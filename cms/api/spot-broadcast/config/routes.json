@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/spot-broadcasts",
+      "handler": "spot-broadcast.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/spot-broadcasts/count",
+      "handler": "spot-broadcast.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/spot-broadcasts/:id",
+      "handler": "spot-broadcast.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/spot-broadcasts",
+      "handler": "spot-broadcast.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/spot-broadcasts/:id",
+      "handler": "spot-broadcast.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/spot-broadcasts/:id",
+      "handler": "spot-broadcast.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

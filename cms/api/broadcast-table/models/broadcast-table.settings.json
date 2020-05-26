@@ -1,0 +1,22 @@
+{
+  "kind": "collectionType",
+  "collectionName": "broadcast_tables",
+  "info": {
+    "name": "broadcast_table"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "date": {
+      "type": "date"
+    },
+    "time": {
+      "type": "time"
+    },
+    "spot": {
+      "model": "spot"
+    }
+  }
+}

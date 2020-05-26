@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/broadcast-tables",
+      "handler": "broadcast-table.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/broadcast-tables/count",
+      "handler": "broadcast-table.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/broadcast-tables/:id",
+      "handler": "broadcast-table.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/broadcast-tables",
+      "handler": "broadcast-table.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/broadcast-tables/:id",
+      "handler": "broadcast-table.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/broadcast-tables/:id",
+      "handler": "broadcast-table.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

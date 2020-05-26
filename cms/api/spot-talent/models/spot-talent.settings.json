@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "spot_talents",
+  "info": {
+    "name": "spot_talent"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "talent_role": {
+      "type": "enumeration",
+      "enum": [
+        "ACTOR",
+        "VOICE"
+      ]
+    },
+    "obs": {
+      "type": "text"
+    },
+    "user": {
+      "plugin": "users-permissions",
+      "model": "user"
+    },
+    "spot": {
+      "model": "spot"
+    }
+  }
+}

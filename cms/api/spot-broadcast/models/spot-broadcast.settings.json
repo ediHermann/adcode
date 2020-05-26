@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "spot_broadcasts",
+  "info": {
+    "name": "spot_broadcast"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "broadcast_duration": {
+      "type": "integer"
+    },
+    "start_date": {
+      "type": "date"
+    },
+    "media_type": {
+      "type": "enumeration",
+      "enum": [
+        "AUDIO",
+        "AUDIO_VIDEO",
+        "VIDEO"
+      ]
+    },
+    "spot": {
+      "model": "spot"
+    }
+  }
+}

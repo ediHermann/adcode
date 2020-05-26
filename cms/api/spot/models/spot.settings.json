@@ -1,0 +1,47 @@
+{
+  "kind": "collectionType",
+  "collectionName": "spots",
+  "info": {
+    "name": "spot"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "uid": {
+      "type": "string",
+      "unique": true,
+      "required": true
+    },
+    "title": {
+      "type": "string"
+    },
+    "client": {
+      "type": "string"
+    },
+    "spot_type": {
+      "type": "enumeration",
+      "enum": [
+        "AUDIO",
+        "AUDIO_VIDEO",
+        "VIDEO"
+      ]
+    },
+    "duration": {
+      "type": "integer"
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "PENDING",
+        "PUBLISHED",
+        "INACTIVATED",
+        "DELETED"
+      ]
+    },
+    "referrer": {
+      "type": "string"
+    }
+  }
+}

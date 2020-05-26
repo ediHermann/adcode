@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/spot-talents",
+      "handler": "spot-talent.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/spot-talents/count",
+      "handler": "spot-talent.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/spot-talents/:id",
+      "handler": "spot-talent.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/spot-talents",
+      "handler": "spot-talent.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/spot-talents/:id",
+      "handler": "spot-talent.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/spot-talents/:id",
+      "handler": "spot-talent.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}
