@@ -62,9 +62,6 @@
     "phone": {
       "type": "string"
     },
-    "cnp": {
-      "type": "string"
-    },
     "user_type": {
       "type": "enumeration",
       "enum": [
@@ -73,6 +70,9 @@
         "BROADCAST",
         "ARBITER"
       ]
+    },
+    "contact_name": {
+      "type": "string"
     }
   }
 }
