@@ -62,27 +62,16 @@
     "phone": {
       "type": "string"
     },
-    "talent_type": {
-      "type": "enumeration",
-      "enum": [
-        "VOICE",
-        "FACE"
-      ]
+    "cnp": {
+      "type": "string"
     },
-    "media_type": {
+    "user_type": {
       "type": "enumeration",
       "enum": [
-        "TV",
-        "RADIO",
-        "ONLINE",
-        "CINEMA"
-      ]
-    },
-    "arbiter_type": {
-      "type": "enumeration",
-      "enum": [
-        "CLIENT",
-        "OTHER"
+        "TALENT",
+        "STUDIO",
+        "BROADCAST",
+        "ARBITER"
       ]
     }
   }
