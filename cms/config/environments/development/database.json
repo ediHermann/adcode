@@ -8,8 +8,8 @@
         "database": "adcode",
         "host": "127.0.0.1",
         "port": 3306,
-        "username": "root",
-        "password": "parolaBRE69"
+        "username": "admin",
+        "password": "administrator"
       },
       "options": {}
     }
