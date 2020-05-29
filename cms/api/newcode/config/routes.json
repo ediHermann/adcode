@@ -1,0 +1,14 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/newcode",
+      "handler": "Newcode.index",
+      "config": {
+        "policies": []
+      }
+
+    }
+
+  ]
+}
