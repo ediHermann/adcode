@@ -73,6 +73,9 @@
     },
     "contact_name": {
       "type": "string"
+    },
+    "referrer": {
+      "type": "string"
     }
   }
 }
