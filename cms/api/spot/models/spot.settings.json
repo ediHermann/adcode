@@ -42,6 +42,10 @@
     },
     "referrer": {
       "type": "string"
+    },
+    "user": {
+      "plugin": "users-permissions",
+      "model": "user"
     }
   }
 }
