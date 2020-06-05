@@ -2,6 +2,7 @@
   "timeout": 100,
   "load": {
     "before": [
+      "apikey",
       "responseTime",
       "logger",
       "cors",

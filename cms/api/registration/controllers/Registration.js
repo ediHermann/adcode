@@ -6,10 +6,6 @@ var util = require('util');
 module.exports = {
   async create(ctx) {
     let newRecord;
-
-
-
-
     if (ctx.is('multipart')) {
       const { data, files } = parseMultipartData(ctx);
       newRecord = await strapi.services.user.create(data, {files });
@@ -31,11 +27,12 @@ module.exports = {
 
         // email to site admin
 
+        //Config locate in config/application.json and config/custom.json
         const sgMail = require('@sendgrid/mail');
-        const apiKey = strapi.config['sendgrid'].apikey;
-        const adminSubj=strapi.config['adminMsgRegistration'].subject;
-        const adminText=strapi.config['adminMsgRegistration'].text;
-        const adminHtml=strapi.config['adminMsgRegistration'].html;
+        const apiKey = strapi.config['sendgrid'].apikey;                //config/application.json
+        const adminSubj=strapi.config['adminMsgRegistration'].subject;  //config/custom.json
+        const adminText=strapi.config['adminMsgRegistration'].text;     //config/custom.json
+        const adminHtml=strapi.config['adminMsgRegistration'].html;     //config/custom.json
 
         // sgMail.setApiKey('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');
         sgMail.setApiKey(apiKey);

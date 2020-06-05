@@ -9,5 +9,9 @@
   },
   "sendgrid": {
     "apikey": "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"
+  },
+
+  "security": {
+    "apikey": "79BCD4C6A911F"
   }
 }
