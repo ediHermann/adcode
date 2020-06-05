@@ -1,3 +1,12 @@
 {
-  "myCustomConfiguration": "This configuration is accessible through strapi.config.myCustomConfiguration"
+  "clientConfirmRegistration": {
+    "subject": "Adcode registration",
+    "text": "Multumim pentru inregistrarea in platforma Adcode",
+    "html": "<strong>Multumim pentru inregistrarea in platforma Adcode"
+  },
+  "adminMsgRegistration": {
+    "subject": "Adcode registration request",
+    "text": "A new registration request has arrived. Name:%s, email: %s",
+    "html": "<strong>A new registration request has arrived</strong><br />Name:%s<br />email: %s"
+  }
 }

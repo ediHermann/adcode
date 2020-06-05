@@ -1,10 +1,12 @@
 'use strict';
 const { parseMultipartData, sanitizenewRecord } = require('strapi-utils');
+var util = require('util');
 
 //POST
 module.exports = {
   async create(ctx) {
     let newRecord;
+
 
 
 
@@ -31,14 +33,18 @@ module.exports = {
 
         const sgMail = require('@sendgrid/mail');
         const apiKey = strapi.config['sendgrid'].apikey;
+        const adminSubj=strapi.config['adminMsgRegistration'].subject;
+        const adminText=strapi.config['adminMsgRegistration'].text;
+        const adminHtml=strapi.config['adminMsgRegistration'].html;
+
         // sgMail.setApiKey('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');
         sgMail.setApiKey(apiKey);
         const msg = {
-          to: 'edi.hermann@lemonbyte.ro',
+          to:   'edi.hermann@lemonbyte.ro',
           from: 'edi.hermann@lemonbyte.ro',
-          subject: 'Adcode registration request',
-          text:  'A new registration request has arrived. Name:'+ username+', email: '+email,
-          html: '<strong>A new registration request has arrived</strong><br />Name:'+ username+'<br />email: '+email
+          subject: adminSubj,
+          text: util.format(adminText, username, email),
+          html: util.format(adminHtml, username, email)
         };
        //ES6
         sgMail
@@ -56,12 +62,9 @@ module.exports = {
 
         ctx.send({"success": true});
 
-
       }
       catch (error) {
         //console.log(error.errno);
-
-
         ctx.send({"success": false,  "payload": {}, "error": {"code": error.errno, "message": "An error occurred! "+error.code}});
         //ctx.badRequest(null, formatError(error));
       }
