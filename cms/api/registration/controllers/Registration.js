@@ -1,7 +1,7 @@
 'use strict';
 const { parseMultipartData, sanitizenewRecord } = require('strapi-utils');
-var util = require('util');
-
+//var util = require('util');
+const errmess=require('@vladblindu/errmess');
 //POST
 module.exports = {
   async create(ctx) {
@@ -29,23 +29,37 @@ module.exports = {
 
         //Config locate in config/application.json and config/custom.json
         const sgMail = require('@sendgrid/mail');
-        const apiKey = strapi.config['sendgrid'].apikey;                //config/application.json
-        const adminSubj=strapi.config['adminMsgRegistration'].subject;  //config/custom.json
-        const adminText=strapi.config['adminMsgRegistration'].text;     //config/custom.json
-        const adminHtml=strapi.config['adminMsgRegistration'].html;     //config/custom.json
+        const apiKey = strapi.config['sendgrid'].apikey;               //config/application.json
 
+        const msgObj=strapi.config['adminMsgReg'];                      //config/custom.json
+        const lang="ro";
+        const vars = {username:username, useremail:email};
+
+        const adminSubj  = errmess(msgObj)(lang)("subject", vars);
+        const adminText  = errmess(msgObj)(lang)("txt", vars);
+        const adminHtml  = errmess(msgObj)(lang)("html", vars);
+        console.log(adminHtml);
+
+        // const adminHtml= langFunc;
+        // const adminSubj= langFunc("subject", vars);
+        // const adminText= langFunc("txt", vars);
+
+
+        //const adminSubj=strapi.config['adminMsgRegistration'].subject;  //config/custom.json
+        //const adminText=strapi.config['adminMsgRegistration'].text;     //config/custom.json
+        //const adminHtml=strapi.config['adminMsgRegistration'].html;     //config/custom.json
         // sgMail.setApiKey('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');
         sgMail.setApiKey(apiKey);
-        const msg = {
+        const emailmsg = {
           to:   'edi.hermann@lemonbyte.ro',
           from: 'edi.hermann@lemonbyte.ro',
           subject: adminSubj,
-          text: util.format(adminText, username, email),
-          html: util.format(adminHtml, username, email)
+          text: adminText,
+          html: adminHtml
         };
        //ES6
         sgMail
-          .send(msg)
+          .send(emailmsg)
           .then(() => {}, error => {
             console.error(error);
 
