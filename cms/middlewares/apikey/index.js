@@ -3,12 +3,10 @@ module.exports = strapi => {
     initialize() {
       strapi.app.use(async (ctx, next) => {
         const apiKey = strapi.config['security'].apikey;
-
-        const start = Date.now();
         console.log('middleware enter');
+        //console.log(ctx.request);
 
-
-        if(ctx.request.method=='POST'&& ctx.header['x-custom-header']!=apiKey)
+        if(ctx.request.method=='POST'&& ctx.header['x-custom-header']!=apiKey && false)
         {
             return ctx.response['notAcceptable']('Please refresh the page and try again. ' +
             'If this doesn\'t solve the issue, please contact the web-admin via email message.')
@@ -17,9 +15,8 @@ module.exports = strapi => {
 
         await next();
 
-        const delta = Math.ceil(Date.now() - start);
-        console.log('middleware exit: '+ delta+ 'ms');
-        ctx.set('X-Response-Time', delta + 'ms');
+        console.log('middleware exit');
+
       });
     },
   };

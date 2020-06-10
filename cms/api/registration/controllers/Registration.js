@@ -29,9 +29,12 @@ module.exports = {
 
         //Config locate in config/application.json and config/custom.json
         const sgMail = require('@sendgrid/mail');
-        const apiKey = strapi.config['sendgrid'].apikey;               //config/application.json
 
-        const msgObj=strapi.config['adminMsgReg'];                      //config/custom.json
+        //Get sendGrid apiKey
+        const apiKey = strapi.config['sendgrid'].apikey;    //config/application.json
+
+        //Get msg templates
+        const msgObj=strapi.config['adminMsgReg'];       //config/custom.json
         const lang="ro";
         const vars = {username:username, useremail:email};
 
@@ -40,15 +43,6 @@ module.exports = {
         const adminHtml  = errmess(msgObj)(lang)("html", vars);
         console.log(adminHtml);
 
-        // const adminHtml= langFunc;
-        // const adminSubj= langFunc("subject", vars);
-        // const adminText= langFunc("txt", vars);
-
-
-        //const adminSubj=strapi.config['adminMsgRegistration'].subject;  //config/custom.json
-        //const adminText=strapi.config['adminMsgRegistration'].text;     //config/custom.json
-        //const adminHtml=strapi.config['adminMsgRegistration'].html;     //config/custom.json
-        // sgMail.setApiKey('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');
         sgMail.setApiKey(apiKey);
         const emailmsg = {
           to:   'edi.hermann@lemonbyte.ro',

@@ -1,13 +1,13 @@
 
-
+{
   "clientConfirmMsgReg": {
     "en": {
-      "subject": "dcode registration",
-      "txt": "Multumim pentru inregistrarea in platforma Adcode\"",
-      "html": "<strong>Multumim pentru inregistrarea in platforma Adcode</strong>"
+      "subject": "Adcode registration",
+      "txt": "Thanks for registration to  Adcode paltform",
+      "html": "<strong>Thanks for registration to  Adcode paltform</strong>"
     },
     "ro": {
-      "subject": "Adcode registration",
+      "subject": "Inregistrare Adcode",
       "text": "Multumim pentru inregistrarea in platforma Adcode",
       "html": "<strong>Multumim pentru inregistrarea in platforma Adcode</strong>"
 
@@ -21,11 +21,11 @@
       "html": "<strong>A new registration request has arrived</strong><br />Name:{{username}}<br />email: {{useremail}}"
     },
     "ro": {
-      "subject": "Adcode registration request",
-      "txt": "A new registration request has arrived. Name:{{username}}, email: {{useremail}}",
-      "html": "<strong>A new registration request has arrived</strong><br />Name:{{username}}<br />email: {{useremail}}"
+      "subject": "Cerere nnou de inregistrare Adcode",
+      "txt": "O noua cerere de inregistrare a fost primita. Nume:{{username}}, email: {{useremail}}",
+      "html": "<strong> noua cerere de inregistrare a fost primita.</strong><br />Nume:{{username}}<br />email: {{useremail}}"
 
     }
   }
-
 }
+
