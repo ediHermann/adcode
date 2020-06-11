@@ -46,6 +46,10 @@
     "user": {
       "plugin": "users-permissions",
       "model": "user"
+    },
+    "deleted": {
+      "type": "boolean",
+      "default": false
     }
   }
 }

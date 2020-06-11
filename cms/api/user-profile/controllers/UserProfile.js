@@ -1,7 +1,9 @@
+const { parseMultipartData, sanitizeEntity } = require('strapi-utils');
+
 module.exports = {
 
   findOne: async ctx => {
-    console.log(ctx.request.header);
+      console.log(ctx.request.header);
     let id;
     let result;
         let errNum;
@@ -67,7 +69,7 @@ module.exports = {
   },
 
   update: async ctx => {
-    console.log(ctx.request.header);
+    //console.log(ctx.request.header);
     let id;
     let result;
     let errNum;
@@ -86,24 +88,31 @@ module.exports = {
         else {
           //Authentiation OK
 
+          console.log(ctx);
           if (ctx.is('multipart')){
+            console.log("multipart");
             const {data, files} = parseMultipartData(ctx);
-            result = await strapi.plugins['users-permissions'].services.user.edit({id},data, {files});
+            result = await strapi.plugins['users-permissions'].services.user.edit({id},data,{files});
+            console.log(files);
+
           }
           else {
+            console.log("no multipart");
             result = await strapi.plugins['users-permissions'].services.user.edit({id}, ctx.request.body);
           }
 
         }
 
       } catch (e) {
+        console.log(e);
         errNum = "202";
-        errDesc = 'Invalid token: Token did not contain required fields';
+        errDesc ="Unexpected error";
+
       }
     }
 
     if(result) {
-      console.log(result);
+      //console.log(result);
       ctx.send({"success": true});
     }
     else
