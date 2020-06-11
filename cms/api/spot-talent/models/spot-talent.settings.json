@@ -25,6 +25,10 @@
     },
     "spot": {
       "model": "spot"
+    },
+    "deleted": {
+      "type": "boolean",
+      "default": false
     }
   }
 }
