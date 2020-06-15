@@ -74,7 +74,7 @@ module.exports = {
         //CHECK if the spot belong to the user
         const chkResult = await strapi.services.spot.find({uid: uid,user:userid, deleted: false});
         if (chkResult.length == 0) {
-          errNum = "401";
+          errNum = "301";
           errDesc = 'Invalid spot uid';
         } else {
           //insert record
@@ -137,7 +137,7 @@ module.exports = {
                result = await strapi.services.spot-broadcast.update({id}, ctx.request.body);
 
           } else {
-            errNum = "401";
+            errNum = "301";
             errDesc = 'Invalid spot uid';
           }
         }
@@ -187,7 +187,7 @@ module.exports = {
           result = await strapi.services.spot-broadcast.update({id}, updateData);
 
         } else {
-          errNum = "401";
+          errNum = "301";
           errDesc = 'Invalid spot uid';
         }
       }

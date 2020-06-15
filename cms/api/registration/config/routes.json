@@ -2,7 +2,7 @@
   "routes": [
     {
       "method": "POST",
-      "path": "/registrations",
+      "path": "/registration",
       "handler": "registration.create",
       "config": {
         "policies": []
