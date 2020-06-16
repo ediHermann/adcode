@@ -21,7 +21,7 @@ module.exports = {
           errNum = "201";
           errDesc = 'Invalid token: Token did not contain required fields';
         } else {
-          result = await strapi.services.spot-broadcast.find({spot:uid,deleted:false});
+          result = await strapi.services.spot-talent.find({spot:uid,deleted:false});
           console.log(result);
 
         }
@@ -78,13 +78,13 @@ module.exports = {
           errDesc = 'Invalid spot uid';
         } else {
           //insert record
-          newRecord = await strapi.services.spot - broadcast.create(ctx.request.body);
+          newRecord = await strapi.services.spot-talent.create(ctx.request.body);
           console.log(newRecord.id);
           const id = newRecord.id;
 
           //update the owner
           const updateData = {"user": userid};
-          result = await strapi.services.spot - broadcast.update({id}, updateData);
+          result = await strapi.services.spot-talent.update({id}, updateData);
 
         }
       }
@@ -134,7 +134,7 @@ module.exports = {
           console.log(chkResult);
           if (chkResult.length>0 && chkResult.user==userid) {
 
-            result = await strapi.services.spot-broadcast.update({id}, ctx.request.body);
+            result = await strapi.services.spot-talent.update({id}, ctx.request.body);
 
           } else {
             errNum = "301";
@@ -184,7 +184,7 @@ module.exports = {
           if (chkResult.length>0 && chkResult.user==userid) {
 
             const updateData={"deleted":true};
-            result = await strapi.services.spot-broadcast.update({id}, updateData);
+            result = await strapi.services.spot-talent.update({id}, updateData);
 
           } else {
             errNum = "301";

@@ -78,13 +78,13 @@ module.exports = {
           errDesc = 'Invalid spot uid';
         } else {
           //insert record
-          newRecord = await strapi.services.spot - broadcast.create(ctx.request.body);
+          newRecord = await strapi.services.spot-broadcast.create(ctx.request.body);
           console.log(newRecord.id);
           const id = newRecord.id;
 
           //update the owner
           const updateData = {"user": userid};
-          result = await strapi.services.spot - broadcast.update({id}, updateData);
+          result = await strapi.services.spot-broadcast.update({id}, updateData);
 
         }
       }
