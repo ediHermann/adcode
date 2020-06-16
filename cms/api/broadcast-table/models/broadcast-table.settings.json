@@ -15,12 +15,12 @@
     "time": {
       "type": "time"
     },
-    "spot": {
-      "model": "spot"
-    },
     "deleted": {
       "type": "boolean",
       "default": false
+    },
+    "spot_broadcast": {
+      "model": "spot-broadcast"
     }
   }
 }

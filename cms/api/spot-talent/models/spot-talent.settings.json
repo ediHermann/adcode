@@ -19,7 +19,7 @@
     "obs": {
       "type": "text"
     },
-    "user": {
+    "talent": {
       "plugin": "users-permissions",
       "model": "user"
     },

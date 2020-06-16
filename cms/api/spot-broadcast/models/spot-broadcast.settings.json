@@ -29,6 +29,11 @@
     "deleted": {
       "type": "boolean",
       "default": false
+    },
+    "broadcaster": {
+      "columnName": "broadcaster",
+      "plugin": "users-permissions",
+      "model": "user"
     }
   }
 }
