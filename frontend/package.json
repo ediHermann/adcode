@@ -1,0 +1,55 @@
+{
+  "name": "@vladblindu/frontall",
+  "version": "1.0.0",
+  "description": "Frontend starter kit",
+  "keywords": [
+    "react",
+    "tailwind",
+    "frontend",
+    "starter",
+    "kit",
+    "lib"
+  ],
+  "main": "dist/index.js",
+  "types": "index.d.ts",
+  "repository": "https://github.com/vladblindu/audiotext-comp-lib",
+  "scripts": {
+    "prepare": "rm -rf ./dist && touch .frontall/css/styles.css && yarn run build",
+    "tw": "tailwindcss build .frontall/css/tailwind.css -o .frontall/css/styles.css",
+    "start": "yarn run tw && webpack-dev-server  --open --config .frontall/webpack/webpack.development.js",
+    "build": "webpack --config .frontall/webpack/webpack.production.js"
+  },
+  "author": "Vlad Blindu",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.9.6",
+    "@babel/plugin-transform-runtime": "^7.9.6",
+    "@babel/preset-env": "^7.9.6",
+    "@babel/preset-react": "^7.9.4",
+    "autoprefixer": "^9.7.6",
+    "babel-loader": "^8.1.0",
+    "babel-preset-env": "^1.7.0",
+    "css-loader": "^3.5.3",
+    "file-loader": "^6.0.0",
+    "formik": "^2.1.4",
+    "html-loader": "^1.1.0",
+    "html-webpack-plugin": "^4.3.0",
+    "postcss": "^7.0.30",
+    "prop-types": "^15.7.2",
+    "style-loader": "^1.2.1",
+    "tailwindcss": "^1.4.6",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.11.0",
+    "webpack-merge": "^4.2.2",
+    "yup": "^0.29.1"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
+  "dependencies": {
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "classnames": "^2.2.6"
+  }
+}
