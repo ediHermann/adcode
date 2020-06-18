@@ -21,13 +21,15 @@ module.exports = {
         } else {
           result = await strapi.services.spot.find({user:userid,deleted:false});
           console.log(result);
-          //ctx.send({"success": false,  "payload": {}, "error": {"code": error.errno, "message": "An error occurred! "+error.code}});
 
         }
       } catch (e) {
+
         console.log(e);
         errNum = "202";
         errDesc = 'Invalid token: Token did not contain required fields';
+
+        eerrror
       }
     } else {
       errNum = "203";

@@ -11,8 +11,8 @@
   },
   "devDependencies": {},
   "dependencies": {
+    "@vladblindu/eerror": "https://github.com/vladblindu/eerror",
     "@vladblindu/errmess": "1.0.1",
-    "graphql": "^15.1.0",
     "knex": "<0.20.0",
     "mysql": "latest",
     "strapi": "3.0.0-beta.20.3",

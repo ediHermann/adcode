@@ -1,5 +1,5 @@
 const { parseMultipartData, sanitizeEntity } = require('strapi-utils');
-
+const {normalize} = require("@vladblindu/eerror").registerErrorClasses()
 module.exports = {
 
   findOne: async ctx => {
@@ -104,7 +104,9 @@ module.exports = {
         }
 
       } catch (e) {
-        console.log(e);
+
+        console.log(normalize(e));
+        //console.log(e);
         errNum = "202";
         errDesc ="Unexpected error";
 
