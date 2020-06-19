@@ -1,0 +1,22 @@
+.react-datepicker {
+    top:0;
+    left:12%;
+}
+
+.react-datepicker-wrapper{
+    display: flex;
+    max-width: 200px;
+}
+
+.react-datepicker__input-container{
+    max-width: 200px;
+}
+
+.react-datepicker-ignore-onclickoutside{
+    max-width: 200px;
+}
+
+.react-datepicker__input-container > input{
+    max-width: 200px;
+    margin-left: 50px;
+}

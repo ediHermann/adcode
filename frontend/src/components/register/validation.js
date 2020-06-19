@@ -23,7 +23,11 @@ const validationSchema = Yup.object().shape({
         .matches(/^07[0-9]{8}$/,
             'Phone number is not valid!')
         .required('Phone number required'),
-    email: Yup.string().email().required('Your email is required!'),
+    email: Yup.string()
+        .email()
+        .min(4, 'Your email is not valid!')
+        .max(64, 'Your email is too long!')
+        .required('Your email is required!'),
     password: Yup.string()
         .max(20, 'Your password should have max 16 characters.')
         .matches(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,

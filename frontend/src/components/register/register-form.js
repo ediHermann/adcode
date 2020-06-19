@@ -4,8 +4,7 @@ import {ErrorMessage, Field, Form, Formik} from 'formik'
 import cn from 'classnames'
 import GlobalError from './global-error'
 import validationSchema from './validation'
-import RadioGroup from "../buttons/radioGroup";
-
+import RadioGroup from "./../buttons/radioGroup";
 
 
 const RegisterForm = ({sendMessage}) => {
@@ -29,40 +28,7 @@ const RegisterForm = ({sendMessage}) => {
             'border-2 border-secondary mb-8': !cond
         });
 
-    function ActionClick() {
-        // POST request using fetch with error handling
-        const requestOptions = {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({
-                username: "Studio 3",
-                password: "blabladvvv",
-                email: "studio3@gmail.com",
-                cui: "RO190273637492807",
-                address: "Unirii 2",
-                phone: "0741300014"
-            })
-        };
-        fetch('http://localhost:1337/users', requestOptions)
-            .then(async response => {
-                const data = await response.json();
 
-                // check for error response
-                if (!response.ok) {
-                    // get error message from body or default to response status
-                    const error = (data && data.message) || response.status;
-                    alert(error[0].messages[0].message);
-                    return Promise.reject(error);
-
-                }
-
-                // this.setState({ postId: data.id })
-            })
-            .catch(error => {
-                // this.setState({ errorMessage: error.toString() });
-                console.error('There was an error!', error);
-            });
-    }
 
     const FORM_TYPES = ['Persoana juridica', 'Persoana fizica'];
 
@@ -94,7 +60,7 @@ const RegisterForm = ({sendMessage}) => {
                  errors,
                  touched,
                  handleSubmit,
-
+                 isSubmitting
              }) =>
                 <Form onSubmit={handleSubmit}>
                     <GlobalError message={globalError}/>
@@ -151,7 +117,7 @@ const RegisterForm = ({sendMessage}) => {
                         </>
                     }
                     <Field
-                        type="address"
+                        type="text"
                         name="address"
                         placeholder="Adresa"
                         className={inputStyle(errors.address && touched.address)}/>
@@ -161,7 +127,7 @@ const RegisterForm = ({sendMessage}) => {
                         className="mb-6 text-sm text-error italic"/>
 
                     <Field
-                        type="phone"
+                        type="text"
                         name="phone"
                         placeholder="Telefon"
                         className={inputStyle(errors.phone && touched.phone)}/>
@@ -171,7 +137,7 @@ const RegisterForm = ({sendMessage}) => {
                         className="mb-6 text-sm text-error italic"/>
 
                     <Field
-                        type="email"
+                        type="text"
                         name="email"
                         placeholder="Email"
                         className={inputStyle(errors.email && touched.email)}/>
@@ -200,7 +166,7 @@ const RegisterForm = ({sendMessage}) => {
                         component="div"
                         className="mb-6 text-sm text-error italic"/>
 
-                    <button type='button' onClick={ActionClick}>Submit</button>
+                    <button type='submit' disabled={isSubmitting}>Submit</button>
 
                 </Form>
 
