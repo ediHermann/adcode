@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 29 Mai 2020 la 14:24
+-- Generation Time: 19 Iun 2020 la 13:54
 -- Versiune server: 5.6.26
 -- PHP Version: 5.6.12
 
@@ -33,8 +33,39 @@ CREATE TABLE IF NOT EXISTS `broadcast_tables` (
   `time` time(3) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `spot` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `spot` int(11) DEFAULT NULL,
+  `deleted` tinyint(1) DEFAULT NULL,
+  `spot_broadcast` int(11) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Salvarea datelor din tabel `broadcast_tables`
+--
+
+INSERT INTO `broadcast_tables` (`id`, `uid`, `date`, `time`, `created_at`, `updated_at`, `spot`, `deleted`, `spot_broadcast`) VALUES
+(1, NULL, '2020-06-01', '01:30:00.000', '2020-06-16 08:00:31', '2020-06-16 08:05:02', 1, 0, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Structura de tabel pentru tabelul `broadcast_types`
+--
+
+CREATE TABLE IF NOT EXISTS `broadcast_types` (
+  `id` int(10) unsigned NOT NULL,
+  `type_name` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Salvarea datelor din tabel `broadcast_types`
+--
+
+INSERT INTO `broadcast_types` (`id`, `type_name`, `created_at`, `updated_at`) VALUES
+(1, 'Radio', '2020-06-19 07:26:25', '2020-06-19 07:26:25'),
+(2, 'TV', '2020-06-19 07:26:33', '2020-06-19 07:26:33'),
+(3, 'Web', '2020-06-19 07:26:41', '2020-06-19 07:26:41');
 
 -- --------------------------------------------------------
 
@@ -49,7 +80,7 @@ CREATE TABLE IF NOT EXISTS `core_store` (
   `type` varchar(255) DEFAULT NULL,
   `environment` varchar(255) DEFAULT NULL,
   `tag` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=latin1;
 
 --
 -- Salvarea datelor din tabel `core_store`
@@ -62,27 +93,64 @@ INSERT INTO `core_store` (`id`, `key`, `value`, `type`, `environment`, `tag`) VA
 (4, 'db_model_upload_file', '{"name":{"type":"string","configurable":false,"required":true},"alternativeText":{"type":"string","configurable":false},"caption":{"type":"string","configurable":false},"width":{"type":"integer","configurable":false},"height":{"type":"integer","configurable":false},"formats":{"type":"json","configurable":false},"hash":{"type":"string","configurable":false,"required":true},"ext":{"type":"string","configurable":false},"mime":{"type":"string","configurable":false,"required":true},"size":{"type":"decimal","configurable":false,"required":true},"url":{"type":"string","configurable":false,"required":true},"previewUrl":{"type":"string","configurable":false},"provider":{"type":"string","configurable":false,"required":true},"provider_metadata":{"type":"json","configurable":false},"related":{"collection":"*","filter":"field","configurable":false},"created_at":{"type":"currentTimestamp"},"updated_at":{"type":"currentTimestamp"}}', 'object', NULL, NULL),
 (5, 'db_model_users-permissions_role', '{"name":{"type":"string","minLength":3,"required":true,"configurable":false},"description":{"type":"string","configurable":false},"type":{"type":"string","unique":true,"configurable":false},"permissions":{"collection":"permission","via":"role","plugin":"users-permissions","configurable":false,"isVirtual":true},"users":{"collection":"user","via":"role","configurable":false,"plugin":"users-permissions","isVirtual":true}}', 'object', NULL, NULL),
 (6, 'db_model_strapi_administrator', '{"username":{"type":"string","minLength":3,"unique":true,"configurable":false,"required":true},"email":{"type":"email","minLength":6,"configurable":false,"required":true},"password":{"type":"password","minLength":6,"configurable":false,"private":true,"required":true},"resetPasswordToken":{"type":"string","configurable":false,"private":true},"blocked":{"type":"boolean","default":false,"configurable":false}}', 'object', NULL, NULL),
-(7, 'db_model_users-permissions_user', '{"username":{"type":"string","minLength":3,"unique":true,"configurable":false,"required":true},"email":{"type":"email","minLength":6,"configurable":false,"required":true},"provider":{"type":"string","configurable":false},"password":{"type":"password","minLength":6,"configurable":false,"private":true},"resetPasswordToken":{"type":"string","configurable":false,"private":true},"confirmed":{"type":"boolean","default":false,"configurable":false},"blocked":{"type":"boolean","default":false,"configurable":false},"role":{"model":"role","via":"users","plugin":"users-permissions","configurable":false},"cui":{"type":"string"},"address":{"type":"string"},"phone":{"type":"string"},"user_type":{"type":"enumeration","enum":["TALENT","STUDIO","BROADCAST","ARBITER"]},"contact_name":{"type":"string"},"referrer":{"type":"string"},"created_at":{"type":"currentTimestamp"},"updated_at":{"type":"currentTimestamp"}}', 'object', NULL, NULL),
+(7, 'db_model_users-permissions_user', '{"username":{"type":"string","minLength":3,"unique":true,"configurable":false,"required":true},"email":{"type":"email","minLength":6,"configurable":false,"required":true},"provider":{"type":"string","configurable":false},"password":{"type":"password","minLength":6,"configurable":false,"private":true},"resetPasswordToken":{"type":"string","configurable":false,"private":true},"confirmed":{"type":"boolean","default":false,"configurable":false},"blocked":{"type":"boolean","default":false,"configurable":false},"role":{"model":"role","via":"users","plugin":"users-permissions","configurable":false},"cui":{"type":"string"},"address":{"type":"string"},"phone":{"type":"string"},"contact_name":{"type":"string"},"referrer":{"type":"string"},"avatar":{"model":"file","via":"related","allowedTypes":["files","images","videos"],"plugin":"upload","required":false},"talent_types":{"collection":"talent-type","attribute":"talent-type","column":"id","isVirtual":true},"broadcast_types":{"collection":"broadcast-type","attribute":"broadcast-type","column":"id","isVirtual":true},"created_at":{"type":"currentTimestamp"},"updated_at":{"type":"currentTimestamp"}}', 'object', NULL, NULL),
 (8, 'db_model_upload_file_morph', '{"upload_file_id":{"type":"integer"},"related_id":{"type":"integer"},"related_type":{"type":"text"},"field":{"type":"text"},"order":{"type":"integer"}}', 'object', NULL, NULL),
-(9, 'plugin_email_provider', '{"provider":"sendmail","name":"Sendmail","auth":{"sendmail_default_from":{"label":"Sendmail Default From","type":"text"},"sendmail_default_replyto":{"label":"Sendmail Default Reply-To","type":"text"}}}', 'object', 'development', ''),
+(9, 'plugin_email_provider', '{"provider":"sendmail","name":"Sendmail","auth":{"sendmail_default_from":{"label":"Sendmail Default From","type":"text"},"sendmail_default_replyto":{"label":"Sendmail Default Reply-To","type":"text"}},"sendmail_default_from":"office@adcode.ro","sendmail_default_replyto":"office@adcode.ro"}', 'object', 'development', ''),
 (10, 'plugin_upload_settings', '{"sizeOptimization":true,"responsiveDimensions":true}', 'object', 'development', ''),
 (11, 'plugin_users-permissions_grant', '{"email":{"enabled":true,"icon":"envelope"},"discord":{"enabled":false,"icon":"discord","key":"","secret":"","callback":"/auth/discord/callback","scope":["identify","email"]},"facebook":{"enabled":false,"icon":"facebook-square","key":"","secret":"","callback":"/auth/facebook/callback","scope":["email"]},"google":{"enabled":false,"icon":"google","key":"","secret":"","callback":"/auth/google/callback","scope":["email"]},"github":{"enabled":false,"icon":"github","key":"","secret":"","redirect_uri":"/auth/github/callback","scope":["user","user:email"]},"microsoft":{"enabled":false,"icon":"windows","key":"","secret":"","callback":"/auth/microsoft/callback","scope":["user.read"]},"twitter":{"enabled":false,"icon":"twitter","key":"","secret":"","callback":"/auth/twitter/callback"},"instagram":{"enabled":false,"icon":"instagram","key":"","secret":"","callback":"/auth/instagram/callback"},"vk":{"enabled":false,"icon":"vk","key":"","secret":"","callback":"/auth/vk/callback","scope":["email"]}}', 'object', '', ''),
 (12, 'plugin_content_manager_configuration_content_types::plugins::users-permissions.permission', '{"uid":"plugins::users-permissions.permission","settings":{"bulkable":true,"filterable":true,"searchable":true,"pageSize":10,"mainField":"type","defaultSortBy":"type","defaultSortOrder":"ASC"},"metadatas":{"id":{"edit":{},"list":{"label":"Id","searchable":true,"sortable":true}},"type":{"edit":{"label":"Type","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Type","searchable":true,"sortable":true}},"controller":{"edit":{"label":"Controller","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Controller","searchable":true,"sortable":true}},"action":{"edit":{"label":"Action","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Action","searchable":true,"sortable":true}},"enabled":{"edit":{"label":"Enabled","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Enabled","searchable":true,"sortable":true}},"policy":{"edit":{"label":"Policy","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Policy","searchable":true,"sortable":true}},"role":{"edit":{"label":"Role","description":"","placeholder":"","visible":true,"editable":true,"mainField":"name"},"list":{"label":"Role","searchable":false,"sortable":false}}},"layouts":{"list":["id","type","controller","action"],"editRelations":["role"],"edit":[[{"name":"type","size":6},{"name":"controller","size":6}],[{"name":"action","size":6},{"name":"enabled","size":4}],[{"name":"policy","size":6}]]}}', 'object', '', ''),
 (13, 'plugin_content_manager_configuration_content_types::plugins::users-permissions.role', '{"uid":"plugins::users-permissions.role","settings":{"bulkable":true,"filterable":true,"searchable":true,"pageSize":10,"mainField":"name","defaultSortBy":"name","defaultSortOrder":"ASC"},"metadatas":{"id":{"edit":{},"list":{"label":"Id","searchable":true,"sortable":true}},"name":{"edit":{"label":"Name","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Name","searchable":true,"sortable":true}},"description":{"edit":{"label":"Description","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Description","searchable":true,"sortable":true}},"type":{"edit":{"label":"Type","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Type","searchable":true,"sortable":true}},"permissions":{"edit":{"label":"Permissions","description":"","placeholder":"","visible":true,"editable":true,"mainField":"type"},"list":{"label":"Permissions","searchable":false,"sortable":false}},"users":{"edit":{"label":"Users","description":"","placeholder":"","visible":true,"editable":true,"mainField":"username"},"list":{"label":"Users","searchable":false,"sortable":false}}},"layouts":{"list":["id","name","description","type"],"editRelations":["permissions","users"],"edit":[[{"name":"name","size":6},{"name":"description","size":6}],[{"name":"type","size":6}]]}}', 'object', '', ''),
 (14, 'plugin_content_manager_configuration_content_types::plugins::upload.file', '{"uid":"plugins::upload.file","settings":{"bulkable":true,"filterable":true,"searchable":true,"pageSize":10,"mainField":"name","defaultSortBy":"name","defaultSortOrder":"ASC"},"metadatas":{"id":{"edit":{},"list":{"label":"Id","searchable":true,"sortable":true}},"name":{"edit":{"label":"Name","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Name","searchable":true,"sortable":true}},"alternativeText":{"edit":{"label":"AlternativeText","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"AlternativeText","searchable":true,"sortable":true}},"caption":{"edit":{"label":"Caption","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Caption","searchable":true,"sortable":true}},"width":{"edit":{"label":"Width","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Width","searchable":true,"sortable":true}},"height":{"edit":{"label":"Height","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Height","searchable":true,"sortable":true}},"formats":{"edit":{"label":"Formats","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Formats","searchable":false,"sortable":false}},"hash":{"edit":{"label":"Hash","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Hash","searchable":true,"sortable":true}},"ext":{"edit":{"label":"Ext","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Ext","searchable":true,"sortable":true}},"mime":{"edit":{"label":"Mime","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Mime","searchable":true,"sortable":true}},"size":{"edit":{"label":"Size","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Size","searchable":true,"sortable":true}},"url":{"edit":{"label":"Url","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Url","searchable":true,"sortable":true}},"previewUrl":{"edit":{"label":"PreviewUrl","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"PreviewUrl","searchable":true,"sortable":true}},"provider":{"edit":{"label":"Provider","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Provider","searchable":true,"sortable":true}},"provider_metadata":{"edit":{"label":"Provider_metadata","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Provider_metadata","searchable":false,"sortable":false}},"related":{"edit":{"label":"Related","description":"","placeholder":"","visible":true,"editable":true,"mainField":"id"},"list":{"label":"Related","searchable":false,"sortable":false}},"created_at":{"edit":{"label":"Created_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Created_at","searchable":true,"sortable":true}},"updated_at":{"edit":{"label":"Updated_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Updated_at","searchable":true,"sortable":true}}},"layouts":{"list":["id","name","alternativeText","caption"],"editRelations":["related"],"edit":[[{"name":"name","size":6},{"name":"alternativeText","size":6}],[{"name":"caption","size":6},{"name":"width","size":4}],[{"name":"height","size":4}],[{"name":"formats","size":12}],[{"name":"hash","size":6},{"name":"ext","size":6}],[{"name":"mime","size":6},{"name":"size","size":4}],[{"name":"url","size":6},{"name":"previewUrl","size":6}],[{"name":"provider","size":6}],[{"name":"provider_metadata","size":12}]]}}', 'object', '', ''),
 (15, 'plugin_content_manager_configuration_content_types::strapi::administrator', '{"uid":"strapi::administrator","settings":{"bulkable":true,"filterable":true,"searchable":true,"pageSize":10,"mainField":"username","defaultSortBy":"username","defaultSortOrder":"ASC"},"metadatas":{"id":{"edit":{},"list":{"label":"Id","searchable":true,"sortable":true}},"username":{"edit":{"label":"Username","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Username","searchable":true,"sortable":true}},"email":{"edit":{"label":"Email","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Email","searchable":true,"sortable":true}},"password":{"edit":{"label":"Password","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Password","searchable":true,"sortable":true}},"resetPasswordToken":{"edit":{"label":"ResetPasswordToken","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"ResetPasswordToken","searchable":true,"sortable":true}},"blocked":{"edit":{"label":"Blocked","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Blocked","searchable":true,"sortable":true}}},"layouts":{"list":["id","username","email","blocked"],"editRelations":[],"edit":[[{"name":"username","size":6},{"name":"email","size":6}],[{"name":"password","size":6},{"name":"blocked","size":4}]]}}', 'object', '', ''),
-(16, 'plugin_content_manager_configuration_content_types::plugins::users-permissions.user', '{"uid":"plugins::users-permissions.user","settings":{"bulkable":true,"filterable":true,"searchable":true,"pageSize":10,"mainField":"username","defaultSortBy":"username","defaultSortOrder":"ASC"},"metadatas":{"id":{"edit":{},"list":{"label":"Id","searchable":true,"sortable":true}},"username":{"edit":{"label":"Username","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Username","searchable":true,"sortable":true}},"email":{"edit":{"label":"Email","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Email","searchable":true,"sortable":true}},"provider":{"edit":{"label":"Provider","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Provider","searchable":true,"sortable":true}},"password":{"edit":{"label":"Password","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Password","searchable":true,"sortable":true}},"resetPasswordToken":{"edit":{"label":"ResetPasswordToken","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"ResetPasswordToken","searchable":true,"sortable":true}},"confirmed":{"edit":{"label":"Confirmed","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Confirmed","searchable":true,"sortable":true}},"blocked":{"edit":{"label":"Blocked","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Blocked","searchable":true,"sortable":true}},"role":{"edit":{"label":"Role","description":"","placeholder":"","visible":true,"editable":true,"mainField":"name"},"list":{"label":"Role","searchable":false,"sortable":false}},"cui":{"edit":{"label":"Cui","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Cui","searchable":true,"sortable":true}},"address":{"edit":{"label":"Address","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Address","searchable":true,"sortable":true}},"phone":{"edit":{"label":"Phone","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Phone","searchable":true,"sortable":true}},"user_type":{"edit":{"label":"User_type","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"User_type","searchable":true,"sortable":true}},"contact_name":{"edit":{"label":"Contact_name","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Contact_name","searchable":true,"sortable":true}},"referrer":{"edit":{"label":"Referrer","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Referrer","searchable":true,"sortable":true}},"created_at":{"edit":{"label":"Created_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Created_at","searchable":true,"sortable":true}},"updated_at":{"edit":{"label":"Updated_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Updated_at","searchable":true,"sortable":true}}},"layouts":{"list":["id","username","email","confirmed"],"edit":[[{"name":"username","size":6},{"name":"email","size":6}],[{"name":"password","size":6},{"name":"confirmed","size":4}],[{"name":"blocked","size":4},{"name":"cui","size":6}],[{"name":"address","size":6},{"name":"phone","size":6}],[{"name":"user_type","size":6}],[{"name":"contact_name","size":6},{"name":"referrer","size":6}]],"editRelations":["role"]}}', 'object', '', ''),
+(16, 'plugin_content_manager_configuration_content_types::plugins::users-permissions.user', '{"uid":"plugins::users-permissions.user","settings":{"bulkable":true,"filterable":true,"searchable":true,"pageSize":10,"mainField":"username","defaultSortBy":"username","defaultSortOrder":"ASC"},"metadatas":{"id":{"edit":{},"list":{"label":"Id","searchable":true,"sortable":true}},"username":{"edit":{"label":"Username","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Username","searchable":true,"sortable":true}},"email":{"edit":{"label":"Email","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Email","searchable":true,"sortable":true}},"provider":{"edit":{"label":"Provider","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Provider","searchable":true,"sortable":true}},"password":{"edit":{"label":"Password","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Password","searchable":true,"sortable":true}},"resetPasswordToken":{"edit":{"label":"ResetPasswordToken","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"ResetPasswordToken","searchable":true,"sortable":true}},"confirmed":{"edit":{"label":"Confirmed","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Confirmed","searchable":true,"sortable":true}},"blocked":{"edit":{"label":"Blocked","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Blocked","searchable":true,"sortable":true}},"role":{"edit":{"label":"Role","description":"","placeholder":"","visible":true,"editable":true,"mainField":"name"},"list":{"label":"Role","searchable":false,"sortable":false}},"cui":{"edit":{"label":"Cui","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Cui","searchable":true,"sortable":true}},"address":{"edit":{"label":"Address","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Address","searchable":true,"sortable":true}},"phone":{"edit":{"label":"Phone","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Phone","searchable":true,"sortable":true}},"contact_name":{"edit":{"label":"Contact_name","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Contact_name","searchable":true,"sortable":true}},"referrer":{"edit":{"label":"Referrer","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Referrer","searchable":true,"sortable":true}},"avatar":{"edit":{"label":"Avatar","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Avatar","searchable":false,"sortable":false}},"talent_types":{"edit":{"label":"Talent_types","description":"","placeholder":"","visible":true,"editable":true,"mainField":"type_name"},"list":{"label":"Talent_types","searchable":false,"sortable":false}},"broadcast_types":{"edit":{"label":"Broadcast_types","description":"","placeholder":"","visible":true,"editable":true,"mainField":"type_name"},"list":{"label":"Broadcast_types","searchable":false,"sortable":false}},"created_at":{"edit":{"label":"Created_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Created_at","searchable":true,"sortable":true}},"updated_at":{"edit":{"label":"Updated_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Updated_at","searchable":true,"sortable":true}}},"layouts":{"list":["id","username","email","confirmed"],"edit":[[{"name":"username","size":6},{"name":"email","size":6}],[{"name":"password","size":6},{"name":"confirmed","size":4}],[{"name":"blocked","size":4},{"name":"cui","size":6}],[{"name":"address","size":6},{"name":"phone","size":6}],[{"name":"contact_name","size":6},{"name":"referrer","size":6}],[{"name":"avatar","size":6}]],"editRelations":["role","talent_types","broadcast_types"]}}', 'object', '', ''),
 (17, 'plugin_users-permissions_email', '{"reset_password":{"display":"Email.template.reset_password","icon":"sync","options":{"from":{"name":"Administration Panel","email":"no-reply@strapi.io"},"response_email":"","object":"Reset password","message":"<p>We heard that you lost your password. Sorry about that!</p>\\n\\n<p>But don’t worry! You can use the following link to reset your password:</p>\\n\\n<p><%= URL %>?code=<%= TOKEN %></p>\\n\\n<p>Thanks.</p>"}},"email_confirmation":{"display":"Email.template.email_confirmation","icon":"check-square","options":{"from":{"name":"Administration Panel","email":"no-reply@strapi.io"},"response_email":"","object":"Account confirmation","message":"<p>Thank you for registering!</p>\\n\\n<p>You have to confirm your email address. Please click on the link below.</p>\\n\\n<p><%= URL %>?confirmation=<%= CODE %></p>\\n\\n<p>Thanks.</p>"}}}', 'object', '', ''),
 (18, 'plugin_users-permissions_advanced', '{"unique_email":true,"allow_register":true,"email_confirmation":false,"email_confirmation_redirection":"http://0.0.0.0:1337/admin","email_reset_password":"http://0.0.0.0:1337/admin","default_role":"authenticated"}', 'object', '', ''),
-(19, 'db_model_spots', '{"uid":{"type":"string","unique":true,"required":true},"title":{"type":"string"},"client":{"type":"string"},"spot_type":{"type":"enumeration","enum":["AUDIO","AUDIO_VIDEO","VIDEO"]},"duration":{"type":"integer"},"status":{"type":"enumeration","enum":["PENDING","PUBLISHED","INACTIVATED","DELETED"]},"referrer":{"type":"string"},"user":{"plugin":"users-permissions","model":"user"},"created_at":{"type":"currentTimestamp"},"updated_at":{"type":"currentTimestamp"}}', 'object', NULL, NULL),
-(20, 'plugin_content_manager_configuration_content_types::application::spot.spot', '{"uid":"application::spot.spot","settings":{"bulkable":true,"filterable":true,"searchable":true,"pageSize":10,"mainField":"uid","defaultSortBy":"uid","defaultSortOrder":"ASC"},"metadatas":{"id":{"edit":{},"list":{"label":"Id","searchable":true,"sortable":true}},"uid":{"edit":{"label":"Uid","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Uid","searchable":true,"sortable":true}},"title":{"edit":{"label":"Title","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Title","searchable":true,"sortable":true}},"client":{"edit":{"label":"Client","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Client","searchable":true,"sortable":true}},"spot_type":{"edit":{"label":"Spot_type","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Spot_type","searchable":true,"sortable":true}},"duration":{"edit":{"label":"Duration","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Duration","searchable":true,"sortable":true}},"status":{"edit":{"label":"Status","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Status","searchable":true,"sortable":true}},"referrer":{"edit":{"label":"Referrer","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Referrer","searchable":true,"sortable":true}},"user":{"edit":{"label":"User","description":"","placeholder":"","visible":true,"editable":true,"mainField":"username"},"list":{"label":"User","searchable":false,"sortable":false}},"created_at":{"edit":{"label":"Created_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Created_at","searchable":true,"sortable":true}},"updated_at":{"edit":{"label":"Updated_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Updated_at","searchable":true,"sortable":true}}},"layouts":{"list":["id","uid","title","client"],"edit":[[{"name":"uid","size":6},{"name":"title","size":6}],[{"name":"client","size":6},{"name":"spot_type","size":6}],[{"name":"duration","size":4},{"name":"status","size":6}],[{"name":"referrer","size":6}]],"editRelations":["user"]}}', 'object', '', ''),
-(21, 'db_model_spot_talents', '{"talent_role":{"type":"enumeration","enum":["ACTOR","VOICE"]},"obs":{"type":"text"},"user":{"plugin":"users-permissions","model":"user"},"spot":{"model":"spot"},"created_at":{"type":"currentTimestamp"},"updated_at":{"type":"currentTimestamp"}}', 'object', NULL, NULL),
-(22, 'plugin_content_manager_configuration_content_types::application::spot-talent.spot-talent', '{"uid":"application::spot-talent.spot-talent","settings":{"bulkable":true,"filterable":true,"searchable":true,"pageSize":10,"mainField":"id","defaultSortBy":"id","defaultSortOrder":"ASC"},"metadatas":{"id":{"edit":{},"list":{"label":"Id","searchable":true,"sortable":true}},"talent_role":{"edit":{"label":"Talent_role","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Talent_role","searchable":true,"sortable":true}},"obs":{"edit":{"label":"Obs","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Obs","searchable":true,"sortable":true}},"user":{"edit":{"label":"User","description":"","placeholder":"","visible":true,"editable":true,"mainField":"username"},"list":{"label":"User","searchable":false,"sortable":false}},"spot":{"edit":{"label":"Spot","description":"","placeholder":"","visible":true,"editable":true,"mainField":"uid"},"list":{"label":"Spot","searchable":false,"sortable":false}},"created_at":{"edit":{"label":"Created_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Created_at","searchable":true,"sortable":true}},"updated_at":{"edit":{"label":"Updated_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Updated_at","searchable":true,"sortable":true}}},"layouts":{"list":["id","talent_role","obs"],"edit":[[{"name":"talent_role","size":6}],[{"name":"obs","size":6}]],"editRelations":["spot","user"]}}', 'object', '', ''),
-(23, 'db_model_spot_broadcasts', '{"broadcast_duration":{"type":"integer"},"start_date":{"type":"date"},"media_type":{"type":"enumeration","enum":["AUDIO","AUDIO_VIDEO","VIDEO"]},"spot":{"model":"spot"},"created_at":{"type":"currentTimestamp"},"updated_at":{"type":"currentTimestamp"}}', 'object', NULL, NULL),
-(24, 'plugin_content_manager_configuration_content_types::application::spot-broadcast.spot-broadcast', '{"uid":"application::spot-broadcast.spot-broadcast","settings":{"bulkable":true,"filterable":true,"searchable":true,"pageSize":10,"mainField":"id","defaultSortBy":"id","defaultSortOrder":"ASC"},"metadatas":{"id":{"edit":{},"list":{"label":"Id","searchable":true,"sortable":true}},"broadcast_duration":{"edit":{"label":"Broadcast_duration","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Broadcast_duration","searchable":true,"sortable":true}},"start_date":{"edit":{"label":"Start_date","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Start_date","searchable":true,"sortable":true}},"media_type":{"edit":{"label":"Media_type","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Media_type","searchable":true,"sortable":true}},"spot":{"edit":{"label":"Spot","description":"","placeholder":"","visible":true,"editable":true,"mainField":"uid"},"list":{"label":"Spot","searchable":false,"sortable":false}},"created_at":{"edit":{"label":"Created_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Created_at","searchable":true,"sortable":true}},"updated_at":{"edit":{"label":"Updated_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Updated_at","searchable":true,"sortable":true}}},"layouts":{"list":["id","broadcast_duration","start_date"],"edit":[[{"name":"broadcast_duration","size":4}],[{"name":"start_date","size":4},{"name":"media_type","size":6}]],"editRelations":["spot"]}}', 'object', '', ''),
-(25, 'db_model_broadcast_tables', '{"date":{"type":"date"},"time":{"type":"time"},"spot":{"model":"spot"},"created_at":{"type":"currentTimestamp"},"updated_at":{"type":"currentTimestamp"}}', 'object', NULL, NULL),
-(26, 'plugin_content_manager_configuration_content_types::application::broadcast-table.broadcast-table', '{"uid":"application::broadcast-table.broadcast-table","settings":{"bulkable":true,"filterable":true,"searchable":true,"pageSize":10,"mainField":"id","defaultSortBy":"id","defaultSortOrder":"ASC"},"metadatas":{"id":{"edit":{},"list":{"label":"Id","searchable":true,"sortable":true}},"date":{"edit":{"label":"Date","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Date","searchable":true,"sortable":true}},"time":{"edit":{"label":"Time","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Time","searchable":true,"sortable":true}},"spot":{"edit":{"label":"Spot","description":"","placeholder":"","visible":true,"editable":true,"mainField":"uid"},"list":{"label":"Spot","searchable":false,"sortable":false}},"created_at":{"edit":{"label":"Created_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Created_at","searchable":true,"sortable":true}},"updated_at":{"edit":{"label":"Updated_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Updated_at","searchable":true,"sortable":true}}},"layouts":{"list":["id","date","time"],"edit":[[{"name":"date","size":4}],[{"name":"time","size":4}]],"editRelations":["spot"]}}', 'object', '', ''),
-(27, 'db_model_spot_talents__uid', '{"spot_talent_id":{"type":"integer"},"spot_id":{"type":"integer"}}', 'object', NULL, NULL);
+(19, 'db_model_spots', '{"uid":{"type":"string","unique":true,"required":true},"title":{"type":"string"},"client":{"type":"string"},"duration":{"type":"integer"},"status":{"type":"enumeration","enum":["PENDING","PUBLISHED","INACTIVATED","DELETED"]},"user":{"plugin":"users-permissions","model":"user"},"deleted":{"type":"boolean","default":false},"media_types":{"collection":"madia-type","attribute":"madia-type","column":"id","isVirtual":true},"created_at":{"type":"currentTimestamp"},"updated_at":{"type":"currentTimestamp"}}', 'object', NULL, NULL),
+(20, 'plugin_content_manager_configuration_content_types::application::spot.spot', '{"uid":"application::spot.spot","settings":{"bulkable":true,"filterable":true,"searchable":true,"pageSize":10,"mainField":"uid","defaultSortBy":"uid","defaultSortOrder":"ASC"},"metadatas":{"id":{"edit":{},"list":{"label":"Id","searchable":true,"sortable":true}},"uid":{"edit":{"label":"Uid","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Uid","searchable":true,"sortable":true}},"title":{"edit":{"label":"Title","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Title","searchable":true,"sortable":true}},"client":{"edit":{"label":"Client","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Client","searchable":true,"sortable":true}},"duration":{"edit":{"label":"Duration","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Duration","searchable":true,"sortable":true}},"status":{"edit":{"label":"Status","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Status","searchable":true,"sortable":true}},"user":{"edit":{"label":"User","description":"","placeholder":"","visible":true,"editable":true,"mainField":"username"},"list":{"label":"User","searchable":false,"sortable":false}},"deleted":{"edit":{"label":"Deleted","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Deleted","searchable":true,"sortable":true}},"media_types":{"edit":{"label":"Media_types","description":"","placeholder":"","visible":true,"editable":true,"mainField":"type_name"},"list":{"label":"Media_types","searchable":false,"sortable":false}},"created_at":{"edit":{"label":"Created_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Created_at","searchable":true,"sortable":true}},"updated_at":{"edit":{"label":"Updated_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Updated_at","searchable":true,"sortable":true}}},"layouts":{"list":["id","uid","title","client"],"edit":[[{"name":"uid","size":6},{"name":"title","size":6}],[{"name":"client","size":6}],[{"name":"duration","size":4},{"name":"status","size":6}],[{"name":"deleted","size":4}]],"editRelations":["user","media_types"]}}', 'object', '', ''),
+(21, 'db_model_spot_talents', '{"talent_role":{"type":"enumeration","enum":["ACTOR","VOICE"]},"obs":{"type":"text"},"talent":{"plugin":"users-permissions","model":"user"},"spot":{"model":"spot"},"deleted":{"type":"boolean","default":false},"created_at":{"type":"currentTimestamp"},"updated_at":{"type":"currentTimestamp"}}', 'object', NULL, NULL),
+(22, 'plugin_content_manager_configuration_content_types::application::spot-talent.spot-talent', '{"uid":"application::spot-talent.spot-talent","settings":{"bulkable":true,"filterable":true,"searchable":true,"pageSize":10,"mainField":"id","defaultSortBy":"id","defaultSortOrder":"ASC"},"metadatas":{"id":{"edit":{},"list":{"label":"Id","searchable":true,"sortable":true}},"talent_role":{"edit":{"label":"Talent_role","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Talent_role","searchable":true,"sortable":true}},"obs":{"edit":{"label":"Obs","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Obs","searchable":true,"sortable":true}},"talent":{"edit":{"label":"Talent","description":"","placeholder":"","visible":true,"editable":true,"mainField":"username"},"list":{"label":"Talent","searchable":false,"sortable":false}},"spot":{"edit":{"label":"Spot","description":"","placeholder":"","visible":true,"editable":true,"mainField":"uid"},"list":{"label":"Spot","searchable":false,"sortable":false}},"deleted":{"edit":{"label":"Deleted","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Deleted","searchable":true,"sortable":true}},"created_at":{"edit":{"label":"Created_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Created_at","searchable":true,"sortable":true}},"updated_at":{"edit":{"label":"Updated_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Updated_at","searchable":true,"sortable":true}}},"layouts":{"list":["id","talent_role","obs","deleted"],"edit":[[{"name":"talent_role","size":6}],[{"name":"obs","size":6},{"name":"deleted","size":4}]],"editRelations":["spot","talent"]}}', 'object', '', ''),
+(23, 'db_model_spot_broadcasts', '{"broadcast_duration":{"type":"integer"},"start_date":{"type":"date"},"spot":{"model":"spot"},"deleted":{"type":"boolean","default":false},"broadcaster":{"columnName":"broadcaster","plugin":"users-permissions","model":"user"},"broadcast_types":{"collection":"broadcast-type","attribute":"broadcast-type","column":"id","isVirtual":true},"created_at":{"type":"currentTimestamp"},"updated_at":{"type":"currentTimestamp"}}', 'object', NULL, NULL),
+(24, 'plugin_content_manager_configuration_content_types::application::spot-broadcast.spot-broadcast', '{"uid":"application::spot-broadcast.spot-broadcast","settings":{"bulkable":true,"filterable":true,"searchable":true,"pageSize":10,"mainField":"id","defaultSortBy":"id","defaultSortOrder":"ASC"},"metadatas":{"id":{"edit":{},"list":{"label":"Id","searchable":true,"sortable":true}},"broadcast_duration":{"edit":{"label":"Broadcast_duration","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Broadcast_duration","searchable":true,"sortable":true}},"start_date":{"edit":{"label":"Start_date","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Start_date","searchable":true,"sortable":true}},"spot":{"edit":{"label":"Spot","description":"","placeholder":"","visible":true,"editable":true,"mainField":"uid"},"list":{"label":"Spot","searchable":false,"sortable":false}},"deleted":{"edit":{"label":"Deleted","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Deleted","searchable":true,"sortable":true}},"broadcaster":{"edit":{"label":"Broadcaster","description":"","placeholder":"","visible":true,"editable":true,"mainField":"username"},"list":{"label":"Broadcaster","searchable":false,"sortable":false}},"broadcast_types":{"edit":{"label":"Broadcast_types","description":"","placeholder":"","visible":true,"editable":true,"mainField":"type_name"},"list":{"label":"Broadcast_types","searchable":false,"sortable":false}},"created_at":{"edit":{"label":"Created_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Created_at","searchable":true,"sortable":true}},"updated_at":{"edit":{"label":"Updated_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Updated_at","searchable":true,"sortable":true}}},"layouts":{"list":["id","broadcast_duration","start_date","deleted"],"edit":[[{"name":"broadcast_duration","size":4}],[{"name":"start_date","size":4}],[{"name":"deleted","size":4}]],"editRelations":["spot","broadcaster","broadcast_types"]}}', 'object', '', ''),
+(25, 'db_model_broadcast_tables', '{"date":{"type":"date"},"time":{"type":"time"},"deleted":{"type":"boolean","default":false},"spot_broadcast":{"model":"spot-broadcast"},"created_at":{"type":"currentTimestamp"},"updated_at":{"type":"currentTimestamp"}}', 'object', NULL, NULL),
+(26, 'plugin_content_manager_configuration_content_types::application::broadcast-table.broadcast-table', '{"uid":"application::broadcast-table.broadcast-table","settings":{"bulkable":true,"filterable":true,"searchable":true,"pageSize":10,"mainField":"id","defaultSortBy":"id","defaultSortOrder":"ASC"},"metadatas":{"id":{"edit":{},"list":{"label":"Id","searchable":true,"sortable":true}},"date":{"edit":{"label":"Date","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Date","searchable":true,"sortable":true}},"time":{"edit":{"label":"Time","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Time","searchable":true,"sortable":true}},"deleted":{"edit":{"label":"Deleted","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Deleted","searchable":true,"sortable":true}},"spot_broadcast":{"edit":{"label":"Spot_broadcast","description":"","placeholder":"","visible":true,"editable":true,"mainField":"id"},"list":{"label":"Spot_broadcast","searchable":false,"sortable":false}},"created_at":{"edit":{"label":"Created_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Created_at","searchable":true,"sortable":true}},"updated_at":{"edit":{"label":"Updated_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Updated_at","searchable":true,"sortable":true}}},"layouts":{"list":["id","date","time","deleted"],"edit":[[{"name":"date","size":4}],[{"name":"time","size":4},{"name":"deleted","size":4}]],"editRelations":["spot_broadcast"]}}', 'object', '', ''),
+(27, 'db_model_spot_talents__uid', '{"spot_talent_id":{"type":"integer"},"spot_id":{"type":"integer"}}', 'object', NULL, NULL),
+(28, 'plugin_email_provider', '{"provider":"sendmail","name":"Sendmail","auth":{"sendmail_default_from":{"label":"Sendmail Default From","type":"text"},"sendmail_default_replyto":{"label":"Sendmail Default Reply-To","type":"text"}}}', 'object', 'production', ''),
+(29, 'plugin_email_provider', '{"provider":"sendmail","name":"Sendmail","auth":{"sendmail_default_from":{"label":"Sendmail Default From","type":"text"},"sendmail_default_replyto":{"label":"Sendmail Default Reply-To","type":"text"}}}', 'object', 'staging', ''),
+(30, 'db_model_students', '{"student_name":{"type":"string"},"grade":{"type":"string"},"class":{"model":"class"},"created_at":{"type":"currentTimestamp"},"updated_at":{"type":"currentTimestamp"}}', 'object', NULL, NULL),
+(32, 'db_model_classes', '{"class_name":{"type":"string"},"created_at":{"type":"currentTimestamp"},"updated_at":{"type":"currentTimestamp"}}', 'object', NULL, NULL),
+(33, 'db_model_talent_types', '{"type_name":{"type":"string"},"deleted":{"type":"boolean","default":false},"created_at":{"type":"currentTimestamp"},"updated_at":{"type":"currentTimestamp"}}', 'object', NULL, NULL),
+(34, 'plugin_content_manager_configuration_content_types::application::talent-type.talent-type', '{"uid":"application::talent-type.talent-type","settings":{"bulkable":true,"filterable":true,"searchable":true,"pageSize":10,"mainField":"type_name","defaultSortBy":"type_name","defaultSortOrder":"ASC"},"metadatas":{"id":{"edit":{},"list":{"label":"Id","searchable":true,"sortable":true}},"type_name":{"edit":{"label":"Type_name","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Type_name","searchable":true,"sortable":true}},"deleted":{"edit":{"label":"Deleted","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Deleted","searchable":true,"sortable":true}},"created_at":{"edit":{"label":"Created_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Created_at","searchable":true,"sortable":true}},"updated_at":{"edit":{"label":"Updated_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Updated_at","searchable":true,"sortable":true}}},"layouts":{"list":["id","type_name","deleted","created_at"],"editRelations":[],"edit":[[{"name":"type_name","size":6},{"name":"deleted","size":4}]]}}', 'object', '', ''),
+(35, 'db_model_users-permissions_user__talent_type', '{"users-permissions_user_id":{"type":"integer"},"talent-type_id":{"type":"integer"}}', 'object', NULL, NULL),
+(36, 'db_model_madia_types', '{"type_name":{"type":"string"},"created_at":{"type":"currentTimestamp"},"updated_at":{"type":"currentTimestamp"}}', 'object', NULL, NULL),
+(37, 'plugin_content_manager_configuration_content_types::application::madia-type.madia-type', '{"uid":"application::madia-type.madia-type","settings":{"bulkable":true,"filterable":true,"searchable":true,"pageSize":10,"mainField":"type_name","defaultSortBy":"type_name","defaultSortOrder":"ASC"},"metadatas":{"id":{"edit":{},"list":{"label":"Id","searchable":true,"sortable":true}},"type_name":{"edit":{"label":"Type_name","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Type_name","searchable":true,"sortable":true}},"created_at":{"edit":{"label":"Created_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Created_at","searchable":true,"sortable":true}},"updated_at":{"edit":{"label":"Updated_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Updated_at","searchable":true,"sortable":true}}},"layouts":{"list":["id","type_name","created_at","updated_at"],"editRelations":[],"edit":[[{"name":"type_name","size":6}]]}}', 'object', '', ''),
+(38, 'db_model_broadcast_types', '{"type_name":{"type":"string"},"created_at":{"type":"currentTimestamp"},"updated_at":{"type":"currentTimestamp"}}', 'object', NULL, NULL),
+(39, 'plugin_content_manager_configuration_content_types::application::broadcast-type.broadcast-type', '{"uid":"application::broadcast-type.broadcast-type","settings":{"bulkable":true,"filterable":true,"searchable":true,"pageSize":10,"mainField":"type_name","defaultSortBy":"type_name","defaultSortOrder":"ASC"},"metadatas":{"id":{"edit":{},"list":{"label":"Id","searchable":true,"sortable":true}},"type_name":{"edit":{"label":"Type_name","description":"","placeholder":"","visible":true,"editable":true},"list":{"label":"Type_name","searchable":true,"sortable":true}},"created_at":{"edit":{"label":"Created_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Created_at","searchable":true,"sortable":true}},"updated_at":{"edit":{"label":"Updated_at","description":"","placeholder":"","visible":false,"editable":true},"list":{"label":"Updated_at","searchable":true,"sortable":true}}},"layouts":{"list":["id","type_name","created_at","updated_at"],"editRelations":[],"edit":[[{"name":"type_name","size":6}]]}}', 'object', '', ''),
+(40, 'db_model_spot_broadcasts__broadcast_types', '{"spot_broadcast_id":{"type":"integer"},"broadcast-type_id":{"type":"integer"}}', 'object', NULL, NULL),
+(41, 'db_model_spots__media_types', '{"spot_id":{"type":"integer"},"madia-type_id":{"type":"integer"}}', 'object', NULL, NULL),
+(42, 'db_model_users-permissions_user__broadcast_type', '{"users-permissions_user_id":{"type":"integer"},"broadcast-type_id":{"type":"integer"}}', 'object', NULL, NULL),
+(43, 'db_model_users-permissions_user__talent_types', '{"users-permissions_user_id":{"type":"integer"},"talent-type_id":{"type":"integer"}}', 'object', NULL, NULL),
+(44, 'db_model_users-permissions_user__broadcast_types', '{"users-permissions_user_id":{"type":"integer"},"broadcast-type_id":{"type":"integer"}}', 'object', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Structura de tabel pentru tabelul `madia_types`
+--
+
+CREATE TABLE IF NOT EXISTS `madia_types` (
+  `id` int(10) unsigned NOT NULL,
+  `type_name` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Salvarea datelor din tabel `madia_types`
+--
+
+INSERT INTO `madia_types` (`id`, `type_name`, `created_at`, `updated_at`) VALUES
+(1, 'Audio', '2020-06-19 07:24:50', '2020-06-19 07:24:50'),
+(2, 'Video', '2020-06-19 07:24:58', '2020-06-19 07:24:58');
 
 -- --------------------------------------------------------
 
@@ -95,22 +163,45 @@ CREATE TABLE IF NOT EXISTS `spots` (
   `uid` varchar(255) NOT NULL,
   `title` varchar(255) DEFAULT NULL,
   `client` varchar(255) DEFAULT NULL,
-  `spot_type` varchar(255) DEFAULT NULL,
   `duration` int(11) DEFAULT NULL,
   `status` varchar(255) DEFAULT NULL,
   `referrer` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `user` int(11) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+  `user` int(11) DEFAULT NULL,
+  `deleted` tinyint(1) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 --
 -- Salvarea datelor din tabel `spots`
 --
 
-INSERT INTO `spots` (`id`, `uid`, `title`, `client`, `spot_type`, `duration`, `status`, `referrer`, `created_at`, `updated_at`, `user`) VALUES
-(1, 'ABD6575B', 'Spot 1', 'Emag', 'AUDIO', 20, 'PENDING', 'ref 2', '2020-05-26 08:54:32', '2020-05-29 09:00:45', NULL),
-(2, '0K76VLPW', 'Spot 2', 'Flanco', 'AUDIO_VIDEO', 20, 'PENDING', 'ref', '2020-05-29 09:00:23', '2020-05-29 09:00:30', 1);
+INSERT INTO `spots` (`id`, `uid`, `title`, `client`, `duration`, `status`, `referrer`, `created_at`, `updated_at`, `user`, `deleted`) VALUES
+(1, 'ABD6575B', 'Spot 1', 'Emag', 20, 'PENDING', 'ref 2', '2020-05-26 08:54:32', '2020-06-19 07:42:39', 1, 0),
+(2, '0K76VLPW', 'Spot 2', 'Media Galaxy', 20, 'PENDING', 'ref', '2020-05-29 09:00:23', '2020-06-19 07:42:31', 1, 0),
+(8, 'QQQQQQQQ', 'Spot 3', 'Emag', 30, 'PENDING', NULL, '2020-06-11 10:31:41', '2020-06-19 07:42:48', 1, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Structura de tabel pentru tabelul `spots__media_types`
+--
+
+CREATE TABLE IF NOT EXISTS `spots__media_types` (
+  `id` int(10) unsigned NOT NULL,
+  `spot_id` int(11) DEFAULT NULL,
+  `madia-type_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+--
+-- Salvarea datelor din tabel `spots__media_types`
+--
+
+INSERT INTO `spots__media_types` (`id`, `spot_id`, `madia-type_id`) VALUES
+(1, 2, 1),
+(2, 1, 2),
+(3, 8, 1),
+(4, 8, 2);
 
 -- --------------------------------------------------------
 
@@ -126,8 +217,38 @@ CREATE TABLE IF NOT EXISTS `spot_broadcasts` (
   `media_type` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `spot` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `spot` int(11) DEFAULT NULL,
+  `deleted` tinyint(1) DEFAULT NULL,
+  `user` int(11) DEFAULT NULL,
+  `broadcaster` int(11) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Salvarea datelor din tabel `spot_broadcasts`
+--
+
+INSERT INTO `spot_broadcasts` (`id`, `uid`, `broadcast_duration`, `start_date`, `media_type`, `created_at`, `updated_at`, `spot`, `deleted`, `user`, `broadcaster`) VALUES
+(1, NULL, 50, '2020-06-01', 'AUDIO', '2020-06-11 10:54:18', '2020-06-19 07:40:37', 2, 0, 3, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Structura de tabel pentru tabelul `spot_broadcasts__broadcast_types`
+--
+
+CREATE TABLE IF NOT EXISTS `spot_broadcasts__broadcast_types` (
+  `id` int(10) unsigned NOT NULL,
+  `spot_broadcast_id` int(11) DEFAULT NULL,
+  `broadcast-type_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Salvarea datelor din tabel `spot_broadcasts__broadcast_types`
+--
+
+INSERT INTO `spot_broadcasts__broadcast_types` (`id`, `spot_broadcast_id`, `broadcast-type_id`) VALUES
+(1, 1, 3),
+(2, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -143,16 +264,18 @@ CREATE TABLE IF NOT EXISTS `spot_talents` (
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `spot` int(11) DEFAULT NULL,
-  `user` int(11) DEFAULT NULL
+  `user` int(11) DEFAULT NULL,
+  `deleted` tinyint(1) DEFAULT NULL,
+  `talent` int(11) DEFAULT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Salvarea datelor din tabel `spot_talents`
 --
 
-INSERT INTO `spot_talents` (`id`, `uid`, `talent_role`, `obs`, `created_at`, `updated_at`, `spot`, `user`) VALUES
-(1, 1, 'VOICE', 'jwjsbajb', '2020-05-26 09:00:55', '2020-05-29 09:03:36', 1, 2),
-(2, 1, 'VOICE', 'jdnzjk', '2020-05-26 09:06:46', '2020-05-29 09:03:27', 1, 6);
+INSERT INTO `spot_talents` (`id`, `uid`, `talent_role`, `obs`, `created_at`, `updated_at`, `spot`, `user`, `deleted`, `talent`) VALUES
+(1, 1, 'VOICE', 'jwjsbajb', '2020-05-26 09:00:55', '2020-06-16 07:59:27', 1, 2, NULL, 2),
+(2, 1, 'VOICE', 'jdnzjk', '2020-05-26 09:06:46', '2020-06-16 07:59:18', 1, 6, NULL, 6);
 
 -- --------------------------------------------------------
 
@@ -213,6 +336,28 @@ CREATE TABLE IF NOT EXISTS `strapi_webhooks` (
 -- --------------------------------------------------------
 
 --
+-- Structura de tabel pentru tabelul `talent_types`
+--
+
+CREATE TABLE IF NOT EXISTS `talent_types` (
+  `id` int(10) unsigned NOT NULL,
+  `type_name` varchar(255) DEFAULT NULL,
+  `deleted` tinyint(1) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Salvarea datelor din tabel `talent_types`
+--
+
+INSERT INTO `talent_types` (`id`, `type_name`, `deleted`, `created_at`, `updated_at`) VALUES
+(1, 'Voice', 0, '2020-06-19 05:52:33', '2020-06-19 05:52:33'),
+(2, 'Face', 0, '2020-06-19 05:52:42', '2020-06-19 05:52:42');
+
+-- --------------------------------------------------------
+
+--
 -- Structura de tabel pentru tabelul `upload_file`
 --
 
@@ -234,7 +379,14 @@ CREATE TABLE IF NOT EXISTS `upload_file` (
   `provider_metadata` longtext,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Salvarea datelor din tabel `upload_file`
+--
+
+INSERT INTO `upload_file` (`id`, `name`, `alternativeText`, `caption`, `width`, `height`, `formats`, `hash`, `ext`, `mime`, `size`, `url`, `previewUrl`, `provider`, `provider_metadata`, `created_at`, `updated_at`) VALUES
+(1, 'planeta', '', '', 450, 357, '{"thumbnail":{"hash":"thumbnail_planeta_816f356644","ext":".png","mime":"image/png","width":197,"height":156,"size":13.49,"path":null,"url":"/uploads/thumbnail_planeta_816f356644.png"}}', 'planeta_816f356644', '.png', 'image/png', '17.14', '/uploads/planeta_816f356644.png', NULL, 'local', NULL, '2020-06-10 10:25:36', '2020-06-10 10:25:36');
 
 -- --------------------------------------------------------
 
@@ -249,7 +401,14 @@ CREATE TABLE IF NOT EXISTS `upload_file_morph` (
   `related_type` longtext,
   `field` longtext,
   `order` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Salvarea datelor din tabel `upload_file_morph`
+--
+
+INSERT INTO `upload_file_morph` (`id`, `upload_file_id`, `related_id`, `related_type`, `field`, `order`) VALUES
+(1, 1, 1, 'users-permissions_user', 'avatar', 1);
 
 -- --------------------------------------------------------
 
@@ -265,7 +424,7 @@ CREATE TABLE IF NOT EXISTS `users-permissions_permission` (
   `enabled` tinyint(1) NOT NULL,
   `policy` varchar(255) DEFAULT NULL,
   `role` int(11) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=595 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=865 DEFAULT CHARSET=latin1;
 
 --
 -- Salvarea datelor din tabel `users-permissions_permission`
@@ -555,14 +714,14 @@ INSERT INTO `users-permissions_permission` (`id`, `type`, `controller`, `action`
 (281, 'email', 'email', 'getsettings', 0, '', 3),
 (282, 'email', 'email', 'updatesettings', 0, '', 3),
 (283, 'upload', 'proxy', 'uploadproxy', 0, '', 3),
-(284, 'upload', 'upload', 'upload', 0, '', 3),
-(285, 'upload', 'upload', 'getsettings', 0, '', 3),
-(286, 'upload', 'upload', 'updatesettings', 0, '', 3),
-(287, 'upload', 'upload', 'findone', 0, '', 3),
-(288, 'upload', 'upload', 'find', 0, '', 3),
-(289, 'upload', 'upload', 'count', 0, '', 3),
-(290, 'upload', 'upload', 'destroy', 0, '', 3),
-(291, 'upload', 'upload', 'search', 0, '', 3),
+(284, 'upload', 'upload', 'upload', 1, '', 3),
+(285, 'upload', 'upload', 'getsettings', 1, '', 3),
+(286, 'upload', 'upload', 'updatesettings', 1, '', 3),
+(287, 'upload', 'upload', 'findone', 1, '', 3),
+(288, 'upload', 'upload', 'find', 1, '', 3),
+(289, 'upload', 'upload', 'count', 1, '', 3),
+(290, 'upload', 'upload', 'destroy', 1, '', 3),
+(291, 'upload', 'upload', 'search', 1, '', 3),
 (292, 'application', 'broadcast-table', 'find', 0, '', 4),
 (293, 'application', 'broadcast-table', 'findone', 0, '', 4),
 (294, 'application', 'broadcast-table', 'count', 0, '', 4),
@@ -859,7 +1018,205 @@ INSERT INTO `users-permissions_permission` (`id`, `type`, `controller`, `action`
 (591, 'application', 'newcode', 'index', 0, '', 3),
 (592, 'application', 'newcode', 'index', 0, '', 4),
 (593, 'application', 'newcode', 'index', 0, '', 5),
-(594, 'application', 'newcode', 'index', 0, '', 6);
+(594, 'application', 'newcode', 'index', 0, '', 6),
+(595, 'application', 'registration', 'create', 0, '', 1),
+(596, 'application', 'registration', 'create', 1, '', 2),
+(597, 'application', 'registration', 'create', 0, '', 3),
+(598, 'application', 'registration', 'create', 0, '', 4),
+(599, 'application', 'registration', 'create', 0, '', 5),
+(600, 'application', 'registration', 'create', 0, '', 6),
+(601, 'application', 'userprofile', 'findone', 1, '', 1),
+(602, 'application', 'userprofile', 'findone', 0, '', 2),
+(603, 'application', 'userprofile', 'findone', 1, '', 3),
+(604, 'application', 'userprofile', 'findone', 0, '', 4),
+(605, 'application', 'userprofile', 'findone', 0, '', 5),
+(606, 'application', 'userprofile', 'findone', 0, '', 6),
+(607, 'application', 'userprofile', 'update', 0, '', 1),
+(608, 'application', 'userprofile', 'update', 0, '', 2),
+(609, 'application', 'userprofile', 'update', 1, '', 3),
+(610, 'application', 'userprofile', 'update', 0, '', 4),
+(611, 'application', 'userprofile', 'update', 0, '', 5),
+(612, 'application', 'userprofile', 'update', 0, '', 6),
+(613, 'application', 'userspot', 'create', 0, '', 1),
+(614, 'application', 'userspot', 'create', 0, '', 2),
+(615, 'application', 'userspot', 'create', 1, '', 3),
+(616, 'application', 'userspot', 'create', 0, '', 4),
+(617, 'application', 'userspot', 'create', 0, '', 5),
+(618, 'application', 'userspot', 'create', 0, '', 6),
+(619, 'application', 'userspot', 'delete', 0, '', 1),
+(620, 'application', 'userspot', 'delete', 0, '', 2),
+(621, 'application', 'userspot', 'delete', 1, '', 3),
+(622, 'application', 'userspot', 'delete', 0, '', 4),
+(623, 'application', 'userspot', 'delete', 0, '', 5),
+(624, 'application', 'userspot', 'delete', 0, '', 6),
+(625, 'application', 'userspot', 'find', 0, '', 1),
+(626, 'application', 'userspot', 'find', 0, '', 2),
+(627, 'application', 'userspot', 'find', 1, '', 3),
+(628, 'application', 'userspot', 'find', 0, '', 4),
+(629, 'application', 'userspot', 'find', 0, '', 5),
+(630, 'application', 'userspot', 'find', 0, '', 6),
+(631, 'application', 'userspot', 'update', 0, '', 1),
+(632, 'application', 'userspot', 'update', 0, '', 2),
+(633, 'application', 'userspot', 'update', 1, '', 3),
+(634, 'application', 'userspot', 'update', 0, '', 4),
+(635, 'application', 'userspot', 'update', 0, '', 5),
+(636, 'application', 'userspot', 'update', 0, '', 6),
+(637, 'application', 'userspotbroadcast', 'create', 0, '', 1),
+(638, 'application', 'userspotbroadcast', 'create', 0, '', 2),
+(639, 'application', 'userspotbroadcast', 'create', 0, '', 3),
+(640, 'application', 'userspotbroadcast', 'create', 0, '', 4),
+(641, 'application', 'userspotbroadcast', 'create', 0, '', 5),
+(642, 'application', 'userspotbroadcast', 'create', 0, '', 6),
+(643, 'application', 'userspotbroadcast', 'delete', 0, '', 1),
+(644, 'application', 'userspotbroadcast', 'delete', 0, '', 2),
+(645, 'application', 'userspotbroadcast', 'delete', 0, '', 3),
+(646, 'application', 'userspotbroadcast', 'delete', 0, '', 4),
+(647, 'application', 'userspotbroadcast', 'delete', 0, '', 5),
+(648, 'application', 'userspotbroadcast', 'delete', 0, '', 6),
+(649, 'application', 'userspotbroadcast', 'find', 0, '', 1),
+(650, 'application', 'userspotbroadcast', 'find', 0, '', 2),
+(651, 'application', 'userspotbroadcast', 'find', 0, '', 3),
+(652, 'application', 'userspotbroadcast', 'find', 0, '', 4),
+(653, 'application', 'userspotbroadcast', 'find', 0, '', 5),
+(654, 'application', 'userspotbroadcast', 'find', 0, '', 6),
+(655, 'application', 'userspotbroadcast', 'update', 0, '', 1),
+(656, 'application', 'userspotbroadcast', 'update', 0, '', 2),
+(657, 'application', 'userspotbroadcast', 'update', 0, '', 3),
+(658, 'application', 'userspotbroadcast', 'update', 0, '', 4),
+(659, 'application', 'userspotbroadcast', 'update', 0, '', 5),
+(660, 'application', 'userspotbroadcast', 'update', 0, '', 6),
+(733, 'application', 'userspottalent', 'create', 0, '', 1),
+(734, 'application', 'userspottalent', 'create', 0, '', 2),
+(735, 'application', 'userspottalent', 'create', 0, '', 3),
+(736, 'application', 'userspottalent', 'create', 0, '', 4),
+(737, 'application', 'userspottalent', 'create', 0, '', 5),
+(738, 'application', 'userspottalent', 'create', 0, '', 6),
+(739, 'application', 'userspottalent', 'delete', 0, '', 1),
+(740, 'application', 'userspottalent', 'delete', 0, '', 2),
+(741, 'application', 'userspottalent', 'delete', 0, '', 3),
+(742, 'application', 'userspottalent', 'delete', 0, '', 4),
+(743, 'application', 'userspottalent', 'delete', 0, '', 5),
+(744, 'application', 'userspottalent', 'delete', 0, '', 6),
+(745, 'application', 'userspottalent', 'find', 0, '', 1),
+(746, 'application', 'userspottalent', 'find', 0, '', 2),
+(747, 'application', 'userspottalent', 'find', 0, '', 3),
+(748, 'application', 'userspottalent', 'find', 0, '', 4),
+(749, 'application', 'userspottalent', 'find', 0, '', 5),
+(750, 'application', 'userspottalent', 'find', 0, '', 6),
+(751, 'application', 'userspottalent', 'update', 0, '', 1),
+(752, 'application', 'userspottalent', 'update', 0, '', 2),
+(753, 'application', 'userspottalent', 'update', 0, '', 3),
+(754, 'application', 'userspottalent', 'update', 0, '', 4),
+(755, 'application', 'userspottalent', 'update', 0, '', 5),
+(756, 'application', 'userspottalent', 'update', 0, '', 6),
+(757, 'application', 'talent-type', 'count', 0, '', 1),
+(758, 'application', 'talent-type', 'count', 0, '', 2),
+(759, 'application', 'talent-type', 'count', 0, '', 3),
+(760, 'application', 'talent-type', 'count', 0, '', 4),
+(761, 'application', 'talent-type', 'count', 0, '', 5),
+(762, 'application', 'talent-type', 'count', 0, '', 6),
+(763, 'application', 'talent-type', 'create', 0, '', 1),
+(764, 'application', 'talent-type', 'create', 0, '', 2),
+(765, 'application', 'talent-type', 'create', 0, '', 3),
+(766, 'application', 'talent-type', 'create', 0, '', 4),
+(767, 'application', 'talent-type', 'create', 0, '', 5),
+(768, 'application', 'talent-type', 'create', 0, '', 6),
+(769, 'application', 'talent-type', 'delete', 0, '', 1),
+(770, 'application', 'talent-type', 'delete', 0, '', 2),
+(771, 'application', 'talent-type', 'delete', 0, '', 3),
+(772, 'application', 'talent-type', 'delete', 0, '', 4),
+(773, 'application', 'talent-type', 'delete', 0, '', 5),
+(774, 'application', 'talent-type', 'delete', 0, '', 6),
+(775, 'application', 'talent-type', 'find', 0, '', 1),
+(776, 'application', 'talent-type', 'find', 0, '', 2),
+(777, 'application', 'talent-type', 'find', 0, '', 3),
+(778, 'application', 'talent-type', 'find', 0, '', 4),
+(779, 'application', 'talent-type', 'find', 0, '', 5),
+(780, 'application', 'talent-type', 'find', 0, '', 6),
+(781, 'application', 'talent-type', 'findone', 0, '', 1),
+(782, 'application', 'talent-type', 'findone', 0, '', 2),
+(783, 'application', 'talent-type', 'findone', 0, '', 3),
+(784, 'application', 'talent-type', 'findone', 0, '', 4),
+(785, 'application', 'talent-type', 'findone', 0, '', 5),
+(786, 'application', 'talent-type', 'findone', 0, '', 6),
+(787, 'application', 'talent-type', 'update', 0, '', 1),
+(788, 'application', 'talent-type', 'update', 0, '', 2),
+(789, 'application', 'talent-type', 'update', 0, '', 3),
+(790, 'application', 'talent-type', 'update', 0, '', 4),
+(791, 'application', 'talent-type', 'update', 0, '', 5),
+(792, 'application', 'talent-type', 'update', 0, '', 6),
+(793, 'application', 'madia-type', 'count', 0, '', 1),
+(794, 'application', 'madia-type', 'count', 0, '', 2),
+(795, 'application', 'madia-type', 'count', 0, '', 3),
+(796, 'application', 'madia-type', 'count', 0, '', 4),
+(797, 'application', 'madia-type', 'count', 0, '', 5),
+(798, 'application', 'madia-type', 'count', 0, '', 6),
+(799, 'application', 'madia-type', 'create', 0, '', 1),
+(800, 'application', 'madia-type', 'create', 0, '', 2),
+(801, 'application', 'madia-type', 'create', 0, '', 3),
+(802, 'application', 'madia-type', 'create', 0, '', 4),
+(803, 'application', 'madia-type', 'create', 0, '', 5),
+(804, 'application', 'madia-type', 'create', 0, '', 6),
+(805, 'application', 'madia-type', 'delete', 0, '', 1),
+(806, 'application', 'madia-type', 'delete', 0, '', 2),
+(807, 'application', 'madia-type', 'delete', 0, '', 3),
+(808, 'application', 'madia-type', 'delete', 0, '', 4),
+(809, 'application', 'madia-type', 'delete', 0, '', 5),
+(810, 'application', 'madia-type', 'delete', 0, '', 6),
+(811, 'application', 'madia-type', 'find', 0, '', 1),
+(812, 'application', 'madia-type', 'find', 0, '', 2),
+(813, 'application', 'madia-type', 'find', 0, '', 3),
+(814, 'application', 'madia-type', 'find', 0, '', 4),
+(815, 'application', 'madia-type', 'find', 0, '', 5),
+(816, 'application', 'madia-type', 'find', 0, '', 6),
+(817, 'application', 'madia-type', 'findone', 0, '', 1),
+(818, 'application', 'madia-type', 'findone', 0, '', 2),
+(819, 'application', 'madia-type', 'findone', 0, '', 3),
+(820, 'application', 'madia-type', 'findone', 0, '', 4),
+(821, 'application', 'madia-type', 'findone', 0, '', 5),
+(822, 'application', 'madia-type', 'findone', 0, '', 6),
+(823, 'application', 'madia-type', 'update', 0, '', 1),
+(824, 'application', 'madia-type', 'update', 0, '', 2),
+(825, 'application', 'madia-type', 'update', 0, '', 3),
+(826, 'application', 'madia-type', 'update', 0, '', 4),
+(827, 'application', 'madia-type', 'update', 0, '', 5),
+(828, 'application', 'madia-type', 'update', 0, '', 6),
+(829, 'application', 'broadcast-type', 'count', 0, '', 1),
+(830, 'application', 'broadcast-type', 'count', 0, '', 2),
+(831, 'application', 'broadcast-type', 'count', 0, '', 3),
+(832, 'application', 'broadcast-type', 'count', 0, '', 4),
+(833, 'application', 'broadcast-type', 'count', 0, '', 5),
+(834, 'application', 'broadcast-type', 'count', 0, '', 6),
+(835, 'application', 'broadcast-type', 'create', 0, '', 1),
+(836, 'application', 'broadcast-type', 'create', 0, '', 2),
+(837, 'application', 'broadcast-type', 'create', 0, '', 3),
+(838, 'application', 'broadcast-type', 'create', 0, '', 4),
+(839, 'application', 'broadcast-type', 'create', 0, '', 5),
+(840, 'application', 'broadcast-type', 'create', 0, '', 6),
+(841, 'application', 'broadcast-type', 'delete', 0, '', 1),
+(842, 'application', 'broadcast-type', 'delete', 0, '', 2),
+(843, 'application', 'broadcast-type', 'delete', 0, '', 3),
+(844, 'application', 'broadcast-type', 'delete', 0, '', 4),
+(845, 'application', 'broadcast-type', 'delete', 0, '', 5),
+(846, 'application', 'broadcast-type', 'delete', 0, '', 6),
+(847, 'application', 'broadcast-type', 'find', 0, '', 1),
+(848, 'application', 'broadcast-type', 'find', 0, '', 2),
+(849, 'application', 'broadcast-type', 'find', 0, '', 3),
+(850, 'application', 'broadcast-type', 'find', 0, '', 4),
+(851, 'application', 'broadcast-type', 'find', 0, '', 5),
+(852, 'application', 'broadcast-type', 'find', 0, '', 6),
+(853, 'application', 'broadcast-type', 'findone', 0, '', 1),
+(854, 'application', 'broadcast-type', 'findone', 0, '', 2),
+(855, 'application', 'broadcast-type', 'findone', 0, '', 3),
+(856, 'application', 'broadcast-type', 'findone', 0, '', 4),
+(857, 'application', 'broadcast-type', 'findone', 0, '', 5),
+(858, 'application', 'broadcast-type', 'findone', 0, '', 6),
+(859, 'application', 'broadcast-type', 'update', 0, '', 1),
+(860, 'application', 'broadcast-type', 'update', 0, '', 2),
+(861, 'application', 'broadcast-type', 'update', 0, '', 3),
+(862, 'application', 'broadcast-type', 'update', 0, '', 4),
+(863, 'application', 'broadcast-type', 'update', 0, '', 5),
+(864, 'application', 'broadcast-type', 'update', 0, '', 6);
 
 -- --------------------------------------------------------
 
@@ -915,19 +1272,93 @@ CREATE TABLE IF NOT EXISTS `users-permissions_user` (
   `user_type` varchar(255) DEFAULT NULL,
   `contact_name` varchar(255) DEFAULT NULL,
   `referrer` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=latin1;
 
 --
 -- Salvarea datelor din tabel `users-permissions_user`
 --
 
 INSERT INTO `users-permissions_user` (`id`, `username`, `email`, `provider`, `password`, `resetPasswordToken`, `confirmed`, `blocked`, `role`, `created_at`, `updated_at`, `user_id`, `cui`, `address`, `phone`, `talent_type`, `media_type`, `arbiter_type`, `cnp`, `user_type`, `contact_name`, `referrer`) VALUES
-(1, 'Studio 1', 'studio@gmail.com', 'local', '$2a$10$EJt.E7RFxUQp6ms0prJhSOj4eJgZuQpceuGeMuaXI3tVheHDzvZ6S', NULL, 1, 0, 3, '2020-05-26 09:27:23', '2020-05-26 09:27:23', NULL, 'RO190273637492827', 'Unirii 7', '0741393014', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(2, 'Voice 1', 'voice@gmail.com', 'local', '$2a$10$ADUfimbwILS5yB5R2cUvR.6QkSHW7jJBf3z5.rx/GQPgUUwDKg.WW', NULL, 1, 0, 4, '2020-05-26 09:30:16', '2020-05-29 09:02:47', NULL, 'RO190273637492827', 'Unirii 7', '0741393014', 'VOICE', NULL, NULL, NULL, NULL, NULL, NULL),
-(3, 'Broadcaster', 'broadcaster@gmail.com', 'local', '$2a$10$9Q2Wq1T.a6kJpIcTGGM9M.bB7CfqF6OvxPmXltZrz/fG0p3nfGilK', NULL, 0, 0, 5, '2020-05-26 09:31:11', '2020-05-26 09:31:11', NULL, 'RO190273637492827', 'Unirii 7', '0741393014', NULL, 'RADIO', NULL, NULL, NULL, NULL, NULL),
+(1, 'Studio 1', 'studio@gmail.com', 'local', '$2a$10$FXMQg3kgAHL2hGuURXZPGeUSpxXvi9ywcGN0sXuJaqQy964gy53qW', NULL, 1, 0, 3, '2020-05-26 09:27:23', '2020-06-18 10:51:35', NULL, 'RO190273637492827', 'Unirii 7', '0744555555', NULL, NULL, NULL, NULL, NULL, 'Bubu1', 'refff1'),
+(3, 'Virgin Radio', 'broadcaster@gmail.com', 'local', '$2a$10$9Q2Wq1T.a6kJpIcTGGM9M.bB7CfqF6OvxPmXltZrz/fG0p3nfGilK', NULL, 1, 0, 5, '2020-05-26 09:31:11', '2020-06-19 07:54:28', NULL, 'RO190273637492827', 'Unirii 7', '0741393014', NULL, 'RADIO', NULL, NULL, NULL, NULL, NULL),
 (4, 'Studio 2', 'studio2@gmail.com', 'local', '$2a$10$rnNn0C8K7TmAGJZJX6VLvOy6600kshzY/9JtM325Ay3WJWGAtcPki', NULL, NULL, NULL, 1, '2020-05-28 08:32:20', '2020-05-28 08:32:20', NULL, 'RO190273637492807', 'Unirii 2', '0741300014', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (5, 'Studio 3', 'studio3@gmail.com', 'local', '$2a$10$f9VxuhD4W7I2CgWfSt0f4eIqSrxlwTx3GU0jlgSSw2eq9X78q6bJC', NULL, NULL, NULL, 1, '2020-05-28 08:34:49', '2020-05-28 08:34:49', NULL, 'RO190273637492807', 'Unirii 2', '0741300014', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(6, 'Voice 2', 'edi.hermann@lemonbyte.ro', 'local', '$2a$10$D4Gw62Bj7yAg6120361LduUkoZ5zhaODZew1daeydpaYAHSTdd6KG', NULL, 0, 0, 1, '2020-05-29 09:02:39', '2020-05-29 09:02:39', NULL, '4354524522524', 'saFfSFSF', '0744666847', NULL, NULL, NULL, NULL, 'TALENT', NULL, 'ref 2');
+(6, 'Voice 2', 'edi.hermann@lemonbyte.ro', 'local', '$2a$10$D4Gw62Bj7yAg6120361LduUkoZ5zhaODZew1daeydpaYAHSTdd6KG', NULL, 1, 0, 1, '2020-05-29 09:02:39', '2020-06-19 07:54:20', NULL, '4354524522524', 'saFfSFSF', '0744666847', NULL, NULL, NULL, NULL, 'TALENT', NULL, 'ref 2'),
+(7, 'Studio 5', 'studio5@gmail.com', 'local', '$2a$10$RktFmcTqN8wiYWJpUeZg.uvfvYyDPnJzK4HdFSPz7rp1PmlVYBkhK', NULL, NULL, NULL, 3, '2020-06-04 06:22:24', '2020-06-04 06:22:24', NULL, 'RO190273637492827', 'Unirii 77', '0741393014', NULL, NULL, NULL, NULL, NULL, 'Bubu', 'refff'),
+(86, 'Studio 0005', 'studio0005@gmail.com', NULL, '$2a$10$gqjd2idQlom0GETzXD.TO.vWPkdRg7yV4co4VLjNn915oE2MRH.8C', NULL, NULL, 1, 3, '2020-06-09 11:24:42', '2020-06-09 11:24:42', NULL, 'RO190273637492827', 'Unirii 77', '0741393014', NULL, NULL, NULL, NULL, NULL, 'Bubu', 'refff'),
+(99, 'Artist 1', 'edi_il@yahoo.com', 'local', '$2a$10$ApDczQ6Vfl4bXWaYQFp5y.F43iwSmdT1O0dHuiNydyXVjsvtkNrLy', NULL, 1, 0, 4, '2020-06-19 06:01:02', '2020-06-19 07:54:06', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'TALENT', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Structura de tabel pentru tabelul `users-permissions_user__broadcast_type`
+--
+
+CREATE TABLE IF NOT EXISTS `users-permissions_user__broadcast_type` (
+  `id` int(10) unsigned NOT NULL,
+  `users-permissions_user_id` int(11) DEFAULT NULL,
+  `broadcast-type_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structura de tabel pentru tabelul `users-permissions_user__broadcast_types`
+--
+
+CREATE TABLE IF NOT EXISTS `users-permissions_user__broadcast_types` (
+  `id` int(10) unsigned NOT NULL,
+  `users-permissions_user_id` int(11) DEFAULT NULL,
+  `broadcast-type_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Salvarea datelor din tabel `users-permissions_user__broadcast_types`
+--
+
+INSERT INTO `users-permissions_user__broadcast_types` (`id`, `users-permissions_user_id`, `broadcast-type_id`) VALUES
+(1, 3, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Structura de tabel pentru tabelul `users-permissions_user__talent_type`
+--
+
+CREATE TABLE IF NOT EXISTS `users-permissions_user__talent_type` (
+  `id` int(10) unsigned NOT NULL,
+  `users-permissions_user_id` int(11) DEFAULT NULL,
+  `talent-type_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+--
+-- Salvarea datelor din tabel `users-permissions_user__talent_type`
+--
+
+INSERT INTO `users-permissions_user__talent_type` (`id`, `users-permissions_user_id`, `talent-type_id`) VALUES
+(3, 99, 1),
+(4, 99, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Structura de tabel pentru tabelul `users-permissions_user__talent_types`
+--
+
+CREATE TABLE IF NOT EXISTS `users-permissions_user__talent_types` (
+  `id` int(10) unsigned NOT NULL,
+  `users-permissions_user_id` int(11) DEFAULT NULL,
+  `talent-type_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Salvarea datelor din tabel `users-permissions_user__talent_types`
+--
+
+INSERT INTO `users-permissions_user__talent_types` (`id`, `users-permissions_user_id`, `talent-type_id`) VALUES
+(1, 99, 1),
+(2, 6, 1),
+(3, 99, 2);
 
 --
 -- Indexes for dumped tables
@@ -940,9 +1371,21 @@ ALTER TABLE `broadcast_tables`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `broadcast_types`
+--
+ALTER TABLE `broadcast_types`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `core_store`
 --
 ALTER TABLE `core_store`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `madia_types`
+--
+ALTER TABLE `madia_types`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -953,9 +1396,21 @@ ALTER TABLE `spots`
   ADD UNIQUE KEY `spots_uid_unique` (`uid`);
 
 --
+-- Indexes for table `spots__media_types`
+--
+ALTER TABLE `spots__media_types`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `spot_broadcasts`
 --
 ALTER TABLE `spot_broadcasts`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `spot_broadcasts__broadcast_types`
+--
+ALTER TABLE `spot_broadcasts__broadcast_types`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -981,6 +1436,12 @@ ALTER TABLE `strapi_administrator`
 -- Indexes for table `strapi_webhooks`
 --
 ALTER TABLE `strapi_webhooks`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `talent_types`
+--
+ALTER TABLE `talent_types`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1016,6 +1477,30 @@ ALTER TABLE `users-permissions_user`
   ADD UNIQUE KEY `users-permissions_user_username_unique` (`username`);
 
 --
+-- Indexes for table `users-permissions_user__broadcast_type`
+--
+ALTER TABLE `users-permissions_user__broadcast_type`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `users-permissions_user__broadcast_types`
+--
+ALTER TABLE `users-permissions_user__broadcast_types`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `users-permissions_user__talent_type`
+--
+ALTER TABLE `users-permissions_user__talent_type`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `users-permissions_user__talent_types`
+--
+ALTER TABLE `users-permissions_user__talent_types`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -1023,22 +1508,42 @@ ALTER TABLE `users-permissions_user`
 -- AUTO_INCREMENT for table `broadcast_tables`
 --
 ALTER TABLE `broadcast_tables`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `broadcast_types`
+--
+ALTER TABLE `broadcast_types`
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `core_store`
 --
 ALTER TABLE `core_store`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=28;
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=45;
+--
+-- AUTO_INCREMENT for table `madia_types`
+--
+ALTER TABLE `madia_types`
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `spots`
 --
 ALTER TABLE `spots`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
+--
+-- AUTO_INCREMENT for table `spots__media_types`
+--
+ALTER TABLE `spots__media_types`
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `spot_broadcasts`
 --
 ALTER TABLE `spot_broadcasts`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `spot_broadcasts__broadcast_types`
+--
+ALTER TABLE `spot_broadcasts__broadcast_types`
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `spot_talents`
 --
@@ -1060,20 +1565,25 @@ ALTER TABLE `strapi_administrator`
 ALTER TABLE `strapi_webhooks`
   MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT for table `talent_types`
+--
+ALTER TABLE `talent_types`
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
 -- AUTO_INCREMENT for table `upload_file`
 --
 ALTER TABLE `upload_file`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `upload_file_morph`
 --
 ALTER TABLE `upload_file_morph`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `users-permissions_permission`
 --
 ALTER TABLE `users-permissions_permission`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=595;
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=865;
 --
 -- AUTO_INCREMENT for table `users-permissions_role`
 --
@@ -1083,7 +1593,27 @@ ALTER TABLE `users-permissions_role`
 -- AUTO_INCREMENT for table `users-permissions_user`
 --
 ALTER TABLE `users-permissions_user`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=100;
+--
+-- AUTO_INCREMENT for table `users-permissions_user__broadcast_type`
+--
+ALTER TABLE `users-permissions_user__broadcast_type`
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `users-permissions_user__broadcast_types`
+--
+ALTER TABLE `users-permissions_user__broadcast_types`
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `users-permissions_user__talent_type`
+--
+ALTER TABLE `users-permissions_user__talent_type`
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT for table `users-permissions_user__talent_types`
+--
+ALTER TABLE `users-permissions_user__talent_types`
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

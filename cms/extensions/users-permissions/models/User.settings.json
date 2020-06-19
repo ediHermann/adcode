@@ -62,15 +62,6 @@
     "phone": {
       "type": "string"
     },
-    "user_type": {
-      "type": "enumeration",
-      "enum": [
-        "TALENT",
-        "STUDIO",
-        "BROADCAST",
-        "ARBITER"
-      ]
-    },
     "contact_name": {
       "type": "string"
     },
@@ -87,6 +78,12 @@
       ],
       "plugin": "upload",
       "required": false
+    },
+    "talent_types": {
+      "collection": "talent-type"
+    },
+    "broadcast_types": {
+      "collection": "broadcast-type"
     }
   }
 }
