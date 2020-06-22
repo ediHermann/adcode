@@ -86,67 +86,117 @@
             }
 
 
-			function UserProfileFunction(tok) {
-
-					$qs="";
-                $.ajax({
-                    type: 'GET',
-                    headers: {
-                        "Authorization": tok
-                    },
-                    async: false,
-                    url:  baseurl+"user-profile",
-                    success: function (data) {
-                      $("#api_resp").html(JSON.stringify(data));
-                      $("#api_err").html('');
-                    },
-                  error: function (data) {
-                          $("#api_err").html(JSON.stringify(data));
-                      $("#api_resp").html('');
-                  }
-                });
-         }
-
-     function UpdateProfile(tok,strdata) {
-        var fd = new FormData();
-        var files = $('#file')[0].files[0];
-        fd.append('files.avatar',files);
-        fd.append('dataa', strdata);
-
-
-        $.ajax({
-            type: 'PUT',
-            headers: {
+          function UserProfileFunctionAPI(tok) {
+            $qs="";
+            $.ajax({
+              type: 'GET',
+              headers: {
                 "Authorization": tok
-            },
-            data:fd,
-            async: false,
-            contentType: false,
-            processData: false,
-            url:  baseurl+"user-profile",
-            success: function (data) {
+              },
+              async: false,
+              url:  baseurl+"user-profile",
+              success: function (data) {
                 $("#api_resp").html(JSON.stringify(data));
-						    $("#api_err").html('');
-            },
-            error: function (data) {
+                $("#api_err").html('');
+              },
+              error: function (data) {
                 $("#api_err").html(JSON.stringify(data));
-						    $("#api_resp").html('');
-                    }
-                });
+                $("#api_resp").html('');
+              }
+            });
+          }
+
+
+
+          function UserProfileFunction(tok) {
+            var query = "query={userProfile}";
+            $.ajax({
+                type: 'POST',
+                headers: {
+                    "Authorization": tok
+                },
+                async: false,
+                url:  baseurl+"graphql",
+                data:query,
+                success: function (data) {
+                  $("#api_resp").html(JSON.stringify(data));
+                  $("#api_err").html('');
+                },
+              error: function (data) {
+                      $("#api_err").html(JSON.stringify(data));
+                  $("#api_resp").html('');
+              }
+            });
       }
 
+      function UpdateProfile(tok,strdata) {
+      var fd = new FormData();
+      var files = $('#file')[0].files[0];
+      fd.append('files.avatar',files);
+      fd.append('data', strdata);
+        $.ajax({
+          type: 'PUT',
+          headers: {
+              "Authorization": tok
+          },
+          data:fd,
+          async: false,
+          contentType: false,
+          processData: false,
+          url:  baseurl+"user-profile",
+          success: function (data) {
+              $("#api_resp").html(JSON.stringify(data));
+              $("#api_err").html('');
+          },
+          error: function (data) {
+              $("#api_err").html(JSON.stringify(data));
+              $("#api_resp").html('');
+                  }
+              });
+        }
 
 
-            $("#login").click(function () {
-                var userName = $('#uname1').val();
-                var pwd = $('#pwd1').val();
-                var Tkn = Authenticate(userName, pwd);
-                createCookie('token', Tkn, 60)
+          function UserSpotsFunction(tok) {
+            var query = "query={userSpots}";
+            var spotuid=$('#spot_uid').val();
+            if(spotuid)
+               query = "query={userSpots(where:{uid:\""+ $('#spot_uid').val() +"\"})}";
+
+            console.log(query);
+
+
+            $.ajax({
+              type: 'POST',
+              headers: {
+                "Authorization": tok
+              },
+              async: false,
+              url:  baseurl+"graphql",
+              data:query,
+              success: function (data) {
+                $("#api_resp").html(JSON.stringify(data));
+                $("#api_err").html('');
+              },
+              error: function (data) {
+                $("#api_err").html(JSON.stringify(data));
+                $("#api_resp").html('');
+              }
             });
-            $("#demo").click(function () {
-                Tkn = readCookie('token');
-                DemoFunction(Tkn);
-            });
+          }
+
+
+          $("#login").click(function () {
+              var userName = $('#uname1').val();
+              var pwd = $('#pwd1').val();
+              var Tkn = Authenticate(userName, pwd);
+              createCookie('token', Tkn, 60)
+          });
+
+
+          $("#demo").click(function () {
+              Tkn = readCookie('token');
+              DemoFunction(Tkn);
+          });
 
 
 			$("#btn_profile").click(function () {
@@ -159,15 +209,26 @@
 
 
 			$("#btn_updateprofile").click(function () {
-
-
         Tkn = readCookie('token');
 				var payload = $('#payload').val();
           UpdateProfile(Tkn,payload);
             });
 
 
-       });
+          $("#btn_spots").click(function () {
+
+            Tkn = readCookie('token');
+            UserSpotsFunction(Tkn);
+
+          });
+
+
+
+
+
+
+ });
+
 
 
 
@@ -197,16 +258,33 @@ Password:<br> <input type="password" id="pwd1"><br /><br />
 <hr>
 
 
-<h3>UPDATE PROFILE</h3>
-    <form method="post" action="" enctype="multipart/form-data" id="myform">
-      <input type="file" id="file" name="file" />
-      <br /><br />
-      <textarea  id="payload" style="width:600px;height:400px">{"contact_name":"Bubu1","referrer":"refff1"}</textarea>
-     <br /><br />
-    </form>
+<h3>UPDATE PROFILE</h3><br />
 <button id="btn_updateprofile">Update profile</button><br />
 <br />
 <hr>
+  <h3>USER SPOTS</h3>
+  <br />
+  <button id="btn_spots">Get spots</button><br />
+  <br />
+  <hr>
+  <h3>UPDATE SPOT</h3>
+  <br />
+  Spot uid:<input type="text" id="spot_uid" name="spot_uid" />
+  <button id="btn_update_spot">Update spot</button><br />
+  <br />
+  <hr>
+
+
+  <form method="post" action="" enctype="multipart/form-data" id="myform">
+    <input type="file" id="file" name="file" />
+    <br /><br />
+    <textarea  id="payload" style="width:600px;height:400px">{"contact_name":"Bubu1","referrer":"refff1"}</textarea>
+    <br /><br />
+  </form>
+
+  <br />
+  <hr>
+
 </td>
 <td valign="top">
 <h3>RESPONSE</h3>

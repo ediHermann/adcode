@@ -7,6 +7,7 @@ import {
 import RegisterForm from "./components/register/register-form";
 import SpotList from "./pages/spot/spot_list";
 import CreateSpot from "./pages/spot/create_spot";
+import EditSpot from "./pages/spot/edit_spot";
 class Main extends Component {
     render() {
         return (
@@ -22,7 +23,7 @@ class Main extends Component {
                         <Route path="/components/register/register-form" component={RegisterForm}/>
                         <Route path="/pages/spot/spot_list" component={SpotList}/>
                         <Route path="/pages/spot/create_spot" component={CreateSpot}/>
-
+                        <Route path="/pages/spot/edit_spot" component={EditSpot}/>
                     </div>
                 </div>
             </HashRouter>
