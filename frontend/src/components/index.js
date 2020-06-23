@@ -1,9 +1,12 @@
 import React from 'react'
+import Layout from "./layout";
+import {Route, Switch} from 'react-router'
 
 const App = () =>
-    <div className="relative text-center p-24">
-        <h1 className="text-3xl">FRONTALL</h1>
-
-    </div>
-
+    <Layout>
+        <Switch>
+            <Route exact path={'/home'} render={() => ''}/>
+            <Route exact path={'/profile'} render={() => ''}/>
+        </Switch>
+    </Layout>
 export default App

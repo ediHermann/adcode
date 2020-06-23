@@ -36,6 +36,8 @@
     "html-webpack-plugin": "^4.3.0",
     "postcss": "^7.0.30",
     "prop-types": "^15.7.2",
+    "react-autosuggest": "^10.0.2",
+    "react-datepicker": "^3.0.0",
     "style-loader": "^1.2.1",
     "tailwindcss": "^1.4.6",
     "webpack": "^4.43.0",
@@ -48,8 +50,11 @@
     "registry": "https://npm.pkg.github.com/"
   },
   "dependencies": {
+    "classnames": "^2.2.6",
+    "date-fns": "^2.14.0",
     "react": "^16.13.1",
+    "react-debounce-input": "^3.2.2",
     "react-dom": "^16.13.1",
-    "classnames": "^2.2.6"
+    "react-router": "^5.2.0"
   }
 }
