@@ -20,14 +20,6 @@
     "client": {
       "type": "string"
     },
-    "spot_type": {
-      "type": "enumeration",
-      "enum": [
-        "AUDIO",
-        "AUDIO_VIDEO",
-        "VIDEO"
-      ]
-    },
     "duration": {
       "type": "integer"
     },
@@ -47,6 +39,9 @@
     "deleted": {
       "type": "boolean",
       "default": false
+    },
+    "media_types": {
+      "collection": "madia-type"
     }
   }
 }

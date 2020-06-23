@@ -15,14 +15,6 @@
     "start_date": {
       "type": "date"
     },
-    "media_type": {
-      "type": "enumeration",
-      "enum": [
-        "AUDIO",
-        "AUDIO_VIDEO",
-        "VIDEO"
-      ]
-    },
     "spot": {
       "model": "spot"
     },
@@ -34,6 +26,9 @@
       "columnName": "broadcaster",
       "plugin": "users-permissions",
       "model": "user"
+    },
+    "broadcast_types": {
+      "collection": "broadcast-type"
     }
   }
 }
