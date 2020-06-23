@@ -1,9 +1,10 @@
 import React from 'react'
+import Menu from "../menu";
 
 const Layout = props =>
     <>
         <div className="app-header">
-            {/*<HeaderContent/>*/}
+            <Menu/>
         </div>
         <div className='app-page'>
             {props.children}
