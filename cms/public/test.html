@@ -1,5 +1,6 @@
 <head>
     <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
 		var baseurl="http://localhost:1337/";
 
@@ -40,61 +41,40 @@
         $(document).ready(function () {
 
           function Authenticate(user, pass) {
-                var tok = "";
-                var crturl = baseurl+"auth/local";
+            var tok = "";
+            var crturl = baseurl + "auth/local";
 
-				        $.ajax({
-                    type: "POST",
-                    async: false,
-                    url: crturl,
-                    data: {
-                        identifier: user,
-                        password: pass,
-                    },
-                    success: function (data) {
+            $.ajax({
+              type: "POST",
+              async: false,
+              url: crturl,
+              data: {
+                identifier: user,
+                password: pass,
+              },
+              success: function (data) {
 
-                        tok = 'Bearer ' + data.jwt;
-                        $("#token").html(tok);
-                        $("#authenticateerr").html('');
-                          //tok is saved on cookie
-                    },
-                    error: function (data) {
-                        $("#authenticateerr").html(JSON.stringify(data));
-						      $("#token").html('');
-                    }
-                 });
-                return tok;
+                tok = 'Bearer ' + data.jwt;
+                $("#token").html(tok);
+                $("#authenticateerr").html('');
+                //tok is saved on cookie
+              },
+              error: function (data) {
+                $("#authenticateerr").html(JSON.stringify(data));
+                $("#token").html('');
+              }
+            });
+            return tok;
           }
 
-            function DemoFunction(tok) {
-                $.ajax({
-                    type: 'POST',
-                    headers: {
-                        "Authorization": tok
-                    },
-                    async: false,
-                    url:  baseurl+"apitest",
-                    success: function (data) {
-                        $("#api_resp").html(JSON.stringify(data));
-						$("#api_err").html('');
-                    },
-                    error: function (data) {
-                        $("#api_err").html(JSON.stringify(data));
-						$("#api_resp").html('');
-                    }
-                });
-            }
-
-
-          function UserProfileFunctionAPI(tok) {
-            $qs="";
+          function DemoFunction(tok) {
             $.ajax({
-              type: 'GET',
+              type: 'POST',
               headers: {
                 "Authorization": tok
               },
               async: false,
-              url:  baseurl+"user-profile",
+              url: baseurl + "apitest",
               success: function (data) {
                 $("#api_resp").html(JSON.stringify(data));
                 $("#api_err").html('');
@@ -107,53 +87,108 @@
           }
 
 
+          function UserProfileFunctionAPI(tok) {
+            $qs = "";
+            $.ajax({
+              type: 'GET',
+              headers: {
+                "Authorization": tok
+              },
+              async: false,
+              url: baseurl + "user-profile",
+              success: function (data) {
+                $("#api_resp").html(JSON.stringify(data));
+                $("#api_err").html('');
+              },
+              error: function (data) {
+                $("#api_err").html(JSON.stringify(data));
+                $("#api_resp").html('');
+              }
+            });
+          }
+
 
           function UserProfileFunction(tok) {
             var query = "query={userProfile}";
             $.ajax({
-                type: 'POST',
-                headers: {
-                    "Authorization": tok
-                },
-                async: false,
-                url:  baseurl+"graphql",
-                data:query,
-                success: function (data) {
-                  $("#api_resp").html(JSON.stringify(data));
-                  $("#api_err").html('');
-                },
+              type: 'POST',
+              headers: {
+                "Authorization": tok
+              },
+              async: false,
+              url: baseurl + "graphql",
+              data: query,
+              success: function (data) {
+                $("#api_resp").html(JSON.stringify(data));
+                $("#api_err").html('');
+              },
               error: function (data) {
-                      $("#api_err").html(JSON.stringify(data));
-                  $("#api_resp").html('');
+                $("#api_err").html(JSON.stringify(data));
+                $("#api_resp").html('');
               }
             });
-      }
+          }
 
-      function UpdateProfile(tok,strdata) {
-      var fd = new FormData();
-      var files = $('#file')[0].files[0];
-      fd.append('files.avatar',files);
-      fd.append('data', strdata);
-        $.ajax({
-          type: 'PUT',
-          headers: {
-              "Authorization": tok
-          },
-          data:fd,
-          async: false,
-          contentType: false,
-          processData: false,
-          url:  baseurl+"user-profile",
-          success: function (data) {
-              $("#api_resp").html(JSON.stringify(data));
-              $("#api_err").html('');
-          },
-          error: function (data) {
-              $("#api_err").html(JSON.stringify(data));
-              $("#api_resp").html('');
-                  }
-              });
-        }
+
+          ////////////////////////////////////////////////////////////////////////////////////
+          //UPLOAD NOT WORKING
+           ////////////////////////////////////////////////////////////////////////////////////
+          function UpdateProfile_UPLOAD(tok, strdata) {
+            //var data = "query=mutation{updateProfile(data:" + strdata + ")}";
+
+            var fd = new FormData();
+            var files = $('#file')[0].files[0];
+            fd.append('file', files);
+            // fd.append('data', data);
+
+            var postdata={
+              query:`mutation {updateProfile(file:${fd}, data: ${strdata})}`
+            };
+            $.ajax({
+              type: 'POST',
+              headers: {
+                "Authorization": tok
+              },
+              data: postdata,
+              async: false,
+              url: baseurl + "graphql",
+              success: function (data) {
+                $("#api_resp").html(JSON.stringify(data));
+                $("#api_err").html('');
+              },
+              error: function (data) {
+                $("#api_err").html(JSON.stringify(data));
+                $("#api_resp").html('');
+              }
+            });
+          }
+
+          //////////////////////////////////////////////////
+
+          function UpdateProfile(tok, strdata) {
+            //var data = "query=mutation{updateProfile(data:" + strdata + ")}";
+            var postdata={
+              query:`mutation {updateProfile(data: ${strdata})}`
+            };
+            $.ajax({
+              type: 'POST',
+              headers: {
+                "Authorization": tok
+              },
+              data: postdata,
+              async: false,
+              url: baseurl + "graphql",
+              success: function (data) {
+                $("#api_resp").html(JSON.stringify(data));
+                $("#api_err").html('');
+              },
+              error: function (data) {
+                $("#api_err").html(JSON.stringify(data));
+                $("#api_resp").html('');
+              }
+            });
+          }
+
 
 
           function UserSpotsFunction(tok) {
@@ -278,7 +313,7 @@ Password:<br> <input type="password" id="pwd1"><br /><br />
   <form method="post" action="" enctype="multipart/form-data" id="myform">
     <input type="file" id="file" name="file" />
     <br /><br />
-    <textarea  id="payload" style="width:600px;height:400px">{"contact_name":"Bubu1","referrer":"refff1"}</textarea>
+    <textarea  id="payload" style="width:600px;height:400px">{contact_name:"Bubu1",referrer:"refff1"}</textarea>
     <br /><br />
   </form>
 
