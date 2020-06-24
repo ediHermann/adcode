@@ -1,8 +1,8 @@
 import React from 'react'
-import {NavLink} from "react-router-dom";
-import {HOME, LOGOUT, PROFILE, SETTINGS, SPOTS, UID} from "../../__constants";
-import CloseButton from "../mixt/close-button";
+
+import {HOME, LOGOUT, PROFILE, SETTINGS, SPOTS, UID} from "../__constants";
 import MenuToggle from "../buttons/menu-toggle";
+import NavLink from "../mixt/nav-link";
 
 
 const Menu = () => {
@@ -19,18 +19,18 @@ const Menu = () => {
                 borderRadius: '0 0 20px 20px'
             }}>
             <header className="flex flex-col justify-between px-4 py-4 bg-secondary">
-                <NavLink to={route.link(HOME)}
-                         className='rounded-lg border-2 border-gray-600 hover:border-primary py-2 pl-4 pr-10 text-text mb-2'>ACASA</NavLink>
-                <NavLink to={route.link(UID)}
+                <button onClick={() => history.push('/home')}
+                         className='rounded-lg border-2 border-gray-600 hover:border-primary py-2 pl-4 pr-10 text-text mb-2'>ACASA</button>
+                <button onClick={() => history.push('/uid')}
                          className='rounded-lg border-2 border-gray-600 hover:border-primary py-2 pl-4 pr-10 text-text mb-2'>NEW
-                    UID</NavLink>
-                <NavLink to={route.link(SPOTS)}
+                    UID</button>
+                <button onClick={() => history.push('/create_spot')}
                          className='rounded-lg border-2 border-gray-600 hover:border-primary py-2 pl-4 pr-10 text-text mb-2'>SPOTURILE
-                    MELE</NavLink>
+                    MELE</button>
                 <NavLink to={route.link(PROFILE)}
                          className='rounded-lg border-2 border-gray-600 hover:border-primary py-2 pl-4 pr-10 text-text mb-2'>PROFIL</NavLink>
-                <NavLink to={route.link(SETTINGS)}
-                         className='rounded-lg border-2 border-gray-600 hover:border-primary py-2 pl-4 pr-10 text-text mb-2'>SETTINGS</NavLink>
+                <button onClick={() => history.push('/settings')}
+                        className='rounded-lg border-2 border-gray-600 hover:border-primary py-2 pl-4 pr-10 text-text mb-2'>SETTINGS</button>
                 <NavLink to={route.link(LOGOUT)}
                          className='rounded-lg border-2 border-gray-600 hover:border-primary py-2 pl-4 pr-10 text-text mb-2'>LOG
                     OUT</NavLink>

@@ -7,4 +7,36 @@ body {
     z-index: 1;
 }
 
+.icon-xsm {
+    @apply w-8 h-8 fill-current;
+}
+
+.icon-sm {
+    @apply w-12 h-12 fill-current;
+}
+
+.icon-md {
+    @apply w-16 h-16 fill-current;
+}
+
+.icon-lg {
+    @apply w-24 h-24 fill-current;
+}
+
+.icon-xlg {
+    @apply w-48 h-48 fill-current;
+}
+
+.bottom-rounded {
+    border-radius: 0 0 20px 20px;
+}
+
+.bottom-rounded-inner {
+    border-radius: 0 0 16px 16px;
+}
+
+.bottom-right-rounded {
+    border-radius: 0 0 14px 0;
+}
+
 @tailwind utilities;
