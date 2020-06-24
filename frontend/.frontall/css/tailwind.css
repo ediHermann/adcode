@@ -28,15 +28,32 @@ body {
 }
 
 .bottom-rounded {
-    border-radius: 0 0 20px 20px;
+    border-radius: 0 0 68px 68px;
 }
 
 .bottom-rounded-inner {
-    border-radius: 0 0 16px 16px;
+    border-radius: 0 0 68px 68px;
 }
 
 .bottom-right-rounded {
-    border-radius: 0 0 14px 0;
+    border-radius: 0 0 58px 0;
+}
+
+.bottom-rounded-window{
+    border-radius: 0 0 24px 24px;
+}
+
+.fill-white {
+    fill: #ffffff;
+}
+
+.window-size{
+    width: 350px;
+    height: auto;
+}
+
+.rounded-window{
+    border-radius: 28px;
 }
 
 @tailwind utilities;

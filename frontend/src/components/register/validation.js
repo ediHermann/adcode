@@ -31,7 +31,7 @@ const validationSchema = Yup.object().shape({
     password: Yup.string()
         .max(20, 'Your password should have max 16 characters.')
         .matches(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-            'Your password must contain at least 8 Characters, one uppercase, one number and one special case character')
+            'Your password must contain at least 8 Characters, 1 uppercase, 1 number and 1 special case character')
         .required('Your password is required!'),
     confirmPassword: Yup.string()
         .oneOf([Yup.ref('password'), null], 'Password do not match!')

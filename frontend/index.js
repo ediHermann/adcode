@@ -6,7 +6,7 @@ import Main from './src/Main';
 import "./src/index.css";
 
 ReactDOM.render(
-    <App/>,
+    <Main/>,
     document.getElementById("root")
 );
 
