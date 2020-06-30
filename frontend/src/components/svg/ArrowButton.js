@@ -12,10 +12,10 @@ const svgArrow = `
     </svg>
 `
 
-const LoginArrow = ({className}) => <SVG src={svgArrow} className={className}/>
+const ArrowButton = ({className}) => <SVG src={svgArrow} className={className}/>
 
 
-LoginArrow.propTypes = {
+ArrowButton.propTypes = {
     className: PropTypes.string
 }
-export default LoginArrow
+export default ArrowButton

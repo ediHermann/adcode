@@ -5,8 +5,8 @@ import validationSchema from "../register/validation";
 import GlobalError from "../register/global-error";
 import PropTypes from "prop-types";
 import Title from "../mixt/Title";
-import LoginArrow from "../svg/LoginArrow";
 import {Link} from "react-router-dom";
+import ArrowButton from "../svg/ArrowButton";
 
 
 const LoginForm = ({sendMessages}) => {
@@ -91,7 +91,7 @@ const LoginForm = ({sendMessages}) => {
 
 
                         <div className='flex justify-end pt-2'>
-                            <LoginArrow
+                            <ArrowButton
                                 className='flex transform -rotate-90 fill-white right-0 cursor-pointer'
                                 onClick={() => isSubmitting}
                             />
