@@ -16,7 +16,7 @@ const ContactForm = ({sendMessage}) => {
     }
 
     const inputStyle = cond => cn(
-        "w-full rounded-lg ", {
+        "w-full rounded-lg pl-2", {
             "border-2 border-error": cond,
             'border-2 border-secondary mb-3': !cond
         })
@@ -83,7 +83,7 @@ const ContactForm = ({sendMessage}) => {
                            className={inputStyle(errors.message && touched.message)}
                            name="message"
                            placeholder="Scrie un mesaj"
-                           rows="8"/>
+                           rows="4"/>
                     <ErrorMessage
                         name="message"
                         component="div"

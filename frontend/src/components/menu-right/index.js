@@ -9,11 +9,11 @@ const RightMenu = () => {
 
 
     return <div className="fixed overflow-visible right-0 top-0 "
-    style={{
-        width: '350px',
-        right: '0',
-        height: '100%'
-    }}>
+                style={{
+                    width: '350px',
+                    right: '0',
+                    height: '100%'
+                }}>
         <div
             className="relative text-white"
             style={{
@@ -40,17 +40,22 @@ const RightMenu = () => {
                              className='item-link hover:border-primary'>Cont Arbitru</NavLink>
                 </div>
 
-                <div className='px-2 mt-10 mb-4 bottom-0'>
-                    <div className='mb-2'>
-                        <label>CONTACT</label>
-                    </div>
-                    <div className='text-black'>
-                        <ContactForm />
+                <div className='relative h-full'>
+                    <div className='absolute px-2 mb-4'
+                         style={{
+                             bottom: '250px'
+                         }}>
+                        <div className='mb-2'>
+                            <label>CONTACT</label>
+                        </div>
+                        <div className='text-black'>
+                            <ContactForm />
+                        </div>
                     </div>
                 </div>
             </div>
             <div
-                className=" fixed w-20 h-18 transform -rotate-90 aps -mt-48"
+                className=" fixed w-20 h-18 transform -rotate-90 aps -mt-32"
                 onClick={() => {
                     setOpened(!opened)
                 }}>
@@ -72,6 +77,7 @@ const RightMenu = () => {
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 }

@@ -6,7 +6,6 @@ import Profile from "./profile";
 import CreateSpot from "./spot/create_spot";
 import Settings from "./settings";
 import {Router} from "react-router";
-import history from './../components/constants/history';
 import {HOME} from "../components/__constants";
 
 
@@ -14,7 +13,7 @@ import {HOME} from "../components/__constants";
 const App = () =>{
 const route = location.pathname
     return(
-    <Router history={history}>
+    <Router >
         <Layout>
            <Switch>
                 <Route exact path={route.link(HOME)} render={() => <Home/>}/>
