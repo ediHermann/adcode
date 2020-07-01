@@ -658,6 +658,18 @@ body {
   fill: currentColor;
 }
 
+.top-rounded{
+  border-radius: 44px 44px 0 0;
+}
+
+.rounded-t-right{
+  border-radius: 0 24px 0 0;
+}
+
+.rounded-t-left{
+  border-radius: 0 0 40px 0;
+}
+
 .bottom-rounded {
   border-radius: 0 0 68px 68px;
 }
@@ -683,8 +695,22 @@ body {
   height: auto;
 }
 
-.rounded-window{
+.window-rounded{
   border-radius: 28px;
+}
+
+.aps{
+  left: -102px;
+}
+
+.item-link{
+  margin-bottom: 10px;
+  color: #ffffff;
+  padding: 4px 4px 4px 10px;
+  border-color: slategray;
+  border-width: 2px;
+  border-radius: 10px;
+  text-transform: uppercase;
 }
 
 .space-y-0 > :not(template) ~ :not(template) {

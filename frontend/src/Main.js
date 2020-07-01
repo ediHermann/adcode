@@ -8,24 +8,21 @@ import RegisterForm from "./components/register/register-form";
 import SpotList from "./pages/spot/spot_list";
 import CreateSpot from "./pages/spot/create_spot";
 import EditSpot from "./pages/spot/edit_spot";
+import Layout from "./components/layout";
+
+
 class Main extends Component {
     render() {
         return (
             <HashRouter>
-                <div>
-                    <h1>ADCODE</h1>
-                    <ul className="header">
-                        <li><NavLink to="/">Home</NavLink></li>
-                        <li><NavLink to="/components/register/register-form">Register</NavLink></li>
-                        <li><NavLink to="/pages/spot/spot_list">Spots</NavLink></li>
-                    </ul>
+                <Layout>
                     <div className="content">
                         <Route path="/components/register/register-form" component={RegisterForm}/>
-                        <Route path="/pages/spot/spot_list" component={SpotList}/>
+                        <Route path="/spot_list" render={() => <SpotList/>}/>
                         <Route path="/pages/spot/create_spot" component={CreateSpot}/>
                         <Route path="/pages/spot/edit_spot" component={EditSpot}/>
-                    </div>
                 </div>
+                </Layout>
             </HashRouter>
         );
     }
