@@ -121,5 +121,64 @@ module.exports = {
       {
         ctx.send({"success": false,  "payload": {}, "error": {"code": errNum, "message": errDesc}});
       }
+  },
+
+
+  avatar: async ctx => {
+    //UPLOAD CRT USER AVATAR
+    let id;
+    let result;
+    let errNum;
+    let errDesc;
+
+    //GET USER FROM HEADER TOKEN
+    if (ctx.request && ctx.request.header && ctx.request.header.authorization) {
+      try {
+        const decrypted = await strapi.plugins['users-permissions'].services.jwt.getToken(ctx);
+        id = decrypted.id;
+
+        if (id === undefined) {
+          errNum = "201";
+          errDesc = 'Invalid token: Token did not contain required fields';
+        }
+        else {
+          //Authentiation OK
+          console.log(ctx);
+          if (ctx.is('multipart')){
+            console.log("multipart");
+            const {data, files} = parseMultipartData(ctx);
+            result = await strapi.plugins['users-permissions'].services.user.edit({id},data,{files});
+            console.log(result);
+          }
+          else {
+            console.log("no multipart");
+            errNum = "205";
+            errDesc = 'Missing image file';
+          }
+        }
+
+      } catch (e) {
+
+        console.log(normalize(e));
+        //console.log(e);
+        errNum = "202";
+        errDesc ="Unexpected error";
+
+      }
+    }
+
+    if(result) {
+      //console.log(result);
+      ctx.send({"success": true});
+    }
+    else
+    {
+      ctx.send({"success": false,  "payload": {}, "error": {"code": errNum, "message": errDesc}});
+    }
   }
+
+
+
+
+
 };

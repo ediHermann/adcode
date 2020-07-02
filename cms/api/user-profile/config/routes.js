@@ -16,7 +16,15 @@ module.exports=
       "config": {
       "policies": []
         }
-    }
+    },
+      {
+        "method": "POST",
+        "path": "/user-avatar",
+        "handler": "UserProfile.avatar",
+        "config": {
+          "policies": []
+        }
+      }
 
   ]
 }
