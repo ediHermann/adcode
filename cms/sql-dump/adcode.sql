@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 19 Iun 2020 la 13:54
+-- Generation Time: 02 Iul 2020 la 11:10
 -- Versiune server: 5.6.26
 -- PHP Version: 5.6.12
 
@@ -179,7 +179,7 @@ CREATE TABLE IF NOT EXISTS `spots` (
 INSERT INTO `spots` (`id`, `uid`, `title`, `client`, `duration`, `status`, `referrer`, `created_at`, `updated_at`, `user`, `deleted`) VALUES
 (1, 'ABD6575B', 'Spot 1', 'Emag', 20, 'PENDING', 'ref 2', '2020-05-26 08:54:32', '2020-06-19 07:42:39', 1, 0),
 (2, '0K76VLPW', 'Spot 2', 'Media Galaxy', 20, 'PENDING', 'ref', '2020-05-29 09:00:23', '2020-06-19 07:42:31', 1, 0),
-(8, 'QQQQQQQQ', 'Spot 3', 'Emag', 30, 'PENDING', NULL, '2020-06-11 10:31:41', '2020-06-19 07:42:48', 1, 0);
+(8, 'QQQQQQQQ', 'Spot 3', 'Client 1', 30, 'PENDING', NULL, '2020-06-11 10:31:41', '2020-07-02 06:00:25', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -424,7 +424,7 @@ CREATE TABLE IF NOT EXISTS `users-permissions_permission` (
   `enabled` tinyint(1) NOT NULL,
   `policy` varchar(255) DEFAULT NULL,
   `role` int(11) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=865 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=871 DEFAULT CHARSET=latin1;
 
 --
 -- Salvarea datelor din tabel `users-permissions_permission`
@@ -577,17 +577,17 @@ INSERT INTO `users-permissions_permission` (`id`, `type`, `controller`, `action`
 (144, 'users-permissions', 'userspermissions', 'updateproviders', 0, '', 2),
 (145, 'users-permissions', 'userspermissions', 'updaterole', 0, '', 1),
 (146, 'users-permissions', 'userspermissions', 'updaterole', 0, '', 2),
-(147, 'application', 'spot', 'count', 0, '', 1),
+(147, 'application', 'spot', 'count', 1, '', 1),
 (148, 'application', 'spot', 'count', 1, '', 2),
-(149, 'application', 'spot', 'create', 0, '', 1),
+(149, 'application', 'spot', 'create', 1, '', 1),
 (150, 'application', 'spot', 'create', 1, '', 2),
-(151, 'application', 'spot', 'delete', 0, '', 1),
+(151, 'application', 'spot', 'delete', 1, '', 1),
 (152, 'application', 'spot', 'delete', 1, '', 2),
-(153, 'application', 'spot', 'find', 0, '', 1),
+(153, 'application', 'spot', 'find', 1, '', 1),
 (154, 'application', 'spot', 'find', 1, '', 2),
-(155, 'application', 'spot', 'findone', 0, '', 1),
+(155, 'application', 'spot', 'findone', 1, '', 1),
 (156, 'application', 'spot', 'findone', 1, '', 2),
-(157, 'application', 'spot', 'update', 0, '', 1),
+(157, 'application', 'spot', 'update', 1, '', 1),
 (158, 'application', 'spot', 'update', 1, '', 2),
 (159, 'application', 'spot-talent', 'count', 0, '', 1),
 (160, 'application', 'spot-talent', 'count', 1, '', 2),
@@ -643,12 +643,12 @@ INSERT INTO `users-permissions_permission` (`id`, `type`, `controller`, `action`
 (210, 'application', 'spot-talent', 'create', 0, '', 3),
 (211, 'application', 'spot-talent', 'update', 0, '', 3),
 (212, 'application', 'spot-talent', 'delete', 0, '', 3),
-(213, 'application', 'spot', 'find', 0, '', 3),
-(214, 'application', 'spot', 'findone', 0, '', 3),
-(215, 'application', 'spot', 'count', 0, '', 3),
-(216, 'application', 'spot', 'create', 0, '', 3),
-(217, 'application', 'spot', 'update', 0, '', 3),
-(218, 'application', 'spot', 'delete', 0, '', 3),
+(213, 'application', 'spot', 'find', 1, '', 3),
+(214, 'application', 'spot', 'findone', 1, '', 3),
+(215, 'application', 'spot', 'count', 1, '', 3),
+(216, 'application', 'spot', 'create', 1, '', 3),
+(217, 'application', 'spot', 'update', 1, '', 3),
+(218, 'application', 'spot', 'delete', 1, '', 3),
 (219, 'content-type-builder', 'componentcategories', 'editcategory', 0, '', 3),
 (220, 'content-type-builder', 'componentcategories', 'deletecategory', 0, '', 3),
 (221, 'content-type-builder', 'components', 'getcomponents', 0, '', 3),
@@ -684,14 +684,14 @@ INSERT INTO `users-permissions_permission` (`id`, `type`, `controller`, `action`
 (251, 'users-permissions', 'auth', 'forgotpassword', 0, '', 3),
 (252, 'users-permissions', 'auth', 'emailconfirmation', 0, '', 3),
 (253, 'users-permissions', 'auth', 'sendemailconfirmation', 0, '', 3),
-(254, 'users-permissions', 'user', 'find', 0, '', 3),
-(255, 'users-permissions', 'user', 'me', 0, '', 3),
-(256, 'users-permissions', 'user', 'findone', 0, '', 3),
-(257, 'users-permissions', 'user', 'create', 0, '', 3),
-(258, 'users-permissions', 'user', 'update', 0, '', 3),
-(259, 'users-permissions', 'user', 'destroy', 0, '', 3),
+(254, 'users-permissions', 'user', 'find', 1, '', 3),
+(255, 'users-permissions', 'user', 'me', 1, '', 3),
+(256, 'users-permissions', 'user', 'findone', 1, '', 3),
+(257, 'users-permissions', 'user', 'create', 1, '', 3),
+(258, 'users-permissions', 'user', 'update', 1, '', 3),
+(259, 'users-permissions', 'user', 'destroy', 1, '', 3),
 (260, 'users-permissions', 'userspermissions', 'getemailtemplate', 0, '', 3),
-(261, 'users-permissions', 'user', 'destroyall', 0, '', 3),
+(261, 'users-permissions', 'user', 'destroyall', 1, '', 3),
 (262, 'users-permissions', 'userspermissions', 'searchusers', 0, '', 3),
 (263, 'users-permissions', 'userspermissions', 'getroutes', 0, '', 3),
 (264, 'users-permissions', 'userspermissions', 'deleterole', 0, '', 3),
@@ -1216,7 +1216,13 @@ INSERT INTO `users-permissions_permission` (`id`, `type`, `controller`, `action`
 (861, 'application', 'broadcast-type', 'update', 0, '', 3),
 (862, 'application', 'broadcast-type', 'update', 0, '', 4),
 (863, 'application', 'broadcast-type', 'update', 0, '', 5),
-(864, 'application', 'broadcast-type', 'update', 0, '', 6);
+(864, 'application', 'broadcast-type', 'update', 0, '', 6),
+(865, 'application', 'userprofile', 'avatar', 0, '', 1),
+(866, 'application', 'userprofile', 'avatar', 0, '', 2),
+(867, 'application', 'userprofile', 'avatar', 1, '', 3),
+(868, 'application', 'userprofile', 'avatar', 0, '', 4),
+(869, 'application', 'userprofile', 'avatar', 0, '', 5),
+(870, 'application', 'userprofile', 'avatar', 0, '', 6);
 
 -- --------------------------------------------------------
 
@@ -1279,7 +1285,7 @@ CREATE TABLE IF NOT EXISTS `users-permissions_user` (
 --
 
 INSERT INTO `users-permissions_user` (`id`, `username`, `email`, `provider`, `password`, `resetPasswordToken`, `confirmed`, `blocked`, `role`, `created_at`, `updated_at`, `user_id`, `cui`, `address`, `phone`, `talent_type`, `media_type`, `arbiter_type`, `cnp`, `user_type`, `contact_name`, `referrer`) VALUES
-(1, 'Studio 1', 'studio@gmail.com', 'local', '$2a$10$FXMQg3kgAHL2hGuURXZPGeUSpxXvi9ywcGN0sXuJaqQy964gy53qW', NULL, 1, 0, 3, '2020-05-26 09:27:23', '2020-06-18 10:51:35', NULL, 'RO190273637492827', 'Unirii 7', '0744555555', NULL, NULL, NULL, NULL, NULL, 'Bubu1', 'refff1'),
+(1, 'Studio 1', 'studio@gmail.com', 'local', '$2a$10$FXMQg3kgAHL2hGuURXZPGeUSpxXvi9ywcGN0sXuJaqQy964gy53qW', NULL, 1, 0, 3, '2020-05-26 09:27:23', '2020-07-02 05:50:05', NULL, 'RO190273637492827', 'Unirii 7', '0744555555', NULL, NULL, NULL, NULL, NULL, 'Bubu1', 'refff1'),
 (3, 'Virgin Radio', 'broadcaster@gmail.com', 'local', '$2a$10$9Q2Wq1T.a6kJpIcTGGM9M.bB7CfqF6OvxPmXltZrz/fG0p3nfGilK', NULL, 1, 0, 5, '2020-05-26 09:31:11', '2020-06-19 07:54:28', NULL, 'RO190273637492827', 'Unirii 7', '0741393014', NULL, 'RADIO', NULL, NULL, NULL, NULL, NULL),
 (4, 'Studio 2', 'studio2@gmail.com', 'local', '$2a$10$rnNn0C8K7TmAGJZJX6VLvOy6600kshzY/9JtM325Ay3WJWGAtcPki', NULL, NULL, NULL, 1, '2020-05-28 08:32:20', '2020-05-28 08:32:20', NULL, 'RO190273637492807', 'Unirii 2', '0741300014', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (5, 'Studio 3', 'studio3@gmail.com', 'local', '$2a$10$f9VxuhD4W7I2CgWfSt0f4eIqSrxlwTx3GU0jlgSSw2eq9X78q6bJC', NULL, NULL, NULL, 1, '2020-05-28 08:34:49', '2020-05-28 08:34:49', NULL, 'RO190273637492807', 'Unirii 2', '0741300014', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -1583,7 +1589,7 @@ ALTER TABLE `upload_file_morph`
 -- AUTO_INCREMENT for table `users-permissions_permission`
 --
 ALTER TABLE `users-permissions_permission`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=865;
+  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=871;
 --
 -- AUTO_INCREMENT for table `users-permissions_role`
 --
