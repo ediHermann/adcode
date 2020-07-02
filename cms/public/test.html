@@ -189,6 +189,34 @@
             });
           }
 
+          function UploadAvatar(tok) {
+            var fd = new FormData();
+            var file = $('#file')[0].files[0];
+            var data = {};
+
+            fd.append('files.avatar', file, file.name);
+            fd.append('data', JSON.stringify(data));
+
+            $.ajax({
+              type: 'POST',
+              headers: {
+                "Authorization": tok
+              },
+              data: fd,
+              async: false,
+              processData: false,  // tell jQuery not to process the data
+              contentType: false,  // tell jQuery not to set contentType
+              url: baseurl + "user-avatar",
+              success: function (data) {
+                $("#api_resp").html(JSON.stringify(data));
+                $("#api_err").html('');
+              },
+              error: function (data) {
+                $("#api_err").html(JSON.stringify(data));
+                $("#api_resp").html('');
+              }
+            });
+          }
 
 
           function UserSpotsFunction(tok) {
@@ -208,6 +236,31 @@
               async: false,
               url:  baseurl+"graphql",
               data:query,
+              success: function (data) {
+                $("#api_resp").html(JSON.stringify(data));
+                $("#api_err").html('');
+              },
+              error: function (data) {
+                $("#api_err").html(JSON.stringify(data));
+                $("#api_resp").html('');
+              }
+            });
+          }
+
+          function UpdateSpotFunction(tok) {
+            var strdata = '{client:"Client 1"}';
+            var uid="QQQQQQQQ";
+            var postdata={
+              query:`mutation {updateUserSpot(uid:"${uid}",data: ${strdata})}`
+            };
+            $.ajax({
+              type: 'POST',
+              headers: {
+                "Authorization": tok
+              },
+              data: postdata,
+              async: false,
+              url: baseurl + "graphql",
               success: function (data) {
                 $("#api_resp").html(JSON.stringify(data));
                 $("#api_err").html('');
@@ -250,13 +303,28 @@
             });
 
 
+          $("#btn_avatar").click(function () {
+            Tkn = readCookie('token');
+            UploadAvatar(Tkn);
+          });
+
+
+
           $("#btn_spots").click(function () {
 
             Tkn = readCookie('token');
-            UserSpotsFunction(Tkn);
+            var payload = $('#payload').val();
+            UserSpotsFunction(Tkn,payload);
 
           });
 
+
+          $("#btn_update_spot").click(function () {
+
+            Tkn = readCookie('token');
+            UpdateSpotFunction(Tkn);
+
+          });
 
 
 
@@ -296,6 +364,8 @@ Password:<br> <input type="password" id="pwd1"><br /><br />
 <h3>UPDATE PROFILE</h3><br />
 <button id="btn_updateprofile">Update profile</button><br />
 <br />
+<button id="btn_avatar">Upload avatar</button><br />
+  <br />
 <hr>
   <h3>USER SPOTS</h3>
   <br />
