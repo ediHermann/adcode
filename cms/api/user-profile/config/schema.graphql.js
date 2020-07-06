@@ -2,10 +2,9 @@ const { parseMultipartData, sanitizeEntity } = require('strapi-utils');
 
 module.exports = {
   query: `userProfile: JSON!`,
-  mutation:` updateProfile(data: JSON): JSON!`,
+  mutation:`updateProfile(data: JSON): JSON!`,
   resolver: {
-    Query:
-    {
+    Query:{
       userProfile:
         {
           description: 'Return crt user profile',
@@ -55,7 +54,6 @@ module.exports = {
           }
         }
     },
-
 
     Mutation:
     {
