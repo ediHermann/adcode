@@ -12,40 +12,38 @@ import RegisterTalent from "./pages/registerTalent";
 import RegisterStudio from "./pages/registerStudio";
 import RegisterBroadcaster from "./pages/registerEmitator";
 import RegisterArbiter from "./pages/registerArbiter";
+import Layout from "./components/layout";
+import RegisterForm from "./components/register/register-form";
 
 
 class Main extends Component {
     render() {
         return (
             <HashRouter>
-                {/*{userLoggedin ?*/}
-                {/*    <Layout>*/}
-                {/*        <div className="content">*/}
-                {/*            <Route path="/home" render={() => <Home/>}/>*/}
-                {/*            <Route path="/spot_list" render={() => <SpotList/>}/>*/}
-                {/*            <Route path="/settings" render={() => <Settings/>}/>*/}
-                {/*            <Route path="/profile" render={() => <Profile/>}/>*/}
-                {/*            <Route path="/cont_talent" render={() => <RegisterForm/>}/>*/}
-                {/*            <Route path="/cont_producator" render={() => <RegisterFormProducator/>}/>*/}
-                {/*            <Route path="/cont_emitator" render={() => <RegisterFormBroadcaster/>}/>*/}
-                {/*            <Route path="/cont_arbitru" render={() => <RegisterFormArbiter/>}/>*/}
-                {/*        </div>*/}
-                {/*    </Layout>*/}
-                {/*    :*/}
-                {/*    <Login/>*/}
-                {/*}*/}
-
-                    <Login/>
+                    <Layout>
                         <div className="content">
                             <Route path="/home" render={() => <Home/>}/>
                             <Route path="/spot_list" render={() => <SpotList/>}/>
                             <Route path="/settings" render={() => <Settings/>}/>
                             <Route path="/profile" render={() => <Profile/>}/>
-                            <Route path="/cont_talent" render={() => <RegisterTalent/>}/>
+                            <Route path="/cont_talent" render={() => <RegisterForm/>}/>
                             <Route path="/cont_producator" render={() => <RegisterStudio/>}/>
                             <Route path="/cont_emitator" render={() => <RegisterBroadcaster/>}/>
                             <Route path="/cont_arbitru" render={() => <RegisterArbiter/>}/>
                         </div>
+                    </Layout>
+
+                    {/*<Login/>*/}
+                    {/*    <div className="content">*/}
+                    {/*        <Route path="/home" render={() => <Home/>}/>*/}
+                    {/*        <Route path="/spot_list" render={() => <SpotList/>}/>*/}
+                    {/*        <Route path="/settings" render={() => <Settings/>}/>*/}
+                    {/*        <Route path="/profile" render={() => <Profile/>}/>*/}
+                    {/*        <Route path="/cont_talent" render={() => <RegisterTalent/>}/>*/}
+                    {/*        <Route path="/cont_producator" render={() => <RegisterStudio/>}/>*/}
+                    {/*        <Route path="/cont_emitator" render={() => <RegisterBroadcaster/>}/>*/}
+                    {/*        <Route path="/cont_arbitru" render={() => <RegisterArbiter/>}/>*/}
+                    {/*    </div>*/}
             </HashRouter>
         );
     }

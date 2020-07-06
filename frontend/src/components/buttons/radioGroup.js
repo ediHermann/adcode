@@ -16,7 +16,7 @@ const RadioGroup = ({labels, setSelected, selected}) =>
                         onChange={() => {
                             setSelected(idx);
                         }}/>
-                    <label className='mr-24 cursor-pointer' htmlFor={dash(label)}>{label}</label>
+                    <label className='text-sm md:text-lg mr-24 cursor-pointer ' htmlFor={dash(label)}>{label}</label>
                 </li>
         )}
     </ul>;

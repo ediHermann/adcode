@@ -1,10 +1,12 @@
 import React from 'react'
-import RegisterForm from "../components/register/register-form";
-import RegisterTalent from "./registerTalent";
 
 
 const Profile = () => <div>Profile
-    {/*<RegisterTalent/>*/}
+    <div className='flex justify-center flex-wrap h-48'>
+        <div className='text-gray-700 text-center p-2'>
+            dsfsdfs
+        </div>
+    </div>
 </div>
 
 export default Profile
