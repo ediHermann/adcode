@@ -14,9 +14,9 @@ const validationSchema = Yup.object().shape({
         .max(12, 'CUI should have 9 characters')
         .required('Your CUI is required!'),
     cnp: Yup.string()
-        .min(12, 'CUI should have 13 characters')
-        .max(12, 'CUI should have 13 characters')
-        .required('Your CUI is required!'),
+        .min(12, 'CNP should have 13 characters')
+        .max(12, 'CNP should have 13 characters')
+        .required('Your CNP is required!'),
     address: Yup.string()
         .required('Your address is required!'),
     phone: Yup.string()

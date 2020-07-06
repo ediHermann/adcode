@@ -3,13 +3,10 @@ import {NavLink} from "react-router-dom";
 import MenuToggle from "../buttons/menu-toggle";
 
 
-
-
-
 const Menu = () => {
     const [opened, setOpened] = React.useState(true)
 
-    return <div className="absolute overflow-visible right-menu top-0">
+    return <div className="absolute overflow-visible right-0 mr-20 top-0">
         <div
             className="relative text-secondary bottom-rounded "
             style={{
@@ -18,13 +15,19 @@ const Menu = () => {
             }}>
 
             <header className="flex flex-col justify-between px-4 py-4 bg-secondary">
-                <NavLink to='/'
+                <NavLink to='/home'
                          className='rounded-lg border-2 border-gray-600 hover:border-primary py-2 pl-4 pr-10 text-text mb-2'
                         >ACASA</NavLink>
-                <NavLink to='"/pages/spot/spot_list"'
+                <NavLink to='/spot_list'
                          className='rounded-lg border-2 border-gray-600 hover:border-primary py-2 pl-4 pr-10 text-text mb-2'
-                         >SPOTURILE
-                    MELE</NavLink>
+                         >SPOTURILE MELE</NavLink>
+                <NavLink to='/settings'
+                         className='rounded-lg border-2 border-gray-600 hover:border-primary py-2 pl-4 pr-10 text-text mb-2'
+                >Setari</NavLink>
+                <NavLink to='/profile'
+                         className='rounded-lg border-2 border-gray-600 hover:border-primary py-2 pl-4 pr-10 text-text mb-2'
+                >Profil</NavLink>
+
             </header>
 
             <div

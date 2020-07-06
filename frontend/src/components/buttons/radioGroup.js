@@ -3,20 +3,20 @@ import React from 'react'
 const dash = st => st.replace(/\s/g, '-').toLowerCase();
 
 const RadioGroup = ({labels, setSelected, selected}) =>
-    <ul>
+    <ul className='flex text-text '>
         {labels.map(
             (label, idx) =>
                 <li key={label}>
-                    <label htmlFor={dash(label)}>{label}</label>
                     <input
                         id={dash(label)}
                         type="radio"
                         value={idx}
                         checked={selected === idx}
+                        className='mb-10 mr-1 cursor-pointer'
                         onChange={() => {
                             setSelected(idx);
-
                         }}/>
+                    <label className='mr-24 cursor-pointer' htmlFor={dash(label)}>{label}</label>
                 </li>
         )}
     </ul>;

@@ -8,7 +8,7 @@ const RightMenu = () => {
     const [opened, setOpened] = React.useState(true)
 
 
-    return <div className="fixed overflow-visible right-0 top-0 "
+    return <div className="fixed overflow-visible right-0 top-0 z-50"
                 style={{
                     width: '350px',
                     right: '0',
