@@ -35,7 +35,7 @@ module.exports = {
                   if (options.where) {
                     criteria = options.where;
                     criteria.user = userid;
-                    criteria.deleted = true;
+                    criteria.deleted = false;
                     result = await strapi.services.spot.find(criteria);
                   } else
                     result = await strapi.services.spot.find({user: userid, deleted: false});
