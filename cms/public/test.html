@@ -248,7 +248,9 @@
           }
 
           function UpdateSpotFunction(tok) {
-            var strdata = '{client:"Client 1"}';
+           // var strdata = '{client:"Client 1"}';
+
+            var strdata = '{media_types:[{id:1},{id:2}]}';
             var uid="QQQQQQQQ";
             var postdata={
               query:`mutation {updateUserSpot(uid:"${uid}",data: ${strdata})}`
@@ -261,6 +263,31 @@
               data: postdata,
               async: false,
               url: baseurl + "graphql",
+              success: function (data) {
+                $("#api_resp").html(JSON.stringify(data));
+                $("#api_err").html('');
+              },
+              error: function (data) {
+                $("#api_err").html(JSON.stringify(data));
+                $("#api_resp").html('');
+              }
+            });
+          }
+
+
+          function searchUSer(tok) {
+
+            query = "query={searchUser(where:{username:\"Artist 1\"})}";
+            console.log(query);
+
+            $.ajax({
+              type: 'POST',
+              headers: {
+                "Authorization": tok
+              },
+              async: false,
+              url:  baseurl+"graphql",
+              data:query,
               success: function (data) {
                 $("#api_resp").html(JSON.stringify(data));
                 $("#api_err").html('');
@@ -308,6 +335,10 @@
             UploadAvatar(Tkn);
           });
 
+          $("#btn_searchuser").click(function () {
+            Tkn = readCookie('token');
+            searchUSer(Tkn);
+          });
 
 
           $("#btn_spots").click(function () {
@@ -365,6 +396,9 @@ Password:<br> <input type="password" id="pwd1"><br /><br />
 <button id="btn_updateprofile">Update profile</button><br />
 <br />
 <button id="btn_avatar">Upload avatar</button><br />
+  <br />
+  <br />
+  <button id="btn_searchuser">Search user</button><br />
   <br />
 <hr>
   <h3>USER SPOTS</h3>
