@@ -8,7 +8,8 @@ module.exports = {
         'primary-hover': '#67002f',
         secondary: '#333333',
         'secondary-hover': '#2B7A7F',
-        accent:'#1F252A'
+        accent:'#1F252A',
+        error: '#b42800'
     },
     height:{
         header: headerHeight
