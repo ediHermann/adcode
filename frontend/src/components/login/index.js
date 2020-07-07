@@ -57,7 +57,7 @@ const LoginForm = ({sendMessages}) => {
                     onSubmit={handleSubmit}
                     className='bg-primary border-2 rounded-window window-size '>
 
-                    <div className='flex text-center justify-center w-full my-4 sm:my-4 lg:my-8 xl:my-8 text-white'>
+                    <div className='flex text-center justify-center w-full my-4 sm:my-4 lg:my-8 xl:my-8'>
                         <Title>AUTENTIFICARE</Title>
                     </div>
 

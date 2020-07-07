@@ -8,7 +8,7 @@ const Menu = () => {
 
     return <div className="absolute overflow-visible right-0 mr-20 top-0">
         <div
-            className="relative text-secondary bottom-rounded "
+            className="relative text-secondary bottom-rounded sticky"
             style={{
                 transform: opened ? 'translateY(calc(4.9rem - 100%)' : 'translateY(0)',
                 transition: 'transform .5s',
@@ -38,13 +38,13 @@ const Menu = () => {
                 <div className='flex text-text h-14'>
                     <div className='flex bg-secondary justify-center text-center ml-6 mr-2 mt-1'
                     style={{borderRadius: '50%', width: '100px', height: '64px'}}>
-                        BG
+                        RS
                     </div>
                     <div className='flex justify-center pr-2 bg-secondary w-full bottom-right-rounded mb-2 mr-2'>
-                        <ul>
-                            <li className='font-semibold'>Nume</li>
-                            <li className='text-xs pb-1'>Bla Bla</li>
-                            <li className='font-semibold'>CONT PRODUCATOR</li>
+                        <ul className='mr-10'>
+                            <li className='font-semibold'>Red Studio</li>
+                            <li className='text-xs pb-1'>AV Studio Plus</li>
+                            <li className='font-semibold '>CONT PRODUCATOR</li>
                         </ul>
                         <MenuToggle
                             opened={!opened}
