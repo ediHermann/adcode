@@ -1,0 +1,20 @@
+{
+  "kind": "collectionType",
+  "collectionName": "talent_types",
+  "info": {
+    "name": "talent_type"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "type_name": {
+      "type": "string"
+    },
+    "deleted": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}

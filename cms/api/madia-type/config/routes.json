@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/madia-types",
+      "handler": "madia-type.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/madia-types/count",
+      "handler": "madia-type.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/madia-types/:id",
+      "handler": "madia-type.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/madia-types",
+      "handler": "madia-type.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/madia-types/:id",
+      "handler": "madia-type.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/madia-types/:id",
+      "handler": "madia-type.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

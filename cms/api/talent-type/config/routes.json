@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/talent-types",
+      "handler": "talent-type.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/talent-types/count",
+      "handler": "talent-type.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/talent-types/:id",
+      "handler": "talent-type.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/talent-types",
+      "handler": "talent-type.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/talent-types/:id",
+      "handler": "talent-type.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/talent-types/:id",
+      "handler": "talent-type.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}
