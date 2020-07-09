@@ -5,10 +5,11 @@ import cn from 'classnames'
 import GlobalError from './global-error'
 import validationSchema from './validation'
 import RadioGroup from "./../buttons/radioGroup";
-import Title from "../mixt/Title";
+//import  FetchDog from "@vladblindu/fetch-dog/src/fetch-dog.class";
+import FetchDog from "@vladblindu/fetch-dog/src";
 
 
-const RegisterForm = ({sendMessage}) => {
+const RegisterForm = () => {
 
 
     const initialValues = {
@@ -36,27 +37,65 @@ const RegisterForm = ({sendMessage}) => {
     const [globalError, setGlobalError] = React.useState('');
 
     const onSubmit = async (values, {setSubmitting, resetForm}) => {
-        const payload = {...values};
+        alert('start')
+
+        FetchDog.endpoints = {
+            register: {
+                //login
+                url: '/auth/local',
+                display: 'Inregistrare',
+                method: "POST",
+                default: true
+            }
+        }
+        FetchDog.baseUrl = 'http://localhost:1337/cms'
+        FetchDog.apiKey = '12345667'
+        FetchDog.token = ''
+
+        // const payload = {...values};
+        const payload =
+            {
+                username: 'userTest',
+                address: '',
+                identifier: 'Studio 1',
+                password: 'studio1'
+            }
+        console.log('fdsgsf')
         setSubmitting(true);
         try {
-            const outcome = await sendMessage(payload);
-            if (outcome) setGlobalError(outcome);
-            else {
-                resetForm();
-                alert('Message sent successfully.')
-            }
+            console.log('dxfvsdgvs')
+            // const outcome = await sendMessage(fetchDog.execute (payload));
+
+            const outcome = await FetchDog.execute('register', payload);
+
+            // if (outcome) setGlobalError(outcome);
+            // else {
+            //     resetForm();
+            //     alert('Message sent successfully.')
+            // }
         } catch (err) {
             setGlobalError(err.message)
         }
         setSubmitting(false)
+        return false
+
     };
 
 
     return <Formik initialValues={initialValues}
-                   validationSchema={validationSchema}
-                   onSubmit={onSubmit}>
+                    //validationSchema={validationSchema}
+                   // onSubmit={(values, {setSubmitting}) => {
+                   //     setTimeout(() => {
+                   //         alert(JSON.stringify(values, null, 2));
+                   //         setSubmitting(false);
+                   //     }, 400);
+                   // }}
+        onSubmit={onSubmit}
+    >
+
         {
             ({
+
                  errors,
                  touched,
                  handleSubmit,
@@ -64,121 +103,123 @@ const RegisterForm = ({sendMessage}) => {
              }) =>
                 <Form onSubmit={handleSubmit}>
                     <GlobalError message={globalError}/>
-                            <RadioGroup labels={FORM_TYPES} selected={formType} setSelected={setFormType}/>
-                            {formType === 0
-                                ? <>
-                                    <label className='text-text text-sm'>CNP</label>
-                                    <Field
-                                        type="text"
-                                        name="cnp"
-                                        placeholder="CNP"
-                                        className={inputStyle(errors.cnp && touched.cnp)}/>
-                                    <ErrorMessage
-                                        name="cnp"
-                                        component="div"
-                                        className="text-sm text-error italic"/>
-
-                                    <label className='text-text text-sm'>Nume</label>
-                                    <Field
-                                        type="text"
-                                        name="name"
-                                        placeholder="Numele"
-                                        className={inputStyle(errors.name && touched.name)}/>
-                                    <ErrorMessage
-                                        name="name"
-                                        component="div"
-                                        className="text-sm text-error italic"/>
-                                </>
-                                : <>
-                                    <label className='text-text text-sm'>CUI</label>
-                                    <Field
-                                        type="text"
-                                        name="cui"
-                                        placeholder="CUI"
-                                        className={inputStyle(errors.cui && touched.cui)}/>
-                                    <ErrorMessage
-                                        name="cui"
-                                        component="div"
-                                        className="text-sm text-error italic"/>
-                                    <label className='text-text text-sm'>Numele Companiei</label>
-                                    <Field
-                                        type="text"
-                                        name="companyName"
-                                        placeholder="Numele companiei"
-                                        className={inputStyle(errors.companyName && touched.companyName)}/>
-                                    <ErrorMessage
-                                        name="companyName"
-                                        component="div"
-                                        className="text-sm text-error italic"/>
-                                    <label className='text-text text-sm'>Persoana de Contact</label>
-                                    <Field
-                                        type="text"
-                                        name="contact"
-                                        placeholder="Persoana de contact"
-                                        className={inputStyle(errors.contact && touched.contact)}/>
-                                    <ErrorMessage
-                                        name="contact"
-                                        component="div"
-                                        className=" text-sm text-error italic"/>
-                                </>
-                            }
-                            <label className='text-text text-sm'>Adresa</label>
+                    <RadioGroup labels={FORM_TYPES} selected={formType} setSelected={setFormType}/>
+                    {formType === 0
+                        ? <>
+                            <label className='text-text text-sm'>Nume</label>
                             <Field
                                 type="text"
-                                name="address"
-                                placeholder="Adresa"
-                                className={inputStyle(errors.address && touched.address)}/>
+                                name="name"
+                                placeholder="Numele"
+                                className={inputStyle(errors.name && touched.name)}/>
                             <ErrorMessage
-                                name="address"
+                                name="name"
+                                component="div"
+                                className="text-sm text-error italic"/>
+
+                            {/*<label className='text-text text-sm'>CNP</label>*/}
+                            {/*<Field*/}
+                            {/*    type="text"*/}
+                            {/*    name="cnp"*/}
+                            {/*    placeholder="CNP"*/}
+                            {/*    className={inputStyle(errors.cnp && touched.cnp)}/>*/}
+                            {/*<ErrorMessage*/}
+                            {/*    name="cnp"*/}
+                            {/*    component="div"*/}
+                            {/*    className="text-sm text-error italic"/>*/}
+                        </>
+                        : <>
+                            <label className='text-text text-sm'>Numele Companiei</label>
+                            <Field
+                                type="text"
+                                name="companyName"
+                                placeholder="Numele companiei"
+                                className={inputStyle(errors.companyName && touched.companyName)}/>
+                            <ErrorMessage
+                                name="companyName"
+                                component="div"
+                                className="text-sm text-error italic"/>
+
+                            {/*<label className='text-text text-sm'>CUI</label>*/}
+                            {/*<Field*/}
+                            {/*    type="text"*/}
+                            {/*    name="cui"*/}
+                            {/*    placeholder="CUI"*/}
+                            {/*    className={inputStyle(errors.cui && touched.cui)}/>*/}
+                            {/*<ErrorMessage*/}
+                            {/*    name="cui"*/}
+                            {/*    component="div"*/}
+                            {/*    className="text-sm text-error italic"/>*/}
+
+                            <label className='text-text text-sm'>Persoana de Contact</label>
+                            <Field
+                                type="text"
+                                name="contact"
+                                placeholder="Persoana de contact"
+                                className={inputStyle(errors.contact && touched.contact)}/>
+                            <ErrorMessage
+                                name="contact"
                                 component="div"
                                 className=" text-sm text-error italic"/>
-                            <label className='text-text text-sm'>Telefon</label>
-                            <Field
-                                type="text"
-                                name="phone"
-                                placeholder="Telefon"
-                                className={inputStyle(errors.phone && touched.phone)}/>
-                            <ErrorMessage
-                                name="phone"
-                                component="div"
-                                className="text-sm text-error italic"/>
-                            <label className='text-text text-sm'>Email</label>
-                            <Field
-                                type="text"
-                                name="email"
-                                placeholder="Email"
-                                className={inputStyle(errors.email && touched.email)}/>
-                            <ErrorMessage
-                                name="email"
-                                component="div"
-                                className="text-sm text-error italic"/>
-                            <label className='text-text text-sm'>Parola</label>
-                            <Field
-                                type="password"
-                                name="password"
-                                placeholder="Parola"
-                                className={inputStyle(errors.password && touched.password)}/>
-                            <ErrorMessage
-                                name="password"
-                                component="div"
-                                className="text-sm text-error italic"/>
-                            <label className='text-text text-sm'>Confirmare Parola</label>
-                            <Field
-                                type="password"
-                                name="confirmPassword"
-                                placeholder="Confirmare parola"
-                                className={inputStyle(errors.confirmPassword && touched.confirmPassword)}/>
-                            <ErrorMessage
-                                name="confirmPassword"
-                                component="div"
-                                className="text-sm text-error italic"/>
+                        </>
+                    }
+                    <label className='text-text text-sm'>Adresa</label>
+                    <Field
+                        type="text"
+                        name="address"
+                        placeholder="Adresa"
+                        className={inputStyle(errors.address && touched.address)}/>
+                    <ErrorMessage
+                        name="address"
+                        component="div"
+                        className=" text-sm text-error italic"/>
+                    <label className='text-text text-sm'>Telefon</label>
+                    <Field
+                        type="text"
+                        name="phone"
+                        placeholder="Telefon"
+                        className={inputStyle(errors.phone && touched.phone)}/>
+                    <ErrorMessage
+                        name="phone"
+                        component="div"
+                        className="text-sm text-error italic"/>
+                    <label className='text-text text-sm'>Email</label>
+                    <Field
+                        type="text"
+                        name="email"
+                        placeholder="Email"
+                        className={inputStyle(errors.email && touched.email)}/>
+                    <ErrorMessage
+                        name="email"
+                        component="div"
+                        className="text-sm text-error italic"/>
+                    <label className='text-text text-sm'>Parola</label>
+                    <Field
+                        type="password"
+                        name="password"
+                        placeholder="Parola"
+                        className={inputStyle(errors.password && touched.password)}/>
+                    <ErrorMessage
+                        name="password"
+                        component="div"
+                        className="text-sm text-error italic"/>
+                    <label className='text-text text-sm'>Confirmare Parola</label>
+                    <Field
+                        type="password"
+                        name="confirmPassword"
+                        placeholder="Confirmare parola"
+                        className={inputStyle(errors.confirmPassword && touched.confirmPassword)}/>
+                    <ErrorMessage
+                        name="confirmPassword"
+                        component="div"
+                        className="text-sm text-error italic"/>
 
-                            <div>
-                                <button className='absolute bg-primary px-16 py-4 mt-20 rounded-md text-text'
-                                        style={{left: '50%', marginLeft: '-90px'}}
-                                        type='submit' disabled={isSubmitting}>Submit
-                                </button>
-                            </div>
+                    <div>
+                        <button className='absolute bg-primary px-16 py-4 mt-20 rounded-md text-text'
+                                style={{left: '50%', marginLeft: '-90px'}}
+                                type='submit' disabled={isSubmitting}>Submit
+                        </button>
+                    </div>
 
                 </Form>
 

@@ -1,12 +1,11 @@
 import React from 'react'
+import Table from "../components/table2";
+
 
 
 const Profile = () => <div>Profile
-    <div className='flex justify-center flex-wrap h-48'>
-        <div className='text-gray-700 text-center p-2'>
-            dsfsdfs
-        </div>
-    </div>
+
+    {/*<Table/>*/}
 </div>
 
 export default Profile

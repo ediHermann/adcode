@@ -33,8 +33,8 @@ class Main extends Component {
                         </div>
                     </Layout>
 
-                    {/*<Login/>*/}
                     {/*    <div className="content">*/}
+                    {/*        <Route path='/' render={() => <Login/>}/>*/}
                     {/*        <Route path="/home" render={() => <Home/>}/>*/}
                     {/*        <Route path="/spot_list" render={() => <SpotList/>}/>*/}
                     {/*        <Route path="/settings" render={() => <Settings/>}/>*/}

@@ -1666,13 +1666,6 @@
   dependencies:
     chalk "^3.0.0"
 
-"@vladblindu/errmess@1.0.1":
-  version "1.0.1"
-  resolved "https://npm.pkg.github.com/download/@vladblindu/errmess/1.0.1/c05d313dd69bd1e548b8312b17053d3be41e8a36e8b27bb382666cf12f5d1434#51d081ff0bc165a5e5ee4121196a237bcb0808f5"
-  integrity sha512-rvL5Fq2vTW8A9GWZl8FvuBBl81Wxfl+CKX6v0qtgmWCLJfCk+mKIkLU+g1pQbEux7JIF7sp/Nn7G+eFAp4yqyQ==
-  dependencies:
-    rollup "^2.12.0"
-
 "@webassemblyjs/ast@1.9.0":
   version "1.9.0"
   resolved "https://registry.yarnpkg.com/@webassemblyjs/ast/-/ast-1.9.0.tgz#bd850604b4042459a5a41cd7d338cbed695ed964"
@@ -8586,13 +8579,6 @@ ripemd160@^2.0.0, ripemd160@^2.0.1:
   dependencies:
     hash-base "^3.0.0"
     inherits "^2.0.1"
-
-rollup@^2.12.0:
-  version "2.15.0"
-  resolved "https://registry.yarnpkg.com/rollup/-/rollup-2.15.0.tgz#1324633188c7f82138bd3bdc99416009ee541f48"
-  integrity sha512-HAk4kyXiV5sdNDnbKWk5zBPnkX/DAgx09Kbp8rRIRDVsTUVN3vnSowR7ZHkV6/lAiE6c2TQ8HtYb72aCPGW4Jw==
-  optionalDependencies:
-    fsevents "~2.1.2"
 
 run-async@^2.2.0:
   version "2.4.1"

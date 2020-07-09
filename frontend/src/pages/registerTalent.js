@@ -6,8 +6,8 @@ import Title from "../components/mixt/Title";
 const RegisterTalent = () =>
     <div className='absolute w-full h-full'>
         <div className='flex justify-center mt-10 flex-wrap'>
-            <div className=' bg-primary px-4 py-4 rounded-window'
-                style={{maxWidth: '600px'}}>
+            <div className='bg-primary px-4 py-4 rounded-window'
+                style={{width: '600px'}}>
                 <div className='flex justify-center align-middle py-10 '>
                     <Title>Înregistrare cont talent</Title>
                 </div>

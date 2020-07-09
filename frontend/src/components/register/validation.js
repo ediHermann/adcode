@@ -10,12 +10,12 @@ const validationSchema = Yup.object().shape({
     companyName: Yup.string()
         .required('This field is required'),
     cui: Yup.string()
-        .min(12, 'CUI should have 9 characters')
+        .min(11, 'CUI should have 9 characters')
         .max(12, 'CUI should have 9 characters')
         .required('Your CUI is required!'),
     cnp: Yup.string()
         .min(12, 'CNP should have 13 characters')
-        .max(12, 'CNP should have 13 characters')
+        .max(13, 'CNP should have 13 characters')
         .required('Your CNP is required!'),
     address: Yup.string()
         .required('Your address is required!'),

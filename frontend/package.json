@@ -29,6 +29,7 @@
     "autoprefixer": "^9.7.6",
     "babel-loader": "^8.1.0",
     "babel-preset-env": "^1.7.0",
+    "clsx": "^1.1.1",
     "css-loader": "^3.5.3",
     "file-loader": "^6.0.0",
     "formik": "^2.1.4",
@@ -51,6 +52,7 @@
     "registry": "https://npm.pkg.github.com/"
   },
   "dependencies": {
+    "@vladblindu/fetch-dog": "https://github.com/vladblindu/fetch-dog",
     "classnames": "^2.2.6",
     "date-fns": "^2.14.0",
     "react": "^16.13.1",
