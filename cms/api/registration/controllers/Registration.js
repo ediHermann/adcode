@@ -1,7 +1,7 @@
 'use strict';
 const { parseMultipartData, sanitizenewRecord } = require('strapi-utils');
 //var util = require('util');
-const errmess=require('@vladblindu/errmess');
+//const errmess=require('@vladblindu/errmess');
 //POST
 module.exports = {
   async create(ctx) {
@@ -27,6 +27,7 @@ module.exports = {
 
         // email to site admin
 
+        /**************************************************************
         //Config locate in config/application.json and config/custom.json
         const sgMail = require('@sendgrid/mail');
 
@@ -64,7 +65,7 @@ module.exports = {
 
 
         // email to user
-
+        ***********************************************************/
         ctx.send({"success": true});
 
       }
