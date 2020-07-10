@@ -14,6 +14,8 @@ import RegisterBroadcaster from "./pages/registerEmitator";
 import RegisterArbiter from "./pages/registerArbiter";
 import Layout from "./components/layout";
 import RegisterForm from "./components/register/register-form";
+import Other from "./pages/other";
+import LogOut from "./pages/logout";
 
 
 class Main extends Component {
@@ -30,6 +32,8 @@ class Main extends Component {
                             <Route path="/cont_producator" render={() => <RegisterStudio/>}/>
                             <Route path="/cont_emitator" render={() => <RegisterBroadcaster/>}/>
                             <Route path="/cont_arbitru" render={() => <RegisterArbiter/>}/>
+                            <Route path="/other1" render={() => <Other/>}/>
+                            <Route path="/logout" render={() => <LogOut/>}/>
                         </div>
                     </Layout>
 

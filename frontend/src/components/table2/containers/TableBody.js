@@ -1,19 +1,20 @@
 import React from 'react'
 
-const TableBody = (props) => {
-    const { header, rows } = props;
-    const columns = header ? header.length : 0;
-    const showSpinner = rows === null;
+
+const TableBody = ({header, rows}) => {
+
+    const columns = header ? header.length : 0
+    const showSpinner = rows === null
 
     function buildRow(row, header) {
         return (
-            <tr key={row.id}>
+            <tr key={row.uid} className='hover:bg-primary hover:text-white'>
                 { header.map((value, index) => {
-                    return <td key={index}>{row[value]}</td>
+                    return <td key={index} className='p-2 text-sm md:text-lg border-2'>{row[value]}</td>
                 })}
             </tr>
         )
-    };
+    }
 
     return(
         <tbody>
@@ -30,7 +31,7 @@ const TableBody = (props) => {
             return buildRow(value, header);
         })}
         </tbody>
-    );
+    )
 }
 
 export default TableBody

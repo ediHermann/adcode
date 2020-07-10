@@ -1,7 +1,7 @@
 'use strict';
 const { parseMultipartData, sanitizenewRecord } = require('strapi-utils');
 //var util = require('util');
-const errmess=require('@vladblindu/errmess');
+//const errmess=require('@vladblindu/errmess');
 //POST
 module.exports = {
   async create(ctx) {
@@ -28,39 +28,39 @@ module.exports = {
         // email to site admin
 
         //Config locate in config/application.json and config/custom.json
-        const sgMail = require('@sendgrid/mail');
+        // const sgMail = require('@sendgrid/mail');
 
         //Get sendGrid apiKey
-        const apiKey = strapi.config['sendgrid'].apikey;    //config/application.json
+        // const apiKey = strapi.config['sendgrid'].apikey;    //config/application.json
 
         //Get msg templates
         const msgObj=strapi.config['adminMsgReg'];       //config/custom.json
         const lang="ro";
-        const vars = {username:username, useremail:email};
+        // const vars = {username:username, useremail:email};
 
-        const adminSubj  = errmess(msgObj)(lang)("subject", vars);
-        const adminText  = errmess(msgObj)(lang)("txt", vars);
-        const adminHtml  = errmess(msgObj)(lang)("html", vars);
-        console.log(adminHtml);
+        // const adminSubj  = errmess(msgObj)(lang)("subject", vars);
+        // const adminText  = errmess(msgObj)(lang)("txt", vars);
+        // const adminHtml  = errmess(msgObj)(lang)("html", vars);
+        // console.log(adminHtml);
 
-        sgMail.setApiKey(apiKey);
-        const emailmsg = {
-          to:   'edi.hermann@lemonbyte.ro',
-          from: 'edi.hermann@lemonbyte.ro',
-          subject: adminSubj,
-          text: adminText,
-          html: adminHtml
-        };
+        // sgMail.setApiKey(apiKey);
+        // const emailmsg = {
+        //   to:   'edi.hermann@lemonbyte.ro',
+        //   from: 'edi.hermann@lemonbyte.ro',
+        //   subject: adminSubj,
+        //   text: adminText,
+        //   html: adminHtml
+        // };
        //ES6
-        sgMail
-          .send(emailmsg)
-          .then(() => {}, error => {
-            console.error(error);
-
-            if (error.response) {
-              console.error(error.response.body)
-            }
-          });
+       //  sgMail
+       //    .send(emailmsg)
+       //    .then(() => {}, error => {
+       //      console.error(error);
+       //
+       //      if (error.response) {
+       //        console.error(error.response.body)
+       //      }
+       //    });
 
 
         // email to user

@@ -2,16 +2,18 @@ import React from 'react'
 import TableHead from "./TableHead";
 import TableBody from "./TableBody";
 
-const Table = (props) => {
-    const { header, rows } = props;
+
+const TableComponent = ({ header, rows }) => {
+
+
     return (
-        <div>
-            <table className="table table-bordered table-hover">
-                <TableHead headers={header}> </TableHead>
-                <TableBody headers={header} rows={rows}> </TableBody>
+        <div className='flex justify-center '>
+            <table className="border-2 rounded-window ">
+                <TableHead header={header}> </TableHead>
+                <TableBody header={header} rows={rows}> </TableBody>
             </table>
         </div>
     );
 }
 
-export default Table
+export default TableComponent

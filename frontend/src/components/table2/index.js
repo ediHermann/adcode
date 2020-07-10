@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from 'react'
 import datas from './data'
 import schema from './schema'
+import TableComponent from "./containers/Table";
+
 
 const Table = () => {
     const [ data, setData] = useState(null);
@@ -14,11 +16,13 @@ const Table = () => {
             setData(result);
         })
     });
+
+
 return(
-    <div className="container p-2">
+    <div className="flex-center p-2 mt-20 w-full h-full">
         <div className="row">
             <div className="col">
-                <Table header={Object.keys(schema)} rows={data}/>
+                <TableComponent header={Object.keys(schema)} rows={data}/>
             </div>
         </div>
     </div>

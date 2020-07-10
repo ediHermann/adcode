@@ -1,0 +1,1409 @@
+type BroadcastTable {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  date: Date
+  time: Time
+  deleted: Boolean
+  spot_broadcast: SpotBroadcast
+}
+
+type BroadcastTableAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type BroadcastTableConnection {
+  values: [BroadcastTable]
+  groupBy: BroadcastTableGroupBy
+  aggregate: BroadcastTableAggregator
+}
+
+type BroadcastTableConnectionCreated_at {
+  key: DateTime
+  connection: BroadcastTableConnection
+}
+
+type BroadcastTableConnectionDate {
+  key: ID
+  connection: BroadcastTableConnection
+}
+
+type BroadcastTableConnectionDeleted {
+  key: Boolean
+  connection: BroadcastTableConnection
+}
+
+type BroadcastTableConnectionId {
+  key: ID
+  connection: BroadcastTableConnection
+}
+
+type BroadcastTableConnectionSpot_broadcast {
+  key: ID
+  connection: BroadcastTableConnection
+}
+
+type BroadcastTableConnectionTime {
+  key: ID
+  connection: BroadcastTableConnection
+}
+
+type BroadcastTableConnectionUpdated_at {
+  key: DateTime
+  connection: BroadcastTableConnection
+}
+
+type BroadcastTableGroupBy {
+  id: [BroadcastTableConnectionId]
+  created_at: [BroadcastTableConnectionCreated_at]
+  updated_at: [BroadcastTableConnectionUpdated_at]
+  date: [BroadcastTableConnectionDate]
+  time: [BroadcastTableConnectionTime]
+  deleted: [BroadcastTableConnectionDeleted]
+  spot_broadcast: [BroadcastTableConnectionSpot_broadcast]
+}
+
+input BroadcastTableInput {
+  date: Date
+  time: Time
+  deleted: Boolean
+  spot_broadcast: ID
+}
+
+type BroadcastType {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  type_name: String
+}
+
+type BroadcastTypeAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type BroadcastTypeConnection {
+  values: [BroadcastType]
+  groupBy: BroadcastTypeGroupBy
+  aggregate: BroadcastTypeAggregator
+}
+
+type BroadcastTypeConnectionCreated_at {
+  key: DateTime
+  connection: BroadcastTypeConnection
+}
+
+type BroadcastTypeConnectionId {
+  key: ID
+  connection: BroadcastTypeConnection
+}
+
+type BroadcastTypeConnectionType_name {
+  key: String
+  connection: BroadcastTypeConnection
+}
+
+type BroadcastTypeConnectionUpdated_at {
+  key: DateTime
+  connection: BroadcastTypeConnection
+}
+
+type BroadcastTypeGroupBy {
+  id: [BroadcastTypeConnectionId]
+  created_at: [BroadcastTypeConnectionCreated_at]
+  updated_at: [BroadcastTypeConnectionUpdated_at]
+  type_name: [BroadcastTypeConnectionType_name]
+}
+
+input BroadcastTypeInput {
+  type_name: String
+}
+
+input createBroadcastTableInput {
+  data: BroadcastTableInput
+}
+
+type createBroadcastTablePayload {
+  broadcastTable: BroadcastTable
+}
+
+input createBroadcastTypeInput {
+  data: BroadcastTypeInput
+}
+
+type createBroadcastTypePayload {
+  broadcastType: BroadcastType
+}
+
+input createMadiaTypeInput {
+  data: MadiaTypeInput
+}
+
+type createMadiaTypePayload {
+  madiaType: MadiaType
+}
+
+input createRoleInput {
+  data: RoleInput
+}
+
+type createRolePayload {
+  role: UsersPermissionsRole
+}
+
+input createSpotBroadcastInput {
+  data: SpotBroadcastInput
+}
+
+type createSpotBroadcastPayload {
+  spotBroadcast: SpotBroadcast
+}
+
+input createSpotInput {
+  data: SpotInput
+}
+
+type createSpotPayload {
+  spot: Spot
+}
+
+input createSpotTalentInput {
+  data: SpotTalentInput
+}
+
+type createSpotTalentPayload {
+  spotTalent: SpotTalent
+}
+
+input createTalentTypeInput {
+  data: TalentTypeInput
+}
+
+type createTalentTypePayload {
+  talentType: TalentType
+}
+
+input createUserInput {
+  data: UserInput
+}
+
+type createUserPayload {
+  user: UsersPermissionsUser
+}
+
+"""
+A date string, such as 2007-12-03, compliant with the `full-date` format
+outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for
+representation of dates and times using the Gregorian calendar.
+"""
+scalar Date
+
+"""
+A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the
+`date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO
+8601 standard for representation of dates and times using the Gregorian calendar.
+"""
+scalar DateTime
+
+input deleteBroadcastTableInput {
+  where: InputID
+}
+
+type deleteBroadcastTablePayload {
+  broadcastTable: BroadcastTable
+}
+
+input deleteBroadcastTypeInput {
+  where: InputID
+}
+
+type deleteBroadcastTypePayload {
+  broadcastType: BroadcastType
+}
+
+input deleteMadiaTypeInput {
+  where: InputID
+}
+
+type deleteMadiaTypePayload {
+  madiaType: MadiaType
+}
+
+input deleteRoleInput {
+  where: InputID
+}
+
+type deleteRolePayload {
+  role: UsersPermissionsRole
+}
+
+input deleteSpotBroadcastInput {
+  where: InputID
+}
+
+type deleteSpotBroadcastPayload {
+  spotBroadcast: SpotBroadcast
+}
+
+input deleteSpotInput {
+  where: InputID
+}
+
+type deleteSpotPayload {
+  spot: Spot
+}
+
+input deleteSpotTalentInput {
+  where: InputID
+}
+
+type deleteSpotTalentPayload {
+  spotTalent: SpotTalent
+}
+
+input deleteTalentTypeInput {
+  where: InputID
+}
+
+type deleteTalentTypePayload {
+  talentType: TalentType
+}
+
+input deleteUserInput {
+  where: InputID
+}
+
+type deleteUserPayload {
+  user: UsersPermissionsUser
+}
+
+input editBroadcastTableInput {
+  date: Date
+  time: Time
+  deleted: Boolean
+  spot_broadcast: ID
+}
+
+input editBroadcastTypeInput {
+  type_name: String
+}
+
+input editFileInput {
+  name: String
+  alternativeText: String
+  caption: String
+  width: Int
+  height: Int
+  formats: JSON
+  hash: String
+  ext: String
+  mime: String
+  size: Float
+  url: String
+  previewUrl: String
+  provider: String
+  provider_metadata: JSON
+  related: [ID]
+}
+
+input editMadiaTypeInput {
+  type_name: String
+}
+
+input editRoleInput {
+  name: String
+  description: String
+  type: String
+  permissions: [ID]
+  users: [ID]
+}
+
+input editSpotBroadcastInput {
+  broadcast_duration: Int
+  start_date: Date
+  spot: ID
+  deleted: Boolean
+  broadcaster: ID
+  broadcast_types: [ID]
+}
+
+input editSpotInput {
+  uid: String
+  title: String
+  client: String
+  duration: Int
+  status: ENUM_SPOT_STATUS
+  user: ID
+  deleted: Boolean
+  media_types: [ID]
+}
+
+input editSpotTalentInput {
+  talent_role: ENUM_SPOTTALENT_TALENT_ROLE
+  obs: String
+  talent: ID
+  spot: ID
+  deleted: Boolean
+}
+
+input editTalentTypeInput {
+  type_name: String
+  deleted: Boolean
+}
+
+input editUserInput {
+  username: String
+  email: String
+  provider: String
+  password: String
+  resetPasswordToken: String
+  confirmed: Boolean
+  blocked: Boolean
+  role: ID
+  cui: String
+  address: String
+  phone: String
+  contact_name: String
+  referrer: String
+  avatar: ID
+  talent_types: [ID]
+  broadcast_types: [ID]
+}
+
+enum ENUM_SPOT_STATUS {
+  PENDING
+  PUBLISHED
+  INACTIVATED
+  DELETED
+}
+
+enum ENUM_SPOTTALENT_TALENT_ROLE {
+  ACTOR
+  VOICE
+}
+
+input FileInput {
+  name: String!
+  alternativeText: String
+  caption: String
+  width: Int
+  height: Int
+  formats: JSON
+  hash: String!
+  ext: String
+  mime: String!
+  size: Float!
+  url: String!
+  previewUrl: String
+  provider: String!
+  provider_metadata: JSON
+  related: [ID]
+}
+
+type ForgotPassword {
+  ok: Boolean
+}
+
+input InputID {
+  id: ID!
+}
+
+"""
+The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSON
+
+"""The `Long` scalar type represents 52-bit integers"""
+scalar Long
+
+type MadiaType {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  type_name: String
+}
+
+type MadiaTypeAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type MadiaTypeConnection {
+  values: [MadiaType]
+  groupBy: MadiaTypeGroupBy
+  aggregate: MadiaTypeAggregator
+}
+
+type MadiaTypeConnectionCreated_at {
+  key: DateTime
+  connection: MadiaTypeConnection
+}
+
+type MadiaTypeConnectionId {
+  key: ID
+  connection: MadiaTypeConnection
+}
+
+type MadiaTypeConnectionType_name {
+  key: String
+  connection: MadiaTypeConnection
+}
+
+type MadiaTypeConnectionUpdated_at {
+  key: DateTime
+  connection: MadiaTypeConnection
+}
+
+type MadiaTypeGroupBy {
+  id: [MadiaTypeConnectionId]
+  created_at: [MadiaTypeConnectionCreated_at]
+  updated_at: [MadiaTypeConnectionUpdated_at]
+  type_name: [MadiaTypeConnectionType_name]
+}
+
+input MadiaTypeInput {
+  type_name: String
+}
+
+union Morph = UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsLoginPayload | ForgotPassword | BroadcastTable | BroadcastTableConnection | BroadcastTableAggregator | BroadcastTableGroupBy | BroadcastTableConnectionId | BroadcastTableConnectionCreated_at | BroadcastTableConnectionUpdated_at | BroadcastTableConnectionDate | BroadcastTableConnectionTime | BroadcastTableConnectionDeleted | BroadcastTableConnectionSpot_broadcast | createBroadcastTablePayload | updateBroadcastTablePayload | deleteBroadcastTablePayload | BroadcastType | BroadcastTypeConnection | BroadcastTypeAggregator | BroadcastTypeGroupBy | BroadcastTypeConnectionId | BroadcastTypeConnectionCreated_at | BroadcastTypeConnectionUpdated_at | BroadcastTypeConnectionType_name | createBroadcastTypePayload | updateBroadcastTypePayload | deleteBroadcastTypePayload | MadiaType | MadiaTypeConnection | MadiaTypeAggregator | MadiaTypeGroupBy | MadiaTypeConnectionId | MadiaTypeConnectionCreated_at | MadiaTypeConnectionUpdated_at | MadiaTypeConnectionType_name | createMadiaTypePayload | updateMadiaTypePayload | deleteMadiaTypePayload | SpotBroadcast | SpotBroadcastConnection | SpotBroadcastAggregator | SpotBroadcastAggregatorSum | SpotBroadcastAggregatorAvg | SpotBroadcastAggregatorMin | SpotBroadcastAggregatorMax | SpotBroadcastGroupBy | SpotBroadcastConnectionId | SpotBroadcastConnectionCreated_at | SpotBroadcastConnectionUpdated_at | SpotBroadcastConnectionBroadcast_duration | SpotBroadcastConnectionStart_date | SpotBroadcastConnectionSpot | SpotBroadcastConnectionDeleted | SpotBroadcastConnectionBroadcaster | createSpotBroadcastPayload | updateSpotBroadcastPayload | deleteSpotBroadcastPayload | SpotTalent | SpotTalentConnection | SpotTalentAggregator | SpotTalentGroupBy | SpotTalentConnectionId | SpotTalentConnectionCreated_at | SpotTalentConnectionUpdated_at | SpotTalentConnectionTalent_role | SpotTalentConnectionObs | SpotTalentConnectionTalent | SpotTalentConnectionSpot | SpotTalentConnectionDeleted | createSpotTalentPayload | updateSpotTalentPayload | deleteSpotTalentPayload | Spot | SpotConnection | SpotAggregator | SpotAggregatorSum | SpotAggregatorAvg | SpotAggregatorMin | SpotAggregatorMax | SpotGroupBy | SpotConnectionId | SpotConnectionCreated_at | SpotConnectionUpdated_at | SpotConnectionUid | SpotConnectionTitle | SpotConnectionClient | SpotConnectionDuration | SpotConnectionStatus | SpotConnectionUser | SpotConnectionDeleted | createSpotPayload | updateSpotPayload | deleteSpotPayload | TalentType | TalentTypeConnection | TalentTypeAggregator | TalentTypeGroupBy | TalentTypeConnectionId | TalentTypeConnectionCreated_at | TalentTypeConnectionUpdated_at | TalentTypeConnectionType_name | TalentTypeConnectionDeleted | createTalentTypePayload | updateTalentTypePayload | deleteTalentTypePayload | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileAggregatorSum | UploadFileAggregatorAvg | UploadFileAggregatorMin | UploadFileAggregatorMax | UploadFileGroupBy | UploadFileConnectionId | UploadFileConnectionCreated_at | UploadFileConnectionUpdated_at | UploadFileConnectionName | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionWidth | UploadFileConnectionHeight | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_metadata | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsUser | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionCreated_at | UsersPermissionsUserConnectionUpdated_at | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole | UsersPermissionsUserConnectionCui | UsersPermissionsUserConnectionAddress | UsersPermissionsUserConnectionPhone | UsersPermissionsUserConnectionContact_name | UsersPermissionsUserConnectionReferrer | UsersPermissionsUserConnectionAvatar | createUserPayload | updateUserPayload | deleteUserPayload
+
+type Mutation {
+  createBroadcastTable(input: createBroadcastTableInput): createBroadcastTablePayload
+  updateBroadcastTable(input: updateBroadcastTableInput): updateBroadcastTablePayload
+  deleteBroadcastTable(input: deleteBroadcastTableInput): deleteBroadcastTablePayload
+  createBroadcastType(input: createBroadcastTypeInput): createBroadcastTypePayload
+  updateBroadcastType(input: updateBroadcastTypeInput): updateBroadcastTypePayload
+  deleteBroadcastType(input: deleteBroadcastTypeInput): deleteBroadcastTypePayload
+  createMadiaType(input: createMadiaTypeInput): createMadiaTypePayload
+  updateMadiaType(input: updateMadiaTypeInput): updateMadiaTypePayload
+  deleteMadiaType(input: deleteMadiaTypeInput): deleteMadiaTypePayload
+  createSpotBroadcast(input: createSpotBroadcastInput): createSpotBroadcastPayload
+  updateSpotBroadcast(input: updateSpotBroadcastInput): updateSpotBroadcastPayload
+  deleteSpotBroadcast(input: deleteSpotBroadcastInput): deleteSpotBroadcastPayload
+  createSpotTalent(input: createSpotTalentInput): createSpotTalentPayload
+  updateSpotTalent(input: updateSpotTalentInput): updateSpotTalentPayload
+  deleteSpotTalent(input: deleteSpotTalentInput): deleteSpotTalentPayload
+  createSpot(input: createSpotInput): createSpotPayload
+  updateSpot(input: updateSpotInput): updateSpotPayload
+  deleteSpot(input: deleteSpotInput): deleteSpotPayload
+  createTalentType(input: createTalentTypeInput): createTalentTypePayload
+  updateTalentType(input: updateTalentTypeInput): updateTalentTypePayload
+  deleteTalentType(input: deleteTalentTypeInput): deleteTalentTypePayload
+
+  """Create a new role"""
+  createRole(input: createRoleInput): createRolePayload
+
+  """Update an existing role"""
+  updateRole(input: updateRoleInput): updateRolePayload
+
+  """Delete an existing role"""
+  deleteRole(input: deleteRoleInput): deleteRolePayload
+
+  """Create a new user"""
+  createUser(input: createUserInput): createUserPayload
+
+  """Update an existing user"""
+  updateUser(input: updateUserInput): updateUserPayload
+
+  """Delete an existing user"""
+  deleteUser(input: deleteUserInput): deleteUserPayload
+  updateProfile(data: JSON): JSON!
+  createUserSpot(data: JSON): JSON!
+  updateUserSpot(uid: String, data: JSON): JSON!
+  deleteUserSpot(uid: String): JSON!
+  upload(refId: ID, ref: String, field: String, source: String, file: Upload!): UploadFile!
+  multipleUpload(refId: ID, ref: String, field: String, source: String, files: [Upload]!): [UploadFile]!
+  login(input: UsersPermissionsLoginInput!): UsersPermissionsLoginPayload!
+  register(input: UserInput!): UsersPermissionsLoginPayload!
+  forgotPassword(email: String!): ForgotPassword
+  changePassword(password: String!, passwordConfirmation: String!, code: String!): UsersPermissionsLoginPayload
+  emailConfirmation(confirmation: String!): UsersPermissionsLoginPayload
+}
+
+type Query {
+  broadcastTable(id: ID!): BroadcastTable
+  broadcastTables(sort: String, limit: Int, start: Int, where: JSON): [BroadcastTable]
+  broadcastTablesConnection(sort: String, limit: Int, start: Int, where: JSON): BroadcastTableConnection
+  broadcastType(id: ID!): BroadcastType
+  broadcastTypes(sort: String, limit: Int, start: Int, where: JSON): [BroadcastType]
+  broadcastTypesConnection(sort: String, limit: Int, start: Int, where: JSON): BroadcastTypeConnection
+  madiaType(id: ID!): MadiaType
+  madiaTypes(sort: String, limit: Int, start: Int, where: JSON): [MadiaType]
+  madiaTypesConnection(sort: String, limit: Int, start: Int, where: JSON): MadiaTypeConnection
+  spotBroadcast(id: ID!): SpotBroadcast
+  spotBroadcasts(sort: String, limit: Int, start: Int, where: JSON): [SpotBroadcast]
+  spotBroadcastsConnection(sort: String, limit: Int, start: Int, where: JSON): SpotBroadcastConnection
+  spotTalent(id: ID!): SpotTalent
+  spotTalents(sort: String, limit: Int, start: Int, where: JSON): [SpotTalent]
+  spotTalentsConnection(sort: String, limit: Int, start: Int, where: JSON): SpotTalentConnection
+  spot(id: ID!): Spot
+  spots(sort: String, limit: Int, start: Int, where: JSON): [Spot]
+  spotsConnection(sort: String, limit: Int, start: Int, where: JSON): SpotConnection
+  talentType(id: ID!): TalentType
+  talentTypes(sort: String, limit: Int, start: Int, where: JSON): [TalentType]
+  talentTypesConnection(sort: String, limit: Int, start: Int, where: JSON): TalentTypeConnection
+  files(sort: String, limit: Int, start: Int, where: JSON): [UploadFile]
+  filesConnection(sort: String, limit: Int, start: Int, where: JSON): UploadFileConnection
+  role(id: ID!): UsersPermissionsRole
+
+  """
+  Retrieve all the existing roles. You can't apply filters on this query.
+  """
+  roles(sort: String, limit: Int, start: Int, where: JSON): [UsersPermissionsRole]
+  rolesConnection(sort: String, limit: Int, start: Int, where: JSON): UsersPermissionsRoleConnection
+  user(id: ID!): UsersPermissionsUser
+  users(sort: String, limit: Int, start: Int, where: JSON): [UsersPermissionsUser]
+  usersConnection(sort: String, limit: Int, start: Int, where: JSON): UsersPermissionsUserConnection
+  userProfile: JSON!
+  searchUser(where: JSON): JSON!
+  userSpots(where: JSON): JSON!
+  me: UsersPermissionsMe
+}
+
+input RoleInput {
+  name: String!
+  description: String
+  type: String
+  permissions: [ID]
+  users: [ID]
+}
+
+type Spot {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  uid: String!
+  title: String
+  client: String
+  duration: Int
+  status: ENUM_SPOT_STATUS
+  user: UsersPermissionsUser
+  deleted: Boolean
+  media_types(sort: String, limit: Int, start: Int, where: JSON): [MadiaType]
+}
+
+type SpotAggregator {
+  count: Int
+  totalCount: Int
+  sum: SpotAggregatorSum
+  avg: SpotAggregatorAvg
+  min: SpotAggregatorMin
+  max: SpotAggregatorMax
+}
+
+type SpotAggregatorAvg {
+  duration: Float
+}
+
+type SpotAggregatorMax {
+  duration: Float
+}
+
+type SpotAggregatorMin {
+  duration: Float
+}
+
+type SpotAggregatorSum {
+  duration: Float
+}
+
+type SpotBroadcast {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  broadcast_duration: Int
+  start_date: Date
+  spot: Spot
+  deleted: Boolean
+  broadcaster: UsersPermissionsUser
+  broadcast_types(sort: String, limit: Int, start: Int, where: JSON): [BroadcastType]
+}
+
+type SpotBroadcastAggregator {
+  count: Int
+  totalCount: Int
+  sum: SpotBroadcastAggregatorSum
+  avg: SpotBroadcastAggregatorAvg
+  min: SpotBroadcastAggregatorMin
+  max: SpotBroadcastAggregatorMax
+}
+
+type SpotBroadcastAggregatorAvg {
+  broadcast_duration: Float
+}
+
+type SpotBroadcastAggregatorMax {
+  broadcast_duration: Float
+}
+
+type SpotBroadcastAggregatorMin {
+  broadcast_duration: Float
+}
+
+type SpotBroadcastAggregatorSum {
+  broadcast_duration: Float
+}
+
+type SpotBroadcastConnection {
+  values: [SpotBroadcast]
+  groupBy: SpotBroadcastGroupBy
+  aggregate: SpotBroadcastAggregator
+}
+
+type SpotBroadcastConnectionBroadcast_duration {
+  key: Int
+  connection: SpotBroadcastConnection
+}
+
+type SpotBroadcastConnectionBroadcaster {
+  key: ID
+  connection: SpotBroadcastConnection
+}
+
+type SpotBroadcastConnectionCreated_at {
+  key: DateTime
+  connection: SpotBroadcastConnection
+}
+
+type SpotBroadcastConnectionDeleted {
+  key: Boolean
+  connection: SpotBroadcastConnection
+}
+
+type SpotBroadcastConnectionId {
+  key: ID
+  connection: SpotBroadcastConnection
+}
+
+type SpotBroadcastConnectionSpot {
+  key: ID
+  connection: SpotBroadcastConnection
+}
+
+type SpotBroadcastConnectionStart_date {
+  key: ID
+  connection: SpotBroadcastConnection
+}
+
+type SpotBroadcastConnectionUpdated_at {
+  key: DateTime
+  connection: SpotBroadcastConnection
+}
+
+type SpotBroadcastGroupBy {
+  id: [SpotBroadcastConnectionId]
+  created_at: [SpotBroadcastConnectionCreated_at]
+  updated_at: [SpotBroadcastConnectionUpdated_at]
+  broadcast_duration: [SpotBroadcastConnectionBroadcast_duration]
+  start_date: [SpotBroadcastConnectionStart_date]
+  spot: [SpotBroadcastConnectionSpot]
+  deleted: [SpotBroadcastConnectionDeleted]
+  broadcaster: [SpotBroadcastConnectionBroadcaster]
+}
+
+input SpotBroadcastInput {
+  broadcast_duration: Int
+  start_date: Date
+  spot: ID
+  deleted: Boolean
+  broadcaster: ID
+  broadcast_types: [ID]
+}
+
+type SpotConnection {
+  values: [Spot]
+  groupBy: SpotGroupBy
+  aggregate: SpotAggregator
+}
+
+type SpotConnectionClient {
+  key: String
+  connection: SpotConnection
+}
+
+type SpotConnectionCreated_at {
+  key: DateTime
+  connection: SpotConnection
+}
+
+type SpotConnectionDeleted {
+  key: Boolean
+  connection: SpotConnection
+}
+
+type SpotConnectionDuration {
+  key: Int
+  connection: SpotConnection
+}
+
+type SpotConnectionId {
+  key: ID
+  connection: SpotConnection
+}
+
+type SpotConnectionStatus {
+  key: String
+  connection: SpotConnection
+}
+
+type SpotConnectionTitle {
+  key: String
+  connection: SpotConnection
+}
+
+type SpotConnectionUid {
+  key: String
+  connection: SpotConnection
+}
+
+type SpotConnectionUpdated_at {
+  key: DateTime
+  connection: SpotConnection
+}
+
+type SpotConnectionUser {
+  key: ID
+  connection: SpotConnection
+}
+
+type SpotGroupBy {
+  id: [SpotConnectionId]
+  created_at: [SpotConnectionCreated_at]
+  updated_at: [SpotConnectionUpdated_at]
+  uid: [SpotConnectionUid]
+  title: [SpotConnectionTitle]
+  client: [SpotConnectionClient]
+  duration: [SpotConnectionDuration]
+  status: [SpotConnectionStatus]
+  user: [SpotConnectionUser]
+  deleted: [SpotConnectionDeleted]
+}
+
+input SpotInput {
+  uid: String!
+  title: String
+  client: String
+  duration: Int
+  status: ENUM_SPOT_STATUS
+  user: ID
+  deleted: Boolean
+  media_types: [ID]
+}
+
+type SpotTalent {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  talent_role: ENUM_SPOTTALENT_TALENT_ROLE
+  obs: String
+  talent: UsersPermissionsUser
+  spot: Spot
+  deleted: Boolean
+}
+
+type SpotTalentAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type SpotTalentConnection {
+  values: [SpotTalent]
+  groupBy: SpotTalentGroupBy
+  aggregate: SpotTalentAggregator
+}
+
+type SpotTalentConnectionCreated_at {
+  key: DateTime
+  connection: SpotTalentConnection
+}
+
+type SpotTalentConnectionDeleted {
+  key: Boolean
+  connection: SpotTalentConnection
+}
+
+type SpotTalentConnectionId {
+  key: ID
+  connection: SpotTalentConnection
+}
+
+type SpotTalentConnectionObs {
+  key: String
+  connection: SpotTalentConnection
+}
+
+type SpotTalentConnectionSpot {
+  key: ID
+  connection: SpotTalentConnection
+}
+
+type SpotTalentConnectionTalent {
+  key: ID
+  connection: SpotTalentConnection
+}
+
+type SpotTalentConnectionTalent_role {
+  key: String
+  connection: SpotTalentConnection
+}
+
+type SpotTalentConnectionUpdated_at {
+  key: DateTime
+  connection: SpotTalentConnection
+}
+
+type SpotTalentGroupBy {
+  id: [SpotTalentConnectionId]
+  created_at: [SpotTalentConnectionCreated_at]
+  updated_at: [SpotTalentConnectionUpdated_at]
+  talent_role: [SpotTalentConnectionTalent_role]
+  obs: [SpotTalentConnectionObs]
+  talent: [SpotTalentConnectionTalent]
+  spot: [SpotTalentConnectionSpot]
+  deleted: [SpotTalentConnectionDeleted]
+}
+
+input SpotTalentInput {
+  talent_role: ENUM_SPOTTALENT_TALENT_ROLE
+  obs: String
+  talent: ID
+  spot: ID
+  deleted: Boolean
+}
+
+type TalentType {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  type_name: String
+  deleted: Boolean
+}
+
+type TalentTypeAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type TalentTypeConnection {
+  values: [TalentType]
+  groupBy: TalentTypeGroupBy
+  aggregate: TalentTypeAggregator
+}
+
+type TalentTypeConnectionCreated_at {
+  key: DateTime
+  connection: TalentTypeConnection
+}
+
+type TalentTypeConnectionDeleted {
+  key: Boolean
+  connection: TalentTypeConnection
+}
+
+type TalentTypeConnectionId {
+  key: ID
+  connection: TalentTypeConnection
+}
+
+type TalentTypeConnectionType_name {
+  key: String
+  connection: TalentTypeConnection
+}
+
+type TalentTypeConnectionUpdated_at {
+  key: DateTime
+  connection: TalentTypeConnection
+}
+
+type TalentTypeGroupBy {
+  id: [TalentTypeConnectionId]
+  created_at: [TalentTypeConnectionCreated_at]
+  updated_at: [TalentTypeConnectionUpdated_at]
+  type_name: [TalentTypeConnectionType_name]
+  deleted: [TalentTypeConnectionDeleted]
+}
+
+input TalentTypeInput {
+  type_name: String
+  deleted: Boolean
+}
+
+"""A time string with format: HH:mm:ss.SSS"""
+scalar Time
+
+input updateBroadcastTableInput {
+  where: InputID
+  data: editBroadcastTableInput
+}
+
+type updateBroadcastTablePayload {
+  broadcastTable: BroadcastTable
+}
+
+input updateBroadcastTypeInput {
+  where: InputID
+  data: editBroadcastTypeInput
+}
+
+type updateBroadcastTypePayload {
+  broadcastType: BroadcastType
+}
+
+input updateMadiaTypeInput {
+  where: InputID
+  data: editMadiaTypeInput
+}
+
+type updateMadiaTypePayload {
+  madiaType: MadiaType
+}
+
+input updateRoleInput {
+  where: InputID
+  data: editRoleInput
+}
+
+type updateRolePayload {
+  role: UsersPermissionsRole
+}
+
+input updateSpotBroadcastInput {
+  where: InputID
+  data: editSpotBroadcastInput
+}
+
+type updateSpotBroadcastPayload {
+  spotBroadcast: SpotBroadcast
+}
+
+input updateSpotInput {
+  where: InputID
+  data: editSpotInput
+}
+
+type updateSpotPayload {
+  spot: Spot
+}
+
+input updateSpotTalentInput {
+  where: InputID
+  data: editSpotTalentInput
+}
+
+type updateSpotTalentPayload {
+  spotTalent: SpotTalent
+}
+
+input updateTalentTypeInput {
+  where: InputID
+  data: editTalentTypeInput
+}
+
+type updateTalentTypePayload {
+  talentType: TalentType
+}
+
+input updateUserInput {
+  where: InputID
+  data: editUserInput
+}
+
+type updateUserPayload {
+  user: UsersPermissionsUser
+}
+
+"""The `Upload` scalar type represents a file upload."""
+scalar Upload
+
+type UploadFile {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  name: String!
+  alternativeText: String
+  caption: String
+  width: Int
+  height: Int
+  formats: JSON
+  hash: String!
+  ext: String
+  mime: String!
+  size: Float!
+  url: String!
+  previewUrl: String
+  provider: String!
+  provider_metadata: JSON
+  related(sort: String, limit: Int, start: Int, where: JSON): [Morph]
+}
+
+type UploadFileAggregator {
+  count: Int
+  totalCount: Int
+  sum: UploadFileAggregatorSum
+  avg: UploadFileAggregatorAvg
+  min: UploadFileAggregatorMin
+  max: UploadFileAggregatorMax
+}
+
+type UploadFileAggregatorAvg {
+  width: Float
+  height: Float
+  size: Float
+}
+
+type UploadFileAggregatorMax {
+  width: Float
+  height: Float
+  size: Float
+}
+
+type UploadFileAggregatorMin {
+  width: Float
+  height: Float
+  size: Float
+}
+
+type UploadFileAggregatorSum {
+  width: Float
+  height: Float
+  size: Float
+}
+
+type UploadFileConnection {
+  values: [UploadFile]
+  groupBy: UploadFileGroupBy
+  aggregate: UploadFileAggregator
+}
+
+type UploadFileConnectionAlternativeText {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionCaption {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionCreated_at {
+  key: DateTime
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionExt {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionFormats {
+  key: JSON
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionHash {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionHeight {
+  key: Int
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionId {
+  key: ID
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionMime {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionName {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionPreviewUrl {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionProvider {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionProvider_metadata {
+  key: JSON
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionSize {
+  key: Float
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionUpdated_at {
+  key: DateTime
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionUrl {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionWidth {
+  key: Int
+  connection: UploadFileConnection
+}
+
+type UploadFileGroupBy {
+  id: [UploadFileConnectionId]
+  created_at: [UploadFileConnectionCreated_at]
+  updated_at: [UploadFileConnectionUpdated_at]
+  name: [UploadFileConnectionName]
+  alternativeText: [UploadFileConnectionAlternativeText]
+  caption: [UploadFileConnectionCaption]
+  width: [UploadFileConnectionWidth]
+  height: [UploadFileConnectionHeight]
+  formats: [UploadFileConnectionFormats]
+  hash: [UploadFileConnectionHash]
+  ext: [UploadFileConnectionExt]
+  mime: [UploadFileConnectionMime]
+  size: [UploadFileConnectionSize]
+  url: [UploadFileConnectionUrl]
+  previewUrl: [UploadFileConnectionPreviewUrl]
+  provider: [UploadFileConnectionProvider]
+  provider_metadata: [UploadFileConnectionProvider_metadata]
+}
+
+input UserInput {
+  username: String!
+  email: String!
+  provider: String
+  password: String
+  resetPasswordToken: String
+  confirmed: Boolean
+  blocked: Boolean
+  role: ID
+  cui: String
+  address: String
+  phone: String
+  contact_name: String
+  referrer: String
+  avatar: ID
+  talent_types: [ID]
+  broadcast_types: [ID]
+}
+
+input UsersPermissionsLoginInput {
+  identifier: String!
+  password: String!
+  provider: String = "local"
+}
+
+type UsersPermissionsLoginPayload {
+  jwt: String!
+  user: UsersPermissionsMe!
+}
+
+type UsersPermissionsMe {
+  id: ID!
+  username: String!
+  email: String!
+  confirmed: Boolean
+  blocked: Boolean
+  role: UsersPermissionsMeRole
+}
+
+type UsersPermissionsMeRole {
+  id: ID!
+  name: String!
+  description: String
+  type: String
+}
+
+type UsersPermissionsPermission {
+  id: ID!
+  type: String!
+  controller: String!
+  action: String!
+  enabled: Boolean!
+  policy: String
+  role: UsersPermissionsRole
+}
+
+type UsersPermissionsRole {
+  id: ID!
+  name: String!
+  description: String
+  type: String
+  permissions(sort: String, limit: Int, start: Int, where: JSON): [UsersPermissionsPermission]
+  users(sort: String, limit: Int, start: Int, where: JSON): [UsersPermissionsUser]
+}
+
+type UsersPermissionsRoleAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type UsersPermissionsRoleConnection {
+  values: [UsersPermissionsRole]
+  groupBy: UsersPermissionsRoleGroupBy
+  aggregate: UsersPermissionsRoleAggregator
+}
+
+type UsersPermissionsRoleConnectionDescription {
+  key: String
+  connection: UsersPermissionsRoleConnection
+}
+
+type UsersPermissionsRoleConnectionId {
+  key: ID
+  connection: UsersPermissionsRoleConnection
+}
+
+type UsersPermissionsRoleConnectionName {
+  key: String
+  connection: UsersPermissionsRoleConnection
+}
+
+type UsersPermissionsRoleConnectionType {
+  key: String
+  connection: UsersPermissionsRoleConnection
+}
+
+type UsersPermissionsRoleGroupBy {
+  id: [UsersPermissionsRoleConnectionId]
+  name: [UsersPermissionsRoleConnectionName]
+  description: [UsersPermissionsRoleConnectionDescription]
+  type: [UsersPermissionsRoleConnectionType]
+}
+
+type UsersPermissionsUser {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  username: String!
+  email: String!
+  provider: String
+  confirmed: Boolean
+  blocked: Boolean
+  role: UsersPermissionsRole
+  cui: String
+  address: String
+  phone: String
+  contact_name: String
+  referrer: String
+  avatar: UploadFile
+  talent_types(sort: String, limit: Int, start: Int, where: JSON): [TalentType]
+  broadcast_types(sort: String, limit: Int, start: Int, where: JSON): [BroadcastType]
+}
+
+type UsersPermissionsUserAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type UsersPermissionsUserConnection {
+  values: [UsersPermissionsUser]
+  groupBy: UsersPermissionsUserGroupBy
+  aggregate: UsersPermissionsUserAggregator
+}
+
+type UsersPermissionsUserConnectionAddress {
+  key: String
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionAvatar {
+  key: ID
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionBlocked {
+  key: Boolean
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionConfirmed {
+  key: Boolean
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionContact_name {
+  key: String
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionCreated_at {
+  key: DateTime
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionCui {
+  key: String
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionEmail {
+  key: String
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionId {
+  key: ID
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionPhone {
+  key: String
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionProvider {
+  key: String
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionReferrer {
+  key: String
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionRole {
+  key: ID
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionUpdated_at {
+  key: DateTime
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionUsername {
+  key: String
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserGroupBy {
+  id: [UsersPermissionsUserConnectionId]
+  created_at: [UsersPermissionsUserConnectionCreated_at]
+  updated_at: [UsersPermissionsUserConnectionUpdated_at]
+  username: [UsersPermissionsUserConnectionUsername]
+  email: [UsersPermissionsUserConnectionEmail]
+  provider: [UsersPermissionsUserConnectionProvider]
+  confirmed: [UsersPermissionsUserConnectionConfirmed]
+  blocked: [UsersPermissionsUserConnectionBlocked]
+  role: [UsersPermissionsUserConnectionRole]
+  cui: [UsersPermissionsUserConnectionCui]
+  address: [UsersPermissionsUserConnectionAddress]
+  phone: [UsersPermissionsUserConnectionPhone]
+  contact_name: [UsersPermissionsUserConnectionContact_name]
+  referrer: [UsersPermissionsUserConnectionReferrer]
+  avatar: [UsersPermissionsUserConnectionAvatar]
+}
