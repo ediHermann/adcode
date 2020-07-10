@@ -54,6 +54,7 @@
   },
   "dependencies": {
     "@vladblindu/fetch-dog": "https://github.com/vladblindu/fetch-dog",
+    "bootstrap": "^4.5.0",
     "classnames": "^2.2.6",
     "date-fns": "^2.14.0",
     "react": "^16.13.1",

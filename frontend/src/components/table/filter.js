@@ -3,7 +3,7 @@ import {Input, CustomInput} from 'reactstrap';
 
 export const Filter = ({column}) => {
     return (
-        <div style={{marginTop: 5}}>
+        <div className='mt-3 text-black '>
             {column.canFilter && column.render('Filter')}
         </div>
     );
@@ -19,10 +19,11 @@ export const DefaultColumnFilter = ({
     return (
         <Input
             value={filterValue || ''}
+            className='rounded-md pl-2 py-1'
             onChange={(e) => {
                 setFilter(e.target.value || undefined);
             }}
-            placeholder={`search (${length}) ...`}
+            placeholder={`Search (${length}) ...`}
         />
     );
 };
@@ -43,6 +44,7 @@ export const SelectColumnFilter = ({
             id='custom-select'
             type='select'
             value={filterValue}
+            className='rounded-md'
             onChange={(e) => {
                 setFilter(e.target.value || undefined);
             }}
