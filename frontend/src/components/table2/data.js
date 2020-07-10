@@ -1,21 +1,18 @@
  const datas =[
     {
-        "id": "1",
-        "name": "Ghost in The Wires",
-        "author": "Kevin Mitnick",
-        "released": "08/15/2011"
+        "uid": "100000001",
+        "titlu": "Ghost in The Wires",
+        "data": "08/15/2011"
     },
     {
-        "id": "2",
-        "name": "Console Wars",
-        "author": "Blake J. Harris",
-        "released": "05/13/2014"
+        "uid": "100000002",
+        "titlu": "Console Wars",
+        "data": "05/13/2014"
     },
     {
-        "id": "3",
-        "name": "The Phoenix Project",
-        "author": "Gene Kim, Kevin Behr, George Spafford",
-        "released": "12/01/2017"
+        "uid": "100000003",
+        "titlu": "The Phoenix Project",
+        "data": "12/01/2017"
     }
 ]
 
