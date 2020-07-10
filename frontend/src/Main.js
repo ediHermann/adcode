@@ -18,34 +18,42 @@ import RegisterForm from "./components/register/register-form";
 
 
 
+
 class Main extends Component {
     render() {
-        return (
-            <HashRouter>
-                    {/*<Layout>*/}
-                    {/*    <div className="content">*/}
-                    {/*        <Route path="/home" render={() => <Home/>}/>*/}
-                    {/*        <Route path="/spot_list" render={() => <SpotList/>}/>*/}
-                    {/*        <Route path="/settings" render={() => <Settings/>}/>*/}
-                    {/*        <Route path="/profile" render={() => <Profile/>}/>*/}
-                    {/*        <Route path="/cont_talent" render={() => <RegisterForm/>}/>*/}
-                    {/*        <Route path="/cont_producator" render={() => <RegisterStudio/>}/>*/}
-                    {/*        <Route path="/cont_emitator" render={() => <RegisterBroadcaster/>}/>*/}
-                    {/*        <Route path="/cont_arbitru" render={() => <RegisterArbiter/>}/>*/}
-                    {/*    </div>*/}
-                    {/*</Layout>*/}
-
-                        <div className="content">
-                            <Route path='/' render={() => <Login/>}/>
-                            <Route path="/home" render={() => <Home/>}/>
-                            <Route path="/spot_list" render={() => <SpotList/>}/>
-                            <Route path="/settings" render={() => <Settings/>}/>
-                            <Route path="/profile" render={() => <Profile/>}/>
-                            <Route path="/cont_talent" render={() => <RegisterTalent/>}/>
-                            <Route path="/cont_producator" render={() => <RegisterStudio/>}/>
-                            <Route path="/cont_emitator" render={() => <RegisterBroadcaster/>}/>
-                            <Route path="/cont_arbitru" render={() => <RegisterArbiter/>}/>
-                        </div>
+        const isAuthenticated=localStorage.getItem('isAuthenticate')=='1';
+        console.log(isAuthenticated);
+        if(isAuthenticated)
+            return (
+                <HashRouter>
+                        <Layout>
+                            <div className="content">
+                                <Route path="/home" render={() => <Home/>}/>
+                                <Route path="/spot_list" render={() => <SpotList/>}/>
+                                <Route path="/settings" render={() => <Settings/>}/>
+                                <Route path="/profile" render={() => <Profile/>}/>
+                                <Route path="/cont_talent" render={() => <RegisterForm/>}/>
+                                <Route path="/cont_producator" render={() => <RegisterStudio/>}/>
+                                <Route path="/cont_emitator" render={() => <RegisterBroadcaster/>}/>
+                                <Route path="/cont_arbitru" render={() => <RegisterArbiter/>}/>
+                            </div>
+                        </Layout>
+                </HashRouter>
+                );
+        else
+            return (
+                <HashRouter>
+                    <div className="content">
+                        <Route path='/' render={() => <Login/>}/>
+                        <Route path="/home" render={() => <Home/>}/>
+                        <Route path="/spot_list" render={() => <SpotList/>}/>
+                        <Route path="/settings" render={() => <Settings/>}/>
+                        <Route path="/profile" render={() => <Profile/>}/>
+                        <Route path="/cont_talent" render={() => <RegisterTalent/>}/>
+                        <Route path="/cont_producator" render={() => <RegisterStudio/>}/>
+                        <Route path="/cont_emitator" render={() => <RegisterBroadcaster/>}/>
+                        <Route path="/cont_arbitru" render={() => <RegisterArbiter/>}/>
+                    </div>
             </HashRouter>
         );
     }

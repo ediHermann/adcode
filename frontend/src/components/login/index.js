@@ -1,4 +1,5 @@
 import React from 'react'
+import { useHistory } from "react-router-dom";
 import cn from "classnames";
 import {Field, Form, Formik} from "formik";
 import validationSchema from "../register/validation";
@@ -39,8 +40,11 @@ const LoginForm = () => {
             const userData=outcome.user;
             console.log(userData);
             localStorage.setItem('userToken',token);
+            localStorage.setItem('isAuthenticate','1');
             localStorage.setItem('userData',JSON.stringify(userData));
             alert('login succesfful');
+            window.location.href = '/';
+
         }
         return false
 
