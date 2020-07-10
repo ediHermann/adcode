@@ -27,6 +27,7 @@ module.exports = {
 
         // email to site admin
 
+        /**************************************************************
         //Config locate in config/application.json and config/custom.json
         // const sgMail = require('@sendgrid/mail');
 
@@ -64,7 +65,7 @@ module.exports = {
 
 
         // email to user
-
+        ***********************************************************/
         ctx.send({"success": true});
 
       }

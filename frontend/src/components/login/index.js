@@ -1,4 +1,5 @@
 import React from 'react'
+import { useHistory } from "react-router-dom";
 import cn from "classnames";
 import {Field, Form, Formik} from "formik";
 import validationSchema from "../register/validation";
@@ -7,7 +8,9 @@ import PropTypes from "prop-types";
 import Title from "../mixt/Title";
 import {Link} from "react-router-dom";
 import ArrowButton from "../svg/ArrowButton";
+import fetchDog from "./../common/init.js";
 
+console.log(fetchDog);
 
 const LoginForm = () => {
 
@@ -23,35 +26,36 @@ const LoginForm = () => {
             'border-2 border-secondary mb-5': !cond
         });
 
-    //const [globalError, setGlobalError] = React.useState('');
 
-    // const onSubmit = async (values, {setSubmitting, resetForm}) => {
-    //
-    //     const payload = {...values};
-    //     setSubmitting(true);
-    //
-    //     try {
-    //         const outcome = await sendMessages(payload);
-    //         if (outcome) setGlobalError(outcome);
-    //         else {
-    //             resetForm();
-    //             alert('Message sent successfully.')
-    //         }
-    //     } catch (err) {
-    //         setGlobalError(err.message)
-    //     }
-    //     setSubmitting(false)
-    // };
+    const onSubmit = async (values, {setSubmitting}) => {
+
+        const payload={identifier:values.email,password:values.password};
+        console.log(payload);
+        const outcome =  await fetchDog.execute('login', payload);
+        console.log(outcome);
+        if (outcome.status)
+            alert(outcome.message);
+        else {
+            const token=outcome.jwt;
+            const userData=outcome.user;
+            console.log(userData);
+            localStorage.setItem('userToken',token);
+            localStorage.setItem('isAuthenticate','1');
+            localStorage.setItem('userData',JSON.stringify(userData));
+            alert('login succesfful');
+            window.location.href = '/';
+
+        }
+        return false
+
+    };
 
     return <Formik initialValues={initialValues}
           //validationSchema={validationSchema}
-                   onSubmit={(values, {setSubmitting}) => {
-                       setTimeout(() => {
-                           alert(JSON.stringify(values, null, 2));
-                           setSubmitting(false);
-                       }, 400);
-                   }}
-    >
+
+                   onSubmit= {onSubmit}
+
+        >
         {
             ({
                  errors,
@@ -79,7 +83,7 @@ const LoginForm = () => {
                                 id='email'
                                 type="text"
                                 name="email"
-                                placeholder="Email"
+                                placeholder="Username"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 value={values.email}
