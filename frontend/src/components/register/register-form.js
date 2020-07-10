@@ -5,8 +5,7 @@ import cn from 'classnames'
 import GlobalError from './global-error'
 import validationSchema from './validation'
 import RadioGroup from "./../buttons/radioGroup";
-//import  FetchDog from "@vladblindu/fetch-dog/src/fetch-dog.class";
-import FetchDog from "@vladblindu/fetch-dog/src";
+import fetchDog from "./../common/init.js";
 
 
 const RegisterForm = () => {
@@ -37,47 +36,24 @@ const RegisterForm = () => {
     const [globalError, setGlobalError] = React.useState('');
 
     const onSubmit = async (values, {setSubmitting, resetForm}) => {
-        alert('start')
 
-        FetchDog.endpoints = {
-            register: {
-                //login
-                url: '/auth/local',
-                display: 'Inregistrare',
-                method: "POST",
-                default: true
-            }
-        }
-        FetchDog.baseUrl = 'http://localhost:1337/cms'
-        FetchDog.apiKey = '12345667'
-        FetchDog.token = ''
+        console.log(values);
 
-        // const payload = {...values};
-        const payload =
-            {
-                username: 'userTest',
-                address: '',
-                identifier: 'Studio 1',
-                password: 'studio1'
-            }
-        console.log('fdsgsf')
         setSubmitting(true);
         try {
-            console.log('dxfvsdgvs')
-            // const outcome = await sendMessage(fetchDog.execute (payload));
-
-            const outcome = await FetchDog.execute('register', payload);
-
-            // if (outcome) setGlobalError(outcome);
-            // else {
-            //     resetForm();
-            //     alert('Message sent successfully.')
-            // }
-        } catch (err) {
-            setGlobalError(err.message)
-        }
-        setSubmitting(false)
-        return false
+            console.log('Fetching...');
+            const outcome = await  fetchDog.execute('registration', values);
+            console.log(outcome);
+            if (!outcome.success) setGlobalError(outcome.error.message);
+                else {
+                    resetForm();
+                    alert('Message sent successfully.')
+                }
+            } catch (err) {
+                setGlobalError(err.message)
+             }
+            setSubmitting(false)
+            return false
 
     };
 
@@ -109,11 +85,11 @@ const RegisterForm = () => {
                             <label className='text-text text-sm'>Nume</label>
                             <Field
                                 type="text"
-                                name="name"
+                                name="username"
                                 placeholder="Numele"
                                 className={inputStyle(errors.name && touched.name)}/>
                             <ErrorMessage
-                                name="name"
+                                name="username"
                                 component="div"
                                 className="text-sm text-error italic"/>
 
@@ -154,7 +130,7 @@ const RegisterForm = () => {
                             <label className='text-text text-sm'>Persoana de Contact</label>
                             <Field
                                 type="text"
-                                name="contact"
+                                name="contact_name"
                                 placeholder="Persoana de contact"
                                 className={inputStyle(errors.contact && touched.contact)}/>
                             <ErrorMessage

@@ -67,6 +67,28 @@
         return tok;
       }
 
+
+      function Registration() {
+        var crturl = baseurl + "registration";
+        var postdata = {username: "Studio 3", address: "Address 3", identifier: "Studio3", password: "studio3"};
+        $.ajax({
+          type: "POST",
+          async: false,
+          url: crturl,
+          data: postdata,
+          success: function (data) {
+            tok = 'Bearer ' + data.jwt;
+            $("#api_resp").html(JSON.stringify(data));
+            $("#api_err").html('');
+            //tok is saved on cookie
+          },
+          error: function (data) {
+            $("#api_err").html(JSON.stringify(data));
+            $("#api_resp").html('');
+          }
+        });
+      }
+
       function DemoFunction(tok) {
         $.ajax({
           type: 'POST',
@@ -357,6 +379,11 @@
 
       });
 
+      $("#btn_registration").click(function () {
+
+        Registration();
+
+      });
 
 
 
@@ -386,6 +413,12 @@
       <hr>
 
       <h3>USER PROFILE</h3>
+
+      <br />
+      <button id="btn_registration">Register</button><br />
+      <br />
+      <hr>
+
       <br />
       <button id="btn_profile">Get profile</button><br />
       <br />
