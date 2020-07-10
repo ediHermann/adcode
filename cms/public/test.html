@@ -245,7 +245,9 @@
         var query = "query={userSpots}";
         var spotuid=$('#spot_uid').val();
         if(spotuid)
-          query = "query={userSpots(where:{uid:\""+ $('#spot_uid').val() +"\"})}";
+          query = "query={userSpots(where:{uid:\""+ spotuid +"\"},limit:2,offset:2,sort:\"uid:desc\")}";
+        else
+          query = "query={userSpots(limit:2,offset:1,sort:\"uid:desc\")}";
 
         console.log(query);
 

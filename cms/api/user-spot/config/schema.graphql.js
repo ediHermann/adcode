@@ -1,7 +1,7 @@
 const { parseMultipartData, sanitizeEntity } = require('strapi-utils');
 
 module.exports = {
-  query: `userSpots(where: JSON): JSON!`,
+  query: `userSpots(where: JSON, limit: Int, offset: Int, sort:String): JSON!`,
   mutation:`createUserSpot(data: JSON): JSON!,updateUserSpot(uid:String, data: JSON): JSON!,deleteUserSpot(uid:String): JSON! `,
     resolver: {
     Query: {
@@ -25,26 +25,38 @@ module.exports = {
 
                 if (userid === undefined) {
                   errNum = "201";
-                  errDesc = 'Invalid token: Token did not contain required fields';
+                  errDesc = '201 Invalid token: Token did not contain required fields';
                 } else {
                   /***********************************************************************/
                   //Everything is OK
                   /***********************************************************************/
-                  let criteria;
-                  console.log(criteria)
+                  let criteria={};
+
                   if (options.where) {
                     criteria = options.where;
-                    criteria.user = userid;
-                    criteria.deleted = false;
-                    result = await strapi.services.spot.find(criteria);
-                  } else
-                    result = await strapi.services.spot.find({user: userid, deleted: false});
+                  }
+                  if(options.limit && options.offset)
+                  {
+                    criteria._limit = options.limit;
+                    criteria._start = options.offset;
+                  }
+                  if(options.sort)
+                  {
+                    criteria._sort = options.sort;
+                  }
+
+
+                  criteria.user = userid;
+                  criteria.deleted = false;
+                  console.log(criteria)
+                   result = await strapi.services.spot.find(criteria);
+                  }
                   //console.log(result);
                 }
-              } catch (e) {
+                catch (e) {
                 console.log(e);
                 errNum = "202";
-                errDesc = 'Invalid token: Token did not contain required fields';
+                errDesc = '202 Invalid token: Token did not contain required fields';
               }
             } else {
               errNum = "203";
