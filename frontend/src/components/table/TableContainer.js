@@ -1,17 +1,15 @@
 import React, {Fragment} from 'react';
 
-import {Table, Row, Col, Button, Input, CustomInput} from 'reactstrap';
+import {Table, Row, Col, Button, CustomInput} from 'reactstrap';
 import {Filter, DefaultColumnFilter} from './filter';
 import {useExpanded, useFilters, usePagination, useSortBy, useTable} from "react-table";
 
-const TableContainer = ({columns, data, renderRowSubComponent}) => {
+const TableContainer = ({columns, data}) => {
     const {
         getTableProps,
-        getTableBodyProps,
         headerGroups,
         page,
         prepareRow,
-        visibleColumns,
         canPreviousPage,
         canNextPage,
         pageOptions,
@@ -51,7 +49,7 @@ const TableContainer = ({columns, data, renderRowSubComponent}) => {
                     <tr {...headerGroup.getHeaderGroupProps()}>
                         {headerGroup.headers.map((column) => (
                             <th className='py-6 px-2 w-64 text-xl text-center' {...column.getHeaderProps()}>
-                                <div {...column.getSortByToggleProps()}>
+                                <div>
                                     {column.render('Header')}
                                     {generateSortingIndicator(column)}
                                 </div>
@@ -62,7 +60,7 @@ const TableContainer = ({columns, data, renderRowSubComponent}) => {
                 ))}
                 </thead>
 
-                <tbody {...getTableBodyProps()}>
+                <tbody>
                 {page.map((row) => {
                     prepareRow(row);
                     return (
@@ -74,13 +72,6 @@ const TableContainer = ({columns, data, renderRowSubComponent}) => {
                                     );
                                 })}
                             </tr>
-                            {row.isExpanded && (
-                                <tr>
-                                    <td colSpan={visibleColumns.length}>
-                                        {renderRowSubComponent(row)}
-                                    </td>
-                                </tr>
-                            )}
                         </Fragment>
                     );
                 })}

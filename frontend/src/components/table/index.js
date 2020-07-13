@@ -8,6 +8,8 @@ import {
 } from 'reactstrap';
 import TableContainer from './TableContainer';
 import {SelectColumnFilter} from './filter';
+import Clear from "../svg/ClearButton";
+import Delete from "../svg/DeleteButton";
 
 const Table = () => {
     const [data, setData] = useState([]);
@@ -54,7 +56,7 @@ const Table = () => {
                 Cell: ({row}) => (
                     <span {...row.getToggleRowExpandedProps()}>
             {row.isExpanded ? '👇' : '👉'}
-
+                        {/*{row.isDeleted ? <Clear/> : <Delete/>}*/}
           </span>
                 ),
             },

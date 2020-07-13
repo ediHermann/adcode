@@ -1,9 +1,7 @@
 import React from 'react'
-import { useHistory } from "react-router-dom";
 import cn from "classnames";
 import {Field, Form, Formik} from "formik";
 import validationSchema from "../register/validation";
-import GlobalError from "../register/global-error";
 import PropTypes from "prop-types";
 import Title from "../mixt/Title";
 import {Link} from "react-router-dom";
@@ -27,7 +25,7 @@ const LoginForm = () => {
         });
 
 
-    const onSubmit = async (values, {setSubmitting}) => {
+    const onSubmit = async (values) => {
 
         const payload={identifier:values.email,password:values.password};
         console.log(payload);
@@ -62,8 +60,6 @@ const LoginForm = () => {
                  touched,
                  handleSubmit,
                  isSubmitting,
-                 handleChange,
-                 handleBlur,
                  values
              }) =>
                 <Form onSubmit={handleSubmit}
@@ -75,17 +71,14 @@ const LoginForm = () => {
 
                     <div className='bg-secondary m-2 bottom-rounded-window'>
                         <div className='mx-16 pt-10'>
-                            {/*<GlobalError message={globalError}/>*/}
                             <label
                                 htmlFor='email'
                                 className='text-white text-xs pt-4'>Username or Email</label>
-                            <input
+                            <Field
                                 id='email'
                                 type="text"
                                 name="email"
                                 placeholder="Username"
-                                onChange={handleChange}
-                                onBlur={handleBlur}
                                 value={values.email}
                                 className={inputStyle(errors.email && touched.email && "error")}/>
                             {errors.email && touched.email && (
@@ -94,13 +87,11 @@ const LoginForm = () => {
 
                             <label htmlFor='password'
                                    className='text-white text-xs'>Password</label>
-                            <input
+                            <Field
                                 id='password'
                                 type="password"
                                 name="password"
                                 placeholder="Parola"
-                                onChange={handleChange}
-                                onBlur={handleBlur}
                                 value={values.password}
                                 className={inputStyle(errors.password && touched.password && "error")}/>
                             {errors.password && touched.password && (

@@ -10,10 +10,10 @@ const svgDelete = `
       </svg>
 `
 
-const DelButton = ({className}) => <SVG src={svgDelete} className={className} />
+const Delete = ({className}) => <SVG src={svgDelete} className={className} />
 
 
-DelButton.propTypes = {
+Delete.propTypes = {
     className: PropTypes.string
 }
-export default DelButton
+export default Delete
