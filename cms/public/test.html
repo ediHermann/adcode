@@ -2,8 +2,7 @@
   <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script>
-    var baseurl="http://localhost:1337/";
-
+    var baseurl = "http://localhost:1337/";
 
 
     function removeNulls(obj) {
@@ -19,10 +18,10 @@
         var date = new Date();
         date.setTime(date.getTime() + (min * 60 * 1000));
         var expires = "; expires=" + date.toGMTString();
-      }
-      else var expires = "";
+      } else var expires = "";
       document.cookie = name + "=" + value + expires + "; path=/";
     }
+
     function readCookie(name) {
       var nameEQ = name + "=";
       var ca = document.cookie.split(';');
@@ -33,6 +32,7 @@
       }
       return null;
     }
+
     function deleteCookie(name) {
       createCookie(name, "", -1);
     }
@@ -163,8 +163,8 @@
         fd.append('file', files);
         // fd.append('data', data);
 
-        var postdata={
-          query:`mutation {updateProfile(file:${fd}, data: ${strdata})}`
+        var postdata = {
+          query: `mutation {updateProfile(file:${fd}, data: ${strdata})}`
         };
         $.ajax({
           type: 'POST',
@@ -189,8 +189,8 @@
 
       function UpdateProfile(tok, strdata) {
         //var data = "query=mutation{updateProfile(data:" + strdata + ")}";
-        var postdata={
-          query:`mutation {updateProfile(data: ${strdata})}`
+        var postdata = {
+          query: `mutation {updateProfile(data: ${strdata})}`
         };
         $.ajax({
           type: 'POST',
@@ -243,9 +243,11 @@
 
       function UserSpotsFunction(tok) {
         var query = "query={userSpots}";
-        var spotuid=$('#spot_uid').val();
-        if(spotuid)
-          query = "query={userSpots(where:{uid:\""+ $('#spot_uid').val() +"\"})}";
+        var spotuid = $('#spot_uid').val();
+        if (spotuid)
+          query = "query={userSpots(where:{uid:\"" + spotuid + "\"},limit:2,offset:2,sort:\"uid:desc\")}";
+        else
+          query = "query={userSpots(limit:2,offset:1,sort:\"uid:desc\")}";
 
         console.log(query);
 
@@ -256,8 +258,8 @@
             "Authorization": tok
           },
           async: false,
-          url:  baseurl+"graphql",
-          data:query,
+          url: baseurl + "graphql",
+          data: query,
           success: function (data) {
             $("#api_resp").html(JSON.stringify(data));
             $("#api_err").html('');
@@ -273,9 +275,9 @@
         // var strdata = '{client:"Client 1"}';
 
         var strdata = '{media_types:[{id:1},{id:2}]}';
-        var uid="QQQQQQQQ";
-        var postdata={
-          query:`mutation {updateUserSpot(uid:"${uid}",data: ${strdata})}`
+        var uid = "QQQQQQQQ";
+        var postdata = {
+          query: `mutation {updateUserSpot(uid:"${uid}",data: ${strdata})}`
         };
         $.ajax({
           type: 'POST',
@@ -308,8 +310,8 @@
             "Authorization": tok
           },
           async: false,
-          url:  baseurl+"graphql",
-          data:query,
+          url: baseurl + "graphql",
+          data: query,
           success: function (data) {
             $("#api_resp").html(JSON.stringify(data));
             $("#api_err").html('');
@@ -342,13 +344,10 @@
       });
 
 
-
-
-
       $("#btn_updateprofile").click(function () {
         Tkn = readCookie('token');
         var payload = $('#payload').val();
-        UpdateProfile(Tkn,payload);
+        UpdateProfile(Tkn, payload);
       });
 
 
@@ -367,7 +366,7 @@
 
         Tkn = readCookie('token');
         var payload = $('#payload').val();
-        UserSpotsFunction(Tkn,payload);
+        UserSpotsFunction(Tkn, payload);
 
       });
 
@@ -386,14 +385,7 @@
       });
 
 
-
-
     });
-
-
-
-
-
 
 
     function replacer(key, value) {
@@ -401,68 +393,83 @@
     }
   </script>
 </head>
-<table border='1' width="100%"  cellpadding="5" style="font-family:arial;border-collapse:collapse;font-size:11px;background:#efefef">
+<table border='1' width="100%" cellPadding="5"
+       style="font-family:arial;border-collapse:collapse;font-size:11px;background:#efefef">
   <tr>
     <td width="50%">
-      <h3>AUTHENTICATION </h3><br />
-      UserName:<br> <input type="text" id="uname1"><br />
-      Password:<br> <input type="password" id="pwd1"><br /><br />
-      <button id="login">token</button><br />
-      <div id="authenticateerr" style="color:red"></div> <br />
-      <div id="token" style="color:blue;max-width:600px"></div> <br />
+      <h3>AUTHENTICATION </h3><br/>
+      UserName:<br> <input type="text" id="uname1"><br/>
+      Password:<br> <input type="password" id="pwd1"><br/><br/>
+      <button id="login">token</button>
+      <br/>
+      <div id="authenticateerr" style="color:red"></div>
+      <br/>
+      <div id="token" style="color:blue;max-width:600px"></div>
+      <br/>
       <hr>
 
       <h3>USER PROFILE</h3>
 
-      <br />
-      <button id="btn_registration">Register</button><br />
-      <br />
+      <br/>
+      <button id="btn_registration">Register</button>
+      <br/>
+      <br/>
       <hr>
 
-      <br />
-      <button id="btn_profile">Get profile</button><br />
-      <br />
+      <br/>
+      <button id="btn_profile">Get profile</button>
+      <br/>
+      <br/>
       <hr>
 
 
-      <h3>UPDATE PROFILE</h3><br />
-      <button id="btn_updateprofile">Update profile</button><br />
-      <br />
-      <button id="btn_avatar">Upload avatar</button><br />
-      <br />
-      <br />
-      <button id="btn_searchuser">Search user</button><br />
-      <br />
+      <h3>UPDATE PROFILE</h3><br/>
+      <button id="btn_updateprofile">Update profile</button>
+      <br/>
+      <br/>
+      <button id="btn_avatar">Upload avatar</button>
+      <br/>
+      <br/>
+      <br/>
+      <button id="btn_searchuser">Search user</button>
+      <br/>
+      <br/>
       <hr>
       <h3>USER SPOTS</h3>
-      <br />
-      <button id="btn_spots">Get spots</button><br />
-      <br />
+      <br/>
+      <button id="btn_spots">Get spots</button>
+      <br/>
+      <br/>
       <hr>
       <h3>UPDATE SPOT</h3>
-      <br />
-      Spot uid:<input type="text" id="spot_uid" name="spot_uid" />
-      <button id="btn_update_spot">Update spot</button><br />
-      <br />
+      <br/>
+      Spot uid:<input type="text" id="spot_uid" name="spot_uid"/>
+      <button id="btn_update_spot">Update spot</button>
+      <br/>
+      <br/>
       <hr>
 
 
-      <form method="post" action="" enctype="multipart/form-data" id="myform">
-        <input type="file" id="file" name="file" />
-        <br /><br />
-        <textarea  id="payload" style="width:600px;height:400px">{contact_name:"Bubu1",referrer:"refff1"}</textarea>
-        <br /><br />
+      <form method="post" action="" encType="multipart/form-data" id="myform">
+        <input type="file" id="file" name="file"/>
+        <br/><br/>
+        <textarea id="payload" style="width:600px;height:400px">{contact_name:"Bubu1",referrer:"refff1"}</textarea>
+        <br/><br/>
       </form>
 
-      <br />
+      <br/>
       <hr>
 
     </td>
     <td valign="top">
       <h3>RESPONSE</h3>
-      <div id="api_resp" style="color:blue;max-width:600px;max-height:600px;height:200px;overflow:auto;border:1px solid #000;background:#fff"></div><br />
+      <div id="api_resp"
+           style="color:blue;max-width:600px;max-height:600px;height:200px;overflow:auto;border:1px solid #000;background:#fff"></div>
+      <br/>
       <h3 style="color:#FF0000">ERROR</h3>
-      <div id="api_err" style="color:red;max-width:600px;max-height:600px;height:100px;overflow:auto;border:1px solid #000;background:#fff"></div><br />
+      <div id="api_err"
+           style="color:red;max-width:600px;max-height:600px;height:100px;overflow:auto;border:1px solid #000;background:#fff"></div>
+      <br/>
     </td>
   </tr>
 </table>

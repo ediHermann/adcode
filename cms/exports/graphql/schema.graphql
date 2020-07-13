@@ -557,7 +557,7 @@ type Query {
   usersConnection(sort: String, limit: Int, start: Int, where: JSON): UsersPermissionsUserConnection
   userProfile: JSON!
   searchUser(where: JSON): JSON!
-  userSpots(where: JSON): JSON!
+  userSpots(where: JSON, limit: Int, offset: Int, sort: String): JSON!
   me: UsersPermissionsMe
 }
 
