@@ -21,6 +21,7 @@ import LogOut from "./pages/logout";
 
 class Main extends Component {
     render() {
+        //localStorage.setItem('isAuthenticate','0');
         const isAuthenticated = localStorage.getItem('isAuthenticate') === '1';
         console.log(isAuthenticated);
         if (isAuthenticated)
