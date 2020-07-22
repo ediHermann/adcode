@@ -78,4 +78,20 @@ body {
     text-transform: uppercase;
 }
 
+.jsonColumn
+{
+    border:1px solid #777;
+    padding:2px 5px;
+    background: crimson;
+    color:#fff;
+    font-weight: 700;
+}
+
+.jsonCell
+{
+    border:1px solid #777;
+    padding:2px 5px;
+}
+
+
 @tailwind utilities;

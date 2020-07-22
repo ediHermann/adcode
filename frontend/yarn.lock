@@ -5341,7 +5341,7 @@ react-transition-group@^2.3.1:
     prop-types "^15.6.2"
     react-lifecycles-compat "^3.0.4"
 
-react@^16.13.1:
+react@^16.13.1, react@^16.8.6:
   version "16.13.1"
   resolved "https://registry.yarnpkg.com/react/-/react-16.13.1.tgz#2e818822f1a9743122c063d6410d85c1e3afe48e"
   integrity sha512-YMZQQq32xHLX0bz5Mnibv1/LHb3Sqzngu7xstSM+vrkE5Kzr9xE0yMByK5kMoTK30YVJE61WfbxIFFvfeDKT1w==
@@ -6285,6 +6285,13 @@ toposort@^2.0.2:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/toposort/-/toposort-2.0.2.tgz#ae21768175d1559d48bef35420b2f4962f09c330"
   integrity sha1-riF2gXXRVZ1IvvNUILL0li8JwzA=
+
+ts-react-json-table@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/ts-react-json-table/-/ts-react-json-table-0.1.2.tgz#f31008c8c31a1505b786603ffe8d01cbdf1f9f1d"
+  integrity sha512-R04BcrlQ8W0526Riq6HvdNRBgZgAMgQFUcpGXymM4PgC+YWW64gfnTKitS8fimOv+rEbxM0mwvaeohwoSfccHg==
+  dependencies:
+    react "^16.8.6"
 
 tslib@^1.10.0, tslib@^1.9.0:
   version "1.13.0"
