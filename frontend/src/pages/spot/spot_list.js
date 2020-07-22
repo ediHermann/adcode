@@ -55,17 +55,14 @@ class SpotList extends Component {
         this.state = { data: [] };
     }
 
-      componentDidMount() {
-
-
-
-        const resolve=fetchDog.execute('spotList',payload)
-        let thenProm = resolve.then(value => {
-                console.log("The data:");
-                console.log(value);
-                return value});
-        console.log("result="+thenProm);
-    }
+    //   componentDidMount() {
+    //     const resolve=fetchDog.execute('spotList',payload)
+    //     let thenProm = resolve.then(value => {
+    //             console.log("The data:");
+    //             console.log(value);
+    //             return value});
+    //     console.log("result="+thenProm);
+    // }
 
     //console.log(outcome);
      render() {
