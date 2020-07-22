@@ -4,6 +4,7 @@ const baseURL='http://localhost:1337';
 const apiKey='79BCD4C6A911F';
 /*************************************************************/
 const userToken=localStorage.getItem('userToken');
+console.log("token="+userToken);
 
 const endpoints = {
     registration: {
@@ -16,6 +17,12 @@ const endpoints = {
     login: {
         url: '/auth/local',
         display: 'Login',
+        method: 'post',
+        default: true
+    },
+    spotList: {
+        url: '/graphql',
+        display: 'UserSpots',
         method: 'post',
         default: true
     }
