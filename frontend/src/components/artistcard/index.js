@@ -23,7 +23,6 @@ const ArtistCard = ({cards}) =>
 
                     <CardName>
                         {/*{artist.title}*/}
-                        dijfciosd
 
                     </CardName>
 

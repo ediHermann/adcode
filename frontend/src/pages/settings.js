@@ -1,20 +1,9 @@
 import React from 'react'
-import ArtistCard from "../components/artistcard";
-import Card from "../components/artistcard/artistCard";
-
+import MainCrud from "../components/table3/djnwkj";
 
 
 const Settings = () => <div>
-
-    <br/>
-    <br/>
-    <br/>
-    <br/>
- {/*<Card/>*/}
- {/*<ArtistCard/>*/}
-    <br/>
-    <br/>
-    <br/>
-<div>Settings</div>
+    {/*<MainCrud/>*/}
+    Settings
 </div>
 export default Settings

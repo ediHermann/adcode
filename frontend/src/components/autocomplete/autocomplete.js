@@ -3,7 +3,8 @@ import AutoSuggest from "react-autosuggest";
 
 import "./styles.css";
 
-const Autocomplete = ({filter, SuggestionComp, displaySuggestion}) => {
+
+const Autocomplete = ({filter, SuggestionCompLocal, displaySuggestionLocal}) => {
     const [value, setValue] = useState("");
     const [suggestions, setSuggestions] = useState([]);
 
@@ -19,8 +20,8 @@ const Autocomplete = ({filter, SuggestionComp, displaySuggestion}) => {
                 onSuggestionSelected={(_, {suggestionValue}) =>
                     console.log("Selected: " + suggestionValue)
                 }
-                getSuggestionValue={displaySuggestion}
-                renderSuggestion={suggestion => <SuggestionComp suggestion={suggestion}/>}
+                getSuggestionValue={displaySuggestionLocal}
+                renderSuggestion={suggestion => <SuggestionCompLocal suggestion={suggestion}/>}
                 inputProps={{
                     placeholder: "Search",
                     value: value,

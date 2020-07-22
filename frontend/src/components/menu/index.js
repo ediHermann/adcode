@@ -30,6 +30,12 @@ const Menu = () => {
                 <NavLink to='/other1'
                          className='rounded-lg border-2 border-gray-600 hover:border-primary uppercase py-2 pl-4 pr-10 text-text mb-2'
                 >Other</NavLink>
+                <NavLink to='/other2'
+                         className='rounded-lg border-2 border-gray-600 hover:border-primary uppercase py-2 pl-4 pr-10 text-text mb-2'
+                >Other2</NavLink>
+                <NavLink to='/create_spot'
+                         className='rounded-lg border-2 border-gray-600 hover:border-primary uppercase py-2 pl-4 pr-10 text-text mb-2'
+                >Spot nou</NavLink>
                 <NavLink to='/logout'
                          className='rounded-lg border-2 border-gray-600 hover:border-primary uppercase py-2 pl-4 pr-10 text-text mb-2'
                 >Log Out</NavLink>

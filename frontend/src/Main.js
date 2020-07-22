@@ -17,6 +17,9 @@ import Layout from "./components/layout";
 import RegisterForm from "./components/register/register-form";
 import Other from "./pages/other";
 import LogOut from "./pages/logout";
+import UidForm from "./components/UID";
+import CreateSpot from "./pages/spot/create_spot";
+import Other2 from "./pages/other2";
 
 
 class Main extends Component {
@@ -37,6 +40,8 @@ class Main extends Component {
                             <Route path="/cont_emitator" render={() => <RegisterBroadcaster/>}/>
                             <Route path="/cont_arbitru" render={() => <RegisterArbiter/>}/>
                             <Route path="/other1" render={() => <Other/>}/>
+                            <Route path="/other2" render={() => <Other2/>}/>
+                            <Route path="/create_spot" render={() => <CreateSpot/>}/>
                             <Route path="/logout" render={() => <LogOut/>}/>
                         </div>
                     </Layout>
