@@ -6,9 +6,9 @@ import PropTypes from "prop-types";
 import Title from "../mixt/Title";
 import {Link} from "react-router-dom";
 import ArrowButton from "../svg/ArrowButton";
-import fetchDog from "./../common/init.js";
+import httpAgent from "./../common/init";
 
-console.log(fetchDog);
+
 
 const LoginForm = () => {
 
@@ -26,21 +26,21 @@ const LoginForm = () => {
 
 
     const onSubmit = async (values) => {
-
         const payload={identifier:values.email,password:values.password};
         console.log(payload);
-        const outcome =  await fetchDog.execute('login', payload);
-        console.log(outcome);
-        if (outcome.status)
-            alert(outcome.message);
+        const resp =  await httpAgent('login',payload);
+        console.log(resp);
+        if (resp.status!=200)
+            alert('Login fail');
         else {
+            const outcome=await resp.json();
             const token=outcome.jwt;
             const userData=outcome.user;
-            console.log(userData);
+            console.log(token);
             localStorage.setItem('userToken',token);
-            localStorage.setItem('isAuthenticate','1');
+            localStorage.setItem('isAuthenticated','1');
             localStorage.setItem('userData',JSON.stringify(userData));
-            alert('login succesfful');
+            alert('login successful');
             window.location.href = '/';
 
         }

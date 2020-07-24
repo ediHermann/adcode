@@ -10,8 +10,8 @@ import fetchDog from "./../common/init.js";
 
 
 const Talent_types = [
-    { id: "1", name: "Voice" },
-    { id: "2", name: "Face" },
+    { id: "1", name: "Voce" },
+    { id: "2", name: "Fata" },
 
 ];
 
