@@ -23,7 +23,6 @@
   "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.9.6",
-    "@babel/plugin-proposal-class-properties": "^7.10.4",
     "@babel/plugin-transform-runtime": "^7.9.6",
     "@babel/preset-env": "^7.9.6",
     "@babel/preset-react": "^7.9.4",
@@ -45,7 +44,7 @@
     "style-loader": "^1.2.1",
     "tailwindcss": "^1.4.6",
     "webpack": "^4.43.0",
-    "webpack-cli": "^3.3.11",
+    "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0",
     "webpack-merge": "^4.2.2",
     "yup": "^0.29.1"
@@ -54,12 +53,11 @@
     "registry": "https://npm.pkg.github.com/"
   },
   "dependencies": {
-    "@babel/plugin-syntax-class-properties": "^7.10.4",
-    "@vladblindu/fetch-dog": "https://github.com/vladblindu/fetch-dog",
+    "@vladblindu/fetch": "vladblindu/fetch-dog",
+    "@vladblindu/fetch-dog": "^1.0.1",
     "bootstrap": "^4.5.0",
     "classnames": "^2.2.6",
     "date-fns": "^2.14.0",
-    "node-sass": "^4.14.1",
     "react": "^16.13.1",
     "react-autosuggest": "^10.0.2",
     "react-debounce-input": "^3.2.2",

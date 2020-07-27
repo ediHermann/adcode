@@ -24,10 +24,9 @@ import Other2 from "./pages/other2";
 
 class Main extends Component {
     render() {
-        //localStorage.setItem('isAuthenticate','0');
-        const isAuthenticated = localStorage.getItem('isAuthenticate') === '1';
+        let isAuthenticated = localStorage.getItem('isAuthenticated') ;
         console.log(isAuthenticated);
-        if (isAuthenticated)
+        if (isAuthenticated=='1')
             return (
                 <HashRouter>
                     <Layout>

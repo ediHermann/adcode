@@ -1,32 +1,29 @@
-// import FetchDog from "@vladblindu/fetch-dog/src/index.js";
+import FetchDog from "@vladblindu/fetch-dog";
 // /*************************************************************/
-// const baseURL='http://localhost:1337';
-// const apiKey='79BCD4C6A911F';
-// /*************************************************************/
-// const userToken=localStorage.getItem('userToken');
-// console.log("token="+userToken);
-//
-// const endpoints = {
-//     registration: {
-//         //login
-//         url: '/registration',
-//         display: 'Inregistrare',
-//         method: 'post',
-//         default: true
-//     },
-//     login: {
-//         url: '/auth/local',
-//         display: 'Login',
-//         method: 'post',
-//         default: true
-//     },
-//     spotList: {
-//         url: '/graphql',
-//         display: 'UserSpots',
-//         method: 'post',
-//         default: true
-//     }
-// }
-// const FDOptions = {baseUrl: baseURL, apiKey: apiKey, token: userToken, endpoints: endpoints};
-// const fetchDog = new FetchDog.FetchDog(FDOptions);
-// export default fetchDog;
+const baseURL='http://localhost:1337';
+const apiKey='79BCD4C6A911F';
+
+const defaultHeader= {'Content-Type': 'application/json'};
+const endpoints = {
+    registration: {
+        //login
+        url: '/registration',
+        display: 'Inregistrare',
+        method: 'post'
+    },
+    login: {
+        url: '/auth/local',
+        display: 'Login',
+        method: 'post'
+    },
+    spotList: {
+        url: '/graphql',
+        display: 'UserSpots',
+        method: 'post'
+    }
+}
+
+ //const FDOptions = {baseUrl: baseURL, baseHeaders: apiKey,  endpoints: endpoints};
+ const FDOptions = {baseUrl: baseURL, endpoints: endpoints,baseHeaders: defaultHeader, param:""};
+ const httpAgent = FetchDog(FDOptions);
+ export default httpAgent;

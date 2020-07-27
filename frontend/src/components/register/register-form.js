@@ -1,23 +1,25 @@
 import React from 'react'
+import { render } from 'react-dom';
 import PropTypes from 'prop-types'
-import {ErrorMessage, Field, Form, Formik, FieldArray} from 'formik'
+import {ErrorMessage, Field, Form, Formik,FieldArray} from 'formik'
 import cn from 'classnames'
 import GlobalError from './global-error'
 import validationSchema from './validation'
 import RadioGroup from "./../buttons/radioGroup";
+import fetchDog from "./../common/init.js";
 
 
 const Talent_types = [
-    {id: "1", name: "Voice"},
-    {id: "2", name: "Face"},
+    { id: "1", name: "Voce" },
+    { id: "2", name: "Fata" },
 
 ];
 
 const Broadcast_types = [
-    {id: "1", name: "Radio"},
-    {id: "2", name: "TV"},
-    {id: "3", name: "Internet"},
-    {id: "4", name: "Cinema"},
+    { id: "1", name: "Radio" },
+    { id: "2", name: "TV" },
+    { id: "3", name: "Internet" },
+    { id: "4", name: "Cinema" },
 
 ];
 
@@ -30,14 +32,13 @@ const RegisterForm = () => {
         companyName: '',
         contact: '',
         cui: '',
-        cnp: '',
         address: '',
         phone: '',
         email: '',
         password: '',
         confirmPassword: '',
-        talent_types: [],
-        broadcast_types: [],
+        talent_types:[],
+        broadcast_types:[],
 
     };
 
@@ -51,32 +52,38 @@ const RegisterForm = () => {
     const FORM_TYPES = ['Persoană fizică', 'Persoană juridică'];
     const [formType, setFormType] = React.useState(0);
     const [globalError, setGlobalError] = React.useState('');
-    // const onSubmit = async (values, {setSubmitting, resetForm}) => {
-    // console.log(values);
-    // //return;
-    // setSubmitting(true);
-    // try {
-    //     console.log('Fetching...');
-    //     const outcome = await  fetchDog.execute('registration', values);
-    //     console.log(outcome);
-    //     if (!outcome.success) setGlobalError(outcome.error.message);
-    //         else {
-    //             resetForm();
-    //             alert('Message sent successfully.')
-    //         }
-    //     } catch (err) {
-    //          console.log(err);
-    //          setGlobalError(err.message);
-    //      }
-    //     setSubmitting(false)
-    //     return false;
-    //
-    // };
+    const onSubmit = async (values, {setSubmitting, resetForm}) => {
+    console.log(values);
+    //return;
+    setSubmitting(true);
+    try {
+        console.log('Fetching...');
+        const outcome = await  fetchDog.execute('registration', values);
+        console.log(outcome);
+        if (!outcome.success) setGlobalError(outcome.error.message);
+            else {
+                resetForm();
+                alert('Message sent successfully.')
+            }
+        } catch (err) {
+             console.log(err);
+             setGlobalError(err.message);
+         }
+        setSubmitting(false)
+        return false;
+
+    };
 
 
     return <Formik initialValues={initialValues}
-        //validationSchema={validationSchema}
-                   onSubmit={onSubmit}
+                    //validationSchema={validationSchema}
+                   // onSubmit={(values, {setSubmitting}) => {
+                   //     setTimeout(() => {
+                   //         alert(JSON.stringify(values, null, 2));
+                   //         setSubmitting(false);
+                   //     }, 400);
+                   // }}
+        onSubmit={onSubmit}
     >
 
         {
@@ -182,6 +189,7 @@ const RegisterForm = () => {
                         className="text-sm text-error italic"/>
 
 
+
                     <label className='text-text text-sm'>Parola</label>
                     <Field
                         type="password"
@@ -216,9 +224,8 @@ const RegisterForm = () => {
                                                 name="categoryIds"
                                                 type="checkbox"
                                                 value={category.id}
-                                                checked={values.talent_types.find(o => o.id === category.id)}
-                                                onChange={e => {
-                                                    if (e.target.checked) arrayHelpers.push({id: category.id});
+                                                checked={values.talent_types.find(o => o.id === category.id)}                                            onChange={e => {
+                                                    if (e.target.checked) arrayHelpers.push({id:category.id});
                                                     else {
                                                         let obj = values.talent_types.find(o => o.id === category.id);
                                                         let idx = values.talent_types.indexOf(obj);
@@ -235,6 +242,7 @@ const RegisterForm = () => {
                     />
 
 
+
                     <label className='text-text text-sm'>Canale difuzare</label><br/>
                     <FieldArray
                         name="broadcast_types"
@@ -247,15 +255,14 @@ const RegisterForm = () => {
                                                 name="categoryIds"
                                                 type="checkbox"
                                                 value={category.id}
-                                                checked={values.broadcast_types.find(o => o.id === category.id)}
-                                                onChange={e => {
-                                                    if (e.target.checked) arrayHelpers.push({id: category.id});
-                                                    else {
-                                                        let obj = values.broadcast_types.find(o => o.id === category.id);
-                                                        let idx = values.broadcast_types.indexOf(obj);
-                                                        arrayHelpers.remove(idx);
-                                                    }
-                                                }}
+                                                checked={values.broadcast_types.find(o => o.id === category.id)}                                            onChange={e => {
+                                                if (e.target.checked) arrayHelpers.push({id:category.id});
+                                                else {
+                                                    let obj = values.broadcast_types.find(o => o.id === category.id);
+                                                    let idx = values.broadcast_types.indexOf(obj);
+                                                    arrayHelpers.remove(idx);
+                                                }
+                                            }}
                                             />{" "}
                                             {category.name}
                                         </label>
@@ -264,6 +271,10 @@ const RegisterForm = () => {
                             </div>
                         )}
                     />
+
+
+
+
 
 
                     <div>
@@ -290,8 +301,8 @@ RegisterForm.propTypes = {
     email: PropTypes.string,
     password: PropTypes.string,
     confirmPassword: PropTypes.string,
-    talent_types: PropTypes.array,
-    broadcast_types: PropTypes.array,
+    talent_types:PropTypes.array,
+    broadcast_types:PropTypes.array,
 
 };
 
