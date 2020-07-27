@@ -24,9 +24,9 @@ import Other2 from "./pages/other2";
 
 class Main extends Component {
     render() {
-        let isAuthenticated = localStorage.getItem('isAuthenticated') ;
-        console.log(isAuthenticated);
-        if (isAuthenticated=='1')
+        // let isAuthenticated = localStorage.getItem('isAuthenticated') ;
+        // console.log(isAuthenticated);
+        // if (isAuthenticated==='0')
             return (
                 <HashRouter>
                     <Layout>
@@ -46,23 +46,23 @@ class Main extends Component {
                         </div>
                     </Layout>
                 </HashRouter>
-            );
-        else
-            return (
-                <HashRouter>
-                    <div className="content">
-                        <Route path='/' render={() => <Login/>}/>
-                        <Route path="/home" render={() => <Home/>}/>
-                        <Route path="/spot_list" render={() => <SpotList/>}/>
-                        <Route path="/settings" render={() => <Settings/>}/>
-                        <Route path="/profile" render={() => <Profile/>}/>
-                        <Route path="/cont_talent" render={() => <RegisterTalent/>}/>
-                        <Route path="/cont_producator" render={() => <RegisterStudio/>}/>
-                        <Route path="/cont_emitator" render={() => <RegisterBroadcaster/>}/>
-                        <Route path="/cont_arbitru" render={() => <RegisterArbiter/>}/>
-                    </div>
-                </HashRouter>
-            );
+            )
+        // else
+        //     return (
+        //         <HashRouter>
+        //             <div className="content">
+        //                 <Route path='/' render={() => <Login/>}/>
+        //                 <Route path="/home" render={() => <Home/>}/>
+        //                 <Route path="/spot_list" render={() => <SpotList/>}/>
+        //                 <Route path="/settings" render={() => <Settings/>}/>
+        //                 <Route path="/profile" render={() => <Profile/>}/>
+        //                 <Route path="/cont_talent" render={() => <RegisterTalent/>}/>
+        //                 <Route path="/cont_producator" render={() => <RegisterStudio/>}/>
+        //                 <Route path="/cont_emitator" render={() => <RegisterBroadcaster/>}/>
+        //                 <Route path="/cont_arbitru" render={() => <RegisterArbiter/>}/>
+        //             </div>
+        //         </HashRouter>
+        //     );
     }
 }
 
