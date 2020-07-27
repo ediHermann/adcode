@@ -7,7 +7,7 @@ import SearchInput from "../mixt/SearchInput"
 import './styles.css'
 
 
-const AutocompleteAsync = ({httpGetter, SuggestionComp, displaySuggestion}) => {
+const AutocompleteAsync = ({httpGetter, SuggestionComp, displaySuggestion, name, mirrorInput}) => {
     const [value, setValue] = useState("")
     const [suggestions, setSuggestions] = useState([])
     const [isLoading, setIsLoading] = useState(false)
@@ -38,12 +38,27 @@ const AutocompleteAsync = ({httpGetter, SuggestionComp, displaySuggestion}) => {
 
     return (
         <div>
-            <AutoSuggest
-                suggestions={suggestions || []}
+            <AutoSuggest suggestions={suggestions || []}
+
                 onSuggestionsFetchRequested={onSuggestionsFetchRequested}
                 onSuggestionsClearRequested={onSuggestionsClearRequested}
                 onSuggestionSelected={(_, {suggestionValue}) =>
-                    console.log("Selected: " + suggestionValue)
+
+                       // const elem = document.getElementsByName(mirrorInput)[0]
+                       // elem.value = suggestionValue
+                       //
+                       // elem.props.handleChange (new Event('change'))
+                       // document.getElementsByName(mirrorInput)[0].value = suggestionValue
+                       //  elem.dispatchEvent(new Event('change', {
+                       //      bubbles: true
+                       //  }))
+
+                    {
+                        console.log("Selected: " + suggestionValue)
+
+                    }
+
+
                 }
                 getSuggestionValue={displaySuggestion}
                 renderSuggestion={suggestion => <SuggestionComp suggestion={suggestion}/>}
@@ -51,9 +66,14 @@ const AutocompleteAsync = ({httpGetter, SuggestionComp, displaySuggestion}) => {
                 inputProps={{
                     placeholder: "Search",
                     value: value,
+                    name:name,
                     onChange: (_, {newValue}) => {
                         setValue(newValue);
+                    },
+                    onBlur:() => {
+                        console.log('fgbdfgdf' + value)
                     }
+
                 }}
                 highlightFirstSuggestion={true}
             />

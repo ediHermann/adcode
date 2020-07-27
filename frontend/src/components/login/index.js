@@ -25,28 +25,28 @@ const LoginForm = () => {
         });
 
 
-    const onSubmit = async (values) => {
-
-        const payload={identifier:values.email,password:values.password};
-        console.log(payload);
-        const outcome =  await fetchDog.execute('login', payload);
-        console.log(outcome);
-        if (outcome.status)
-            alert(outcome.message);
-        else {
-            const token=outcome.jwt;
-            const userData=outcome.user;
-            console.log(userData);
-            localStorage.setItem('userToken',token);
-            localStorage.setItem('isAuthenticate','1');
-            localStorage.setItem('userData',JSON.stringify(userData));
-            alert('login succesfful');
-            window.location.href = '/';
-
-        }
-        return false
-
-    };
+    // const onSubmit = async (values) => {
+    //
+    //     const payload={identifier:values.email,password:values.password};
+    //     console.log(payload);
+    //     const outcome =  await fetchDog.execute('login', payload);
+    //     console.log(outcome);
+    //     if (outcome.status)
+    //         alert(outcome.message);
+    //     else {
+    //         const token=outcome.jwt;
+    //         const userData=outcome.user;
+    //         console.log(userData);
+    //         localStorage.setItem('userToken',token);
+    //         localStorage.setItem('isAuthenticate','1');
+    //         localStorage.setItem('userData',JSON.stringify(userData));
+    //         alert('login succesfful');
+    //         window.location.href = '/';
+    //
+    //     }
+    //     return false
+    //
+    // };
 
     return <Formik initialValues={initialValues}
           //validationSchema={validationSchema}
