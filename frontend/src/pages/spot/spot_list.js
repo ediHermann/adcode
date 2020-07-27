@@ -6,27 +6,6 @@ import httpAgent from "../../components/common/init";
 const JsonTable = require('ts-react-json-table')
 
 var items = [];
-// const items = [
-//     {
-//
-//         "uid": "QQQQQQQQ",
-//         "title": "Spot 3",
-//         "client": "Client 1",
-//         "duration": 30,
-//         "status": "PENDING",
-//         "created_at": "11.07.2020",
-//     },
-//     {
-//         "uid": "ABD6575B",
-//         "title": "Spot 1",
-//         "client": "Emag",
-//         "duration": 20,
-//         "status": "PENDING",
-//         "created_at": "16.07.2020",
-//     }
-//
-// ];
-
 
 const columns = [
     {key: 'uid', label: 'UID'},
@@ -48,10 +27,7 @@ const columns = [
 const payload = 'query={userSpots}';
 
 const SpotList = () => {
-
     const [items, setItems] = React.useState([])
-
-
     const retrieveData = async () => {
         const response = await httpAgent(payload);
         if (response.status === 200) {
