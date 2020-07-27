@@ -24,6 +24,6 @@ const endpoints = {
 }
 
  //const FDOptions = {baseUrl: baseURL, baseHeaders: apiKey,  endpoints: endpoints};
- const FDOptions = {baseUrl: baseURL, endpoints: endpoints,baseHeaders: defaultHeader, param:""};
+ const FDOptions = {baseUrl: baseURL, endpoints: endpoints,baseHeaders: defaultHeader,tokenKey:'userToken', param:"",};
  const httpAgent = FetchDog(FDOptions);
  export default httpAgent;
