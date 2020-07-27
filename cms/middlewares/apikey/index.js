@@ -4,7 +4,7 @@ module.exports = strapi => {
       strapi.app.use(async (ctx, next) => {
         const apiKey = strapi.config['security'].apikey;
         console.log('middleware enter');
-        //console.log(ctx.request);
+        console.log(ctx);
 
         if(ctx.request.method=='POST'&& ctx.header['x-custom-header']!=apiKey && false)
         {

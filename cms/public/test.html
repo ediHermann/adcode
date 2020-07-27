@@ -54,7 +54,7 @@
           },
           success: function (data) {
 
-            tok = 'Bearer ' + data.jwt;
+            tok = 'bearer ' + data.jwt;
             $("#token").html(tok);
             $("#authenticateerr").html('');
             //tok is saved on cookie

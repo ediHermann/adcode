@@ -930,13 +930,6 @@
     "@types/webpack-sources" "*"
     source-map "^0.6.0"
 
-"@vladblindu/fetch-dog@^1.0.1":
-  version "1.0.1"
-  resolved "https://npm.pkg.github.com/download/@vladblindu/fetch-dog/1.0.1/1487abecb4bbc82ecd6d20cc2142ba76b32362d2691aaf1f752fa0835ed99195#8b6b0b67dba6e958b5efedc03ff3ae3e3ad58925"
-  integrity sha512-YA8ZlEws393yNpr5m7vGtQ1/EH0Tgz6ZaGL9OVj+m/UP8YSB0vKDERcTYf3bgRCNRasmYcPMppy9cxNA8Pdymw==
-  dependencies:
-    url-join "^4.0.1"
-
 "@vladblindu/fetch@vladblindu/fetch-dog":
   version "1.0.1"
   resolved "https://codeload.github.com/vladblindu/fetch-dog/tar.gz/b6dcfb84195b87e35b4be3809594369025046654"
