@@ -7,7 +7,7 @@ import SearchInput from "../mixt/SearchInput"
 import './styles.css'
 
 
-const AutocompleteAsync = ({httpGetter, SuggestionComp, displaySuggestion, name, mirrorInput}) => {
+    const AutocompleteAsync = ({httpGetter, SuggestionComp, displaySuggestion, name, setFValue}) => {
     const [value, setValue] = useState("")
     const [suggestions, setSuggestions] = useState([])
     const [isLoading, setIsLoading] = useState(false)
@@ -54,7 +54,9 @@ const AutocompleteAsync = ({httpGetter, SuggestionComp, displaySuggestion, name,
                        //  }))
 
                     {
-                        console.log("Selected: " + suggestionValue)
+                        console.log("Selected name: " + suggestionValue);
+                        setFValue(name, suggestionValue)
+                        //setFieldValue(value,suggestionValue.talent);
 
                     }
 

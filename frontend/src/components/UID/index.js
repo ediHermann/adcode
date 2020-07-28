@@ -15,13 +15,12 @@ const UidForm = () => {
                 title: '',
                 client: '',
                 duration: '',
-            initValues:[{
+            spotTalent:[{
                  talent: '',
-                role: '',
-                obs: '',
-                talentInput: ''
-            }]
+                 role: '',
+                 obs: ''
 
+            }]
 
     }
 
@@ -77,7 +76,8 @@ const UidForm = () => {
                  errors,
                  touched,
                  handleSubmit,
-                 isSubmitting
+                 isSubmitting,
+                 setFieldValue
              }) => <Form onSubmit={handleSubmit}>
                 <label>Status</label>
                 <div>{status}</div>
@@ -134,36 +134,37 @@ const UidForm = () => {
                     <label className='cursor-pointer' htmlFor='video'>VIDEO</label>
                 </div>
                 <div>
-                    <FieldArray name='initValues'>
+                    <FieldArray name='spotTalent'>
                         {({push, remove}) => (
                             <>
-                                <button type='button' onClick={() => push({talent: '', role: '', obs: '', talentInput: ''})}
+                                <button type='button' onClick={() => push({talent: '', role: '', obs: ''})}
                                         disabled={isSubmitting}>Add
                                 </button>
 
-                                {values.initValues &&
-                                values.initValues.length > 0 &&
-                                values.initValues.map((s_part, index) => (
+                                {values.spotTalent &&
+                                values.spotTalent.length > 0 &&
+                                values.spotTalent.map((s_part, index) => (
                                     <div key={index} className="row">
                                         <div className="col">
 
-                                            {/*<Field name={`initValues[${index}].talent`}>*/}
+                                            {/*<Field name={`spotTalent[${index}].talent`}>*/}
                                                 {/*{({field}) => (*/}
                                                 {/*   <input {...field} type='text' placeholder='Name'/>*/}
                                                     <AutocompleteAsync
                                                     httpGetter={httpGetter}
                                                     SuggestionComp={SuggestionComp}
                                                     displaySuggestion={displaySuggestion}
-                                                    name={`initValues[${index}].talent`}
-                                                    mirrorInput={`initValues[${index}].talentInput`}
-                                                    onChange = { e => e.setFieldValue(`initValues[${index}].talent`, e)}
+                                                    name={`spotTalent[${index}].talent`}
+                                                    setFValue={setFieldValue}
+                                                    //mirrorInput={`spotTalent[${index}].talentInput`}
+                                                    //onChange = { e => e.setFieldValue(`spotTalent[${index}].talent`, e)}
 
                                                     />
                                                 {/*)}*/}
                                             {/*</Field>*/}
                                         </div>
                                         <div className="col">
-                                            {/*<Field name={`initValues[${index}].role`} type='text'>*/}
+                                            {/*<Field name={`spotTalent[${index}].role`} type='text'>*/}
                                                 <Autocomplete
                                                     filter={filter(dbl)}
                                                     SuggestionCompLocal={SuggestionCompLocal}
@@ -175,11 +176,9 @@ const UidForm = () => {
                                             {/*</Field>*/}
                                         </div>
                                         <div className="col">
-                                            <Field name={`initValues[${index}].obs`} type='text'/>
+                                            <Field name={`spotTalent[${index}].obs`} type='text'/>
                                         </div>
-                                        <div className="col">
-                                            <Field name={`initValues[${index}].talentInput`} type='text'/>
-                                        </div>
+
                                         <div>
                                             <button type='button' onClick={() => remove(index)}>X</button>
                                         </div>
