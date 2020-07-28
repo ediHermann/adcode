@@ -1,29 +1,33 @@
-import React from 'react'
-import cn from "classnames";
+import React, {useState} from 'react'
+import cn from "classnames"
 import {ErrorMessage, Field, FieldArray, Form, Formik} from "formik"
+import db from "../dbs/fake-db"
 import dbl from "../dbs/another-db"
-import db from "../dbs/fake-db";
-import AutocompleteAsync from "../autocomplete/autocomplete-async";
-import Autocomplete from "../autocomplete/autocomplete";
+import Select from 'react-select'
+import SearchInput from "../mixt/SearchInput"
+import AutoSuggest from "react-autosuggest"
 
+import './../autocomplete/styles.css'
+import AutocompleteAsync from "../autocomplete/autocomplete-async";
 
 
 const UidForm = () => {
+
+
     const initialValues = {
-                status: '',
-                uid: '',
-                title: '',
-                client: '',
-                duration: '',
-            initValues:[{
-                 talent: '',
-                role: '',
-                obs: '',
-                talentInput: ''
-            }]
-
-
+        status: '',
+        uid: '',
+        title: '',
+        client: '',
+        duration: '',
+        initValues: [{
+            talent: '',
+            role: '',
+            obs: '',
+            talentInput: ''
+        }]
     }
+
 
     const inputStyle = cond => cn(
         "w-full rounded-md p-2 ", {
@@ -42,14 +46,13 @@ const UidForm = () => {
             'border-2 border-secondary mb-2': !cond
         })
 
-    const filter = itemList => value => itemList.filter(item => item.role.toLowerCase().includes(value.trim().toLowerCase()))
-    const SuggestionCompLocal = ({suggestion}) => <span>{`${suggestion.role}`}</span>
-    const displaySuggestionLocal = item => item.role
-
     const SuggestionComp = ({suggestion}) => <span>{`${suggestion.talent}`}</span>
+
     const displaySuggestion = item => {
+        alert(`${item.email}`)
         return item.talent
     }
+
     const httpGetter = value => new Promise(
         resolve => {
             setTimeout(() => {
@@ -77,7 +80,7 @@ const UidForm = () => {
                  errors,
                  touched,
                  handleSubmit,
-                 isSubmitting
+                 isSubmitting,
              }) => <Form onSubmit={handleSubmit}>
                 <label>Status</label>
                 <div>{status}</div>
@@ -137,7 +140,8 @@ const UidForm = () => {
                     <FieldArray name='initValues'>
                         {({push, remove}) => (
                             <>
-                                <button type='button' onClick={() => push({talent: '', role: '', obs: '', talentInput: ''})}
+                                <button type='button'
+                                        onClick={() => push({talent: '', role: '', obs: '', talentInput: ''})}
                                         disabled={isSubmitting}>Add
                                 </button>
 
@@ -147,38 +151,30 @@ const UidForm = () => {
                                     <div key={index} className="row">
                                         <div className="col">
 
-                                            {/*<Field name={`initValues[${index}].talent`}>*/}
-                                                {/*{({field}) => (*/}
-                                                {/*   <input {...field} type='text' placeholder='Name'/>*/}
-                                                    <AutocompleteAsync
-                                                    httpGetter={httpGetter}
-                                                    SuggestionComp={SuggestionComp}
-                                                    displaySuggestion={displaySuggestion}
-                                                    name={`initValues[${index}].talent`}
-                                                    mirrorInput={`initValues[${index}].talentInput`}
-                                                    onChange = { e => e.setFieldValue(`initValues[${index}].talent`, e)}
+                                            <AutocompleteAsync
+                                                label='Name'
+                                                httpGetter={httpGetter}
+                                                SuggestionComp={SuggestionComp}
+                                                displaySuggestion={displaySuggestion}
+                                                name={`initValues[${index}].talent`}
 
-                                                    />
-                                                {/*)}*/}
-                                            {/*</Field>*/}
+                                            />
+
                                         </div>
                                         <div className="col">
-                                            {/*<Field name={`initValues[${index}].role`} type='text'>*/}
-                                                <Autocomplete
-                                                    filter={filter(dbl)}
-                                                    SuggestionCompLocal={SuggestionCompLocal}
-                                                    displaySuggestionLocal={displaySuggestionLocal}
-                                                    onChange={initialValues}
-                                                    // value={role}
-                                                    // name={role}
-                                                />
-                                            {/*</Field>*/}
+                                            {/*<Select*/}
+                                            {/*    {...props}*/}
+                                            {/*    placeholder='Select option'*/}
+                                            {/*    value={dbl ? dbl.find(obj => obj.value === selectedValue) : ''}*/}
+                                            {/*    options={dbl}*/}
+                                            {/*    onChange={handleChange}*/}
+                                            {/*    className='w-64 text-black'*/}
+                                            {/*/>*/}
+
                                         </div>
+
                                         <div className="col">
                                             <Field name={`initValues[${index}].obs`} type='text'/>
-                                        </div>
-                                        <div className="col">
-                                            <Field name={`initValues[${index}].talentInput`} type='text'/>
                                         </div>
                                         <div>
                                             <button type='button' onClick={() => remove(index)}>X</button>
@@ -189,6 +185,7 @@ const UidForm = () => {
                             </>
                         )}
                     </FieldArray>
+
                 </div>
                 <div>
                     <button className='absolute bg-primary px-16 py-4 mt-10 rounded-md text-text'
@@ -202,6 +199,4 @@ const UidForm = () => {
     </Formik>
 
 }
-
-
 export default UidForm
