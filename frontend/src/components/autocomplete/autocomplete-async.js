@@ -1,15 +1,13 @@
-import React, {useState} from 'react'
+import React, { useState} from 'react'
 import AutoSuggest from "react-autosuggest"
-import {useField, Form, FormikProps, Formik, Field} from 'formik';
+
 
 import SearchInput from "../mixt/SearchInput"
 
 import './styles.css'
-import db from "../dbs/fake-db";
 
 
-const AutocompleteAsync = ({httpGetter, SuggestionComp, displaySuggestion, label, ...props}) => {
-    const [field, meta, helpers] = useField(props);
+    const AutocompleteAsync = ({httpGetter, SuggestionComp, displaySuggestion, name, setFValue}) => {
     const [value, setValue] = useState("")
     const [suggestions, setSuggestions] = useState([])
     const [isLoading, setIsLoading] = useState(false)
@@ -38,37 +36,50 @@ const AutocompleteAsync = ({httpGetter, SuggestionComp, displaySuggestion, label
             isLoading={isLoading}
             inputProps={inputProps}/>
 
-
-
     return (
-         <Field>
+        <div>
             <AutoSuggest suggestions={suggestions || []}
-                         onSuggestionsFetchRequested={onSuggestionsFetchRequested}
-                         onSuggestionsClearRequested={onSuggestionsClearRequested}
-                         onSuggestionSelected={(event, {suggestion, method}) => {
-                             if (method === "enter") {
-                                 event.preventDefault()
-                             }
-                             setValue(suggestion.talent)
-                            // setFieldValue('talent', suggestion.talent)
-                         }}
-                         getSuggestionValue={item => {
-                             return item.talent}}
-                         renderSuggestion={suggestion => <span>{`${suggestion.talent}`}</span>}
-                         renderInputComponent={renderInputComponent}
-                         inputProps={{
-                             placeholder: "Search",
-                             value: {...props},
-                             name: name,
-                             onChange: (_, {newValue}) => {
-                                 setValue(newValue);
-                             }
-                         }}
-                         highlightFirstSuggestion={true}
 
+                onSuggestionsFetchRequested={onSuggestionsFetchRequested}
+                onSuggestionsClearRequested={onSuggestionsClearRequested}
+                onSuggestionSelected={(_, {suggestionValue}) =>
+
+                       // const elem = document.getElementsByName(mirrorInput)[0]
+                       // elem.value = suggestionValue
+                       //
+                       // elem.props.handleChange (new Event('change'))
+                       // document.getElementsByName(mirrorInput)[0].value = suggestionValue
+                       //  elem.dispatchEvent(new Event('change', {
+                       //      bubbles: true
+                       //  }))
+
+                    {
+                        console.log("Selected name: " + suggestionValue);
+                        setFValue(name, suggestionValue)
+                        //setFieldValue(value,suggestionValue.talent);
+
+                    }
+
+
+                }
+                getSuggestionValue={displaySuggestion}
+                renderSuggestion={suggestion => <SuggestionComp suggestion={suggestion}/>}
+                renderInputComponent={renderInputComponent}
+                inputProps={{
+                    placeholder: "Search",
+                    value: value,
+                    name:name,
+                    onChange: (_, {newValue}) => {
+                        setValue(newValue);
+                    },
+                    onBlur:() => {
+                        console.log('fgbdfgdf' + value)
+                    }
+
+                }}
+                highlightFirstSuggestion={true}
             />
-         </Field>
-
+        </div>
     )
 }
 
