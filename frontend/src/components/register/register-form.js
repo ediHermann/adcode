@@ -1,12 +1,11 @@
 import React from 'react'
-import { render } from 'react-dom';
 import PropTypes from 'prop-types'
 import {ErrorMessage, Field, Form, Formik,FieldArray} from 'formik'
 import cn from 'classnames'
 import GlobalError from './global-error'
 import validationSchema from './validation'
 import RadioGroup from "./../buttons/radioGroup";
-import fetchDog from "./../common/init.js";
+import httpAgent from "./../common/init";
 
 
 const Talent_types = [
@@ -58,7 +57,7 @@ const RegisterForm = () => {
     setSubmitting(true);
     try {
         console.log('Fetching...');
-        const outcome = await  fetchDog.execute('registration', values);
+        const outcome = await  httpAgent('registration', values);
         console.log(outcome);
         if (!outcome.success) setGlobalError(outcome.error.message);
             else {
