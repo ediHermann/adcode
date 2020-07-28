@@ -51,7 +51,7 @@ const SpotList = () => {
     return (
         <div className='ml-10'>
             <h2 className='text-2xl font-bold mb-20 mt-20'>Spoturile mele</h2>
-            <a href='/pages/spot/create_spot' className='underline '>
+            <a href='#/create_spot' className='underline '>
                 <AddButton className='inline align-bottom mr-2'/>
                 Creaza un spot nou
             </a>

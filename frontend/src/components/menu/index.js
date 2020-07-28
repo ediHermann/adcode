@@ -2,6 +2,14 @@ import React from 'react'
 import {NavLink} from "react-router-dom";
 import MenuToggle from "../buttons/menu-toggle";
 
+const userDataStr=localStorage.getItem('userData');
+console.log(userDataStr);
+let userData;
+if(userDataStr)
+{
+    userData=JSON.parse(userDataStr);
+    console.log(userData.username);
+}
 
 const Menu = () => {
     const [opened, setOpened] = React.useState(true)
@@ -54,9 +62,8 @@ const Menu = () => {
                     </div>
                     <div className='flex justify-center pr-2 bg-secondary w-full bottom-right-rounded mb-2 mr-2'>
                         <ul className='mr-10'>
-                            <li className='font-semibold'>Red Studio</li>
-                            <li className='text-xs pb-1'>AV Studio Plus</li>
-                            <li className='font-semibold '>CONT PRODUCATOR</li>
+                            <li className='font-semibold pb-3' >{userData.username}</li>
+                            <li className='font-semibold uppercase pb-3'>Cont {userData.role.name}</li>
                         </ul>
                         <MenuToggle
                             opened={!opened}
