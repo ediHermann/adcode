@@ -10,6 +10,10 @@ module.exports = merge(common, {
     optimization: {
         runtimeChunk: true
     },
+    devServer:{
+        open: 'http://localhost:8000',
+        port: 8000
+    },
     plugins: [
         new HtmlWebPackPlugin(
             {

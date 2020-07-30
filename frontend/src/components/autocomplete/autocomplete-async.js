@@ -43,24 +43,10 @@ import './styles.css'
                 onSuggestionsFetchRequested={onSuggestionsFetchRequested}
                 onSuggestionsClearRequested={onSuggestionsClearRequested}
                 onSuggestionSelected={(_, {suggestionValue}) =>
-
-                       // const elem = document.getElementsByName(mirrorInput)[0]
-                       // elem.value = suggestionValue
-                       //
-                       // elem.props.handleChange (new Event('change'))
-                       // document.getElementsByName(mirrorInput)[0].value = suggestionValue
-                       //  elem.dispatchEvent(new Event('change', {
-                       //      bubbles: true
-                       //  }))
-
                     {
                         console.log("Selected name: " + suggestionValue);
                         setFValue(name, suggestionValue)
-                        //setFieldValue(value,suggestionValue.talent);
-
                     }
-
-
                 }
                 getSuggestionValue={displaySuggestion}
                 renderSuggestion={suggestion => <SuggestionComp suggestion={suggestion}/>}
