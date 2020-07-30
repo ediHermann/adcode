@@ -41,7 +41,7 @@ const Profile = () =>{
 
     };
 
-    const initialValues = {
+    let initialValues = {
         username: '',
         email: '',
         address: ''
@@ -71,7 +71,7 @@ const Profile = () =>{
 
 return (<div className='absolute w-full h-full'>
         <div className='flex justify-center uppercase mt-40 text-2xl md:text-5xl font-bold '>Profilul meu</div>
-        <Formik initialValues={initialValues}
+        <Formik initialValues={data}
         onSubmit={onSubmit}
     >
     {
@@ -104,15 +104,7 @@ return (<div className='absolute w-full h-full'>
                     name="email"
                     component="div"
                     className="text-sm text-error italic"/>
-                <Field
-                    type="text"
-                    name="address"
-                    placeholder="Adresa"
-                    className={inputStyle(errors.address && touched.address)}/>
-                <ErrorMessage
-                    name="address"
-                    component="div"
-                    className="text-sm text-error italic"/>
+
                 <div>
                     <button className='absolute bg-primary px-16 py-4 mt-20 rounded-md text-text'
                             style={{left: '50%', marginLeft: '-90px'}}

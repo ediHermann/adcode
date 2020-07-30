@@ -366,9 +366,9 @@ input editUserInput {
   phone: String
   contact_name: String
   referrer: String
-  avatar: ID
   talent_types: [ID]
   broadcast_types: [ID]
+  avatar: String
 }
 
 enum ENUM_SPOT_STATUS {
@@ -1195,9 +1195,9 @@ input UserInput {
   phone: String
   contact_name: String
   referrer: String
-  avatar: ID
   talent_types: [ID]
   broadcast_types: [ID]
+  avatar: String
 }
 
 input UsersPermissionsLoginInput {
@@ -1299,7 +1299,7 @@ type UsersPermissionsUser {
   phone: String
   contact_name: String
   referrer: String
-  avatar: UploadFile
+  avatar: String
   talent_types(sort: String, limit: Int, start: Int, where: JSON): [TalentType]
   broadcast_types(sort: String, limit: Int, start: Int, where: JSON): [BroadcastType]
 }
@@ -1321,7 +1321,7 @@ type UsersPermissionsUserConnectionAddress {
 }
 
 type UsersPermissionsUserConnectionAvatar {
-  key: ID
+  key: String
   connection: UsersPermissionsUserConnection
 }
 

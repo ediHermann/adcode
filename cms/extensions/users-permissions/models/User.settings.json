@@ -68,22 +68,14 @@
     "referrer": {
       "type": "string"
     },
-    "avatar": {
-      "model": "file",
-      "via": "related",
-      "allowedTypes": [
-        "files",
-        "images",
-        "videos"
-      ],
-      "plugin": "upload",
-      "required": false
-    },
     "talent_types": {
       "collection": "talent-type"
     },
     "broadcast_types": {
       "collection": "broadcast-type"
+    },
+    "avatar": {
+      "type": "text"
     }
   }
 }
