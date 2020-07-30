@@ -5,7 +5,7 @@ import httpAgent from "../../components/common/init";
 
 const JsonTable = require('ts-react-json-table')
 
-var items = [];
+let items = [];
 
 const columns = [
     {key: 'uid', label: 'UID'},
@@ -51,7 +51,7 @@ const SpotList = () => {
     return (
         <div className='ml-10'>
             <h2 className='text-2xl font-bold mb-20 mt-20'>Spoturile mele</h2>
-            <a href='/pages/spot/create_spot' className='underline '>
+            <a href='#/create_spot' className='underline '>
                 <AddButton className='inline align-bottom mr-2'/>
                 Creaza un spot nou
             </a>

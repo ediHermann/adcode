@@ -1,6 +1,7 @@
 import FetchDog from "@bitbrother/fetch-dog";
+import baseURL from "./config";
 // /*************************************************************/
-const baseURL='http://localhost:1337';
+//const baseURL='http://localhost:1337';
 const apiKey='79BCD4C6A911F';
 //const defaultHeader= {'Content-Type': 'application/json'};
 const defaultHeader1= {'Content-Type': 'application/x-www-form-urlencoded'};
