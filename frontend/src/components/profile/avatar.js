@@ -1,6 +1,6 @@
 import React from 'react'
 import AvatarEditor from "react-avatar-editor";
-
+import PropTypes from "prop-types";
 
 
 const ProfileAvatar = () => {
@@ -48,5 +48,7 @@ const ProfileAvatar = () => {
     </div>
 }
 
-
+ProfileAvatar.propTypes ={
+    allowzoomout: PropTypes.bool
+}
 export default ProfileAvatar

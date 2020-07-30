@@ -1,11 +1,11 @@
 import React, {Component} from "react"
 import EditButton from "../../components/svg/Edit"
 import AddButton from "../../components/svg/AddButton"
-import httpAgent from "../../components/common/init";
+import httpAgent from "../../components/common/init"
 
 const JsonTable = require('ts-react-json-table')
 
-let items = [];
+
 
 const columns = [
     {key: 'uid', label: 'UID'},
@@ -21,7 +21,7 @@ const columns = [
         }
     }
 
-];
+]
 
 
 const payload = 'query={userSpots}';
@@ -57,15 +57,8 @@ const SpotList = () => {
             </a>
             <JsonTable rows={items} columns={columns}/>
         </div>
-
-    );
+    )
 }
 
-export default SpotList;
+export default SpotList
 
-
-function Spots() {
-    //let {spotUID } = useParams();
-    let {spotUID} = 1;
-
-}
