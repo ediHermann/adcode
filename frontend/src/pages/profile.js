@@ -43,6 +43,8 @@ const Profile = () =>{
 
     const initialValues = {
         username: '',
+        email: '',
+        address: ''
     };
     const [data, setData] = React.useState({});
     const [globalError, setGlobalError] = React.useState('');
@@ -81,6 +83,7 @@ return (<div className='absolute w-full h-full'>
              isSubmitting
          }) =>
             <Form onSubmit={handleSubmit}>
+                <GlobalError message={globalError}/>
                 <ProfileAvatar/>
                 <label className='text-text text-sm'>Nume</label>
                 <Field
