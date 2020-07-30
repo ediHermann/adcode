@@ -33,14 +33,14 @@ const LoginForm = () => {
         if (resp.status === 400)
             alert('Login fail');
         else {
-            // const outcome=await resp.json();
-            const outcome=await resp;
+            const outcome=await resp.json();
             const token=outcome.jwt;
             const userData=outcome.user;
             console.log(token);
             localStorage.setItem('userToken',token);
             localStorage.setItem('isAuthenticated','1');
             localStorage.setItem('userData',JSON.stringify(userData));
+            console.log(userData);
             alert('login successful');
             window.location.href = '/';
 

@@ -3,12 +3,20 @@ import {NavLink} from "react-router-dom";
 import MenuToggle from "../buttons/menu-toggle";
 import baseURL from "../common/config.js";
 
+const userDataStrG=localStorage.getItem('userData');
+console.log(".");
+console.log(userDataStrG);
+console.log(".");
 
-const userDataStr=localStorage.getItem('userData');
+const userDataStr=JSON.stringify({"id":1,"username":"Studio 1","email":"studio@gmail.com",role:{name:"Studio"}});
 console.log(userDataStr);
 let userData;
+
+
+
 if(userDataStr)
 {
+    console.log(userDataStr);
     userData=JSON.parse(userDataStr);
     console.log(userData.username);
 }
