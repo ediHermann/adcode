@@ -3,16 +3,10 @@ import {NavLink} from "react-router-dom";
 import MenuToggle from "../buttons/menu-toggle";
 import baseURL from "../common/config.js";
 
-const userDataStrG=localStorage.getItem('userData');
-console.log(".");
-console.log(userDataStrG);
-console.log(".");
-
-const userDataStr=JSON.stringify({"id":1,"username":"Studio 1","email":"studio@gmail.com",role:{name:"Studio"}});
-console.log(userDataStr);
+const userDataStr=localStorage.getItem('userData');
+//const userDataStr=JSON.stringify({"id":1,"username":"Studio 1","email":"studio@gmail.com",role:{name:"Studio"}});
+//console.log(userDataStr);
 let userData;
-
-
 
 if(userDataStr)
 {
@@ -70,7 +64,7 @@ const Menu = () => {
                      style={{minWidth: '375px'}}>
                     <div className='flex bg-secondary justify-center text-center ml-6 mr-2 mt-1'
                          style={{borderRadius: '50%', width: '100px', height: '64px'}}>
-                        <img src={baseURL}/>
+                        <img src={'data:image/png;base64,'+userData.avatar}/>
                     </div>
                     <div className='flex justify-center pr-2 bg-secondary w-full bottom-right-rounded mb-2 mr-2'>
                         <ul className='mr-10'>
