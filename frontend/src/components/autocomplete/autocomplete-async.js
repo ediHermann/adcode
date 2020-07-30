@@ -44,7 +44,6 @@ import './styles.css'
                 onSuggestionsClearRequested={onSuggestionsClearRequested}
                 onSuggestionSelected={(_, {suggestionValue}) =>
                     {
-                        console.log("Selected name: " + suggestionValue);
                         setFValue(name, suggestionValue)
                     }
                 }

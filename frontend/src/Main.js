@@ -1,25 +1,25 @@
-import React, {Component} from "react";
+import React, {Component} from "react"
 import {
     Route,
     HashRouter
-} from "react-router-dom";
+} from "react-router-dom"
 
-import SpotList from "./pages/spot/spot_list";
-import Home from "./pages/home";
-import Login from "./pages/login";
-import Settings from "./pages/settings";
-import Profile from "./pages/profile";
-import RegisterTalent from "./pages/registerTalent";
-import RegisterStudio from "./pages/registerStudio";
-import RegisterBroadcaster from "./pages/registerEmitator";
-import RegisterArbiter from "./pages/registerArbiter";
-import Layout from "./components/layout";
-import RegisterForm from "./components/register/register-form";
-import Other from "./pages/other";
-import LogOut from "./pages/logout";
-import UidForm from "./components/UID";
-import CreateSpot from "./pages/spot/create_spot";
-import Other2 from "./pages/other2";
+import SpotList from "./pages/spot/spot_list"
+import Home from "./pages/home"
+import Login from "./pages/login"
+import Settings from "./pages/settings"
+import Profile from "./pages/profile"
+import RegisterTalent from "./pages/registerTalent"
+import RegisterStudio from "./pages/registerStudio"
+import RegisterBroadcaster from "./pages/registerEmitator"
+import RegisterArbiter from "./pages/registerArbiter"
+import Layout from "./components/layout"
+import RegisterForm from "./components/register/register-form"
+import Other from "./pages/other"
+import LogOut from "./pages/logout"
+import CreateSpot from "./pages/spot/create_spot"
+import Other2 from "./pages/other2"
+
 
 
 class Main extends Component {

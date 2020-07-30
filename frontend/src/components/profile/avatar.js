@@ -7,7 +7,7 @@ const ProfileAvatar = () => {
 
     const [img, setImg] = React.useState({
         image: 'imgs/avatar.png',
-        allowZoomOut: false,
+        allowzoomout: false,
         position: {x: 0.5, y: 0.5},
         scale: 1,
         rotate: 0,
