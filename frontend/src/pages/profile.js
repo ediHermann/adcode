@@ -40,7 +40,7 @@ const Profile = () =>{
 
     };
 
-    const initialValues = {
+    let initialValues = {
         username: '',
     };
     const [data, setData] = React.useState({});

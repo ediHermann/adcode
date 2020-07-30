@@ -62,7 +62,7 @@ const Menu = () => {
                      style={{minWidth: '375px'}}>
                     <div className='flex bg-secondary justify-center text-center ml-6 mr-2 mt-1'
                          style={{borderRadius: '50%', width: '100px', height: '64px'}}>
-                        <img src={baseURL+userData.avatar.url}/>
+                        <img src={baseURL}/>
                     </div>
                     <div className='flex justify-center pr-2 bg-secondary w-full bottom-right-rounded mb-2 mr-2'>
                         <ul className='mr-10'>
