@@ -5,6 +5,7 @@ import {ErrorMessage, Field, Form, Formik,FieldArray} from 'formik'
 import GlobalError from "../components/register/global-error";
 import RegisterForm from "../components/register/register-form";
 import cn from "classnames";
+import ProfileAvatar from "../components/profile/avatar";
 
 let data = [];
 const payload = "query={userProfile}";
@@ -42,6 +43,8 @@ const Profile = () =>{
 
     let initialValues = {
         username: '',
+        email: '',
+        address: ''
     };
     const [data, setData] = React.useState({});
     const [globalError, setGlobalError] = React.useState('');
@@ -80,6 +83,8 @@ return (<div className='absolute w-full h-full'>
              isSubmitting
          }) =>
             <Form onSubmit={handleSubmit}>
+                <GlobalError message={globalError}/>
+                <ProfileAvatar/>
                 <label className='text-text text-sm'>Nume</label>
                 <Field
                     type="text"
@@ -88,6 +93,24 @@ return (<div className='absolute w-full h-full'>
                     className={inputStyle(errors.name && touched.name)}/>
                 <ErrorMessage
                     name="username"
+                    component="div"
+                    className="text-sm text-error italic"/>
+                <Field
+                    type="text"
+                    name="email"
+                    placeholder="Email"
+                    className={inputStyle(errors.email && touched.email)}/>
+                <ErrorMessage
+                    name="email"
+                    component="div"
+                    className="text-sm text-error italic"/>
+                <Field
+                    type="text"
+                    name="address"
+                    placeholder="Adresa"
+                    className={inputStyle(errors.address && touched.address)}/>
+                <ErrorMessage
+                    name="address"
                     component="div"
                     className="text-sm text-error italic"/>
                 <div>

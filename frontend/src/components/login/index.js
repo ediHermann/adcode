@@ -30,10 +30,11 @@ const LoginForm = () => {
         console.log(payload);
         const resp =  await httpAgent('login',payload);
         console.log(resp);
-        if (resp.status!=200)
+        if (resp.status === 400)
             alert('Login fail');
         else {
-            const outcome=await resp.json();
+            // const outcome=await resp.json();
+            const outcome=await resp;
             const token=outcome.jwt;
             const userData=outcome.user;
             console.log(token);

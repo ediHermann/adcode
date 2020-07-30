@@ -53,6 +53,10 @@ body {
     border-radius: 0 0 24px 24px;
 }
 
+.border-window{
+    border: 2px solid black;
+}
+
 .fill-white {
     fill: #ffffff;
 }
