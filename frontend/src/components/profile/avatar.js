@@ -1,6 +1,6 @@
 import React from 'react'
 import AvatarEditor from "react-avatar-editor";
-import {allowTouchMove} from "react-select/src/internal/ScrollLock/utils";
+
 
 
 const ProfileAvatar = () => {
