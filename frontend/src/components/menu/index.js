@@ -1,6 +1,8 @@
 import React from 'react'
 import {NavLink} from "react-router-dom";
 import MenuToggle from "../buttons/menu-toggle";
+import baseURL from "../common/config.js";
+
 
 const userDataStr=localStorage.getItem('userData');
 console.log(userDataStr);
@@ -10,6 +12,8 @@ if(userDataStr)
     userData=JSON.parse(userDataStr);
     console.log(userData.username);
 }
+
+
 
 const Menu = () => {
     const [opened, setOpened] = React.useState(true)
@@ -58,7 +62,7 @@ const Menu = () => {
                      style={{minWidth: '375px'}}>
                     <div className='flex bg-secondary justify-center text-center ml-6 mr-2 mt-1'
                          style={{borderRadius: '50%', width: '100px', height: '64px'}}>
-                        RS
+                        <img src={baseURL+userData.avatar.url}/>
                     </div>
                     <div className='flex justify-center pr-2 bg-secondary w-full bottom-right-rounded mb-2 mr-2'>
                         <ul className='mr-10'>

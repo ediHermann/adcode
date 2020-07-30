@@ -5,7 +5,7 @@ import httpAgent from "../../components/common/init";
 
 const JsonTable = require('ts-react-json-table')
 
-var items = [];
+let items = [];
 
 const columns = [
     {key: 'uid', label: 'UID'},

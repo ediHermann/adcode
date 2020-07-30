@@ -7,7 +7,6 @@ import validationSchema from './validation'
 import RadioGroup from "./../buttons/radioGroup";
 import httpAgent from "./../common/init";
 
-
 const Talent_types = [
     { id: "1", name: "Voce" },
     { id: "2", name: "Fata" },
@@ -24,7 +23,6 @@ const Broadcast_types = [
 
 
 const RegisterForm = () => {
-
 
     const initialValues = {
         name: '',
