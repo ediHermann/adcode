@@ -6,31 +6,43 @@ import GlobalError from "../components/register/global-error";
 import RegisterForm from "../components/register/register-form";
 import cn from "classnames";
 import ProfileAvatar from "../components/profile/avatar";
+import AutocompleteAsync from "../components/autocomplete/autocomplete-async";
 
 let data = [];
-const payload = "query={userProfile}";
+
 const Profile = () =>{
 
 
     const inputStyle = cond => cn(
         "w-full rounded p-2 ", {
             "border-2 border-error": cond,
-            'border-2 border-secondary mb-2': !cond
+            'border-gray-800 border rounded  border-secondary mb-1': !cond
         });
 
 
     const onSubmit = async (values, {setSubmitting, resetForm}) => {
-        console.log(values);
+
         //return;
         setSubmitting(true);
         try {
-            console.log('Fetching...');
-            const outcome = await  httpAgent('update{rofile', values);
-            console.log(outcome);
-            if (!outcome.success) setGlobalError(outcome.error.message);
+             console.log(values.avatar);
+             //return;
+            //console.log(ProfileAvatar);
+
+            let strValues=JSON.stringify(values);
+            const unquoted = strValues.replace(/"([^"]+)":/g, '$1:');
+            const payload1 = `query=mutation{updateProfile(data:${unquoted})}`;
+
+            //const payload1 = `query=mutation{updateProfile(data:{username:\"Studio 1\",email:\"new@gmail.ro\"})}`;
+            console.log(payload1);
+            const outcome = await  httpAgent(payload1);
+            if (outcome.status==200) {
+                alert('Datele au fost salvate')
+                console.log(outcome);
+            }
             else {
-                resetForm();
-                alert('Message sent successfully.')
+                alert('Eroare- Datele nu au fost salvate')
+                console.log(outcome);
             }
         } catch (err) {
             console.log(err);
@@ -44,21 +56,24 @@ const Profile = () =>{
     let initialValues = {
         username: '',
         email: '',
-        address: ''
+        avatar:''
     };
     const [data, setData] = React.useState({});
     const [globalError, setGlobalError] = React.useState('');
 
     const retrieveData = async () => {
+        const payload = "query={userProfile}";
         const response = await httpAgent(payload);
         if (response.status === 200) {
             const json = await response.json();
-            console.log(json);
+            //console.log(json);
             let _data;
             if(json.data.userProfile)
                 _data = json.data.userProfile.payload;
-            console.log(_data);
-            setData(_data)
+           // console.log(_data);
+            const formData={username:_data.username, email:_data.email,avatar:_data.avatar,phone:_data.phone,address:_data.address,contact_name:_data.contact_name};
+            setData(formData);
+           // console.log(formData);
         } else {
             //Display the error
             console.log(response);
@@ -66,13 +81,16 @@ const Profile = () =>{
 
     }
     React.useEffect(() => {
-        retrieveData()
-    }, [])
+        retrieveData();
+         }, [])
 
-return (<div className='absolute w-full h-full'>
+return (<div className='max-w-screen-sm h-full self-center m-auto'>
         <div className='flex justify-center uppercase mt-40 text-2xl md:text-5xl font-bold '>Profilul meu</div>
-        <Formik initialValues={data}
-        onSubmit={onSubmit}
+        <Formik
+            enableReinitialize={true}
+            initialValues={data}
+            onSubmit={onSubmit}
+
     >
     {
         ({
@@ -80,16 +98,23 @@ return (<div className='absolute w-full h-full'>
              errors,
              touched,
              handleSubmit,
-             isSubmitting
+             isSubmitting,
+             setFieldValue
          }) =>
             <Form onSubmit={handleSubmit}>
                 <GlobalError message={globalError}/>
-                <ProfileAvatar/>
+                <ProfileAvatar
+                    pic={'data:image/png;base64,'+data.avatar}
+                    name={'avatar'}
+                    setFValue={setFieldValue}
+
+                />
                 <label className='text-text text-sm'>Nume</label>
                 <Field
                     type="text"
                     name="username"
                     placeholder="Numele"
+                    readonly
                     className={inputStyle(errors.name && touched.name)}/>
                 <ErrorMessage
                     name="username"
@@ -97,11 +122,41 @@ return (<div className='absolute w-full h-full'>
                     className="text-sm text-error italic"/>
                 <Field
                     type="text"
+                    name="contact_name"
+                    placeholder="Persoana de contact"
+                    className={inputStyle(errors.contact_name && touched.contact_name)}/>
+                <ErrorMessage
+                    name="contact_name"
+                    component="div"
+                    className="text-sm text-error italic"/>
+
+                    <Field
+                    type="text"
                     name="email"
                     placeholder="Email"
                     className={inputStyle(errors.email && touched.email)}/>
                 <ErrorMessage
                     name="email"
+                    component="div"
+                    className="text-sm text-error italic"/>
+                <Field
+                    type="text"
+                    name="phone"
+                    placeholder="Telefon"
+                    className={inputStyle(errors.phone && touched.phone)}/>
+                <ErrorMessage
+                    name="phone"
+                    component="div"
+                    className="text-sm text-error italic"/>
+
+                <Field
+                    type="text"
+                    as="textarea"
+                    name="address"
+                    placeholder="Adresa"
+                    className={inputStyle(errors.address && touched.address)}/>
+                <ErrorMessage
+                    name="address"
                     component="div"
                     className="text-sm text-error italic"/>
 
