@@ -1,4 +1,5 @@
-	spot:
+	spot-broadcasts:
+	[
 	{
 		uid:"AB2144",
 		name:"Promotia vara 2020,
@@ -66,5 +67,4 @@
 				
 				
 			]
-	
-}
+	}]
