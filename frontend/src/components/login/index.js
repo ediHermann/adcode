@@ -33,8 +33,15 @@ const LoginForm = () => {
         if (resp.status === 400)
             alert('Login fail');
         else {
-            // const outcome=await resp.json();
-            const outcome = resp
+            let outcome;
+            try {
+                 outcome=await resp.json();
+            }
+            catch(e)
+            {
+                 outcome = resp;
+            }
+
             const token=outcome.jwt;
             const userData=outcome.user;
             console.log(token);
