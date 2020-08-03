@@ -4,24 +4,24 @@ import React from 'react'
 const JsonTable = require('ts-react-json-table')
 
 
-const columns = [
-    {key: 'uid', label: 'UID'},
-    {key: 'title', label: 'Titlu'},
-    {key: 'studio_name', label: 'Studio name'},
-    {key: 'duration', label: 'Durata'},
-    {key: 'created_at', label: 'Data'},
-    {key: 'observation', label: 'Observatii'},
-];
+
 
 const MySpots = ({row = false, cell = false, sort = false}) => {
     const [item, setItem] = React.useState('')
 
     const items = [
         {uid: 'Louise', title: 'cartofi', studio_name: 'red', duration: 4, created_at: 2022020, observation: 'ceva'},
-        {uid: 'Margaret', title: 'morcovi', studio_name: 'blue', duration: 4, created_at: 2022020, observation: 'ceva'},
-        {uid: 'Lisa', title: 'rosii', studio_name: 'yellow', duration: 4, created_at: 2022020, observation: 'ceva'}
+        {uid: 'Margaret', title: 'morcovi', studio_name: 'blue', duration: 4, created_at: 2022020, observation: 'altceva'},
+        {uid: 'Lisa', title: 'rosii', studio_name: 'yellow', duration: 4, created_at: 2022020, observation: 'totceva'}
     ]
-
+    const columns = [
+        {key: 'uid', label: 'UID'},
+        {key: 'title', label: 'Titlu'},
+        {key: 'studio_name', label: 'Studio name'},
+        {key: 'duration', label: 'Durata'},
+        {key: 'created_at', label: 'Data'},
+        {key: 'observation', label: 'Observatii'},
+    ];
         //nu merge sortarea in ambele directii
         if (item.sort) {
             items.sort(function (a, b) {

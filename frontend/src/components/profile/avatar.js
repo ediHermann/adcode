@@ -1,13 +1,13 @@
 import React from 'react'
 import AvatarEditor from "react-avatar-editor";
-import PropTypes from "prop-types";
+
 
 
 const ProfileAvatar = () => {
 
     const [img, setImg] = React.useState({
         image: 'imgs/avatar.png',
-        allowzoomout: false,
+        allowZoomOut: false,
         position: {x: 0.5, y: 0.5},
         scale: 1,
         rotate: 0,
@@ -48,7 +48,5 @@ const ProfileAvatar = () => {
     </div>
 }
 
-ProfileAvatar.propTypes ={
-    allowzoomout: PropTypes.bool
-}
+
 export default ProfileAvatar
