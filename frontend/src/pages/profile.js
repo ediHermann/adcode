@@ -1,16 +1,14 @@
-import React, {Component} from "react";
+import React from "react";
 import httpAgent from "../components/common/init";
 import PropTypes from 'prop-types'
 import {ErrorMessage, Field, Form, Formik,FieldArray} from 'formik'
 import GlobalError from "../components/register/global-error";
-import RegisterForm from "../components/register/register-form";
 import cn from "classnames";
 import ProfileAvatar from "../components/profile/avatar";
-import AutocompleteAsync from "../components/autocomplete/autocomplete-async";
 
-let data = [];
 
-const Profile = () =>{
+
+const Profile = () => {
 
 
     const inputStyle = cond => cn(
@@ -20,7 +18,7 @@ const Profile = () =>{
         });
 
 
-    const onSubmit = async (values, {setSubmitting, resetForm}) => {
+    const onSubmit = async (values, {setSubmitting}) => {
 
         //return;
         setSubmitting(true);
@@ -53,11 +51,6 @@ const Profile = () =>{
 
     };
 
-    let initialValues = {
-        username: '',
-        email: '',
-        avatar:''
-    };
     const [data, setData] = React.useState({});
     const [globalError, setGlobalError] = React.useState('');
 
@@ -84,7 +77,8 @@ const Profile = () =>{
         retrieveData();
          }, [])
 
-return (<div className='max-w-screen-sm h-full self-center m-auto'>
+return (
+    <div className='max-w-screen-sm h-full self-center m-auto'>
         <div className='flex justify-center uppercase mt-40 text-2xl md:text-5xl font-bold '>Profilul meu</div>
         <Formik
             enableReinitialize={true}
@@ -94,7 +88,6 @@ return (<div className='max-w-screen-sm h-full self-center m-auto'>
     >
     {
         ({
-             values,
              errors,
              touched,
              handleSubmit,
@@ -170,8 +163,9 @@ return (<div className='max-w-screen-sm h-full self-center m-auto'>
 
     }
         </Formik>
-      </div>);
-};
+      </div>
+)
+}
 
 Profile.propTypes = {
     username: PropTypes.string,

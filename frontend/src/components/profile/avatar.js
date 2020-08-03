@@ -31,7 +31,7 @@ const ProfileAvatar = ({pic,name,setFValue}) => {
     }
     const handleScale = e => {
         const scale = parseFloat(e.target.value)
-        setImg({...img, scale});
+        setImg({...img, scale})
         const canvas=document.getElementsByTagName("canvas")[0];
         let imgData=canvas.toDataURL();
         imgData=imgData.replace('data:image/png;base64,','');

@@ -96,7 +96,7 @@ const RegisterForm = () => {
                     <RadioGroup labels={FORM_TYPES} selected={formType} setSelected={setFormType}/>
                     {formType === 0
                         ? <>
-                            <label className='text-text text-sm'>Nume</label>
+                            <label className='text-sm'>Nume</label>
                             <Field
                                 type="text"
                                 name="username"
@@ -107,19 +107,19 @@ const RegisterForm = () => {
                                 component="div"
                                 className="text-sm text-error italic"/>
 
-                            {/*<label className='text-text text-sm'>CNP</label>*/}
-                            {/*<Field*/}
-                            {/*    type="text"*/}
-                            {/*    name="cnp"*/}
-                            {/*    placeholder="CNP"*/}
-                            {/*    className={inputStyle(errors.cnp && touched.cnp)}/>*/}
-                            {/*<ErrorMessage*/}
-                            {/*    name="cnp"*/}
-                            {/*    component="div"*/}
-                            {/*    className="text-sm text-error italic"/>*/}
+                            <label className=' text-sm'>CNP</label>
+                            <Field
+                                type="text"
+                                name="cnp"
+                                placeholder="CNP"
+                                className={inputStyle(errors.cnp && touched.cnp)}/>
+                            <ErrorMessage
+                                name="cnp"
+                                component="div"
+                                className="text-sm text-error italic"/>
                         </>
                         : <>
-                            <label className='text-text text-sm'>Numele Companiei</label>
+                            <label className='text-sm'>Numele Companiei</label>
                             <Field
                                 type="text"
                                 name="companyName"
@@ -130,18 +130,18 @@ const RegisterForm = () => {
                                 component="div"
                                 className="text-sm text-error italic"/>
 
-                            {/*<label className='text-text text-sm'>CUI</label>*/}
-                            {/*<Field*/}
-                            {/*    type="text"*/}
-                            {/*    name="cui"*/}
-                            {/*    placeholder="CUI"*/}
-                            {/*    className={inputStyle(errors.cui && touched.cui)}/>*/}
-                            {/*<ErrorMessage*/}
-                            {/*    name="cui"*/}
-                            {/*    component="div"*/}
-                            {/*    className="text-sm text-error italic"/>*/}
+                            <label className='text-sm'>CUI</label>
+                            <Field
+                                type="text"
+                                name="cui"
+                                placeholder="CUI"
+                                className={inputStyle(errors.cui && touched.cui)}/>
+                            <ErrorMessage
+                                name="cui"
+                                component="div"
+                                className="text-sm text-error italic"/>
 
-                            <label className='text-text text-sm'>Persoana de Contact</label>
+                            <label className='text-sm'>Persoana de Contact</label>
                             <Field
                                 type="text"
                                 name="contact_name"
@@ -153,9 +153,10 @@ const RegisterForm = () => {
                                 className=" text-sm text-error italic"/>
                         </>
                     }
-                    <label className='text-text text-sm'>Adresa</label>
+                    <label className='text-sm'>Adresa</label>
                     <Field
                         type="text"
+                        as='textarea'
                         name="address"
                         placeholder="Adresa"
                         className={inputStyle(errors.address && touched.address)}/>
@@ -163,7 +164,7 @@ const RegisterForm = () => {
                         name="address"
                         component="div"
                         className=" text-sm text-error italic"/>
-                    <label className='text-text text-sm'>Telefon</label>
+                    <label className='text-sm'>Telefon</label>
                     <Field
                         type="text"
                         name="phone"
@@ -173,7 +174,7 @@ const RegisterForm = () => {
                         name="phone"
                         component="div"
                         className="text-sm text-error italic"/>
-                    <label className='text-text text-sm'>Email</label>
+                    <label className=' text-sm'>Email</label>
                     <Field
                         type="text"
                         name="email"
@@ -187,7 +188,7 @@ const RegisterForm = () => {
 
 
 
-                    <label className='text-text text-sm'>Parola</label>
+                    <label className='text-sm'>Parola</label>
                     <Field
                         type="password"
                         name="password"
@@ -197,7 +198,7 @@ const RegisterForm = () => {
                         name="password"
                         component="div"
                         className="text-sm text-error italic"/>
-                    <label className='text-text text-sm'>Confirmare Parola</label>
+                    <label className='text-sm'>Confirmare Parola</label>
                     <Field
                         type="password"
                         name="confirmPassword"
@@ -209,14 +210,14 @@ const RegisterForm = () => {
                         className="text-sm text-error italic"/>
 
 
-                    <label className='text-text text-sm'>Tipul talentului</label><br/>
+                    <label className='text-sm uppercase'>Tipul talentului</label><br/>
                     <FieldArray
                         name="talent_types"
                         render={arrayHelpers => (
                             <div>
                                 {Talent_types.map(category => (
                                     <div key={category.id}>
-                                        <label className='text-text text-sm'>
+                                        <label className='text-sm uppercase'>
                                             <input
                                                 name="categoryIds"
                                                 type="checkbox"
@@ -240,16 +241,16 @@ const RegisterForm = () => {
 
 
 
-                    <label className='text-text text-sm'>Canale difuzare</label><br/>
+                    <label className='text-sm uppercase'>Canale difuzare</label><br/>
                     <FieldArray
                         name="broadcast_types"
                         render={arrayHelpers => (
                             <div>
                                 {Broadcast_types.map(category => (
                                     <div key={category.id}>
-                                        <label className='text-text text-sm'>
+                                        <label className='text-sm uppercase'>
                                             <input
-                                                name="categoryIds"
+                                                name="categoryID"
                                                 type="checkbox"
                                                 value={category.id}
                                                 checked={values.broadcast_types.find(o => o.id === category.id)}                                            onChange={e => {
@@ -270,12 +271,8 @@ const RegisterForm = () => {
                     />
 
 
-
-
-
-
                     <div>
-                        <button className='absolute bg-primary px-16 py-4 mt-20 rounded-md text-text'
+                        <button className='absolute bg-primary px-16 py-4 mt-20 mb-20 rounded-md text-text'
                                 style={{left: '50%', marginLeft: '-90px'}}
                                 type='submit' disabled={isSubmitting}>Submit
                         </button>

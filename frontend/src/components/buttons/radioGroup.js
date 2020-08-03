@@ -3,7 +3,7 @@ import React from 'react'
 const dash = st => st.replace(/\s/g, '-').toLowerCase();
 
 const RadioGroup = ({labels, setSelected, selected}) =>
-    <ul className='flex text-text '>
+    <ul className='flex'>
         {labels.map(
             (label, idx) =>
                 <li key={label}>
