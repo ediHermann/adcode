@@ -8,7 +8,8 @@ import SpotList from "./pages/spot/spot_list"
 import Home from "./pages/home"
 import Login from "./pages/login"
 import Settings from "./pages/settings"
-import Profile from "./pages/profile"
+import Profile from "./pages/profile/profile"
+import EditAvatar from "./pages/profile/edit_avatar"
 import RegisterTalent from "./pages/registerTalent"
 import RegisterStudio from "./pages/registerStudio"
 import RegisterBroadcaster from "./pages/registerEmitator"
@@ -35,6 +36,7 @@ class Main extends Component {
                             <Route path="/spot_list" render={() => <SpotList/>}/>
                             <Route path="/settings" render={() => <Settings/>}/>
                             <Route path="/profile" render={() => <Profile/>}/>
+                            <Route path="/edit_avatar"  render={() => <EditAvatar/>}/>
                             <Route path="/other1" render={() => <Other/>}/>
                             <Route path="/other2" render={() => <Other2/>}/>
                             <Route path="/create_spot" render={() => <CreateSpot/>}/>
