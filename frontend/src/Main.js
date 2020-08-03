@@ -35,10 +35,6 @@ class Main extends Component {
                             <Route path="/spot_list" render={() => <SpotList/>}/>
                             <Route path="/settings" render={() => <Settings/>}/>
                             <Route path="/profile" render={() => <Profile/>}/>
-                            <Route path="/cont_talent" render={() => <RegisterForm/>}/>
-                            <Route path="/cont_producator" render={() => <RegisterStudio/>}/>
-                            <Route path="/cont_emitator" render={() => <RegisterBroadcaster/>}/>
-                            <Route path="/cont_arbitru" render={() => <RegisterArbiter/>}/>
                             <Route path="/other1" render={() => <Other/>}/>
                             <Route path="/other2" render={() => <Other2/>}/>
                             <Route path="/create_spot" render={() => <CreateSpot/>}/>
@@ -53,9 +49,6 @@ class Main extends Component {
                     <div className="content">
                         <Route path='/' render={() => <Login/>}/>
                         <Route path="/home" render={() => <Home/>}/>
-                        <Route path="/spot_list" render={() => <SpotList/>}/>
-                        <Route path="/settings" render={() => <Settings/>}/>
-                        <Route path="/profile" render={() => <Profile/>}/>
                         <Route path="/cont_talent" render={() => <RegisterTalent/>}/>
                         <Route path="/cont_producator" render={() => <RegisterStudio/>}/>
                         <Route path="/cont_emitator" render={() => <RegisterBroadcaster/>}/>

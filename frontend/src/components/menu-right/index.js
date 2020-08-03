@@ -38,12 +38,14 @@ const RightMenu = () => {
                              className='item-link hover:border-primary'>Cont Emitator</NavLink>
                     <NavLink to={'/cont_arbitru'}
                              className='item-link hover:border-primary'>Cont Arbitru</NavLink>
+                    <NavLink to={'/login'}
+                             className='item-link hover:border-primary mt-10'>Login</NavLink>
                 </div>
 
                 <div className='relative h-full'>
                     <div className='absolute px-2 mb-4'
                          style={{
-                             bottom: '250px'
+                             bottom: '350px'
                          }}>
                         <div className='mb-2'>
                             <label>CONTACT</label>

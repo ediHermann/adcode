@@ -1,10 +1,10 @@
-import React, {Component} from "react"
+import React from "react"
 import EditButton from "../../components/svg/Edit"
 import AddButton from "../../components/svg/AddButton"
 import httpAgent from "../../components/common/init"
 
-const JsonTable = require('ts-react-json-table')
 
+const JsonTable = require('ts-react-json-table')
 
 
 const columns = [
@@ -28,14 +28,15 @@ const payload = 'query={userSpots}';
 
 const SpotList = () => {
     const [items, setItems] = React.useState([])
+
     const retrieveData = async () => {
-        const response = await httpAgent(payload);
+        const response = await httpAgent(payload)
         if (response.status === 200) {
-            const json = await response.json();
-            console.log(json);
-            const _items = json.data.userSpots;
-            console.log("items");
-            console.log(_items);
+            const json = await response.json()
+            console.log(json)
+            const _items = json.data.userSpots
+            console.log("items")
+            console.log(_items)
             setItems(_items)
         } else {
             //Display the error
