@@ -34,9 +34,9 @@ const Menu = () => {
                 <NavLink to='/spot_list'
                          className='rounded-lg border-2 border-gray-600 hover:border-primary uppercase py-2 pl-4 pr-10 text-text mb-2'
                 >SPOTURILE MELE</NavLink>
-                <NavLink to='/settings'
+                <NavLink to='/my_spots'
                          className='rounded-lg border-2 border-gray-600 hover:border-primary uppercase py-2 pl-4 pr-10 text-text mb-2'
-                >Setari</NavLink>
+                >My Spots</NavLink>
                 <NavLink to='/profile'
                          className='rounded-lg border-2 border-gray-600 hover:border-primary uppercase py-2 pl-4 pr-10 text-text mb-2'
                 >Profil</NavLink>

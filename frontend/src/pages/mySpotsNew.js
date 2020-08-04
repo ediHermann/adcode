@@ -3,9 +3,9 @@ import MySpots from "../components/mySpots";
 
 
 
-const Settings = () => <div>
+const MySpotsNew = () => <div>
 
     Settings
     <MySpots/>
 </div>
-export default Settings
+export default MySpotsNew
