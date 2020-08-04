@@ -44,7 +44,6 @@ const AutocompleteAsync = ({httpGetter, SuggestionComp, displaySuggestion, name,
                          onSuggestionsClearRequested={onSuggestionsClearRequested}
                          onSuggestionSelected={(_, {suggestionValue}) => {
                              setFValue(name, suggestionValue)
-                             alert(suggestionValue)
                          }
                          }
                          getSuggestionValue={displaySuggestion}

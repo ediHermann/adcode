@@ -5,3 +5,5 @@ const studio = [
     {name: 'yellow'},
     {name: 'green'}
 ]
+
+export default studio

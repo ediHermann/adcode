@@ -9,6 +9,7 @@ import DatePicker from 'react-datepicker'
 import {ro} from 'date-fns/locale'
 import "react-datepicker/dist/react-datepicker.css";
 import './../calendar/styles.css'
+import db from "../dbs/fake-db";
 
 
 const JsonTable = require('ts-react-json-table')
@@ -73,8 +74,9 @@ const Broadcast = () => {
                  setFieldValue
              }) =>
                 <Form onSubmit={handleSubmit}>
-                    <div className='mt-20'>
-                        <div className='block lg:flex justify-center '>
+                    <div className='mt-20 border-window rounded-lg p-4'
+                    style={{width: '1500px', marginLeft: '10%'}}>
+                        <div className='block lg:flex justify-center'>
                             <div className='mr-4'>
                                 <label htmlFor='talent'>Cauta un talent</label>
                                 <AutocompleteAsync
@@ -142,7 +144,7 @@ const Broadcast = () => {
                         </button>
                         <div className='block lg:flex justify-center '>
                             <div className='mt-40 '>
-                                <JsonTable rows={spot_broadcasts}/>
+                                <JsonTable rows={db}/>
                             </div>
                         </div>
                     </div>
