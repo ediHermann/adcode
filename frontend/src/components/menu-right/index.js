@@ -11,14 +11,14 @@ const RightMenu = () => {
     return <div className="fixed overflow-visible right-0 top-0 z-50"
                 style={{
                     width: '350px',
+                    transform: opened ? 'translateX(calc(44rem - 100%)' : 'translateX(0)',
+                    transition: 'transform .5s',
                     right: '0',
                     height: '100%'
                 }}>
         <div
             className="relative text-white"
             style={{
-                transform: opened ? 'translateX(calc(44rem - 100%)' : 'translateX(0)',
-                transition: 'transform .5s',
                 height: '100%',
                 borderLeft: '1px solid gray'
 
