@@ -97,5 +97,34 @@ body {
     padding:2px 5px;
 }
 
+.tab-controller {
 
+     margin-bottom: 20px;
+
+}
+
+.tabs li{
+    cursor:pointer;
+    background: #ffffff;
+    display: inline-block;
+    width:150px;
+    border:1px solid #aaaaaa;
+    text-align: center;
+}
+
+.tab-controller > :first-child
+{
+    border-radius: 10px 0 0 10px!important;
+}
+
+.tab-controller > :last-child
+{
+    border-radius: 0 10px 10px 0!important;
+}
+
+.tab-active{
+    cursor:pointer;
+    background: #ccc!important;
+
+}
 @tailwind utilities;

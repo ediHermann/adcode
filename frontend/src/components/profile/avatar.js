@@ -3,11 +3,11 @@ import AvatarEditor from "react-avatar-editor";
 import PropTypes from "prop-types";
 import loadImageFile from "react-avatar-editor/src/utils/load-image-file";
 
+let firstTime=true;
 const ProfileAvatar = ({pic,name,setFValue}) => {
-     console.log('pic1='+pic)
      const [img, setImg] = React.useState({
         className :'border rounded border-gray-800 my-4',
-        /*image: "../imgs/avatar.png",*/
+        image: pic,
         allowzoomout: false,
         position: {x: 0.5, y: 0.5},
         scale: 1,
@@ -15,26 +15,30 @@ const ProfileAvatar = ({pic,name,setFValue}) => {
         borderRadius: 1,
         border: 0,
         preview: null,
-        width: 200,
-        height: 200
+        width: 150,
+        height: 150
     })
 
     const ref = React.useRef();
 
 
-    const LoadImage = (img) => {
-            if(img.length>200) {
-            const canvas = document.getElementsByTagName("canvas")[0];
-            const ctx = canvas.getContext("2d");
-            const image = new Image();
-            image.onload = function () {
-                ctx.drawImage(image, 0, 0);
-            };
+
+    const LoadInitImage = (img) => {
+            if(img.length>200 && firstTime ) {
+
+                const canvas = document.getElementsByTagName("canvas")[0];
+                const ctx = canvas.getContext("2d");
+                const image = new Image();
+                image.onload = function () {
+                     ctx.drawImage(image, 0, 0);
+
+                 };
             image.src = img;
         }
     }
 
     const handleImageChange = e => {
+        firstTime=false;
         setImg({...img, image: e.target.files[0]});
         const canvas=document.getElementsByTagName("canvas")[0];
         let imgData=canvas.toDataURL();
@@ -42,10 +46,12 @@ const ProfileAvatar = ({pic,name,setFValue}) => {
         imgData=encodeURIComponent(imgData);
         setFValue(name, imgData);
 
+
     }
 
 
     const handleScale = e => {
+        firstTime=false;
         const scale = parseFloat(e.target.value)
         setImg({...img, scale})
         const canvas=document.getElementsByTagName("canvas")[0];
@@ -55,6 +61,7 @@ const ProfileAvatar = ({pic,name,setFValue}) => {
         setFValue(name, imgData);
     }
     const handlePositionChange = position => {
+        firstTime=false;
         setImg({...img, position});
         const canvas=document.getElementsByTagName("canvas")[0];
         let imgData=canvas.toDataURL();
@@ -67,7 +74,7 @@ const ProfileAvatar = ({pic,name,setFValue}) => {
         <AvatarEditor
             {...img}
             onPositionChange={handlePositionChange}
-            onLoadSuccess={LoadImage(pic)}
+            onImageReady={LoadInitImage(pic)}
 
 
         />

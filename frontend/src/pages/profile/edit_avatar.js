@@ -32,7 +32,7 @@ const EditAvatar = () => {
                 console.log(outcome);
             }
             else {
-                alert('Eroare- Imaginea nu a fost salvata')
+                alert('Eroare \n '+ outcome.statusText)
                 console.log(outcome);
             }
         } catch (err) {
@@ -45,36 +45,33 @@ const EditAvatar = () => {
     };
 
     const [data, setData] = React.useState({});
-
     const [globalError, setGlobalError] = React.useState('');
-
     const retrieveData = async () => {
-        const payload = "query={userProfile}";
-        const response = await httpAgent(payload);
-        if (response.status === 200) {
-            const json = await response.json();
-            //console.log(json);
-            let _data;
-            if(json.data.userProfile)
-                _data = json.data.userProfile.payload;
-           // console.log(_data);
-            const formData={avatar:_data.avatar};
-            setData(formData);
-           // console.log(formData);
-        } else {
-            //Display the error
-            console.log(response);
-        }
+            const payload = "query={userProfile}";
+            const response = await httpAgent(payload);
+            if (response.status === 200) {
+                const json = await response.json();
+                //console.log(json);
+                let _data;
+                if(json.data.userProfile)
+                    _data = json.data.userProfile.payload;
+               // console.log(_data);
+                const formData={avatar:_data.avatar};
+                setData(formData);
+               // console.log(formData);
+            } else {
+                //Display the error
+                console.log(response);
+            }
 
-    }
-    React.useEffect(() => {
-        retrieveData();
-         }, [])
+        }
+        React.useEffect(() => {
+            retrieveData();
+             }, [])
 
 return (
     <div className='max-w-screen-sm h-full self-center m-auto'>
-        <div className='flex justify-center uppercase mt-40 text-2xl md:text-5xl font-bold '>Editare Avatar</div>
-        <Formik
+         <Formik
             enableReinitialize={true}
             initialValues={data}
             onSubmit={onSubmit}
@@ -100,7 +97,7 @@ return (
                 <div>
                     <button className='absolute bg-primary px-16 py-4 mt-20 rounded-md text-text'
                             style={{left: '50%', marginLeft: '-90px'}}
-                            type='submit' disabled={isSubmitting}>Submit
+                            type='submit' disabled={isSubmitting}>Salveaza
                     </button>
                 </div>
             </Form>

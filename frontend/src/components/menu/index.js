@@ -10,7 +10,6 @@ let userData;
 
 if(userDataStr)
 {
-    console.log(userDataStr);
     userData=JSON.parse(userDataStr);
     console.log(userData.username);
 }

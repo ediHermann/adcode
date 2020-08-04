@@ -7,7 +7,6 @@ import {
 import SpotList from "./pages/spot/spot_list"
 import Home from "./pages/home"
 import Login from "./pages/login"
-import Settings from "./pages/settings"
 import Profile from "./pages/profile/profile"
 import EditAvatar from "./pages/profile/edit_avatar"
 import RegisterTalent from "./pages/registerTalent"
@@ -16,7 +15,6 @@ import RegisterBroadcaster from "./pages/registerEmitator"
 import RegisterArbiter from "./pages/registerArbiter"
 import Layout from "./components/layout"
 import RegisterForm from "./components/register/register-form"
-import Other from "./pages/other"
 import LogOut from "./pages/logout"
 import CreateSpot from "./pages/spot/create_spot"
 import Other2 from "./pages/other2"
@@ -34,8 +32,7 @@ class Main extends Component {
                         <div className="content">
                             <Route path="/home" render={() => <Home/>}/>
                             <Route path="/spot_list" render={() => <SpotList/>}/>
-                            <Route path="/settings" render={() => <Settings/>}/>
-                            <Route path="/profile" render={() => <Profile/>}/>
+                             <Route path="/profile" render={() => <Profile/>}/>
                             <Route path="/edit_avatar"  render={() => <EditAvatar/>}/>
                             <Route path="/other1" render={() => <Other/>}/>
                             <Route path="/other2" render={() => <Other2/>}/>
