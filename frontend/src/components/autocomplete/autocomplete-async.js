@@ -1,4 +1,4 @@
-import React, { useState} from 'react'
+import React, {useState} from 'react'
 import AutoSuggest from "react-autosuggest"
 
 
@@ -7,7 +7,7 @@ import SearchInput from "../mixt/SearchInput"
 import './styles.css'
 
 
-    const AutocompleteAsync = ({httpGetter, SuggestionComp, displaySuggestion, name, setFValue}) => {
+const AutocompleteAsync = ({httpGetter, SuggestionComp, displaySuggestion, name, setFValue}) => {
     const [value, setValue] = useState("")
     const [suggestions, setSuggestions] = useState([])
     const [isLoading, setIsLoading] = useState(false)
@@ -40,29 +40,25 @@ import './styles.css'
         <div>
             <AutoSuggest suggestions={suggestions || []}
 
-                onSuggestionsFetchRequested={onSuggestionsFetchRequested}
-                onSuggestionsClearRequested={onSuggestionsClearRequested}
-                onSuggestionSelected={(_, {suggestionValue}) =>
-                    {
-                        setFValue(name, suggestionValue)
-                    }
-                }
-                getSuggestionValue={displaySuggestion}
-                renderSuggestion={suggestion => <SuggestionComp suggestion={suggestion}/>}
-                renderInputComponent={renderInputComponent}
-                inputProps={{
-                    placeholder: "Search",
-                    value: value,
-                    name:name,
-                    onChange: (_, {newValue}) => {
-                        setValue(newValue);
-                    },
-                    onBlur:() => {
-                        console.log('fgbdfgdf' + value)
-                    }
-
-                }}
-                highlightFirstSuggestion={true}
+                         onSuggestionsFetchRequested={onSuggestionsFetchRequested}
+                         onSuggestionsClearRequested={onSuggestionsClearRequested}
+                         onSuggestionSelected={(_, {suggestionValue}) => {
+                             setFValue(name, suggestionValue)
+                             alert(suggestionValue)
+                         }
+                         }
+                         getSuggestionValue={displaySuggestion}
+                         renderSuggestion={suggestion => <SuggestionComp suggestion={suggestion}/>}
+                         renderInputComponent={renderInputComponent}
+                         inputProps={{
+                             placeholder: "Search",
+                             value: value,
+                             name: name,
+                             onChange: (_, {newValue}) => {
+                                 setValue(newValue);
+                             }
+                         }}
+                         highlightFirstSuggestion={true}
             />
         </div>
     )
