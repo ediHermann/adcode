@@ -83,12 +83,12 @@
     height: 24px;
 }
 
-@media only screen and (max-width: 600px){
-    .react-autosuggest__input {
-        width: 140px;
-    }
-    .react-autosuggest__container {
-        margin-right: 0;
-        margin-left: 5px;
-    }
-}
+/*@media only screen and (max-width: 600px){*/
+/*    .react-autosuggest__input {*/
+/*        width: 140px;*/
+/*    }*/
+/*    .react-autosuggest__container {*/
+/*        margin-right: 0;*/
+/*        margin-left: 5px;*/
+/*    }*/
+/*}*/

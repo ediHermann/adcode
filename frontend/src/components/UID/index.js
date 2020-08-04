@@ -42,16 +42,16 @@ const UidForm = () => {
         })
 
 
-    const SuggestionComp = ({suggestion}) => <span>{`${suggestion.talent}`}</span>
+    const SuggestionComp = ({suggestion}) => <span>{`${suggestion.name}`}</span>
     const displaySuggestion = item => {
-        return item.talent
+        return item.name
     }
     const httpGetter = value => new Promise(
         resolve => {
             setTimeout(() => {
                 resolve(
                     () => db.filter(
-                        item => item.talent
+                        item => item.name
                             .toLowerCase()
                             .includes(value.trim().toLowerCase())))
             }, 500)
@@ -229,3 +229,4 @@ UidForm.propTypes = {
 }
 
 export default UidForm
+

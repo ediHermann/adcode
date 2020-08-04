@@ -41,7 +41,7 @@ const Menu = () => {
                 >Profil</NavLink>
                 <NavLink to='/other1'
                          className='rounded-lg border-2 border-gray-600 hover:border-primary uppercase py-2 pl-4 pr-10 text-text mb-2'
-                >Other</NavLink>
+                >Broadcast</NavLink>
                 <NavLink to='/other2'
                          className='rounded-lg border-2 border-gray-600 hover:border-primary uppercase py-2 pl-4 pr-10 text-text mb-2'
                 >Other2</NavLink>
