@@ -21,7 +21,6 @@ const RightMenu = () => {
             style={{
                 height: '100%',
                 borderLeft: '1px solid gray'
-
             }}>
             <div className="relative px-4 py-4 h-full bg-secondary right-0 ">
                 <MenuToggle

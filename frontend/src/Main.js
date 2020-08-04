@@ -17,6 +17,9 @@ import Layout from "./components/layout"
 import LogOut from "./pages/logout"
 import CreateSpot from "./pages/spot/create_spot"
 import Other2 from "./pages/other2"
+import Broadcast from "./components/broadcast";
+import BroadcastTable from "./pages/broadcastTable";
+import MySpotsNew from "./pages/mySpotsNew";
 
 
 
@@ -31,10 +34,10 @@ class Main extends Component {
                         <div className="content">
                             <Route path="/home" render={() => <Home/>}/>
                             <Route path="/spot_list" render={() => <SpotList/>}/>
-                            <Route path="/settings" render={() => <Settings/>}/>
+                            <Route path="/my_spots" render={() => <MySpotsNew/>}/>
                             <Route path="/profile" render={() => <Profile/>}/>
                             <Route path="/edit_avatar"  render={() => <EditAvatar/>}/>
-                            <Route path="/other1" render={() => <Other/>}/>
+                            <Route path="/other1" render={() => <BroadcastTable/>}/>
                             <Route path="/other2" render={() => <Other2/>}/>
                             <Route path="/create_spot" render={() => <CreateSpot/>}/>
                             <Route path="/logout"  render={() => <LogOut/>}/>
