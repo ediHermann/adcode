@@ -17,7 +17,6 @@ import Layout from "./components/layout"
 import LogOut from "./pages/logout"
 import CreateSpot from "./pages/spot/create_spot"
 import Other2 from "./pages/other2"
-import Broadcast from "./components/broadcast";
 import BroadcastTable from "./pages/broadcastTable";
 import MySpotsNew from "./pages/mySpotsNew";
 
