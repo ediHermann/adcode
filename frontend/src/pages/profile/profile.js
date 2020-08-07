@@ -24,7 +24,7 @@ const Profile = () => {
 
 
     return (
-        <div className='max-w-screen-sm h-full self-center m-auto p-10'>
+        <div className='max-w-screen-sm h-full self-center m-auto px-10'>
             <div className='flex justify-center uppercase mt-40 text-2xl md:text-5xl font-bold '>Profilul meu</div>
 
             <Tabs
