@@ -13,7 +13,7 @@ const GlobalError = ({message, classCont, classErr, classClear}) => message
     : ''
 
 GlobalError.defaultProps = {
-    classCont: 'p-4 mb-2 h-max overflow-scroll',
+    classCont: 'p-4 mb-2 h-max rounded-md',
     classClear: 'bg-transparent border-transparent',
     classErr: 'bg-error text-white'
 }

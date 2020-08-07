@@ -36,6 +36,7 @@ const endpoints = {
         display: 'Login',
         method: 'post'
     },
+
     spotList: {
         url: '/graphql',
         display: 'UserSpots',

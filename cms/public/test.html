@@ -188,7 +188,7 @@
       //////////////////////////////////////////////////
 
       function UpdateProfile(tok, strdata) {
-        //var data = "query=mutation{updateProfile(data:" + strdata + ")}";
+        //Works fine
         var postdata = {
           query: `mutation {updateProfile(data: ${strdata})}`
         };
@@ -210,6 +210,30 @@
           }
         });
       }
+
+
+      function UpdatePassword(tok, strdata) {
+        //Change password
+        var postdata = {password:'111'}
+        $.ajax({
+          type: 'PUT',
+          headers: {
+            "Authorization": tok
+          },
+          data: postdata,
+          async: false,
+          url: baseurl + "users/1",
+          success: function (data) {
+            $("#api_resp").html(JSON.stringify(data));
+            $("#api_err").html('');
+          },
+          error: function (data) {
+            $("#api_err").html(JSON.stringify(data));
+            $("#api_resp").html('');
+          }
+        });
+      }
+
 
       function UploadAvatar(tok) {
         var fd = new FormData();

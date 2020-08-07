@@ -509,6 +509,7 @@ type Mutation {
   """Delete an existing user"""
   deleteUser(input: deleteUserInput): deleteUserPayload
   updateProfile(data: JSON): JSON!
+  changePwd(data: JSON): JSON!
   createUserSpot(data: JSON): JSON!
   updateUserSpot(uid: String, data: JSON): JSON!
   deleteUserSpot(uid: String): JSON!
@@ -557,6 +558,7 @@ type Query {
   usersConnection(sort: String, limit: Int, start: Int, where: JSON): UsersPermissionsUserConnection
   userProfile: JSON!
   searchUser(where: JSON): JSON!
+  checkPwd(data: JSON): JSON
   userSpots(where: JSON, limit: Int, offset: Int, sort: String): JSON!
   me: UsersPermissionsMe
 }

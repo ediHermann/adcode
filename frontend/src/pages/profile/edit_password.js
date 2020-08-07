@@ -6,7 +6,20 @@ import GlobalError from "../../components/register/global-error";
 import cn from "classnames";
 
 
+
 const EditPassword = () => {
+
+
+    const userDataStr=localStorage.getItem('userData');
+    let userData;
+
+    if(userDataStr)
+    {
+        userData=JSON.parse(userDataStr);
+
+    }
+
+
     const inputStyle = cond => cn(
         "w-full rounded p-2 ", {
             "border-2 border-error": cond,
@@ -15,30 +28,83 @@ const EditPassword = () => {
 
     const onSubmit = async (values, {setSubmitting}) => {
         setSubmitting(true);
-        try {
-            console.log(values.avatar);
-            //return;
-            //console.log(ProfileAvatar);
-
-            let strValues=JSON.stringify(values);
-            const unquoted = strValues.replace(/"([^"]+)":/g, '$1:');
-            const payload1 = `query=mutation{updateProfile(data:${unquoted})}`;
-
-            //const payload1 = `query=mutation{updateProfile(data:{username:\"Studio 1\",email:\"new@gmail.ro\"})}`;
-            console.log(payload1);
-            const outcome = await  httpAgent(payload1);
-            if (outcome.status==200) {
-                alert('Datele au fost salvate')
-                console.log(outcome);
-            }
-            else {
-                alert('Eroare- Datele nu au fost salvate')
-                console.log(outcome);
-            }
-        } catch (err) {
-            console.log(err);
-            setGlobalError(err.message);
+        setGlobalError('');
+        if (values.password != values.password_c) {
+            setGlobalError("Parolele nu coincid");
+            return;
         }
+        /**************************************************************************/
+        //STEP 1: Check old password
+        /**************************************************************************/
+        let pwdCheck=false;
+        let val = {chkPassword: values.password_o};
+        console.log(val);
+        let strValues = JSON.stringify(val);
+        let unquoted = strValues.replace(/"([^"]+)":/g, '$1:');
+        let payload1 = `query={checkPwd(data:${unquoted})}`;
+
+
+        console.log(payload1);
+        let result = await httpAgent(payload1);
+        console.log(result);
+        let resultData ;
+
+        if (result.status == 200)
+        {
+            try {
+                resultData = await result.json();
+            } catch (err) {
+                resultData = result;
+            }
+            console.log(resultData);
+            pwdCheck=resultData.data.checkPwd.success;
+            console.log(pwdCheck);
+            if(!pwdCheck)
+            {
+                setGlobalError(resultData.data.checkPwd.error.message);
+                return;
+            }
+
+        }
+        else
+        {
+            setGlobalError('Validare parola esuata');
+            return;
+        }
+
+        /**************************************************************************/
+        //STEP 2: Change  password
+        /**************************************************************************/
+        let pwdChanged=false;
+        strValues = JSON.stringify(values);
+        unquoted = strValues.replace(/"([^"]+)":/g, '$1:');
+        payload1 = `query=mutation{changePwd(data:${unquoted})}`;
+        result = await httpAgent(payload1);
+        console.log(result);
+        if (result.status == 200)
+        {
+            try {
+                resultData = await result.json();
+            } catch (err) {
+                resultData = result;
+            }
+            console.log(resultData.data.changePwd);
+           // console.log(resultData);
+            pwdChanged=resultData.data.changePwd.success;
+            if(!pwdChanged)
+            {
+                setGlobalError(resultData.data.changePwd.error.message);
+                return;
+            }
+
+        }
+        else
+        {
+            setGlobalError('Modificarea parolei a esuat');
+            return;
+        }
+        alert('Parola a fost modificata.')
+
         setSubmitting(false)
         return false;
 
@@ -46,34 +112,12 @@ const EditPassword = () => {
 
     const [data, setData] = React.useState({});
     const [globalError, setGlobalError] = React.useState('');
-    const retrieveData = async () => {
-        const payload = "query={userProfile}";
-        const response = await httpAgent(payload);
-        if (response.status === 200) {
-            const json = await response.json();
-            //console.log(json);
-            let _data;
-            if(json.data.userProfile)
-                _data = json.data.userProfile.payload;
-            // console.log(_data);
-            const formData={password:_data.password};
-            setData(formData);
-            // console.log(formData);
-        } else {
-            //Display the error
-            console.log(response);
-        }
-
-    }
-    React.useEffect(() => {
-        retrieveData();
-    }, [])
+    const initValues={password_o:'',password:'',password_c:''};
 
     return (
         <div className='max-w-screen-sm h-full self-center m-auto'>
                <Formik
-                enableReinitialize={true}
-                initialValues={data}
+                initialValues={initValues}
                 onSubmit={onSubmit}
             >
                 {
@@ -90,8 +134,8 @@ const EditPassword = () => {
                             <label className='text-sm font-semibold'>Parola curenta</label>
                             <Field
                                 type="password"
-                                name="password"
-                                placeholder="Introducei parola curenta"
+                                name="password_o"
+                                placeholder="Introduceti parola curenta"
                                 className={inputStyle(errors.password && touched.password)}/>
                             <ErrorMessage
                                 name="password"
@@ -102,8 +146,8 @@ const EditPassword = () => {
                             <label className='text-sm font-semibold'>Parola noua</label>
                             <Field
                                 type="password"
-                                name="new_password"
-                                placeholder="Parola noua"
+                                name="password"
+                                placeholder="Introduceti parola noua"
                                 className={inputStyle(errors.password && touched.password)}/>
                             <ErrorMessage
                                 name="password"
@@ -113,11 +157,11 @@ const EditPassword = () => {
 
                             <Field
                                 type="password"
-                                name="confirmPassword"
-                                placeholder="Confirmare parola"
+                                name="password_c"
+                                placeholder="Confirmare parola noua"
                                 className={inputStyle(errors.confirmPassword && touched.confirmPassword)}/>
                             <ErrorMessage
-                                name="confirmPassword"
+                                name="password_c"
                                 component="div"
                                 className="text-sm text-error italic"/>
 
