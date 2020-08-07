@@ -16,8 +16,6 @@ const EditProfile = () => {
         });
 
     const onSubmit = async (values, {setSubmitting}) => {
-
-        //return;
         setSubmitting(true);
         try {
 
