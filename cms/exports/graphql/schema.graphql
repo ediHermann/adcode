@@ -336,7 +336,7 @@ input editSpotInput {
   status: ENUM_SPOT_STATUS
   user: ID
   deleted: Boolean
-  media_types: [ID]
+  media_type: ID
 }
 
 input editSpotTalentInput {
@@ -466,7 +466,7 @@ input MadiaTypeInput {
   type_name: String
 }
 
-union Morph = UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsLoginPayload | ForgotPassword | BroadcastTable | BroadcastTableConnection | BroadcastTableAggregator | BroadcastTableGroupBy | BroadcastTableConnectionId | BroadcastTableConnectionCreated_at | BroadcastTableConnectionUpdated_at | BroadcastTableConnectionDate | BroadcastTableConnectionTime | BroadcastTableConnectionDeleted | BroadcastTableConnectionSpot_broadcast | createBroadcastTablePayload | updateBroadcastTablePayload | deleteBroadcastTablePayload | BroadcastType | BroadcastTypeConnection | BroadcastTypeAggregator | BroadcastTypeGroupBy | BroadcastTypeConnectionId | BroadcastTypeConnectionCreated_at | BroadcastTypeConnectionUpdated_at | BroadcastTypeConnectionType_name | createBroadcastTypePayload | updateBroadcastTypePayload | deleteBroadcastTypePayload | MadiaType | MadiaTypeConnection | MadiaTypeAggregator | MadiaTypeGroupBy | MadiaTypeConnectionId | MadiaTypeConnectionCreated_at | MadiaTypeConnectionUpdated_at | MadiaTypeConnectionType_name | createMadiaTypePayload | updateMadiaTypePayload | deleteMadiaTypePayload | SpotBroadcast | SpotBroadcastConnection | SpotBroadcastAggregator | SpotBroadcastAggregatorSum | SpotBroadcastAggregatorAvg | SpotBroadcastAggregatorMin | SpotBroadcastAggregatorMax | SpotBroadcastGroupBy | SpotBroadcastConnectionId | SpotBroadcastConnectionCreated_at | SpotBroadcastConnectionUpdated_at | SpotBroadcastConnectionBroadcast_duration | SpotBroadcastConnectionStart_date | SpotBroadcastConnectionSpot | SpotBroadcastConnectionDeleted | SpotBroadcastConnectionBroadcaster | createSpotBroadcastPayload | updateSpotBroadcastPayload | deleteSpotBroadcastPayload | SpotTalent | SpotTalentConnection | SpotTalentAggregator | SpotTalentGroupBy | SpotTalentConnectionId | SpotTalentConnectionCreated_at | SpotTalentConnectionUpdated_at | SpotTalentConnectionTalent_role | SpotTalentConnectionObs | SpotTalentConnectionTalent | SpotTalentConnectionSpot | SpotTalentConnectionDeleted | createSpotTalentPayload | updateSpotTalentPayload | deleteSpotTalentPayload | Spot | SpotConnection | SpotAggregator | SpotAggregatorSum | SpotAggregatorAvg | SpotAggregatorMin | SpotAggregatorMax | SpotGroupBy | SpotConnectionId | SpotConnectionCreated_at | SpotConnectionUpdated_at | SpotConnectionUid | SpotConnectionTitle | SpotConnectionClient | SpotConnectionDuration | SpotConnectionStatus | SpotConnectionUser | SpotConnectionDeleted | createSpotPayload | updateSpotPayload | deleteSpotPayload | TalentType | TalentTypeConnection | TalentTypeAggregator | TalentTypeGroupBy | TalentTypeConnectionId | TalentTypeConnectionCreated_at | TalentTypeConnectionUpdated_at | TalentTypeConnectionType_name | TalentTypeConnectionDeleted | createTalentTypePayload | updateTalentTypePayload | deleteTalentTypePayload | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileAggregatorSum | UploadFileAggregatorAvg | UploadFileAggregatorMin | UploadFileAggregatorMax | UploadFileGroupBy | UploadFileConnectionId | UploadFileConnectionCreated_at | UploadFileConnectionUpdated_at | UploadFileConnectionName | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionWidth | UploadFileConnectionHeight | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_metadata | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsUser | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionCreated_at | UsersPermissionsUserConnectionUpdated_at | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole | UsersPermissionsUserConnectionCui | UsersPermissionsUserConnectionAddress | UsersPermissionsUserConnectionPhone | UsersPermissionsUserConnectionContact_name | UsersPermissionsUserConnectionReferrer | UsersPermissionsUserConnectionAvatar | createUserPayload | updateUserPayload | deleteUserPayload
+union Morph = UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsLoginPayload | ForgotPassword | BroadcastTable | BroadcastTableConnection | BroadcastTableAggregator | BroadcastTableGroupBy | BroadcastTableConnectionId | BroadcastTableConnectionCreated_at | BroadcastTableConnectionUpdated_at | BroadcastTableConnectionDate | BroadcastTableConnectionTime | BroadcastTableConnectionDeleted | BroadcastTableConnectionSpot_broadcast | createBroadcastTablePayload | updateBroadcastTablePayload | deleteBroadcastTablePayload | BroadcastType | BroadcastTypeConnection | BroadcastTypeAggregator | BroadcastTypeGroupBy | BroadcastTypeConnectionId | BroadcastTypeConnectionCreated_at | BroadcastTypeConnectionUpdated_at | BroadcastTypeConnectionType_name | createBroadcastTypePayload | updateBroadcastTypePayload | deleteBroadcastTypePayload | MadiaType | MadiaTypeConnection | MadiaTypeAggregator | MadiaTypeGroupBy | MadiaTypeConnectionId | MadiaTypeConnectionCreated_at | MadiaTypeConnectionUpdated_at | MadiaTypeConnectionType_name | createMadiaTypePayload | updateMadiaTypePayload | deleteMadiaTypePayload | SpotBroadcast | SpotBroadcastConnection | SpotBroadcastAggregator | SpotBroadcastAggregatorSum | SpotBroadcastAggregatorAvg | SpotBroadcastAggregatorMin | SpotBroadcastAggregatorMax | SpotBroadcastGroupBy | SpotBroadcastConnectionId | SpotBroadcastConnectionCreated_at | SpotBroadcastConnectionUpdated_at | SpotBroadcastConnectionBroadcast_duration | SpotBroadcastConnectionStart_date | SpotBroadcastConnectionSpot | SpotBroadcastConnectionDeleted | SpotBroadcastConnectionBroadcaster | createSpotBroadcastPayload | updateSpotBroadcastPayload | deleteSpotBroadcastPayload | SpotTalent | SpotTalentConnection | SpotTalentAggregator | SpotTalentGroupBy | SpotTalentConnectionId | SpotTalentConnectionCreated_at | SpotTalentConnectionUpdated_at | SpotTalentConnectionTalent_role | SpotTalentConnectionObs | SpotTalentConnectionTalent | SpotTalentConnectionSpot | SpotTalentConnectionDeleted | createSpotTalentPayload | updateSpotTalentPayload | deleteSpotTalentPayload | Spot | SpotConnection | SpotAggregator | SpotAggregatorSum | SpotAggregatorAvg | SpotAggregatorMin | SpotAggregatorMax | SpotGroupBy | SpotConnectionId | SpotConnectionCreated_at | SpotConnectionUpdated_at | SpotConnectionUid | SpotConnectionTitle | SpotConnectionClient | SpotConnectionDuration | SpotConnectionStatus | SpotConnectionUser | SpotConnectionDeleted | SpotConnectionMedia_type | createSpotPayload | updateSpotPayload | deleteSpotPayload | TalentType | TalentTypeConnection | TalentTypeAggregator | TalentTypeGroupBy | TalentTypeConnectionId | TalentTypeConnectionCreated_at | TalentTypeConnectionUpdated_at | TalentTypeConnectionType_name | TalentTypeConnectionDeleted | createTalentTypePayload | updateTalentTypePayload | deleteTalentTypePayload | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileAggregatorSum | UploadFileAggregatorAvg | UploadFileAggregatorMin | UploadFileAggregatorMax | UploadFileGroupBy | UploadFileConnectionId | UploadFileConnectionCreated_at | UploadFileConnectionUpdated_at | UploadFileConnectionName | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionWidth | UploadFileConnectionHeight | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_metadata | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsUser | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionCreated_at | UsersPermissionsUserConnectionUpdated_at | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole | UsersPermissionsUserConnectionCui | UsersPermissionsUserConnectionAddress | UsersPermissionsUserConnectionPhone | UsersPermissionsUserConnectionContact_name | UsersPermissionsUserConnectionReferrer | UsersPermissionsUserConnectionAvatar | createUserPayload | updateUserPayload | deleteUserPayload
 
 type Mutation {
   createBroadcastTable(input: createBroadcastTableInput): createBroadcastTablePayload
@@ -582,7 +582,7 @@ type Spot {
   status: ENUM_SPOT_STATUS
   user: UsersPermissionsUser
   deleted: Boolean
-  media_types(sort: String, limit: Int, start: Int, where: JSON): [MadiaType]
+  media_type: MadiaType
 }
 
 type SpotAggregator {
@@ -744,6 +744,11 @@ type SpotConnectionId {
   connection: SpotConnection
 }
 
+type SpotConnectionMedia_type {
+  key: ID
+  connection: SpotConnection
+}
+
 type SpotConnectionStatus {
   key: String
   connection: SpotConnection
@@ -780,6 +785,7 @@ type SpotGroupBy {
   status: [SpotConnectionStatus]
   user: [SpotConnectionUser]
   deleted: [SpotConnectionDeleted]
+  media_type: [SpotConnectionMedia_type]
 }
 
 input SpotInput {
@@ -790,7 +796,7 @@ input SpotInput {
   status: ENUM_SPOT_STATUS
   user: ID
   deleted: Boolean
-  media_types: [ID]
+  media_type: ID
 }
 
 type SpotTalent {

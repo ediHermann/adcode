@@ -16,6 +16,7 @@ import RegisterArbiter from "./pages/registerArbiter"
 import Layout from "./components/layout"
 import LogOut from "./pages/logout"
 import CreateSpot from "./pages/spot/create_spot"
+import EditSpot from "./pages/spot/edit_spot"
 import Other2 from "./pages/other2"
 import BroadcastTable from "./pages/broadcastTable";
 import MySpotsNew from "./pages/mySpotsNew";
@@ -39,6 +40,7 @@ class Main extends Component {
                             <Route path="/other1" render={() => <BroadcastTable/>}/>
                             <Route path="/other2" render={() => <Other2/>}/>
                             <Route path="/create_spot" render={() => <CreateSpot/>}/>
+                            <Route path="/edit_spot" render={() => <EditSpot/>}/>
                             <Route path="/logout"  render={() => <LogOut/>}/>
                         </div>
                     </Layout>

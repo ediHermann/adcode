@@ -3,7 +3,6 @@ import cn from "classnames";
 import {ErrorMessage, Field, FieldArray, Form, Formik} from "formik"
 import db from "../dbs/fake-db";
 import AutocompleteAsync from "../autocomplete/autocomplete-async";
-
 import PropTypes from "prop-types";
 import Delete from "../svg/DeleteButton";
 import httpAgent from "../common/init";
@@ -15,14 +14,14 @@ const Media_types = [
     {id: "2", name: "VIDEO"},
 ];
 
-const UidForm = () => {
+const UidForm = (uid) => {
     const initialValues = {
         status: '',
         uid: '',
         title: '',
         client: '',
         duration: '',
-        media_types: [],
+        media_type: '',
         spotTalent: [{
             talent: '',
             role: '',
@@ -48,27 +47,38 @@ const UidForm = () => {
         return item.name
     }
 
-    const retrieveData = async () => {
-        // const payload = "query={userProfile}";
-        // const response = await httpAgent(payload);
-        // if (response.status === 200) {
-        //     const json = await response.json();
-        //     //console.log(json);
-        //     let _data;
-        //     if(json.data.userProfile)
-        //         _data = json.data.userProfile.payload;
-        //     // console.log(_data);
-        //     const formData={username:_data.username, email:_data.email,phone:_data.phone,address:_data.address,contact_name:_data.contact_name};
-        //     setData(formData);
-        //     // console.log(formData);
-        // } else {
-        //     //Display the error
-        //     console.log(response);
-        // }
+    const [data, setData] = React.useState({});
+
+    const retrieveData = async (uid) => {
+        const strCrit=JSON.stringify({uid:uid});
+        const unquoted = strCrit.replace(/"([^"]+)":/g, '$1:');
+        const payload = `query={userSpots(where:${unquoted})}`;
+        const response = await httpAgent(payload);
+        if (response.status === 200) {
+            const json = await response.json();
+
+            let _data;
+            if(json.data.userSpots) {
+                _data = json.data.userSpots.payload[0];
+                 //console.log(_data);
+                let mediaType='';
+                if(_data.media_type)
+                    mediaType=_data.media_type.type_name
+                 const _spot_talents=[{talent:{name:'Ellary'},role:'fata',obs:'observatii talent 1'},{talent:{name:'Kacy'},role:'voce',obs:'observatii talent 2'}]
+                 const formData={uid:_data.uid, title:_data.title,client:_data.client,created_at:_data.created_at,duration:_data.duration,media_type:mediaType,spotTalent:_spot_talents};
+                 console.log (formData);
+                 setData(formData);
+            }
+            // console.log(formData);
+        } else {
+            //Display the error
+            console.log(response);
+        }
 
     }
     React.useEffect(() => {
-        retrieveData();
+
+        retrieveData(uid.uid);
     }, [])
 
 
@@ -85,7 +95,6 @@ const UidForm = () => {
 
     const onSubmit = async (values, {setSubmitting}) => {
         setSubmitting(true);
-
 
             let strValues=JSON.stringify(values);
             alert(JSON.stringify(values, null, 2));
@@ -112,8 +121,8 @@ const UidForm = () => {
     };
 
     return <Formik
-
-            initialValues={initialValues}
+            initialValues={data}
+            //initialValues={initialValues}
             enableReinitialize={true}
             onSubmit={onSubmit}
     >
@@ -178,25 +187,21 @@ const UidForm = () => {
                 <div>
                     <label className='font-bold text-sm mb-1 text-gray-600'>Tip media:</label><br/>
                     <FieldArray
-                        name="media_types"
+                        name="media_type"
                         type='text'
                         render={arrayHelpers => (
                             <div>
                                 {Media_types.map(category => (
-                                    <div key={category.id} className='inline-block m-1' >
+                                    <div key={category.id} className='inline-block m-1'>
                                         <label className='text-sm'>
                                             <input
                                                 name="categoryId"
                                                 type="radio"
                                                 value={category.id}
-                                                checked={values.media_types.find(o => o.id === category.id)}
+                                                checked={values.media_type=== category.name}
                                                 onChange={e => {
-                                                    if (e.target.checked) arrayHelpers.push({id: category.id});
-                                                    else {
-                                                        let obj = values.media_types.find(o => o.id === category.id);
-                                                        let idx = values.media_types.indexOf(obj);
-                                                        arrayHelpers.remove(idx);
-                                                    }
+                                                    console.log(e.target.value);
+                                                    setFieldValue('media_type', e.target.value)
                                                 }}
                                             />{" "}
                                             {category.name}
@@ -220,7 +225,8 @@ const UidForm = () => {
                                 {values.spotTalent &&
                                 values.spotTalent.length > 0 &&
                                 values.spotTalent.map((s_part, index) => (
-                                    <div key={index} className="row  border-t border-gray-800 mt-1">
+
+                                    <div key={index} className="row  border-t border-gray-800 mt-1" >
                                         <div className="col inline-block m-1">
                                             <label className='font-bold text-sm mb-1 text-gray-600'>Talent</label><br/>
                                             <AutocompleteAsync
@@ -229,6 +235,7 @@ const UidForm = () => {
                                                 displaySuggestion={displaySuggestion}
                                                 name={`spotTalent[${index}].talent`}
                                                 setFValue={setFieldValue}
+                                                val={s_part.talent.name}
 
                                             />
                                         </div>
@@ -239,7 +246,6 @@ const UidForm = () => {
                                                 className='border-gray-800 border rounded  border-secondary mb-1'
                                                 component='select'
                                                 name={`spotTalent[${index}].role`}
-                                                value={values.color}
                                                 onChange={handleChange}
                                                 onBlur={handleBlur}
                                                 style={{display: 'block'}}>

@@ -40,8 +40,8 @@
       "type": "boolean",
       "default": false
     },
-    "media_types": {
-      "collection": "madia-type"
+    "media_type": {
+      "model": "madia-type"
     }
   }
 }

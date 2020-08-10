@@ -7,8 +7,8 @@ import SearchInput from "../mixt/SearchInput"
 import './styles.css'
 
 
-const AutocompleteAsync = ({httpGetter, SuggestionComp, displaySuggestion, name, setFValue}) => {
-    const [value, setValue] = useState("")
+const AutocompleteAsync = ({httpGetter, SuggestionComp, displaySuggestion, name, setFValue,val}) => {
+    const [value, setValue] = useState(val)
     const [suggestions, setSuggestions] = useState([])
     const [isLoading, setIsLoading] = useState(false)
 

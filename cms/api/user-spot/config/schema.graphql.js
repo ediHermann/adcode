@@ -14,6 +14,7 @@ module.exports = {
             let result;
             let errNum;
             let errDesc;
+            let success = false;
             //GET USER FROM HEADER TOKEN
 
             console.log(ctx.context.request.header.authorization);
@@ -50,6 +51,7 @@ module.exports = {
                   criteria.deleted = false;
                   console.log(criteria)
                   result = await strapi.services.spot.find(criteria);
+                  success=true;
                 }
                 //console.log(result);
               }
@@ -62,18 +64,8 @@ module.exports = {
               errNum = "203";
               errDesc = 'Missing token: Token did not contain required fields';
             }
+            return {"success": success, "payload": result, "error": {"code": errNum, "message": errDesc}};
 
-            if (result) {
-              //console.log(result);
-              return await result;
-              //ctx.send({"success": true, "payload": result});
-
-            } else {
-
-              throw new Error(errDesc);
-              //TODO: use  customer error object
-              // ctx.send({"success": false, "payload": {}, "error": {"code": errNum, "message": errDesc}});
-            }
           }
         }
     },
@@ -83,6 +75,7 @@ module.exports = {
         description: 'Create new  spots',
         resolverOf: 'application::spot.spot.find',
         resolver: async (obj, options, ctx) => {
+          let success = false;
           let newRecord;
           let userid;
           let result;
@@ -116,36 +109,16 @@ module.exports = {
               //update the owner
               const updateData = {"user": userid};
               payload = await strapi.services.spot.update({id}, updateData);
+              success=true;
 
-              result = {
-                "success": true,
-                "payload": payload
-              };
 
             } catch (error) {
               console.log(error);
-              result = {
-                "success": false,
-                "payload": {},
-                "error": {"code": error.errno, "message": "An error occurred! " + error.code}
-              };
-
-
+              errNum= error.code;
+              errDesc="An error occurred! " + error.message;
             }
           }
-          if (newRecord) {
-            //console.log(result);
-            return result;
-
-          } else {
-
-            result = {
-              "success": false,
-              "payload": {},
-              "error": {"code": error.errno, "message": "An error occurred! " + error.code}
-            };
-            return result;
-          }
+          return {"success": success, "payload": {}, "error": {"code": errNum, "message": errDesc}};
 
         }
       },
@@ -155,18 +128,16 @@ module.exports = {
         resolverOf: 'application::spot.spot.find',
         resolver: async (obj, options, ctx) => {
           const uid = options.uid;
-          let newRecord;
+
           let userid;
           let result;
           let payload;
           let errNum;
           let errDesc;
-          let Success = false;
-          //GET USER FROM HEADER TOKEN
+          let success = false;
+           //GET USER FROM HEADER TOKEN
           if (ctx.context.request && ctx.context.request.header && ctx.context.request.header.authorization) {
             try {
-
-
               const decrypted = await strapi.plugins['users-permissions'].services.jwt.getToken(ctx.context);
               userid = decrypted.id;
             } catch (e) {
@@ -189,13 +160,10 @@ module.exports = {
               if (chkResult.length > 0) {
                 const id = chkResult[0].id;
                 payload = await strapi.services.spot.update({id}, options.data);
-                Success = true;
-                result = {
-                  "success": Success,
-                  "payload": payload
-                };
+                success = true;
 
-              } else {
+              }
+              else {
                 errNum = "301";
                 errDesc = 'Invalid spot id';
               }
@@ -204,28 +172,11 @@ module.exports = {
 
             } catch (error) {
               console.log(error);
-              result = {
-                "success": false,
-                "payload": {},
-                "error": {"code": error.errno, "message": "An error occurred! " + error.code}
-              };
-
-
+              errNum= error.code;
+              errDesc="An error occurred! " + error.message;
             }
           }
-          if (Success) {
-            //console.log(result);
-            return result;
-
-          } else {
-
-            result = {
-              "success": false,
-              "payload": {},
-              "error": {"code": errNum, "message": errDesc}
-            };
-            return result;
-          }
+          return {"success": success, "payload": {}, "error": {"code": errNum, "message": errDesc}};
         }
       },
 
@@ -240,11 +191,12 @@ module.exports = {
           let payload;
           let errNum;
           let errDesc;
-          let Success = false;
+          let success = false;
 
 
           //GET USER FROM HEADER TOKEN
-          if (ctx.context.request && ctx.context.request.header && ctx.context.request.header.authorization) {
+          if (ctx.context.request && ctx.context.request.header && ctx.context.request.header.authorization)
+          {
             try {
               const decrypted = await strapi.plugins['users-permissions'].services.jwt.getToken(ctx.context);
               userid = decrypted.id;
@@ -268,41 +220,22 @@ module.exports = {
                 const id = chkResult[0].id;
                 const updateData = {"deleted": true};
                 payload = await strapi.services.spot.update({id}, updateData);
-                Success = true;
-                result = {
-                  "success": true,
-                  "payload": payload
-                };
-
-              } else {
+                success = true;
+              } else
+                {
                 errNum = "301";
                 errDesc = 'Invalid spot id';
               }
 
             } catch (error) {
               console.log(error);
-              result = {
-                "success": false,
-                "payload": {},
-                "error": {"code": error.errno, "message": "An error occurred! " + error.code}
-              };
+              errNum= error.code;
+              errDesc="An error occurred! " + error.message;
 
 
             }
           }
-          if (Success) {
-            //console.log(result);
-            return result;
-
-          } else {
-
-            result = {
-              "success": false,
-              "payload": {},
-              "error": {"code": errNum, "message": errDesc}
-            };
-            return result;
-          }
+          return {"success": success, "payload": {}, "error": {"code": errNum, "message": errDesc}};
         }
       }
 

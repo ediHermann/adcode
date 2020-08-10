@@ -17,7 +17,7 @@ const columns = [
     {key: 'created_at', label: 'Creat la'},
     {
         key: 'edit', label: 'Edit', cell: function (item, columnKey) {
-            let url = '#/pages/spot/edit_spot/' + item.uid;
+            let url = '#/edit_spot/' + item.uid;
             return < a href={url} className='underline'><EditButton className='mr-2 inline align-bottom'/>Editare</a>;
         }
     }
@@ -36,7 +36,7 @@ const SpotList = () => {
         if (response.status === 200) {
             const json = await response.json()
             console.log(json)
-            const _items = json.data.userSpots
+            const _items = json.data.userSpots.payload;
             console.log("items")
             console.log(_items)
             setItems(_items)
