@@ -15,7 +15,8 @@ const Media_types = [
 ];
 
 const UidForm = (uid) => {
-    const initialValues = {
+
+    const initValues = {
         status: '',
         uid: '',
         title: '',
@@ -23,12 +24,11 @@ const UidForm = (uid) => {
         duration: '',
         media_type: '',
         spotTalent: [{
-            talent: '',
+            talent: {name: ''},
             role: '',
             obs: ''
         }]
     }
-
 
     const inputStyles = cond => cn(
         'w-full rounded p-2', {
@@ -50,31 +50,46 @@ const UidForm = (uid) => {
     const [data, setData] = React.useState({});
 
     const retrieveData = async (uid) => {
-        const strCrit=JSON.stringify({uid:uid});
-        const unquoted = strCrit.replace(/"([^"]+)":/g, '$1:');
-        const payload = `query={userSpots(where:${unquoted})}`;
-        const response = await httpAgent(payload);
-        if (response.status === 200) {
-            const json = await response.json();
 
-            let _data;
-            if(json.data.userSpots) {
-                _data = json.data.userSpots.payload[0];
-                 //console.log(_data);
-                let mediaType='';
-                if(_data.media_type)
-                    mediaType=_data.media_type.type_name
-                 const _spot_talents=[{talent:{name:'Ellary'},role:'fata',obs:'observatii talent 1'},{talent:{name:'Kacy'},role:'voce',obs:'observatii talent 2'}]
-                 const formData={uid:_data.uid, title:_data.title,client:_data.client,created_at:_data.created_at,duration:_data.duration,media_type:mediaType,spotTalent:_spot_talents};
-                 console.log (formData);
-                 setData(formData);
+        if(uid.length>0) {
+            const strCrit = JSON.stringify({uid: uid});
+            const unquoted = strCrit.replace(/"([^"]+)":/g, '$1:');
+            const payload = `query={userSpots(where:${unquoted})}`;
+            const response = await httpAgent(payload);
+            if (response.status === 200) {
+                const json = await response.json();
+
+                let _data;
+                if (json.data.userSpots) {
+                    _data = json.data.userSpots.payload[0];
+                    //console.log(_data);
+                    let mediaType = '';
+                    if (_data.media_type)
+                        mediaType = _data.media_type.type_name
+                    const _spot_talents = [{
+                        talent: {name: 'Ellary'},
+                        role: 'fata',
+                        obs: 'observatii talent 1'
+                    }, {talent: {name: 'Kacy'}, role: 'voce', obs: 'observatii talent 2'}]
+                    const formData = {
+                        uid: _data.uid,
+                        title: _data.title,
+                        client: _data.client,
+                        duration: _data.duration,
+                        media_type: mediaType,
+                        spotTalent: _spot_talents
+                    };
+                    console.log(formData);
+                    setData(formData);
+                }
+                // console.log(formData);
+            } else {
+                //Display the error
+                console.log(response);
             }
-            // console.log(formData);
-        } else {
-            //Display the error
-            console.log(response);
         }
-
+        else
+            setData(initValues);
     }
     React.useEffect(() => {
 
@@ -218,7 +233,7 @@ const UidForm = (uid) => {
                         {({push, remove}) => (
                             <>
                                 <AddButton className='inline align-bottom mr-2'/>
-                                <button type='button' onClick={() => push({talent: '', role: '', obs: ''})}
+                                <button type='button' onClick={() => push({talent: {name:''}, role: '', obs: ''})}
                                         disabled={isSubmitting} className='inline align-bottom mr-2 underline' >Adauga talent
                                 </button>
 
