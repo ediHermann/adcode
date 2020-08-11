@@ -55,7 +55,19 @@ const UidForm = (uid) => {
             const strCrit = JSON.stringify({uid: uid});
             const unquoted = strCrit.replace(/"([^"]+)":/g, '$1:');
             const payload = `query={userSpots(where:${unquoted})}`;
-            const response = await httpAgent(payload);
+
+            //TEST
+            // const strCrit = JSON.stringify({username: '%a%',role:{name:'Talent'}});
+            // const unquoted = strCrit.replace(/"([^"]+)":/g, '$1:');
+            // const payload = `query={searchUser(where:${unquoted})}`;
+            //
+            // const response = await httpAgent(payload);
+            // const v=await response.json();
+            // console.log(v.data.searchUser.payload);
+
+
+            //console.log(await response.json())
+
             if (response.status === 200) {
                 const json = await response.json();
 
@@ -96,15 +108,22 @@ const UidForm = (uid) => {
         retrieveData(uid.uid);
     }, [])
 
-
+///
     const httpGetter = value => new Promise(
         resolve => {
-            setTimeout(() => {
+            setTimeout(async() => {
+
+                const strCrit = JSON.stringify({username: '%'+value.trim().toLowerCase()+'%',role:{name:'Talent'}});
+                const unquoted = strCrit.replace(/"([^"]+)":/g, '$1:');
+                const payload = `query={searchUser(where:${unquoted})}`;
+
+                console.log(payload);
+
+                const resp =  await httpAgent(payload);
+                const r= await resp.json();
+                const datarows=r.data.searchUser.payload;
                 resolve(
-                    () => db.filter(
-                        item => item.name
-                            .toLowerCase()
-                            .includes(value.trim().toLowerCase())))
+                    ()  => datarows)
             }, 500)
         })
 
@@ -210,9 +229,9 @@ const UidForm = (uid) => {
                                     <div key={category.id} className='inline-block m-1'>
                                         <label className='text-sm'>
                                             <input
-                                                name="categoryId"
+                                                name="media_type"
                                                 type="radio"
-                                                value={category.id}
+                                                value={category.name}
                                                 checked={values.media_type=== category.name}
                                                 onChange={e => {
                                                     console.log(e.target.value);

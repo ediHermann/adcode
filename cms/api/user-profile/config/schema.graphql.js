@@ -1,3 +1,4 @@
+
 const { parseMultipartData, sanitizeEntity } = require('strapi-utils');
 module.exports = {
   query: `userProfile: JSON!,searchUser(where: JSON): JSON!,checkPwd(data: JSON):JSON`,
@@ -17,10 +18,8 @@ module.exports = {
             //GET USER FROM HEADER TOKEN
             if (ctx.context.request && ctx.context.request.header && ctx.context.request.header.authorization) {
               try {
-
                 const decrypted = await strapi.plugins['users-permissions'].services.jwt.getToken(ctx.context);
                 id = decrypted.id;
-
                 if (id === undefined) {
                   errNum = "201";
                   errDesc = 'Invalid token: Token did not contain required fields';
@@ -72,14 +71,25 @@ module.exports = {
                   if (options.where) {
                     criteria = options.where;
                     console.log(criteria);
-                    const payload = await strapi.plugins['users-permissions'].services.user.fetch(criteria);
+                    const criteriaUser=criteria.username;
+                    const criteriaRole=criteria.role.name;
+                    const qryres= await strapi.connections.default.raw('SELECT username as `name`,avatar,`users-permissions_role`.`name` as `role` FROM `users-permissions_user` inner join `users-permissions_role` ON `users-permissions_user`.role=`users-permissions_role`.id  WHERE `username` LIKE ? AND `users-permissions_role`.`name`="'+criteriaRole+'"', criteriaUser);
+                    if(qryres)
+                      result=qryres[0];
+
+                    console.log(result);
+
+                    //const payload = await strapi.plugins['users-permissions'].services.user.fetch(criteria);
                     success = true;
+                    /*
                     result = {
-                      username: payload.username,
+                      name: payload.username,
                       user_type: payload.role.name,
                       avatar: payload.avatar,
                       talent_types: payload.talent_types
                     }
+                    */
+
 
                   } else {
                     errNum = "207";
@@ -90,7 +100,8 @@ module.exports = {
               } catch (e) {
                 console.log(e);
                 errNum = "202";
-                errDesc = 'Invalid token: Token did not contain required fields';
+                console.log(e);
+                errDesc = e.message;
               }
             } else {
               errNum = "203";
