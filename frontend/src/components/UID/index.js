@@ -23,7 +23,7 @@ const UidForm = (uid) => {
         client: '',
         duration: '',
         media_type: '',
-        spotTalent: [{
+        spotTalents: [{
             talent: {name: ''},
             role: '',
             obs: ''
@@ -48,6 +48,7 @@ const UidForm = (uid) => {
     }
 
     const [data, setData] = React.useState({});
+    const [globalError, setGlobalError] = React.useState('');
 
     const retrieveData = async (uid) => {
 
@@ -82,7 +83,7 @@ const UidForm = (uid) => {
                         client: _data.client,
                         duration: _data.duration,
                         media_type: mediaType,
-                        spotTalent: _spot_talents
+                        spotTalents: _spot_talents
                     };
                     console.log(formData);
                     setData(formData);
@@ -115,35 +116,38 @@ const UidForm = (uid) => {
                 const resp =  await httpAgent(payload);
                 const r= await resp.json();
                 const datarows=r.data.searchUser.payload;
+
                 resolve(
                     ()  => datarows)
             }, 500)
         })
+
+
 
     const onSubmit = async (values, {setSubmitting}) => {
         setSubmitting(true);
 
             let strValues=JSON.stringify(values);
             alert(JSON.stringify(values, null, 2));
-        //   try {
-        //     const unquoted = strValues.replace(/"([^"]+)":/g, '$1:');
-        //     const payload1 = `query=mutation{updateProfile(data:${unquoted})}`;
-        //      console.log(payload1);
-        //     const outcome = await  httpAgent(payload1);
-        //     if (outcome.status==200) {
-        //         alert('Datele au fost salvate')
-        //         console.log(outcome);
-        //     }
-        //     else {
-        //         alert('Eroare- Datele nu au fost salvate')
-        //         console.log(outcome);
-        //     }
-        // } catch (err) {
-        //     console.log(err);
-        //     setGlobalError(err.message);
-        // }
-        // setSubmitting(false)
-        // return false;
+          try {
+            const unquoted = strValues.replace(/"([^"]+)":/g, '$1:');
+            const payload1 = `query=mutation{updateUserSpot(data:${unquoted})}`;
+            console.log(payload1);
+            const outcome = await  httpAgent(payload1);
+            if (outcome.status==200) {
+                alert('Datele au fost salvate')
+                console.log(outcome);
+            }
+            else {
+                alert('Eroare - Datele nu au fost salvate')
+                console.log(outcome);
+            }
+        } catch (err) {
+            console.log(err);
+            setGlobalError(err.message);
+        }
+        setSubmitting(false)
+        return false;
 
     };
 
@@ -241,7 +245,7 @@ const UidForm = (uid) => {
                 </div>
                 <div className=' flex-row'>
                     <label className='font-bold text-sm mb-1 text-gray-600'>Talente:</label><br/>
-                    <FieldArray name='spotTalent'>
+                    <FieldArray name='spotTalents'>
                         {({push, remove}) => (
                             <>
                                 <AddButton className='inline align-bottom mr-2'/>
@@ -249,9 +253,9 @@ const UidForm = (uid) => {
                                         disabled={isSubmitting} className='inline align-bottom mr-2 underline' >Adauga talent
                                 </button>
 
-                                {values.spotTalent &&
-                                values.spotTalent.length > 0 &&
-                                values.spotTalent.map((s_part, index) => (
+                                {values.spotTalents &&
+                                values.spotTalents.length > 0 &&
+                                values.spotTalents.map((s_part, index) => (
 
                                     <div key={index} className="row  border-t border-gray-800 mt-1" >
                                         <div className="col inline-block m-1">
@@ -260,8 +264,8 @@ const UidForm = (uid) => {
                                                 httpGetter={httpGetter}
                                                 SuggestionComp={SuggestionComp}
                                                 displaySuggestion={displaySuggestion}
-                                                name={`spotTalent[${index}].talent`}
-                                                setFValue={setFieldValue}
+                                                name={`spotTalents[${index}].talent`}
+                                                setFValue={(name,val)=>setFieldValue(name,{name:val})}
                                                 val={s_part.talent.name}
 
                                             />
@@ -272,7 +276,7 @@ const UidForm = (uid) => {
                                             <Field
                                                 className='border-gray-800 border rounded  border-secondary mb-1'
                                                 component='select'
-                                                name={`spotTalent[${index}].role`}
+                                                name={`spotTalents[${index}].role`}
                                                 onChange={handleChange}
                                                 onBlur={handleBlur}
                                                 style={{display: 'block'}}>
@@ -286,7 +290,7 @@ const UidForm = (uid) => {
                                         <div className="col inline-block m-1">
 
                                             <label className='font-bold text-sm mb-1 text-gray-600'>Observatii</label><br/>
-                                            <Field name={`spotTalent[${index}].obs`} type='text' className='border-gray-800 border rounded  border-secondary mb-1 pl-2'/>
+                                            <Field name={`spotTalents[${index}].obs`} type='text' className='border-gray-800 border rounded  border-secondary mb-1 pl-2'/>
                                         </div>
 
                                         <div className="col inline-block m-1">
