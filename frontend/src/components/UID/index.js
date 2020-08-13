@@ -55,18 +55,7 @@ const UidForm = (uid) => {
             const strCrit = JSON.stringify({uid: uid});
             const unquoted = strCrit.replace(/"([^"]+)":/g, '$1:');
             const payload = `query={userSpots(where:${unquoted})}`;
-
-            //TEST
-            // const strCrit = JSON.stringify({username: '%a%',role:{name:'Talent'}});
-            // const unquoted = strCrit.replace(/"([^"]+)":/g, '$1:');
-            // const payload = `query={searchUser(where:${unquoted})}`;
-            //
-            // const response = await httpAgent(payload);
-            // const v=await response.json();
-            // console.log(v.data.searchUser.payload);
-
-
-            //console.log(await response.json())
+            const response = await httpAgent(payload);
 
             if (response.status === 200) {
                 const json = await response.json();
@@ -74,15 +63,19 @@ const UidForm = (uid) => {
                 let _data;
                 if (json.data.userSpots) {
                     _data = json.data.userSpots.payload[0];
-                    //console.log(_data);
+                    console.log(_data);
                     let mediaType = '';
                     if (_data.media_type)
                         mediaType = _data.media_type.type_name
-                    const _spot_talents = [{
-                        talent: {name: 'Ellary'},
-                        role: 'fata',
-                        obs: 'observatii talent 1'
-                    }, {talent: {name: 'Kacy'}, role: 'voce', obs: 'observatii talent 2'}]
+
+                    const _spot_talents=_data.spotTalents;
+
+
+                    // const _spot_talents = [{
+                    //     talent: {name: 'Ellary'},
+                    //     role: 'fata',
+                    //     obs: 'observatii talent 1'
+                    // }, {talent: {name: 'Kacy'}, role: 'voce', obs: 'observatii talent 2'}]
                     const formData = {
                         uid: _data.uid,
                         title: _data.title,

@@ -379,8 +379,8 @@ enum ENUM_SPOT_STATUS {
 }
 
 enum ENUM_SPOTTALENT_TALENT_ROLE {
-  ACTOR
-  VOICE
+  voce
+  fata
 }
 
 input FileInput {

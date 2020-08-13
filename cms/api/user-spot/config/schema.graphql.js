@@ -50,10 +50,23 @@ module.exports = {
                   criteria.user = userid;
                   criteria.deleted = false;
                   console.log(criteria)
-                  result = await strapi.services.spot.find(criteria);
-                  success=true;
+                  const result0 = await strapi.services.spot.find(criteria);
+                  if (result0.length>0) {
+                    result=[];
+                    result[0]=result0[0];
+                    const spot_id = result0[0].id;
+                    const result1 = await strapi.services['spot-talent'].find({spot:spot_id});
+                    console.log(result1);
+
+                    //result[0].spotTalents = result1.map{id: result1.id, talent:{name: result1.talent.username},role:result1.talent_role, obs: result1.obs};
+
+                    result[0].spotTalents = result1.map(spotTalent => ({ id: spotTalent.id, talent:{name: spotTalent.talent.username, avatar:spotTalent.talent.avatar},role:spotTalent.talent_role, obs:spotTalent.obs }));
+
+                    success=true;
+                  }
                 }
-                //console.log(result);
+                console.log(result[0]);
+
               }
               catch (e) {
                 console.log(e);
