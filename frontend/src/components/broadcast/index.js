@@ -4,7 +4,6 @@ import talent from '../dbs/talent'
 import AutocompleteAsync from "../autocomplete/autocomplete-async";
 import spots from "../dbs/spots";
 import studio from '../dbs/studio'
-import spot_broadcasts from "../dbs/broadcastTable";
 import DatePicker from 'react-datepicker'
 import {ro} from 'date-fns/locale'
 import "react-datepicker/dist/react-datepicker.css";
@@ -85,6 +84,7 @@ const Broadcast = () => {
                                     displaySuggestion={displaySuggestion}
                                     name='talent'
                                     setFValue={setFieldValue}
+                                    val=''
                                 />
                             </div>
                             <div className='mr-4'>
@@ -95,6 +95,7 @@ const Broadcast = () => {
                                     displaySuggestion={displaySuggestion}
                                     name='spot'
                                     setFValue={setFieldValue}
+                                    val=''
                                 />
                             </div>
                             <div className='mr-4'>
@@ -105,6 +106,7 @@ const Broadcast = () => {
                                     displaySuggestion={displaySuggestion}
                                     name='studio'
                                     setFValue={setFieldValue}
+                                    val=''
                                 />
                             </div>
 

@@ -1,26 +1,15 @@
 import React from "react";
 import httpAgent from "../../components/common/init";
-import PropTypes from 'prop-types'
-import {ErrorMessage, Field, Form, Formik,FieldArray} from 'formik'
+import { Form, Formik} from 'formik'
 import GlobalError from "../../components/register/global-error";
-import cn from "classnames";
-import ProfileAvatar from "../../components/profile/avatar";
+import ProfileAvatar from "./avatar";
 
 const EditAvatar = () => {
-    const inputStyle = cond => cn(
-        "w-full rounded p-2 ", {
-            "border-2 border-error": cond,
-            'border-gray-800 border rounded  border-secondary mb-1': !cond
-        });
 
     const onSubmit = async (values, {setSubmitting}) => {
-
-        //return;
         setSubmitting(true);
         try {
              console.log(values.avatar);
-             //return;
-             //console.log(ProfileAvatar);
 
             let strValues=JSON.stringify(values);
             const unquoted = strValues.replace(/"([^"]+)":/g, '$1:');
@@ -51,16 +40,12 @@ const EditAvatar = () => {
             const response = await httpAgent(payload);
             if (response.status === 200) {
                 const json = await response.json();
-                //console.log(json);
                 let _data;
                 if(json.data.userProfile)
                     _data = json.data.userProfile.payload;
-               // console.log(_data);
                 const formData={avatar:_data.avatar};
                 setData(formData);
-               // console.log(formData);
             } else {
-                //Display the error
                 console.log(response);
             }
 
@@ -78,8 +63,6 @@ return (
     >
     {
         ({
-             errors,
-             touched,
              handleSubmit,
              isSubmitting,
              setFieldValue
@@ -92,8 +75,6 @@ return (
                     setFValue={setFieldValue}
 
                 />
-
-
                 <div>
                     <button className='absolute bg-primary px-16 py-4 mt-20 rounded-md text-text'
                             style={{left: '50%', marginLeft: '-90px'}}
