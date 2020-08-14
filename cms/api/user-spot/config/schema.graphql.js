@@ -185,8 +185,7 @@ module.exports = {
               if (chkResult.length > 0) {
                 id = chkResult[0].id;
                 spotId=id;
-
-                console.log(id);
+                console.log(options.data);
                 payload = await strapi.services.spot.update({id}, options.data);
                 console.log('spotTalents')
                 //Update spotTalents
@@ -216,7 +215,6 @@ module.exports = {
 
                     //find the talent Id
 
-
                     idx1 = dataTalents.findIndex(element => element.id = id);
                     if(idx1>-1)
                     {
@@ -228,11 +226,9 @@ module.exports = {
                       console.log('useriId='+useriId);
                       if(useriId>0) {
                         //Put the id on talent field
-                        console.log('updating...');
+                        console.log('updating line...');
                         dataTalents[idx1].talent = useriId;
                         await strapi.services['spot-talent'].update({id}, dataTalents[idx1]);
-
-
                         console.log(dataTalents[idx1]);
                         dataTalents.splice(idx1, 1);
 

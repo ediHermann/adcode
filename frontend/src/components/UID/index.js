@@ -17,12 +17,12 @@ const Media_types = [
 const UidForm = (uid) => {
 
     const initValues = {
-        status: '',
+        status: 'PENDING',
         uid: '',
         title: '',
         client: '',
         duration: '',
-        media_type: '',
+        media_type: '1',
         spotTalents: [{
             talent: {name: ''},
             role: '',
@@ -41,7 +41,7 @@ const UidForm = (uid) => {
             'border-gray-800 border rounded  border-secondary mb-1': !cond
         })
 
-    const status="Spot nou";
+
     const SuggestionComp = ({suggestion}) => <span>{`${suggestion.name}`}</span>
     const displaySuggestion = item => {
         return item.name
@@ -67,21 +67,16 @@ const UidForm = (uid) => {
                     console.log(_data);
                     let mediaType = '';
                     if (_data.media_type)
-                        mediaType = _data.media_type.type_name
-
+                        mediaType = _data.media_type.id
                     const _spot_talents=_data.spotTalents;
 
 
-                    // const _spot_talents = [{
-                    //     talent: {name: 'Ellary'},
-                    //     role: 'fata',
-                    //     obs: 'observatii talent 1'
-                    // }, {talent: {name: 'Kacy'}, role: 'voce', obs: 'observatii talent 2'}]
                     const formData = {
                         uid: _data.uid,
                         title: _data.title,
                         client: _data.client,
                         duration: _data.duration,
+                        status:_data.status,
                         media_type: mediaType,
                         spotTalents: _spot_talents
                     };
@@ -168,8 +163,7 @@ const UidForm = (uid) => {
                  isSubmitting,
                  setFieldValue
              }) => <Form onSubmit={handleSubmit}>
-                <label className='font-bold text-sm mb-1 mr-2 text-gray-600 '>Status: {status}</label>
-                <div className='block'>
+                 <div className='block'>
                     <label className='font-bold text-sm mb-1 text-gray-600'>UID: </label>
                     <Field
                         type="text"
@@ -215,6 +209,28 @@ const UidForm = (uid) => {
                         component="div"
                         className="text-sm text-error italic"/>
                 </div>
+
+
+
+                <label className='font-bold text-sm mb-1 text-gray-600'>Status: </label>
+                <Field
+                    className='border-gray-800 border rounded  border-secondary mb-1 w-full p-2'
+                    component='select'
+                    name='status'
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    style={{display: 'block'}}>
+                    <option value="PENDING" label="Spot nou"/>
+                    <option value="PUBLISHED" label="Publicat"/>
+                    <option value="INACTIVATED" label="Inactiv"/>
+                    <option value="DELETED" label="Anulat"/>
+                </Field>
+                <ErrorMessage
+                    name="status"
+                    component="div"
+                    className="text-sm text-error italic "/>
+
+
                 <div>
                     <label className='font-bold text-sm mb-1 text-gray-600'>Tip media:</label><br/>
                     <FieldArray
@@ -228,8 +244,8 @@ const UidForm = (uid) => {
                                             <input
                                                 name="media_type"
                                                 type="radio"
-                                                value={category.name}
-                                                checked={values.media_type=== category.name}
+                                                value={category.id}
+                                                checked={values.media_type==category.id}
                                                 onChange={e => {
                                                     console.log(e.target.value);
                                                     setFieldValue('media_type', e.target.value)
@@ -243,6 +259,9 @@ const UidForm = (uid) => {
                         )}
                     />
                 </div>
+
+                <hr   className='border-gray-800 w-full my-8'/>
+
                 <div className=' flex-row'>
                     <label className='font-bold text-sm mb-1 text-gray-600'>Talente:</label><br/>
                     <FieldArray name='spotTalents'>
