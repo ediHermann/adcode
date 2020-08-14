@@ -27,7 +27,6 @@ const AutocompleteAsync = ({httpGetter, SuggestionComp, displaySuggestion, name,
             })
     }
 
-
     const onSuggestionsClearRequested = () => {
         setSuggestions([])
     }
@@ -44,7 +43,7 @@ const AutocompleteAsync = ({httpGetter, SuggestionComp, displaySuggestion, name,
                          onSuggestionsClearRequested={onSuggestionsClearRequested}
                          onSuggestionSelected={(_, {suggestionValue}) => {
                              setFValue(name, suggestionValue)
-                         }
+                            }
                          }
                          getSuggestionValue={displaySuggestion}
                          renderSuggestion={suggestion => <SuggestionComp suggestion={suggestion}/>}
@@ -55,7 +54,8 @@ const AutocompleteAsync = ({httpGetter, SuggestionComp, displaySuggestion, name,
                              name: name,
                              onChange: (_, {newValue}) => {
                                  setValue(newValue);
-                             }
+                             },
+                             onBlur:((_, {suggestionValue})=>{if(suggestionValue== null ){setValue('')};})
                          }}
                          highlightFirstSuggestion={true}
             />

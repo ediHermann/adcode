@@ -120,16 +120,12 @@ const UidForm = (uid) => {
                 const strCrit = JSON.stringify({username: '%'+value.trim().toLowerCase()+'%',role:{name:'Talent'}});
                 const unquoted = strCrit.replace(/"([^"]+)":/g, '$1:');
                 const payload = `query={searchUser(where:${unquoted})}`;
-
-                console.log(payload);
-
                 const resp =  await httpAgent(payload);
                 const r= await resp.json();
                 const datarows=r.data.searchUser.payload;
-
                 resolve(
                     ()  => datarows)
-            }, 500)
+            }, 100)
         })
 
 
@@ -192,7 +188,9 @@ const UidForm = (uid) => {
                         type="text"
                         name="uid"
                         placeholder="UID"
-                        className={inputStyles(errors.uid && touched.uid)}/>
+                        className={inputStyles(errors.uid && touched.uid)}
+                        disabled={true}
+                    />
                     <ErrorMessage
                         name="uid"
                         component="div"
