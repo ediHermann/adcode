@@ -53,6 +53,7 @@ const UidForm = (uid) => {
     const retrieveData = async (uid) => {
 
         if(uid.length>0) {
+            //EDIT SPOT
             const strCrit = JSON.stringify({uid: uid});
             const unquoted = strCrit.replace(/"([^"]+)":/g, '$1:');
             const payload = `query={userSpots(where:${unquoted})}`;
@@ -90,7 +91,21 @@ const UidForm = (uid) => {
             }
         }
         else
-            setData(initValues);
+        {
+            //NEW SPOT
+            const response = await httpAgent('newcode');
+            if (response.status==200) {
+                const respObj = await response.json();
+                const newUID = respObj.uid;
+                console.log(respObj)
+                console.log(newUID);
+                initValues.uid = newUID;
+                setData(initValues);
+            }
+
+
+        }
+
     }
     React.useEffect(() => {
 
@@ -122,12 +137,20 @@ const UidForm = (uid) => {
     const onSubmit = async (values, {setSubmitting}) => {
         setSubmitting(true);
 
-            let strValues=JSON.stringify(values);
-            alert(JSON.stringify(values, null, 2));
-          try {
+         let strValues=JSON.stringify(values);
+         let payload1;
+         alert(JSON.stringify(values, null, 2));
+
+         try {
+
             const unquoted = strValues.replace(/"([^"]+)":/g, '$1:');
-            const payload1 = `query=mutation{updateUserSpot(data:${unquoted})}`;
+            if(uid)
+                 payload1 = `query=mutation{updateUserSpot(data:${unquoted})}`;
+            else
+                 payload1 = `query=mutation{createUserSpot(data:${unquoted})}`;
+
             console.log(payload1);
+
             const outcome = await  httpAgent(payload1);
             if (outcome.status==200) {
                 alert('Datele au fost salvate')
