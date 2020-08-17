@@ -1,6 +1,6 @@
 import React from "react"
-import EditButton from "../../components/svg/Edit"
-import AddButton from "../../components/svg/AddButton"
+import SearchButton from "../../components/svg/Search"
+
 import httpAgent from "../../components/common/init"
 
 
@@ -17,8 +17,8 @@ const columns = [
     {key: 'created_at', label: 'Creat la'},
     {
         key: 'edit', label: 'Detalii', cell: function (item, columnKey) {
-            let url = '#/edit_spot/' + item.uid;
-            return < a href={url} className='underline'><EditButton className='mr-2 inline align-bottom'/>Detalii</a>;
+            let url = '#/details_spot/' + item.uid;
+            return < a href={url} className='underline'><SearchButton className='mr-2 inline align-bottom'/>Detalii</a>;
         }
     }
 
