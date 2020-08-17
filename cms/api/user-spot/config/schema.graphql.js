@@ -1,7 +1,7 @@
 const { parseMultipartData, sanitizeEntity } = require('strapi-utils');
 
 module.exports = {
-  query: `userSpots(where: JSON, limit: Int, offset: Int, sort:String): JSON!`,
+  query: `userSpots(where: JSON, limit: Int, offset: Int, sort:String): JSON!,artistsSpots(where: JSON, limit: Int, offset: Int, sort:String): JSON!`,
   mutation:`createUserSpot(data: JSON): JSON!,updateUserSpot(uid:String, data: JSON): JSON!,deleteUserSpot(uid:String): JSON! `,
   resolver: {
     Query: {
@@ -85,7 +85,98 @@ module.exports = {
             return {"success": success, "payload": result, "error": {"code": errNum, "message": errDesc}};
 
           }
-        }
+        },
+
+
+      artistsSpots:
+        {
+          description: 'Return crt artists spots',
+          resolverOf: 'application::spot.spot.find',
+          resolver: async (obj, options, ctx) => {
+            let userid
+            let result;
+            let result0
+            let result1
+            let errNum;
+            let errDesc;
+            let id;
+            let idx;
+            let success = false;
+            //GET USER FROM HEADER TOKEN
+
+            console.log(ctx.context.request.header.authorization);
+            if (ctx.context.request && ctx.context.request.header && ctx.context.request.header.authorization) {
+              try {
+
+                const decrypted = await strapi.plugins['users-permissions'].services.jwt.getToken(ctx.context);
+                userid = decrypted.id;
+
+                if (userid === undefined) {
+                  errNum = "201";
+                  errDesc = '201 Invalid token: Token did not contain required fields';
+                } else {
+                  /***********************************************************************/
+                  //Everything is OK
+                  /***********************************************************************/
+                  let criteria={};
+
+
+                  if (options.where) {
+                    criteria = options.where;
+                  }
+                  if(options.limit && options.offset)
+                  {
+                    criteria._limit = options.limit;
+                    criteria._start = options.offset;
+                  }
+                  if(options.sort)
+                  {
+                    criteria._sort = options.sort;
+                  }
+                  id=userid;
+                  criteria.talent = userid;
+                  criteria.deleted = false;
+                  console.log(criteria)
+                  result0 = await strapi.services['spot-talent'].find(criteria);
+                  //console.log(result0)
+                  //return(true);
+                  result=[];
+                  if (result0.length>0) {
+                    for (idx = 0; idx < result0.length; idx++) {
+                      result[idx]= result0[idx].spot;
+
+                      //Get all the talents
+                      const spot_id = result0[idx].spot.id;
+                      result1 = await strapi.services['spot-talent'].find({spot: spot_id});
+                      result[idx].spotTalents = result1.map(spotTalent => ({
+                        id: spotTalent.id,
+                        talent: {id: spotTalent.talent.id, name: spotTalent.talent.username, avatar: spotTalent.talent.avatar},
+                        role: spotTalent.talent_role,
+                        obs: spotTalent.obs
+                      }));
+
+                      success = true;
+                    }
+                  }
+                }
+
+                console.log(result);
+
+              }
+              catch (e) {
+                console.log(e);
+                errNum = "202";
+                errDesc = '202 Invalid token: Token did not contain required fields';
+              }
+            } else {
+              errNum = "203";
+              errDesc = 'Missing token: Token did not contain required fields';
+            }
+            return {"success": success, "payload": result, "error": {"code": errNum, "message": errDesc}};
+
+          }
+        },
+
     },
 
     Mutation: {

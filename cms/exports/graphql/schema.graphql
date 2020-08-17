@@ -560,6 +560,7 @@ type Query {
   searchUser(where: JSON): JSON!
   checkPwd(data: JSON): JSON
   userSpots(where: JSON, limit: Int, offset: Int, sort: String): JSON!
+  artistsSpots(where: JSON, limit: Int, offset: Int, sort: String): JSON!
   me: UsersPermissionsMe
 }
 
