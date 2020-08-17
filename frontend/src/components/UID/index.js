@@ -1,7 +1,6 @@
 import React from 'react'
 import cn from "classnames";
 import {ErrorMessage, Field, FieldArray, Form, Formik} from "formik"
-import db from "../dbs/fake-db";
 import AutocompleteAsync from "../autocomplete/autocomplete-async";
 import PropTypes from "prop-types";
 import Delete from "../svg/DeleteButton";
@@ -171,9 +170,9 @@ const UidForm = (uid) => {
                  isSubmitting,
                  setFieldValue
              }) => <Form onSubmit={handleSubmit}>
-                <label className='font-bold text-sm mb-1 mr-2 text-gray-600 '>Status: {status}</label>
+                <label className='font-bold text-sm mb-1 mr-2 text-gray-600 '>Status {status}</label>
                 <div className='block'>
-                    <label className='font-bold text-sm mb-1 text-gray-600'>UID: </label>
+                    <label className='font-bold text-sm mb-1 text-gray-600'>UID </label>
                     <Field
                         type="text"
                         name="uid"
@@ -184,7 +183,7 @@ const UidForm = (uid) => {
                         component="div"
                         className="text-sm text-error italic "/>
 
-                    <label className='font-bold text-sm mb-1 text-gray-600'>Titlu: </label>
+                    <label className='font-bold text-sm mb-1 text-gray-600'>Titlu </label>
                     <Field
                         type="text"
                         name="title"
@@ -195,7 +194,7 @@ const UidForm = (uid) => {
                         component="div"
                         className="text-sm text-error italic"/>
 
-                    <label className='font-bold text-sm mb-1 text-gray-600'>Client: </label>
+                    <label className='font-bold text-sm mb-1 text-gray-600'>Client </label>
                     <Field
                         type="text"
                         name="client"
@@ -206,7 +205,7 @@ const UidForm = (uid) => {
                         component="div"
                         className="text-sm text-error italic"/>
 
-                    <label className='font-bold text-sm mb-1 text-gray-600'>Durata (sec): </label>
+                    <label className='font-bold text-sm mb-1 text-gray-600'>Durata (sec) </label>
 
                     <Field
                         type="text"
@@ -219,7 +218,7 @@ const UidForm = (uid) => {
                         className="text-sm text-error italic"/>
                 </div>
                 <div>
-                    <label className='font-bold text-sm mb-1 text-gray-600'>Tip media:</label><br/>
+                    <label className='font-bold text-sm mb-1 text-gray-600'>Tip media</label><br/>
                     <FieldArray
                         name="media_type"
                         type='text'
