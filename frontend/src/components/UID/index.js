@@ -94,7 +94,7 @@ const UidForm = (uid) => {
         {
             //NEW SPOT
             const response = await httpAgent('newcode');
-            if (response.status==200) {
+            if (response.status === 200) {
                 const respObj = await response.json();
                 const newUID = respObj.uid;
                 console.log(respObj)
