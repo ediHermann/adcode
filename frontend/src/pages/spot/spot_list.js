@@ -24,9 +24,9 @@ const columns = [
 
 ]
 
-const payload = 'query={userSpots}';
+    const payload = 'query={userSpots}';
 
-const SpotList = () => {
+    const SpotList = () => {
 
     const [items, setItems] = React.useState([])
 
