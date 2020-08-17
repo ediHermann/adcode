@@ -12,8 +12,8 @@
     "talent_role": {
       "type": "enumeration",
       "enum": [
-        "ACTOR",
-        "VOICE"
+        "voce",
+        "fata"
       ]
     },
     "obs": {

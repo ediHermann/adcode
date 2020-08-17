@@ -73,7 +73,7 @@ module.exports = {
                     console.log(criteria);
                     const criteriaUser=criteria.username;
                     const criteriaRole=criteria.role.name;
-                    const qryres= await strapi.connections.default.raw('SELECT username as `name`,avatar,`users-permissions_role`.`name` as `role` FROM `users-permissions_user` inner join `users-permissions_role` ON `users-permissions_user`.role=`users-permissions_role`.id  WHERE `username` LIKE ? AND `users-permissions_role`.`name`="'+criteriaRole+'"', criteriaUser);
+                    const qryres= await strapi.connections.default.raw('SELECT `users-permissions_user`.id, username as `name`,avatar,`users-permissions_role`.`name` as `role` FROM `users-permissions_user` inner join `users-permissions_role` ON `users-permissions_user`.role=`users-permissions_role`.id  WHERE `username` LIKE ? AND `users-permissions_role`.`name`="'+criteriaRole+'"', criteriaUser);
                     if(qryres)
                       result=qryres[0];
 

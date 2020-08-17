@@ -37,6 +37,13 @@ const endpoints = {
         method: 'post'
     },
 
+    newcode: {
+        url: '/newcode',
+        headers:{'Content-Type': 'application/json'},
+        display: 'generate new uid',
+        method: 'post'
+    },
+
     spotList: {
         url: '/graphql',
         display: 'UserSpots',

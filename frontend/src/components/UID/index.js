@@ -1,6 +1,7 @@
 import React from 'react'
 import cn from "classnames";
 import {ErrorMessage, Field, FieldArray, Form, Formik} from "formik"
+import db from "../dbs/fake-db";
 import AutocompleteAsync from "../autocomplete/autocomplete-async";
 import PropTypes from "prop-types";
 import Delete from "../svg/DeleteButton";
@@ -16,13 +17,13 @@ const Media_types = [
 const UidForm = (uid) => {
 
     const initValues = {
-        status: '',
+        status: 'PENDING',
         uid: '',
         title: '',
         client: '',
         duration: '',
-        media_type: '',
-        spotTalent: [{
+        media_type: '1',
+        spotTalents: [{
             talent: {name: ''},
             role: '',
             obs: ''
@@ -40,32 +41,23 @@ const UidForm = (uid) => {
             'border-gray-800 border rounded  border-secondary mb-1': !cond
         })
 
-    const status="Spot nou";
+
     const SuggestionComp = ({suggestion}) => <span>{`${suggestion.name}`}</span>
     const displaySuggestion = item => {
         return item.name
     }
 
     const [data, setData] = React.useState({});
+    const [globalError, setGlobalError] = React.useState('');
 
     const retrieveData = async (uid) => {
 
         if(uid.length>0) {
+            //EDIT SPOT
             const strCrit = JSON.stringify({uid: uid});
             const unquoted = strCrit.replace(/"([^"]+)":/g, '$1:');
             const payload = `query={userSpots(where:${unquoted})}`;
-
-            //TEST
-            // const strCrit = JSON.stringify({username: '%a%',role:{name:'Talent'}});
-            // const unquoted = strCrit.replace(/"([^"]+)":/g, '$1:');
-            // const payload = `query={searchUser(where:${unquoted})}`;
-            //
-            // const response = await httpAgent(payload);
-            // const v=await response.json();
-            // console.log(v.data.searchUser.payload);
-
-
-            //console.log(await response.json())
+            const response = await httpAgent(payload);
 
             if (response.status === 200) {
                 const json = await response.json();
@@ -73,22 +65,21 @@ const UidForm = (uid) => {
                 let _data;
                 if (json.data.userSpots) {
                     _data = json.data.userSpots.payload[0];
-                    //console.log(_data);
+                    console.log(_data);
                     let mediaType = '';
                     if (_data.media_type)
-                        mediaType = _data.media_type.type_name
-                    const _spot_talents = [{
-                        talent: {name: 'Ellary'},
-                        role: 'fata',
-                        obs: 'observatii talent 1'
-                    }, {talent: {name: 'Kacy'}, role: 'voce', obs: 'observatii talent 2'}]
+                        mediaType = _data.media_type.id
+                    const _spot_talents=_data.spotTalents;
+
+
                     const formData = {
                         uid: _data.uid,
                         title: _data.title,
                         client: _data.client,
                         duration: _data.duration,
+                        status:_data.status,
                         media_type: mediaType,
-                        spotTalent: _spot_talents
+                        spotTalents: _spot_talents
                     };
                     console.log(formData);
                     setData(formData);
@@ -100,7 +91,21 @@ const UidForm = (uid) => {
             }
         }
         else
-            setData(initValues);
+        {
+            //NEW SPOT
+            const response = await httpAgent('newcode');
+            if (response.status==200) {
+                const respObj = await response.json();
+                const newUID = respObj.uid;
+                console.log(respObj)
+                console.log(newUID);
+                initValues.uid = newUID;
+                setData(initValues);
+            }
+
+
+        }
+
     }
     React.useEffect(() => {
 
@@ -115,41 +120,48 @@ const UidForm = (uid) => {
                 const strCrit = JSON.stringify({username: '%'+value.trim().toLowerCase()+'%',role:{name:'Talent'}});
                 const unquoted = strCrit.replace(/"([^"]+)":/g, '$1:');
                 const payload = `query={searchUser(where:${unquoted})}`;
-
-                console.log(payload);
-
                 const resp =  await httpAgent(payload);
                 const r= await resp.json();
                 const datarows=r.data.searchUser.payload;
                 resolve(
                     ()  => datarows)
-            }, 500)
+            }, 100)
         })
+
+
 
     const onSubmit = async (values, {setSubmitting}) => {
         setSubmitting(true);
 
-            let strValues=JSON.stringify(values);
-            alert(JSON.stringify(values, null, 2));
-        //   try {
-        //     const unquoted = strValues.replace(/"([^"]+)":/g, '$1:');
-        //     const payload1 = `query=mutation{updateProfile(data:${unquoted})}`;
-        //      console.log(payload1);
-        //     const outcome = await  httpAgent(payload1);
-        //     if (outcome.status==200) {
-        //         alert('Datele au fost salvate')
-        //         console.log(outcome);
-        //     }
-        //     else {
-        //         alert('Eroare- Datele nu au fost salvate')
-        //         console.log(outcome);
-        //     }
-        // } catch (err) {
-        //     console.log(err);
-        //     setGlobalError(err.message);
-        // }
-        // setSubmitting(false)
-        // return false;
+         let strValues=JSON.stringify(values);
+         let payload1;
+         alert(JSON.stringify(values, null, 2));
+
+         try {
+
+            const unquoted = strValues.replace(/"([^"]+)":/g, '$1:');
+            if(uid)
+                 payload1 = `query=mutation{updateUserSpot(data:${unquoted})}`;
+            else
+                 payload1 = `query=mutation{createUserSpot(data:${unquoted})}`;
+
+            console.log(payload1);
+
+            const outcome = await  httpAgent(payload1);
+            if (outcome.status==200) {
+                alert('Datele au fost salvate')
+                console.log(outcome);
+            }
+            else {
+                alert('Eroare - Datele nu au fost salvate')
+                console.log(outcome);
+            }
+        } catch (err) {
+            console.log(err);
+            setGlobalError(err.message);
+        }
+        setSubmitting(false)
+        return false;
 
     };
 
@@ -170,20 +182,21 @@ const UidForm = (uid) => {
                  isSubmitting,
                  setFieldValue
              }) => <Form onSubmit={handleSubmit}>
-                <label className='font-bold text-sm mb-1 mr-2 text-gray-600 '>Status {status}</label>
-                <div className='block'>
-                    <label className='font-bold text-sm mb-1 text-gray-600'>UID </label>
+                 <div className='block'>
+                    <label className='font-bold text-sm mb-1 text-gray-600'>UID: </label>
                     <Field
                         type="text"
                         name="uid"
                         placeholder="UID"
-                        className={inputStyles(errors.uid && touched.uid)}/>
+                        className={inputStyles(errors.uid && touched.uid)}
+                        disabled={true}
+                    />
                     <ErrorMessage
                         name="uid"
                         component="div"
                         className="text-sm text-error italic "/>
 
-                    <label className='font-bold text-sm mb-1 text-gray-600'>Titlu </label>
+                    <label className='font-bold text-sm mb-1 text-gray-600'>Titlu: </label>
                     <Field
                         type="text"
                         name="title"
@@ -194,7 +207,7 @@ const UidForm = (uid) => {
                         component="div"
                         className="text-sm text-error italic"/>
 
-                    <label className='font-bold text-sm mb-1 text-gray-600'>Client </label>
+                    <label className='font-bold text-sm mb-1 text-gray-600'>Client: </label>
                     <Field
                         type="text"
                         name="client"
@@ -205,7 +218,7 @@ const UidForm = (uid) => {
                         component="div"
                         className="text-sm text-error italic"/>
 
-                    <label className='font-bold text-sm mb-1 text-gray-600'>Durata (sec) </label>
+                    <label className='font-bold text-sm mb-1 text-gray-600'>Durata (sec): </label>
 
                     <Field
                         type="text"
@@ -217,8 +230,30 @@ const UidForm = (uid) => {
                         component="div"
                         className="text-sm text-error italic"/>
                 </div>
+
+
+
+                <label className='font-bold text-sm mb-1 text-gray-600'>Status: </label>
+                <Field
+                    className='border-gray-800 border rounded  border-secondary mb-1 w-full p-2'
+                    component='select'
+                    name='status'
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    style={{display: 'block'}}>
+                    <option value="PENDING" label="Spot nou"/>
+                    <option value="PUBLISHED" label="Publicat"/>
+                    <option value="INACTIVATED" label="Inactiv"/>
+                    <option value="DELETED" label="Anulat"/>
+                </Field>
+                <ErrorMessage
+                    name="status"
+                    component="div"
+                    className="text-sm text-error italic "/>
+
+
                 <div>
-                    <label className='font-bold text-sm mb-1 text-gray-600'>Tip media</label><br/>
+                    <label className='font-bold text-sm mb-1 text-gray-600'>Tip media:</label><br/>
                     <FieldArray
                         name="media_type"
                         type='text'
@@ -230,8 +265,8 @@ const UidForm = (uid) => {
                                             <input
                                                 name="media_type"
                                                 type="radio"
-                                                value={category.name}
-                                                checked={values.media_type=== category.name}
+                                                value={category.id}
+                                                checked={values.media_type==category.id}
                                                 onChange={e => {
                                                     console.log(e.target.value);
                                                     setFieldValue('media_type', e.target.value)
@@ -245,9 +280,12 @@ const UidForm = (uid) => {
                         )}
                     />
                 </div>
+
+                <hr   className='border-gray-800 w-full my-8'/>
+
                 <div className=' flex-row'>
                     <label className='font-bold text-sm mb-1 text-gray-600'>Talente:</label><br/>
-                    <FieldArray name='spotTalent'>
+                    <FieldArray name='spotTalents'>
                         {({push, remove}) => (
                             <>
                                 <AddButton className='inline align-bottom mr-2'/>
@@ -255,9 +293,9 @@ const UidForm = (uid) => {
                                         disabled={isSubmitting} className='inline align-bottom mr-2 underline' >Adauga talent
                                 </button>
 
-                                {values.spotTalent &&
-                                values.spotTalent.length > 0 &&
-                                values.spotTalent.map((s_part, index) => (
+                                {values.spotTalents &&
+                                values.spotTalents.length > 0 &&
+                                values.spotTalents.map((s_part, index) => (
 
                                     <div key={index} className="row  border-t border-gray-800 mt-1" >
                                         <div className="col inline-block m-1">
@@ -266,8 +304,8 @@ const UidForm = (uid) => {
                                                 httpGetter={httpGetter}
                                                 SuggestionComp={SuggestionComp}
                                                 displaySuggestion={displaySuggestion}
-                                                name={`spotTalent[${index}].talent`}
-                                                setFValue={setFieldValue}
+                                                name={`spotTalents[${index}].talent`}
+                                                setFValue={(name,val)=>setFieldValue(name,{name:val})}
                                                 val={s_part.talent.name}
 
                                             />
@@ -278,7 +316,7 @@ const UidForm = (uid) => {
                                             <Field
                                                 className='border-gray-800 border rounded  border-secondary mb-1'
                                                 component='select'
-                                                name={`spotTalent[${index}].role`}
+                                                name={`spotTalents[${index}].role`}
                                                 onChange={handleChange}
                                                 onBlur={handleBlur}
                                                 style={{display: 'block'}}>
@@ -292,7 +330,7 @@ const UidForm = (uid) => {
                                         <div className="col inline-block m-1">
 
                                             <label className='font-bold text-sm mb-1 text-gray-600'>Observatii</label><br/>
-                                            <Field name={`spotTalent[${index}].obs`} type='text' className='border-gray-800 border rounded  border-secondary mb-1 pl-2'/>
+                                            <Field name={`spotTalents[${index}].obs`} type='text' className='border-gray-800 border rounded  border-secondary mb-1 pl-2'/>
                                         </div>
 
                                         <div className="col inline-block m-1">

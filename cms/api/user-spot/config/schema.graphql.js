@@ -14,6 +14,7 @@ module.exports = {
             let result;
             let errNum;
             let errDesc;
+            let idx;
             let success = false;
             //GET USER FROM HEADER TOKEN
 
@@ -50,10 +51,27 @@ module.exports = {
                   criteria.user = userid;
                   criteria.deleted = false;
                   console.log(criteria)
-                  result = await strapi.services.spot.find(criteria);
-                  success=true;
+                  const result0 = await strapi.services.spot.find(criteria);
+                  result=[];
+                  if (result0.length>0) {
+                    result=result0;
+                    for (idx = 0; idx < result0.length; idx++) {
+
+                      const spot_id = result0[idx].id;
+                      const result1 = await strapi.services['spot-talent'].find({spot: spot_id});
+                      result[idx].spotTalents = result1.map(spotTalent => ({
+                        id: spotTalent.id,
+                        talent: {id: spotTalent.talent.id, name: spotTalent.talent.username, avatar: spotTalent.talent.avatar},
+                        role: spotTalent.talent_role,
+                        obs: spotTalent.obs
+                      }));
+
+                      success = true;
+                    }
+                  }
                 }
-                //console.log(result);
+                console.log(result[0]);
+
               }
               catch (e) {
                 console.log(e);
@@ -80,6 +98,15 @@ module.exports = {
           let userid;
           let result;
           let payload;
+          let idx;
+          let idx1;
+          let id;
+          let spotId;
+          let useriId;
+          let talentName;
+          let userObj;
+          let dataTalents;
+
           let errNum;
           let errDesc;
 
@@ -104,13 +131,88 @@ module.exports = {
               //insert spot
               newRecord = await strapi.services.spot.create(ctx.context.request.body); //Or options.data
               console.log(newRecord.id);
-              const id = newRecord.id;
+              id = newRecord.id;
 
               //update the owner
               const updateData = {"user": userid};
               payload = await strapi.services.spot.update({id}, updateData);
-              success=true;
+              ///////////////////////////////////////////////////////////////
+              //SPOT TALENTS
 
+              const spotTalents = await strapi.services['spot-talent'].find({spot: id});
+              console.log(spotTalents)
+              dataTalents=options.data.spotTalents.map(spotTalent => ({
+                id: spotTalent.id,
+                talent: spotTalent.talent.name,
+                talent_role: spotTalent.role,
+                obs: spotTalent.obs
+              }));
+
+              console.log('dataTalents');
+              console.log(dataTalents);
+              for (idx=0;idx<spotTalents.length;idx++)
+              {
+                if (options.data.spotTalents.length>0)
+                {
+                  useriId=-1;
+                  talentName=spotTalents[idx].talent.username;
+                  id=spotTalents[idx].id;
+
+                  //find the talent Id
+
+                  idx1 = dataTalents.findIndex(element => element.id = id);
+                  if(idx1>-1)
+                  {
+
+                    userObj = await strapi.plugins['users-permissions'].services.user.fetch({username: dataTalents[idx1].talent});
+                    if(userObj)
+                      useriId=userObj.id;
+
+                    console.log('useriId='+useriId);
+                    if(useriId>0) {
+                      //Put the id on talent field
+                      console.log('updating line...');
+                      dataTalents[idx1].talent = useriId;
+                      await strapi.services['spot-talent'].update({id}, dataTalents[idx1]);
+                      console.log(dataTalents[idx1]);
+                      dataTalents.splice(idx1, 1);
+
+                    }
+
+                  }
+                  else
+                  {
+                    await strapi.services['spot-talent'].delete({id});
+                    console.log('deleting spotTalentId='+ id)
+                  }
+
+                }
+              }//end of for loop
+
+              //add the new elements
+              console.log('remaining...')
+              console.log(dataTalents);
+              if (dataTalents.length>0) {
+                for (idx = 0; idx < dataTalents.length; idx++)
+                {
+                  console.log('inserting...')
+                  talentName=dataTalents[idx].talent;
+
+                  id=-1;
+                  //find the talent Id
+                  userObj = await strapi.plugins['users-permissions'].services.user.fetch({username:talentName});
+                  if(userObj) {
+                    console.log('new data...')
+                    dataTalents[idx].talent=userObj.id;
+                    dataTalents[idx].spot=spotId;
+                    console.log(dataTalents[idx])
+                    await strapi.services['spot-talent'].create(dataTalents[idx]);
+
+                  }
+                }
+              }
+
+              success=true;
 
             } catch (error) {
               console.log(error);
@@ -130,10 +232,17 @@ module.exports = {
           const uid = options.uid;
 
           let userid;
-          let result;
           let payload;
           let errNum;
           let errDesc;
+          let idx;
+          let idx1;
+          let id;
+          let spotId;
+          let useriId;
+          let talentName;
+          let userObj;
+          let dataTalents;
           let success = false;
            //GET USER FROM HEADER TOKEN
           if (ctx.context.request && ctx.context.request.header && ctx.context.request.header.authorization) {
@@ -151,15 +260,98 @@ module.exports = {
             errNum = "201";
             errDesc = 'User undefined';
           } else {
-            //Authentiation OK
+            //Authentication OK
             try {
-
 
               //CHECK if the item  belongs to crt user
               const chkResult = await strapi.services.spot.find({uid: uid, user: userid, deleted: false});
               if (chkResult.length > 0) {
-                const id = chkResult[0].id;
+                id = chkResult[0].id;
+                spotId=id;
+                console.log(options.data);
                 payload = await strapi.services.spot.update({id}, options.data);
+
+                ///////////////////////////////////////////////////////////////
+                //SPOT TALENTS
+
+                const spotTalents = await strapi.services['spot-talent'].find({spot: id});
+                console.log(spotTalents)
+
+                // let dataTalents=options.data.spotTalents;
+
+
+                dataTalents=options.data.spotTalents.map(spotTalent => ({
+                  id: spotTalent.id,
+                  talent: spotTalent.talent.name,
+                  talent_role: spotTalent.role,
+                  obs: spotTalent.obs
+                }));
+
+                console.log('dataTalents');
+                console.log(dataTalents);
+                for (idx=0;idx<spotTalents.length;idx++)
+                {
+                  if (options.data.spotTalents.length>0)
+                  {
+                    useriId=-1;
+                    talentName=spotTalents[idx].talent.username;
+                    id=spotTalents[idx].id;
+
+                    //find the talent Id
+
+                    idx1 = dataTalents.findIndex(element => element.id = id);
+                    if(idx1>-1)
+                    {
+
+                      userObj = await strapi.plugins['users-permissions'].services.user.fetch({username: dataTalents[idx1].talent});
+                      if(userObj)
+                        useriId=userObj.id;
+
+                      console.log('useriId='+useriId);
+                      if(useriId>0) {
+                        //Put the id on talent field
+                        console.log('updating line...');
+                        dataTalents[idx1].talent = useriId;
+                        await strapi.services['spot-talent'].update({id}, dataTalents[idx1]);
+                        console.log(dataTalents[idx1]);
+                        dataTalents.splice(idx1, 1);
+
+                      }
+
+                    }
+                    else
+                    {
+                        await strapi.services['spot-talent'].delete({id});
+                        console.log('deleting spotTalentId='+ id)
+                    }
+
+                  }
+                }//end of for loop
+
+                //add the new elements
+
+                console.log('remaining...')
+                console.log(dataTalents);
+                if (dataTalents.length>0) {
+                  for (idx = 0; idx < dataTalents.length; idx++)
+                  {
+                    console.log('inserting...')
+                    talentName=dataTalents[idx].talent;
+
+                    id=-1;
+                    //find the talent Id
+                    userObj = await strapi.plugins['users-permissions'].services.user.fetch({username:talentName});
+                    if(userObj) {
+                      console.log('new data...')
+                      dataTalents[idx].talent=userObj.id;
+                      dataTalents[idx].spot=spotId;
+                      console.log(dataTalents[idx])
+                      await strapi.services['spot-talent'].create(dataTalents[idx]);
+
+                    }
+                  }
+                }
+
                 success = true;
 
               }
@@ -167,8 +359,6 @@ module.exports = {
                 errNum = "301";
                 errDesc = 'Invalid spot id';
               }
-
-
 
             } catch (error) {
               console.log(error);
@@ -210,7 +400,7 @@ module.exports = {
             errNum = "201";
             errDesc = 'Invalid token: Token did not contain required fields';
           } else {
-            //Authentiation OK
+            //Authentication OK
             try {
 
               //CHECK if the item  belongs to crt user
