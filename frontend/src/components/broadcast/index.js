@@ -21,27 +21,36 @@ const columns = [
     {key: 'client', label: 'Client'},
     {key: 'date', label: 'Data'},
     {key: 'time', label: 'Ora'},
-    {key: 'broadcast_duration', label: 'Durata'}
+    {key: 'broadcast_duration', label: 'Durata (sec)'}
 
 ]
 
 const Broadcast = () => {
+
+    let  inidate = new Date();
+    inidate.setDate(inidate.getDate() - 30);
+
     const initialValues = {
-        spot: '',
-        talent: '',
+        broadcaster: '',
         studio: '',
-        startDate: new Date(),
+        spot: '',
+        startDate: inidate,
         endDate: new Date()
     }
 
 
 
+    const [filter, setFilter] = React.useState(initialValues)
+
     const [items, setItems] = React.useState([])
 
 
-    const retrieveData = async () => {
 
-        const payload = 'query={userBroadcastTable}';
+    const retrieveData = async (criteria) => {
+
+        const strCrit = JSON.stringify(criteria);
+        const unquoted = strCrit.replace(/"([^"]+)":/g, '$1:');
+        const payload = `query={userBroadcastTable(where:${unquoted})}`;
         const response = await httpAgent(payload);
         if (response.status === 200) {
             const json = await response.json()
@@ -58,7 +67,7 @@ const Broadcast = () => {
     }
 
     React.useEffect(() => {
-        retrieveData()
+        retrieveData(initialValues)
     }, [])
 
 
@@ -98,12 +107,21 @@ const Broadcast = () => {
         })
 
 
-    return <Formik initialValues={initialValues} onSubmit={(values, {setSubmitting}) => {
-        setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
-            setSubmitting(false);
-        }, 400);
-    }}>
+
+    const onSubmit = async (values, {setSubmitting}) => {
+        setSubmitting(true);
+        alert(JSON.stringify(values, null, 2));
+        setSubmitting(false);
+        setFilter(values);
+        await retrieveData(values);
+        setSubmitting(false)
+        return false;
+
+    };
+
+    return <Formik
+            initialValues={initialValues}
+            onSubmit={onSubmit}>
         {
             ({
                  values,
@@ -121,7 +139,7 @@ const Broadcast = () => {
                                     httpGetter={httpGetterTalent}
                                     SuggestionComp={SuggestionComp}
                                     displaySuggestion={displaySuggestion}
-                                    name='talent'
+                                    name='broadcaster'
                                     setFValue={setFieldValue}
                                     val=''
                                 />
@@ -161,7 +179,7 @@ const Broadcast = () => {
                                     selectsStart
                                     startDate={values.startDate}
                                     endDate={values.endDate}
-                                    dateFormat="yyyy-mm-dd"
+                                    dateFormat="yyyy-MM-dd"
                                     value={values.date}
                                     name='startDate'
                                     className='w-24'
@@ -177,7 +195,7 @@ const Broadcast = () => {
                                     selectsEnd
                                     startDate={values.startDate}
                                     endDate={values.endDate}
-                                    dateFormat="yyyy-mm-dd"
+                                    dateFormat="yyyy-MM-dd"
                                     value={values.date}
                                     name='endDate'
                                     className='w-24'
