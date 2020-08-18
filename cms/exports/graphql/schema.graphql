@@ -510,6 +510,9 @@ type Mutation {
   deleteUser(input: deleteUserInput): deleteUserPayload
   updateProfile(data: JSON): JSON!
   changePwd(data: JSON): JSON!
+  createUserSpotBroadcast(data: JSON): JSON!
+  updateUserSpotBroadcast(uid: String, data: JSON): JSON!
+  deleteUserSpotBroadcast(uid: String): JSON!
   createUserSpot(data: JSON): JSON!
   updateUserSpot(uid: String, data: JSON): JSON!
   deleteUserSpot(uid: String): JSON!
@@ -559,6 +562,8 @@ type Query {
   userProfile: JSON!
   searchUser(where: JSON): JSON!
   checkPwd(data: JSON): JSON
+  userSpotsBroadcast(where: JSON, limit: Int, offset: Int, sort: String): JSON!
+  userBroadcastTable(where: JSON, limit: Int, offset: Int, sort: String): JSON!
   userSpots(where: JSON, limit: Int, offset: Int, sort: String): JSON!
   artistsSpots(where: JSON, limit: Int, offset: Int, sort: String): JSON!
   me: UsersPermissionsMe

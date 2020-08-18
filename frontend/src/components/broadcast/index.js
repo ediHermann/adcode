@@ -9,9 +9,21 @@ import {ro} from 'date-fns/locale'
 import "react-datepicker/dist/react-datepicker.css";
 import './../calendar/styles.css'
 import db from "../dbs/fake-db";
+import httpAgent from "../common/init";
+import SearchButton from "../svg/Search";
+const JsonTable = require('ts-react-json-table');
 
+const columns = [
+    {key: 'broadcaster', label: 'Broadcaster'},
+    {key: 'title', label: 'Spot'},
+    {key: 'uid', label: 'UID'},
+    {key: 'studio', label: 'Studio'},
+    {key: 'client', label: 'Client'},
+    {key: 'date', label: 'Data'},
+    {key: 'time', label: 'Ora'},
+    {key: 'broadcast_duration', label: 'Durata'}
 
-const JsonTable = require('ts-react-json-table')
+]
 
 const Broadcast = () => {
     const initialValues = {
@@ -21,7 +33,34 @@ const Broadcast = () => {
         startDate: new Date(),
         endDate: new Date()
     }
-    // const [items, setItems] = React.useState([])
+
+
+
+    const [items, setItems] = React.useState([])
+
+
+    const retrieveData = async () => {
+
+        const payload = 'query={userBroadcastTable}';
+        const response = await httpAgent(payload);
+        if (response.status === 200) {
+            const json = await response.json()
+            console.log(json)
+            const _items = json.data.userBroadcastTable.payload;
+            console.log("items")
+            console.log(_items)
+            setItems(_items)
+        } else {
+            //Display the error
+            console.log(response);
+        }
+
+    }
+
+    React.useEffect(() => {
+        retrieveData()
+    }, [])
+
 
     const SuggestionComp = ({suggestion}) => <span>{`${suggestion.name}`}</span>
     const displaySuggestion = item => {
@@ -73,11 +112,11 @@ const Broadcast = () => {
                  setFieldValue
              }) =>
                 <Form onSubmit={handleSubmit}>
-                    <div className='mt-20 border-window rounded-lg p-4'
-                    style={{width: '1500px', marginLeft: '10%'}}>
+                    <div className=''
+                    style={{width: '1500px'}}>
                         <div className='block lg:flex justify-center'>
                             <div className='mr-4'>
-                                <label htmlFor='talent'>Cauta un talent</label>
+                                <label htmlFor='talent'>Broadcaster</label>
                                 <AutocompleteAsync
                                     httpGetter={httpGetterTalent}
                                     SuggestionComp={SuggestionComp}
@@ -87,8 +126,22 @@ const Broadcast = () => {
                                     val=''
                                 />
                             </div>
+
                             <div className='mr-4'>
-                                <label htmlFor='spot'>Cauta un Spot</label>
+                                <label htmlFor='studio'>Studio</label>
+                                <AutocompleteAsync
+                                    httpGetter={httpGetterStudio}
+                                    SuggestionComp={SuggestionComp}
+                                    displaySuggestion={displaySuggestion}
+                                    name='studio'
+                                    setFValue={setFieldValue}
+                                    val=''
+
+                                />
+                            </div>
+
+                            <div className='mr-4'>
+                                <label htmlFor='spot'>Spot</label>
                                 <AutocompleteAsync
                                     httpGetter={httpGetterSpot}
                                     SuggestionComp={SuggestionComp}
@@ -98,20 +151,9 @@ const Broadcast = () => {
                                     val=''
                                 />
                             </div>
-                            <div className='mr-4'>
-                                <label htmlFor='studio'>Cauta un Studio</label>
-                                <AutocompleteAsync
-                                    httpGetter={httpGetterStudio}
-                                    SuggestionComp={SuggestionComp}
-                                    displaySuggestion={displaySuggestion}
-                                    name='studio'
-                                    setFValue={setFieldValue}
-                                    val=''
-                                />
-                            </div>
 
                             <div className='mr-4'>
-                                <label htmlFor='startDate'>Alege o data de inceput</label>
+                                <label htmlFor='startDate'>Data de inceput</label>
                                 <DatePicker
                                     selected={values.startDate}
                                     onChange={date => setFieldValue('startDate', date)}
@@ -119,14 +161,15 @@ const Broadcast = () => {
                                     selectsStart
                                     startDate={values.startDate}
                                     endDate={values.endDate}
-                                    dateFormat="dd MMM yyyy"
+                                    dateFormat="yyyy-mm-dd"
                                     value={values.date}
                                     name='startDate'
+                                    className='w-24'
 
                                 />
                             </div>
                             <div>
-                                <label htmlFor='endDate'>Alege o data de sfarsit</label>
+                                <label htmlFor='endDate'>Data de sfarsit</label>
                                 <DatePicker
                                     selected={values.endDate}
                                     onChange={date => setFieldValue('endDate', date)}
@@ -134,9 +177,10 @@ const Broadcast = () => {
                                     selectsEnd
                                     startDate={values.startDate}
                                     endDate={values.endDate}
-                                    dateFormat="dd MMM yyyy"
+                                    dateFormat="yyyy-mm-dd"
                                     value={values.date}
                                     name='endDate'
+                                    className='w-24'
                                 />
                             </div>
                         </div>
@@ -145,8 +189,8 @@ const Broadcast = () => {
                                 type='submit' disabled={isSubmitting}>Apply
                         </button>
                         <div className='block lg:flex justify-center '>
-                            <div className='mt-40 '>
-                                <JsonTable rows={db}/>
+                            <div className='mt-40 align-content-center'>
+                                <JsonTable rows={items} columns={columns}/>
                             </div>
                         </div>
                     </div>

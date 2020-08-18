@@ -6,7 +6,6 @@ module.exports = {
     console.log(ctx.request.header);
     const {uid} = ctx.params;
     let userid;
-    let spot;
     let result;
     let errNum;
     let errDesc;

@@ -38,7 +38,7 @@ class Main extends Component {
                             <Route path="/my_spots" render={() => <MySpotsNew/>}/>
                             <Route path="/profile" render={() => <Profile/>}/>
                             <Route path="/edit_avatar"  render={() => <EditAvatar/>}/>
-                            <Route path="/other1" render={() => <BroadcastTable/>}/>
+                            <Route path="/broadcast-table" render={() => <BroadcastTable/>}/>
                             <Route path="/other2" render={() => <Other2/>}/>
                             <Route path="/create_spot" render={() => <CreateSpot/>}/>
                             <Route path="/details_spot" render={() => <DetailsSpot/>}/>
