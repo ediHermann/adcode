@@ -92,13 +92,13 @@ const Broadcast = () => {
     const httpGetterSpot = value => new Promise(
         resolve => {
             setTimeout(async() => {
-                const strCrit = JSON.stringify({title: '%'+value.trim().toLowerCase()+'%'});
+                const strCrit = JSON.stringify({title_contains: value.trim().toLowerCase()});
                 const unquoted = strCrit.replace(/"([^"]+)":/g, '$1:');
-                const payload = `query={searchSpot(where:${unquoted})}`;
+                const payload = `query={spots(where:${unquoted},sort:"title"){uid,title}}`;
                 const resp =  await httpAgent(payload);
                 const r= await resp.json();
                 console.log(r);
-                const datarows=r.data.searchSpot.payload;
+                const datarows=r.data.spots.map(item => ({uid:item.uid, name:item.title}));
 
                 resolve(
                     ()  => datarows)
