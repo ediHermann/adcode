@@ -17,7 +17,7 @@
     "prepare": "rm -rf ./dist && touch .frontall/css/styles.css && yarn run build",
     "tw": "tailwindcss build .frontall/css/tailwind.css -o .frontall/css/styles.css",
     "start": "yarn run tw && webpack-dev-server  --open --config .frontall/webpack/webpack.development.js",
-    "build": "webpack --config .frontall/webpack/webpack.production.js"
+    "build": "cd --config .frontall/webpack/webpack.production.js"
   },
   "author": "Vlad Blindu",
   "license": "MIT",

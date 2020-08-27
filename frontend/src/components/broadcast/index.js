@@ -33,7 +33,7 @@ const Broadcast = () => {
     const initialValues = {
         broadcaster: '',
         studio: '',
-        spot: '',
+        title: '',
         startDate: inidate,
         endDate: new Date()
     }
@@ -75,35 +75,48 @@ const Broadcast = () => {
     const displaySuggestion = item => {
         return item.name
     }
-    const httpGetterTalent = value => new Promise(
+    const httpGetterBroadcaster = value => new Promise(
         resolve => {
-            setTimeout(() => {
+            setTimeout(async() => {
+
+                const strCrit = JSON.stringify({username: '%'+value.trim().toLowerCase()+'%',role:{name:'Broadcaster'}});
+                const unquoted = strCrit.replace(/"([^"]+)":/g, '$1:');
+                const payload = `query={searchUser(where:${unquoted})}`;
+                const resp =  await httpAgent(payload);
+                const r= await resp.json();
+                const datarows=r.data.searchUser.payload;
                 resolve(
-                    () => talent.filter(
-                        item => item.name
-                            .toLowerCase()
-                            .includes(value.trim().toLowerCase())))
-            }, 500)
+                    ()  => datarows)
+            }, 100)
         })
     const httpGetterSpot = value => new Promise(
         resolve => {
-            setTimeout(() => {
+            setTimeout(async() => {
+                const strCrit = JSON.stringify({title: '%'+value.trim().toLowerCase()+'%'});
+                const unquoted = strCrit.replace(/"([^"]+)":/g, '$1:');
+                const payload = `query={searchSpot(where:${unquoted})}`;
+                const resp =  await httpAgent(payload);
+                const r= await resp.json();
+                console.log(r);
+                const datarows=r.data.searchSpot.payload;
+
                 resolve(
-                    () => spots.filter(
-                        item => item.name
-                            .toLowerCase()
-                            .includes(value.trim().toLowerCase())))
-            }, 500)
+                    ()  => datarows)
+            }, 100)
         })
     const httpGetterStudio = value => new Promise(
         resolve => {
-            setTimeout(() => {
+            setTimeout(async() => {
+
+                const strCrit = JSON.stringify({username: '%'+value.trim().toLowerCase()+'%',role:{name:'Studio'}});
+                const unquoted = strCrit.replace(/"([^"]+)":/g, '$1:');
+                const payload = `query={searchUser(where:${unquoted})}`;
+                const resp =  await httpAgent(payload);
+                const r= await resp.json();
+                const datarows=r.data.searchUser.payload;
                 resolve(
-                    () => studio.filter(
-                        item => item.name
-                            .toLowerCase()
-                            .includes(value.trim().toLowerCase())))
-            }, 500)
+                    ()  => datarows)
+            }, 100)
         })
 
 
@@ -136,7 +149,7 @@ const Broadcast = () => {
                             <div className='mr-4'>
                                 <label htmlFor='talent'>Broadcaster</label>
                                 <AutocompleteAsync
-                                    httpGetter={httpGetterTalent}
+                                    httpGetter={httpGetterBroadcaster}
                                     SuggestionComp={SuggestionComp}
                                     displaySuggestion={displaySuggestion}
                                     name='broadcaster'
@@ -159,12 +172,12 @@ const Broadcast = () => {
                             </div>
 
                             <div className='mr-4'>
-                                <label htmlFor='spot'>Spot</label>
+                                <label htmlFor='title'>Spot</label>
                                 <AutocompleteAsync
                                     httpGetter={httpGetterSpot}
                                     SuggestionComp={SuggestionComp}
                                     displaySuggestion={displaySuggestion}
-                                    name='spot'
+                                    name='title'
                                     setFValue={setFieldValue}
                                     val=''
                                 />

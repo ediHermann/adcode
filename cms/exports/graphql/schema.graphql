@@ -566,6 +566,7 @@ type Query {
   userBroadcastTable(where: JSON, limit: Int, offset: Int, sort: String): JSON!
   userSpots(where: JSON, limit: Int, offset: Int, sort: String): JSON!
   artistsSpots(where: JSON, limit: Int, offset: Int, sort: String): JSON!
+  searchSpot(where: JSON): JSON!
   me: UsersPermissionsMe
 }
 

@@ -1,7 +1,7 @@
 const { parseMultipartData, sanitizeEntity } = require('strapi-utils');
 
 module.exports = {
-  query: `userSpots(where: JSON, limit: Int, offset: Int, sort:String): JSON!,artistsSpots(where: JSON, limit: Int, offset: Int, sort:String): JSON!`,
+  query: `userSpots(where: JSON, limit: Int, offset: Int, sort:String): JSON!, artistsSpots(where: JSON, limit: Int, offset: Int, sort:String): JSON!,searchSpot(where: JSON): JSON!`,
   mutation:`createUserSpot(data: JSON): JSON!,updateUserSpot(uid:String, data: JSON): JSON!,deleteUserSpot(uid:String): JSON! `,
   resolver: {
     Query: {
@@ -87,7 +87,6 @@ module.exports = {
           }
         },
 
-
       artistsSpots:
         {
           description: 'Return crt artists spots',
@@ -167,6 +166,73 @@ module.exports = {
                 console.log(e);
                 errNum = "202";
                 errDesc = '202 Invalid token: Token did not contain required fields';
+              }
+            } else {
+              errNum = "203";
+              errDesc = 'Missing token: Token did not contain required fields';
+            }
+            return {"success": success, "payload": result, "error": {"code": errNum, "message": errDesc}};
+
+          }
+        },
+
+      searchSpot:
+        {
+          description: 'Search  a spot by title ',
+          resolverOf: 'application::spot.spot.find',
+          resolver: async (obj, options, ctx) => {
+            let id
+            let result;
+            let errNum;
+            let errDesc;
+            let success = false;
+            //GET USER FROM HEADER TOKEN
+            if (ctx.context.request && ctx.context.request.header && ctx.context.request.header.authorization) {
+              try {
+                const decrypted = await strapi.plugins['users-permissions'].services.jwt.getToken(ctx.context);
+                id = decrypted.id;
+                if (id === undefined) {
+                  errNum = "201";
+                  errDesc = 'Invalid token: Token did not contain required fields';
+                } else {
+                  /***********************************************************************/
+                  //Everything is OK
+                  /***********************************************************************/
+                  let criteria;
+                  console.log(criteria)
+                  if (options.where) {
+                    criteria = options.where;
+                    const title=criteria.title;
+                    console.log(criteria);
+                    const qryres= await strapi.connections.default.raw('SELECT uid, title  as `name`  from spots WHERE `title` LIKE ? AND deleted=0 order by title', title);
+                    if(qryres)
+                      result=qryres[0];
+
+                    console.log(result);
+
+                    //const payload = await strapi.plugins['users-permissions'].services.user.fetch(criteria);
+                    success = true;
+                    /*
+                    result = {
+                      name: payload.username,
+                      user_type: payload.role.name,
+                      avatar: payload.avatar,
+                      talent_types: payload.talent_types
+                    }
+                    */
+
+
+                  } else {
+                    errNum = "207";
+                    errDesc = 'Invalid search criteria';
+
+                  }
+                }
+              } catch (e) {
+                console.log(e);
+                errNum = "202";
+                console.log(e);
+                errDesc = e.message;
               }
             } else {
               errNum = "203";

@@ -156,13 +156,13 @@ module.exports = {
                   console.log(wherestr);
 
                   //TODO: use params
-                  const qryres= await strapi.connections.default.raw('SELECT distinct  spots.uid,spots.client,spots.title, studio.username as studio,`date`,`time` ,`broadcast_duration`, `users-permissions_user`.username as`broadcaster` ' +
+                  const qryres= await strapi.connections.default.raw('SELECT * FROM (SELECT distinct  spots.uid,spots.client,spots.title, studio.username as studio,`date`,`time` ,`broadcast_duration`, `users-permissions_user`.username as`broadcaster` ' +
                     'FROM `spot_broadcasts` inner join spots on spot_broadcasts.spot=spots.id ' +
                     'inner join `users-permissions_user` on spot_broadcasts.broadcaster=`users-permissions_user`.id '  +
                     'inner join `users-permissions_user` studio on spots.user=studio.id '  +
                     'inner join broadcast_tables on spot_broadcasts.id=broadcast_tables.spot_broadcast '+
                     'left join spot_talents on spots.id=spot_talents.talent ' +
-                    'left join `users-permissions_user` talents on spot_talents.talent=talents.id WHERE '+ wherestr+' ORDER BY '+ criteria._sort+' limit '+ criteria._limit);
+                    'left join `users-permissions_user` talents on spot_talents.talent=talents.id ) AllData WHERE '+ wherestr+' ORDER BY '+ criteria._sort+' limit '+ criteria._limit);
                   if(qryres)
                     result=qryres[0];
 
