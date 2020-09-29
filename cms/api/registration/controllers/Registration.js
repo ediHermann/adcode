@@ -14,6 +14,8 @@ module.exports = {
       try {
 
         //insert user
+
+        console.log(ctx.request.body);
         newRecord = await strapi.plugins['users-permissions'].services.user.add(ctx.request.body);
         console.log(newRecord.id);
         const id=newRecord.id;

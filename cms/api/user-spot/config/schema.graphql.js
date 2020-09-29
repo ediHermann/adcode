@@ -286,7 +286,8 @@ module.exports = {
             try {
 
               //insert spot
-              newRecord = await strapi.services.spot.create(ctx.context.request.body); //Or options.data
+
+              newRecord = await strapi.services.spot.create(options.data); //Or options.data
               console.log(newRecord.id);
               id = newRecord.id;
 
