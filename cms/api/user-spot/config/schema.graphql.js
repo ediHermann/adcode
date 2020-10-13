@@ -199,7 +199,7 @@ module.exports = {
                   //Everything is OK
                   /***********************************************************************/
                   let criteria;
-                  console.log(criteria)
+                                    console.log(criteria)
                   if (options.where) {
                     criteria = options.where;
                     const title=criteria.title;
